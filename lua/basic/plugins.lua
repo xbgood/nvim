@@ -216,6 +216,11 @@ packer.startup(
                     require("conf.lualine")
                 end
             }
+            -- coc
+            use {
+                'neoclide/coc.nvim',
+                run = 'yarn install --frozen-lockfile'
+            }
 
         end,
         -- 使用浮动窗口
