@@ -345,6 +345,17 @@ packer.startup(
                     require("conf.clipboard-image")
                 end
             }
+            --quick run
+            use{
+                "is0n/jaq-nvim",
+                config = function()
+                    require("conf.jaq-nvim")
+                end
+            }
+            -- quick jk
+            use {
+                "rhysd/accelerated-jk",
+            }
 
         end,
         -- 使用浮动窗口
