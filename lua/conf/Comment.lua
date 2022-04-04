@@ -3,13 +3,28 @@
 
 local comment_string = require("ts_context_commentstring")
 
-local plugin_key = vim.u.keymap.set.comment.plugin_set
-
 require("Comment").setup(
     {
-        toggler = plugin_key.toggler,
-        opleader = plugin_key.opleader,
-        extra = plugin_key.extra,
+        toggler = {
+            -- 切换行注释
+            line = "gcc",
+            --- 切换块注释
+            block = "gCC"
+        },
+        opleader = {
+            -- 可视模式下的行注释
+            line = "gc",
+            -- 可视模式下的块注释
+            block = "gC"
+        },
+        extra = {
+            -- 在当前行上方新增行注释
+            above = "gcO",
+            -- 在当前行下方新增行注释
+            below = "gco",
+            -- 在当前行行尾新增行注释
+            eol = "gcA"
+        },
         -- 根据当前光标所在上下文判断不同类别的注释
         -- 由 nvim-ts-context-commentstring  提供
         pre_hook = function(ctx)

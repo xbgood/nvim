@@ -1,21 +1,13 @@
 -- https://github.com/tami5/lspsaga.nvim
 
-local plugin_key = vim.u.keymap.set.lspsaga.plugin_set
-local signs = {
-    Error = {" ", " "},
-    Warn = {" ", " "},
-    Hint = {" ", " "},
-    Info = {" ", " "}
-}
-
 require("lspsaga").setup(
     {
-        -- round、single、double
+        -- 提示边框样式：round、single、double
         border_style = "round",
-        error_sign = signs.Error[1],
-        warn_sign = signs.Warn[1],
-        hint_sign = signs.Hint[1],
-        infor_sign = signs.Info[1],
+        error_sign = " ",
+        warn_sign = " ",
+        hint_sign = " ",
+        infor_sign = " ",
         diagnostic_header_icon = " ",
         -- 正在写入的行提示
         code_action_icon = " ",
@@ -27,7 +19,14 @@ require("lspsaga").setup(
             sign_priority = 40,
             virtual_text = true
         },
-        code_action_keys = plugin_key.code_action_keys,
-        rename_action_keys = plugin_key.rename_action_keys
+        -- 快捷键配置
+        code_action_keys = {
+            quit = "<Esc>",
+            exec = "<CR>"
+        },
+        rename_action_keys = {
+            quit = "<Esc>",
+            exec = "<CR>"
+        }
     }
 )
