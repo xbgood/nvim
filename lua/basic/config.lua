@@ -24,7 +24,7 @@ let g:mkdp_auto_close = 1
 ]])
 
 
--- markdown table
+-- markdown runcodeblock
 vim.cmd([[
 nnoremap <silent> <leader>mp :call org#main#runCodeBlock()<CR>
 ]])
