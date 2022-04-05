@@ -16,3 +16,15 @@ vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- markdown image-paste
 vim.cmd("autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>")
+
+-- markdown preview
+vim.cmd([[
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 1
+]])
+
+
+-- markdown table
+vim.cmd([[
+nnoremap <silent> <leader>mp :call org#main#runCodeBlock()<CR>
+]])
