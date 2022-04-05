@@ -14,17 +14,11 @@ vim.g.undotree_dir = "~/.cache/nvim/undodir"
 -- 指定代码片段存储路径，这个目录我们在第二章节的时候已经创建好了
 vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
--- markdown image-paste
-vim.cmd("autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>")
-
 -- markdown preview
 vim.cmd([[
 let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
+let g:mdip_imgdir = '.img'
+let g:asyncrun_open = 6
 ]])
 
-
--- markdown runcodeblock
-vim.cmd([[
-nnoremap <silent> <leader>mp :call org#main#runCodeBlock()<CR>
-]])

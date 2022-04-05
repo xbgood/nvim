@@ -354,13 +354,6 @@ packer.startup(
             use {
                 "demonlord1997/markdown-org",
             }
-            --quick run
-            use{
-                "is0n/jaq-nvim",
-                config = function()
-                    require("conf.jaq-nvim")
-                end
-            }
             -- quick jk
             use{
                 "PHSix/faster.nvim",
@@ -373,6 +366,15 @@ packer.startup(
                     vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', {noremap=false, silent=true})
                 end
             }
+            -- asyncrun
+            use {
+                "skywind3000/asyncrun.vim",
+            }
+            -- tasks
+            use {
+                "skywind3000/asynctasks.vim",
+            }
+
 
         end,
         -- 使用浮动窗口

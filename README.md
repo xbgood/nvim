@@ -146,12 +146,12 @@ vim.g.multi_cursor_quit_key = "<ESC>"
 ```lua
 -- 新建终端
 local Terminal = require("toggleterm.terminal").Terminal
-​
+
 local function inInsert()
     -- 删除 Esc 的映射
     vim.keybinds.dgmap("t", "<Esc>")
 end
-​
+
 -- 新建浮动终端
 local floatTerm =
     Terminal:new(
@@ -172,7 +172,7 @@ local floatTerm =
         end
     }
 )
-​
+
 -- 新建 lazygit 终端
 local lazyGit =
     Terminal:new(
@@ -194,16 +194,16 @@ local lazyGit =
         end
     }
 )
-​
+
 -- 定义新的方法
 Toggleterm.float_toggle = function()
     floatTerm:toggle()
 end
-​
+
 Toggleterm.lazygit_toggle = function()
     lazyGit:toggle()
 end
-​
+
 -- 退出终端插入模式
 vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
 -- 打开普通终端
@@ -214,7 +214,7 @@ vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggl
 vim.keybinds.gmap("n", "<leader>tg", "<cmd>lua require('toggleterm').lazygit_toggle()<CR>", vim.keybinds.opts)
 -- 打开或关闭所有终端
 vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
-​
+
 -- 要需创建多个终端，可：
 -- 1 <键位> leader tt
 -- 2 <键位>
@@ -268,7 +268,7 @@ vim.keybinds.gmap(
     "<leader>fn",
     "<cmd>lua require('telescope').extensions.notify.notify()<CR>",
     vim.keybinds.opts
-) 
+)
 ```
 
 # todo-comments
@@ -285,4 +285,12 @@ nnoremap <silent> <leader>mp :call org#main#runCodeBlock()<CR>
 
 -- markdown paste image
 vim.cmd("autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>")
+```
+
+
+# AsyncTask
+```lua
+-- AsyncTask 快捷键，编译运行
+vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask file-build<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask file-run<CR>", vim.keybinds.opts)
 ```
