@@ -346,14 +346,14 @@ packer.startup(
             use{
                 "ferrine/md-img-paste.vim",
             }
--- markdown table
-use {
-"dhruvasagar/vim-table-mode",
-}
--- markdown org
-use {
-"demonlord1997/markdown-org",
-}
+            -- markdown table
+            use {
+                "dhruvasagar/vim-table-mode",
+            }
+            -- markdown org
+            use {
+                "demonlord1997/markdown-org",
+            }
             --quick run
             use{
                 "is0n/jaq-nvim",
