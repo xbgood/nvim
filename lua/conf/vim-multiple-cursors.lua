@@ -11,6 +11,6 @@ vim.g.multi_cursor_next_key = "<C-n>"
 -- 取消当前选择
 vim.g.multi_cursor_prev_key = "<C-p>"
 -- 跳过选择
-vim.g.multi_cursor_skip_key = "<C-b>"
+vim.g.multi_cursor_skip_key = "<C-x>"
 -- 退出选择
 vim.g.multi_cursor_quit_key = "<ESC>"

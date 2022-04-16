@@ -11,7 +11,6 @@ packer.startup(
             use {
                 "wbthomason/packer.nvim"
             }
-
             -- 中文文档
             use {
                 "yianwillis/vimcdoc",
@@ -138,13 +137,6 @@ packer.startup(
                 "terryma/vim-multiple-cursors",
                 config = function()
                     require("conf.vim-multiple-cursors")
-                end
-            }
-            -- 显示滚动条
-            use {
-                "petertriho/nvim-scrollbar",
-                config = function()
-                    require("conf.nvim-scrollbar")
                 end
             }
             -- 显示网页色
@@ -366,11 +358,11 @@ packer.startup(
                     vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', {noremap=false, silent=true})
                 end
             }
-            -- asyncrun
+            -- asyncrun 编译代码
             use {
                 "skywind3000/asyncrun.vim",
             }
-            -- tasks
+            -- tasks 任务系统
             use {
                 "skywind3000/asynctasks.vim",
             }
@@ -384,14 +376,14 @@ packer.startup(
             }
         }
     }
-    )
+)
 
-    -- 实时生效配置
-    vim.cmd(
-    [[
-    augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-    augroup end
-    ]]
-    )
+-- 实时生效配置
+vim.cmd(
+[[
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+]]
+)
