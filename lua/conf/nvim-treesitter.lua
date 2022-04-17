@@ -4,7 +4,7 @@
 require("nvim-treesitter.configs").setup(
 {
     -- 安装的高亮支持来源
-    ensure_installed = "maintained",
+    ensure_installed = "all",
     -- 同步下载高亮支持
     sync_install = false,
     -- 高亮相关
@@ -35,7 +35,7 @@ require("nvim-treesitter.configs").setup(
     -- 彩虹括号，由 nvim-ts-rainbow 插件提供
     rainbow = {
         enable = true,
-        extended_mode = true
+        extended_mode = true,
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
     },

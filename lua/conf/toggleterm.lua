@@ -44,35 +44,9 @@ local floatTerm =
     }
 )
 
--- 新建 lazygit 终端
-local lazyGit =
-    Terminal:new(
-    {
-        cmd = "lazygit",
-        hidden = true,
-        direction = "float",
-        float_opts = {
-            border = "double"
-        },
-        on_open = function(term)
-            inInsert()
-            -- lazygit 中 q 是退出
-            vim.keybinds.bmap(term.bufnr, "i", "q", "<cmd>close<CR>", vim.keybinds.opts)
-        end,
-        on_close = function()
-            -- 重新映射 Esc
-            vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
-        end
-    }
-)
-
 -- 定义新的方法
 Toggleterm.float_toggle = function()
     floatTerm:toggle()
-end
-
-Toggleterm.lazygit_toggle = function()
-    lazyGit:toggle()
 end
 
 -- 退出终端插入模式
@@ -81,8 +55,6 @@ vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", vim.keybinds.opts)
 -- 打开浮动终端
 vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggle()<CR>", vim.keybinds.opts)
--- 打开lazy git 终端
-vim.keybinds.gmap("n", "<leader>tg", "<cmd>lua require('toggleterm').lazygit_toggle()<CR>", vim.keybinds.opts)
 -- 打开或关闭所有终端
 vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
 

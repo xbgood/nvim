@@ -7,6 +7,7 @@ local switch_words = {
     {"yes", "no"},
     {"disable", "enable"},
     {"+", "-"},
+    {"[", "]"},
     {">", "<"},
     {"=", "!="}
 }

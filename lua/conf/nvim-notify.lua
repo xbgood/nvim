@@ -8,7 +8,7 @@ local notify_opts = {
     -- static
     stages = "fade",
     -- 超时时间，默认 5s
-    timeout = 2000
+    timeout = 3000
 }
 
 -- 如果是透明背景，则需要设置背景色
