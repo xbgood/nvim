@@ -22,3 +22,5 @@ let g:mdip_imgdir = '.img'
 let g:asyncrun_open = 6
 ]])
 
+-- 设置背景色
+vim.g.background_transparency = true
