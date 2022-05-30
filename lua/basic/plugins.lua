@@ -82,7 +82,6 @@ packer.startup(
             -- 快速跳转
             use {
                 "phaazon/hop.nvim",
-                branch = 'v1',
                 config = function()
                     require("conf.hop")
                 end
