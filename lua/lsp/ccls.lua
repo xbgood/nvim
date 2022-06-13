@@ -1,5 +1,8 @@
+-- install:
+-- sudo pacman -S ccls
 return {
     filetypes = { "c", "cpp", "objc", "objcpp" },
+    cmd = { "ccls" },
     log_level = 2,
     root_dir = function()
         return vim.fn.getcwd()

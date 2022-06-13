@@ -8,9 +8,14 @@ return {
         ["textDocument/publishDiagnostics"] = function(...)
         end
     },
+    filetypes = { "python" },
+    cmd = { "pyright-langserver", "--stdio" },
     settings = {
         python = {
             analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
                 typeCheckingMode = "off"
             }
         }
