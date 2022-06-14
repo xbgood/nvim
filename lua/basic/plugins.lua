@@ -104,7 +104,7 @@ packer.startup(
             use {
                 "Pocco81/AutoSave.nvim",
                 config = function()
-                    require("conf.AutoSave")
+                    require("conf.nvim-autosave")
                 end
             }
             -- 自动恢复光标位置
