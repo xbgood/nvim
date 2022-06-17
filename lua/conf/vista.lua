@@ -2,17 +2,17 @@
 
 vim.cmd( [[
 " 缩进显示方式
-" let g:vista_icon_indent = ["▸ ", ""]
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_icon_indent = ["▸ ", ""]
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " 通过那种方式渲染大纲预览（ctags 或者 nvim_lsp）
-let g:vista_default_executive = 'nvim_lsp'
+let g:vista_default_executive = 'ctags'
 
 " 启用fzf的预览窗口
-" let g:vista_fzf_preview = ['right:50%']
+let g:vista_fzf_preview = ['right:50%']
 
 " 选中后光标闪动2下
-let g:vista_blink = [2, 100]
+let g:vista_blink = [3, 100]
 
 " 打开时移至vista窗口
 let g:vista_stay_on_open = 1
@@ -28,8 +28,6 @@ let g:vista_sidebar_width = 30
 
 " 将选中的内容在底部栏回显
 let g:vista_echo_cursor = 1
-
-
 
 
 " 启用图标支持"

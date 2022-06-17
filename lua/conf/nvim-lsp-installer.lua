@@ -21,6 +21,7 @@ local servers = {
     bashls = require("lsp.bashls"),
     cmake = require("lsp.cmake"),
     awk_ls = require("lsp.awk_ls"),
+    -- clangd = require("lsp.clangd"),
     -- jsonls = require("lsp.jsonls"),
     -- tsserver = require("lsp.tsserver"),
     -- html = require("lsp.html"),
