@@ -4,6 +4,8 @@ require("nvim-tree").setup(
     {
         -- 视图
         view = {
+            -- 位置
+            side = "left",
             -- 宽度
             width = 30,
             -- 高度
@@ -28,7 +30,8 @@ require("nvim-tree").setup(
             enable = true,
             ignore = true,
             timeout = 500
-        }
+        },
+        hijack_cursor = true,
     }
 )
 
@@ -37,7 +40,7 @@ vim.g.nvim_tree_icons = {
     default = " ",
     symlink = " ",
     git = {
-        unstaged = "",
+        unstaged = "✗",
         staged = "✓",
         unmerged = "",
         renamed = "➜",
@@ -46,10 +49,10 @@ vim.g.nvim_tree_icons = {
         ignored = ""
     },
     folder = {
-        arrow_open = "╰─▸",
-        arrow_closed = "├─▸",
-        -- arrow_open = "",
-        -- arrow_closed = "",
+        -- arrow_open = "╰─▸",
+        -- arrow_closed = "├─▸",
+        arrow_open = "",
+        arrow_closed = "",
         default = "",
         open = "",
         empty = "",

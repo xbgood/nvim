@@ -366,6 +366,18 @@ packer.startup(
             use {
                 "skywind3000/asynctasks.vim",
             }
+            -- theme zephyr
+            use {
+                "glepnir/zephyr-nvim",
+            }
+            -- 快速运行代码片段
+            use {
+                "michaelb/sniprun",
+                run = 'bash ./install.sh',
+                config = function()
+                    require("conf.sniprun")
+                end
+            }
 
 
         end,

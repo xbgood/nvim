@@ -9,9 +9,9 @@ require("bufferline").setup(
             diagnostics = "nvim_lsp",
             -- 不建议更改图标
             indicator_icon = "▎",
-            buffer_close_icon = "",
+            buffer_close_icon =  "",
             modified_icon = "●",
-            close_icon = "",
+            close_icon = "", --"",
             left_trunc_marker = "",
             right_trunc_marker = "",
             -- 分割符样式："slant" | "thick" | "thin"

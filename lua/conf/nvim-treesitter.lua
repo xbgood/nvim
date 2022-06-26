@@ -10,7 +10,9 @@ require("nvim-treesitter.configs").setup(
     -- 高亮相关
     highlight = {
         -- 启用高亮支持
-        enable = true,
+        -- enable = true,
+        enable = false,
+
         -- 使用 treesitter 高亮而不是 neovim 内置的高亮
         additional_vim_regex_highlighting = false
     },
@@ -30,7 +32,7 @@ require("nvim-treesitter.configs").setup(
     },
     -- 缩进，关闭
     indent = {
-        enable = false
+        enable = true
     },
     -- 彩虹括号，由 nvim-ts-rainbow 插件提供
     rainbow = {
