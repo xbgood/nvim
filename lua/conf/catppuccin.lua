@@ -3,8 +3,8 @@
 require("catppuccin").setup(
     {
         -- 透明背景
-        transparent_background = vim.g.background_transparency,
-        -- transparent_background = true,
+        -- transparent_background = vim.g.background_transparency,
+        transparent_background = true,
         -- 使用终端背景色
         term_color = false,
         -- 代码样式
@@ -12,7 +12,7 @@ require("catppuccin").setup(
             comments = "italic",
             conditions = "italic",
             loops = "NONE",
-            functions = "BOLD",
+            functions = "NONE",
             keywords = "NONE",
             strings = "NONE",
             variables = "NONE",
@@ -82,5 +82,5 @@ require("catppuccin").setup(
 )
 
 -- 应用主题
-vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 vim.cmd([[colorscheme catppuccin]])
