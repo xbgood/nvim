@@ -366,7 +366,7 @@ packer.startup(
             use {
                 "skywind3000/asynctasks.vim",
             }
-            -- theme zephyr
+            -- theme
             use {
                 "glepnir/zephyr-nvim",
             }
@@ -399,3 +399,5 @@ autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup end
 ]]
 )
+
+-- vim.cmd[[ colorscheme zephyr ]]
