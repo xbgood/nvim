@@ -58,6 +58,13 @@ packer.startup(
                     require("conf.bufferline")
                 end
             }
+            -- use {
+            --     'noib3/nvim-cokeline',
+            --     requres = 'kyazdani42/nvim-web-devicons',
+            --     config = function ()
+            --         require('cokeline').setup()
+            --     end
+            -- }
             -- 搜索时显示条目
             use {
                 "kevinhwang91/nvim-hlslens",
@@ -400,4 +407,4 @@ augroup end
 ]]
 )
 
--- vim.cmd[[ colorscheme zephyr ]]
+vim.cmd[[ colorscheme zephyr ]]
