@@ -408,3 +408,4 @@ augroup end
 )
 
 vim.cmd[[ colorscheme zephyr ]]
+-- vim.cmd[[ colorscheme catppuccin]]

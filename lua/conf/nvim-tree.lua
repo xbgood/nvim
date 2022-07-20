@@ -1,39 +1,67 @@
--- https://github.com/kyazdani42/nvim-tree.lua
+-- nvim-tree config
+require 'nvim-tree'.setup {
+    disable_netrw        = true,
+    hijack_netrw         = true,
+    open_on_setup        = true,
+    ignore_ft_on_setup   = {},
+    auto_reload_on_write = true,
+    open_on_tab          = false,
+    hijack_cursor        = false,
+    update_cwd           = false,
 
-require("nvim-tree").setup(
-    {
-        -- 视图
-        view = {
-            -- 位置
-            side = "left",
-            -- 宽度
-            width = 30,
-            -- 高度
-            height = 30,
-            -- 隐藏顶部的根目录显示
-            hide_root_folder = false,
-            -- 自动调整大小
-            -- auto_resize = true
+    diagnostics          = {
+        enable = false,
+        icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
+        }
+    },
+    update_focused_file  = {
+        enable      = true,
+        update_cwd  = true,
+        ignore_list = {}
+    },
+    system_open          = {
+        cmd  = nil,
+        args = {}
+    },
+    filters              = {
+        dotfiles = true,
+        custom = {}
+    },
+    git                  = {
+        enable = true,
+        ignore = true,
+        timeout = 500,
+    },
+    view                 = {
+        width = 30,
+        height = 30,
+        hide_root_folder = false,
+        side = 'left',
+        mappings = {
+            custom_only = false,
+            list = {}
         },
-        diagnostics = {
-            -- 是否启用文件诊断信息
-            enable = true,
-            icons = {
-                hint = "",
-                info = "",
-                warning = "",
-                error = ""
-            }
+        number = false,
+        relativenumber = false,
+        signcolumn = "yes"
+    },
+    trash                = {
+        cmd = "trash",
+        require_confirm = true
+    },
+    actions              = {
+        change_dir = {
+            global = false,
         },
-        git = {
-            -- 是否启用 git 信息
-            enable = true,
-            ignore = true,
-            timeout = 500
-        },
-        hijack_cursor = true,
+        open_file = {
+            quit_on_open = false,
+        }
     }
-)
+}
 
 -- 默认图标，可自行修改
 vim.g.nvim_tree_icons = {
@@ -62,13 +90,15 @@ vim.g.nvim_tree_icons = {
     }
 }
 
+
 -- 目录后加上反斜杠 /
-vim.g.nvim_tree_add_trailing = 1
+-- vim.g.nvim_tree_add_trailing = 1
 
 -- 按 leader 1 打开文件树
 vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
 -- 按 leader fc 在文件树中找到当前以打开文件的位置
 vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
+
 
 -- 默认按键
 -- o     ：打开目录或文件

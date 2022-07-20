@@ -10,8 +10,8 @@ require("telescope").setup()
 -- 查找文件
 vim.keybinds.gmap("n", "<leader>ff", "<cmd>Telescope find_files theme=ivy<CR>", vim.keybinds.opts)
 -- 查找文字
-vim.keybinds.gmap("n", "<leader>fg", "<cmd>Telescope live_grep theme=ivy<CR>", vim.keybinds.opts)
--- 查找特殊符号
+vim.keybinds.gmap("n", "<leader>fw", "<cmd>Telescope live_grep theme=ivy<CR>", vim.keybinds.opts)
+-- 查找buffers
 vim.keybinds.gmap("n", "<leader>fb", "<cmd>Telescope buffers theme=ivy<CR>", vim.keybinds.opts)
 -- 查找帮助文档
 vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=ivy<CR>", vim.keybinds.opts)
