@@ -58,6 +58,7 @@ packer.startup(
                     require("conf.bufferline")
                 end
             }
+            -- 另一个bufferline，也不错
             -- use {
             --     'noib3/nvim-cokeline',
             --     requres = 'kyazdani42/nvim-web-devicons',
@@ -283,12 +284,12 @@ packer.startup(
                 end
             }
             -- git copilot 自动补全
-            use {
-                "github/copilot.vim",
-                config = function()
-                    require("conf.copilot")
-                end
-            }
+            -- use {
+            --     "github/copilot.vim",
+            --     config = function()
+            --         require("conf.copilot")
+            --     end
+            -- }
             -- 语法高亮
             use {
                 "nvim-treesitter/nvim-treesitter",
@@ -346,13 +347,13 @@ packer.startup(
                 "ferrine/md-img-paste.vim",
             }
             -- markdown table
-            use {
-                "dhruvasagar/vim-table-mode",
-            }
+            -- use {
+            --     "dhruvasagar/vim-table-mode",
+            -- }
             -- markdown org
-            use {
-                "demonlord1997/markdown-org",
-            }
+            -- use {
+            --     "demonlord1997/markdown-org",
+            -- }
             -- quick jk
             use{
                 "PHSix/faster.nvim",
@@ -374,15 +375,21 @@ packer.startup(
                 "skywind3000/asynctasks.vim",
             }
             -- theme
-            use {
-                "glepnir/zephyr-nvim",
-            }
+            -- use {
+            --     "glepnir/zephyr-nvim",
+            -- }
             -- 快速运行代码片段
+            -- use {
+            --     "michaelb/sniprun",
+            --     run = 'bash ./install.sh',
+            --     config = function()
+            --         require("conf.sniprun")
+            --     end
+            -- }
             use {
-                "michaelb/sniprun",
-                run = 'bash ./install.sh',
+                "simrat39/symbols-outline.nvim",
                 config = function()
-                    require("conf.sniprun")
+                    require("conf.outline")
                 end
             }
 
@@ -399,13 +406,14 @@ packer.startup(
 
 -- 实时生效配置
 vim.cmd(
-[[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-]]
+    [[
+    augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    augroup end
+    ]]
 )
 
-vim.cmd[[ colorscheme zephyr ]]
--- vim.cmd[[ colorscheme catppuccin]]
+-- 应用主题
+vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+vim.cmd([[colorscheme catppuccin]])
