@@ -12,7 +12,7 @@ require('bufferline').setup {
         -- NOTE: this plugin is designed with this icon in mind,
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
-        indicator_icon = '▎',
+        -- indicator_icon = '▎', -- 这里报错了，该命令取消了，不知道换成啥另，所以注释了
         buffer_close_icon = '',
         modified_icon = '●',
         close_icon = '',

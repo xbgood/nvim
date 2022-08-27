@@ -20,7 +20,9 @@ let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
 let g:mdip_imgdir = '.img'
 let g:asyncrun_open = 6
+set mouse-=a
 ]])
 
 -- 设置背景色
 vim.g.background_transparency = true
+

@@ -110,9 +110,9 @@ packer.startup(
             }
             -- 自动保存
             use {
-                "Pocco81/AutoSave.nvim",
+                "Pocco81/auto-save.nvim",
                 config = function()
-                    require("conf.nvim-autosave")
+                    require("conf.auto-save")
                 end
             }
             -- 自动恢复光标位置
@@ -355,7 +355,7 @@ packer.startup(
             --     "demonlord1997/markdown-org",
             -- }
             -- quick jk
-            use{
+            use {
                 "PHSix/faster.nvim",
                 event = {"VimEnter *"},
                 config = function()
@@ -366,6 +366,24 @@ packer.startup(
                     vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', {noremap=false, silent=true})
                 end
             }
+            -- F{char}
+            use {
+                "gukz/ftFT.nvim",
+                config = function()
+                    vim.g.ftFT_hl_group = "Search" -- will use Search hl group to do the highlitgt
+
+                    vim.g.ftFT_keymap_keys = {"f", "t", "F"} -- Will create key binding for "f", "t", "F", but not "T"
+                    vim.g.ftFT_keymap_skip_n = 1  -- if set this, will not create key binding for ftFT in normal mode
+                    vim.g.ftFT_keymap_skip_ydc = 1  -- if set this, will not create key binding for [ydc][ftFT] in normal mode
+                    vim.g.ftFT_keymap_skip_v = 1  -- if set this, will not create key binding for ftFT in visual mode
+
+                    -- ftFT will show another sight line below current line, shows you how many `;` you need to jump there, disabled by default
+                    vim.g.ftFT_sight_enable = 1  -- if set this, will show extra sight line
+                    vim.g.ftFT_sight_hl_group = "Search"  -- if set htis, will use other hl group for sight line
+
+                    require("ftFT").setup()  -- this will create default keymapping for you
+                end
+            }
             -- asyncrun 编译代码
             use {
                 "skywind3000/asyncrun.vim",
@@ -374,7 +392,7 @@ packer.startup(
             use {
                 "skywind3000/asynctasks.vim",
             }
-            -- theme
+            -- theme zephyr
             -- use {
             --     "glepnir/zephyr-nvim",
             -- }
@@ -386,15 +404,15 @@ packer.startup(
             --         require("conf.sniprun")
             --     end
             -- }
-            use {
-                "simrat39/symbols-outline.nvim",
-                config = function()
-                    require("conf.outline")
-                end
-            }
-
-
+            -- 代码预览 更好的样式
+            -- use {
+            --     "simrat39/symbols-outline.nvim",
+            --     config = function()
+            --         require("conf.outline")
+            --     end
+            -- }
         end,
+
         -- 使用浮动窗口
         config = {
             display = {
