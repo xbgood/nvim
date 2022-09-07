@@ -27,16 +27,6 @@ packer.startup(
                     require("conf.nvim-tree")
                 end
             }
-            -- 优秀的暗色主题
-            use {
-                "catppuccin/nvim",
-                -- 改个别名，因为它的名字是 nvim，可能会冲突
-                as = "catppuccin",
-                config = function()
-                    -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
-                    require("conf.catppuccin")
-                end
-            }
             -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
             use {
                 "lewis6991/gitsigns.nvim",
@@ -58,14 +48,6 @@ packer.startup(
                     require("conf.bufferline")
                 end
             }
-            -- 另一个bufferline，也不错
-            -- use {
-            --     'noib3/nvim-cokeline',
-            --     requres = 'kyazdani42/nvim-web-devicons',
-            --     config = function ()
-            --         require('cokeline').setup()
-            --     end
-            -- }
             -- 搜索时显示条目
             use {
                 "kevinhwang91/nvim-hlslens",
@@ -283,13 +265,6 @@ packer.startup(
                     require("conf.nvim-cmp")
                 end
             }
-            -- git copilot 自动补全
-            -- use {
-            --     "github/copilot.vim",
-            --     config = function()
-            --         require("conf.copilot")
-            --     end
-            -- }
             -- 语法高亮
             use {
                 "nvim-treesitter/nvim-treesitter",
@@ -346,14 +321,6 @@ packer.startup(
             use{
                 "ferrine/md-img-paste.vim",
             }
-            -- markdown table
-            -- use {
-            --     "dhruvasagar/vim-table-mode",
-            -- }
-            -- markdown org
-            -- use {
-            --     "demonlord1997/markdown-org",
-            -- }
             -- quick jk
             use {
                 "PHSix/faster.nvim",
@@ -392,10 +359,7 @@ packer.startup(
             use {
                 "skywind3000/asynctasks.vim",
             }
-            -- theme zephyr
-            -- use {
-            --     "glepnir/zephyr-nvim",
-            -- }
+
             -- 快速运行代码片段
             -- use {
             --     "michaelb/sniprun",
@@ -410,6 +374,53 @@ packer.startup(
             --     config = function()
             --         require("conf.outline")
             --     end
+            -- }
+            -- markdown table
+            -- use {
+            --     "dhruvasagar/vim-table-mode",
+            -- }
+            -- markdown org
+            -- use {
+            --     "demonlord1997/markdown-org",
+            -- }
+            -- git copilot 自动补全
+            -- use {
+            --     "github/copilot.vim",
+            --     config = function()
+            --         require("conf.copilot")
+            --     end
+            -- }
+            -- 另一个bufferline，也不错
+            -- use {
+            --     'noib3/nvim-cokeline',
+            --     requres = 'kyazdani42/nvim-web-devicons',
+            --     config = function ()
+            --         require('cokeline').setup()
+            --     end
+            -- }
+
+            ------------------ theme zephyr ----------------------
+            -- 优秀的暗色主题
+            use {
+                "catppuccin/nvim",
+                -- 改个别名，因为它的名字是 nvim，可能会冲突
+                as = "catppuccin",
+                config = function()
+                    -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
+                    require("conf.catppuccin")
+                end
+            }
+            -- use {
+            --     "rebelot/kanagawa.nvim",
+            --     config = function()
+            --         require("conf.kanagawa")
+            --     end
+            -- }
+            -- use {
+            --     "glepnir/zephyr-nvim",
+            -- }
+            -- use {
+            --     "crusoexia/vim-monokai",
             -- }
         end,
 
@@ -432,6 +443,17 @@ vim.cmd(
     ]]
 )
 
--- 应用主题
-vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-vim.cmd([[colorscheme catppuccin]])
+------------ monokaipro theme -------------------
+-- vim.g.monokaipro_filter = "octogon"
+-- vim.g.monokaipro_italic_functions = true
+-- vim.g.monokaipro_sidebars = { "vista_kind", "packer" }
+-- vim.g.monokaipro_flat_term = true
+-- vim.g.monokaipro_colors = { hint = "orange", error = "#ff0000" }
+-- vim.cmd[[colorscheme monokaipro]]
+
+------------ sonokai theme ----------------------
+-- vim.g.sonokai_style = "atlantis"
+-- vim.cmd[[colorscheme sonokai]]
+
+------------ sonokai zephyr ----------------------
+-- vim.cmd([[colorscheme zephyr]]) -- catppuccin zephyr

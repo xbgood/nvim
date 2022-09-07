@@ -16,13 +16,9 @@ vim.g.neoformat_run_all_formatter = 1
 -- 只提示错误消息
 vim.g.neoformat_only_msg_on_error = 1
 
--- 自动格式化
 
--- vim.cmd([[
--- augroup fmt
---   autocmd!
---   autocmd BufWritePre * undojoin | Neoformat
--- augroup END
--- ]])
-
+-- neoformat 格式化代码
 vim.keybinds.gmap("n", "<leader>cf", "<cmd>Neoformat<CR>", vim.keybinds.opts)
+
+-- 用 astyle 来格式化代码
+vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --style=google --indent=spaces=4 --ascii --exclude=3rdparty<CR>", vim.keybinds.opts)

@@ -1,6 +1,6 @@
 -- https://github.com/catppuccin/nvim
 
-require("catppuccin").setup(
+require("catppuccin").setup({
     {
         -- 透明背景
         -- transparent_background = vim.g.background_transparency,
@@ -79,4 +79,8 @@ require("catppuccin").setup(
             telekasten = true,
         }
     }
-)
+})
+
+
+vim.g.catppuccin_flavour = "macchiato"
+vim.cmd [[colorscheme catppuccin]]
