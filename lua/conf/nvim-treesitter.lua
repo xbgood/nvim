@@ -12,7 +12,6 @@ require("nvim-treesitter.configs").setup(
         -- 启用高亮支持
         -- enable = true,
         enable = false,
-
         -- 使用 treesitter 高亮而不是 neovim 内置的高亮
         additional_vim_regex_highlighting = false
     },
