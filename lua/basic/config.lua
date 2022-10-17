@@ -18,6 +18,9 @@ vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 vim.cmd([[
 let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
+" let g:mkdp_markdown_css = ''
+let g:mkdp_browser = ''
+let g:mkdp_theme = 'dark'
 let g:mdip_imgdir = '.img'
 let g:asyncrun_open = 6
 set mouse-=a
