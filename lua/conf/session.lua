@@ -13,11 +13,3 @@ require("auto-session").setup(
         pre_save_cmds = {"tabdo NvimTreeClose"}
     }
 )
-
--- 在每次退出 neovim 时自动保存会话
--- 其实该插件不加这个自动命令也能
--- 自动保存会话，但总是感觉效果不理想
--- 所以这里我就自己加了个自动命令
-vim.cmd([[
-    autocmd VimLeavePre * silent! :SaveSession
-]])

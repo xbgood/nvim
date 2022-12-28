@@ -17,6 +17,3 @@ require('kanagawa').setup({
     overrides = {},
     theme = "default"           -- Load "default" theme or the experimental "light" theme
 })
-
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa")

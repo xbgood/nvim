@@ -108,18 +108,7 @@ packer.startup(
             use {
                 "rmagatti/auto-session",
                 config = function()
-                    require("conf.auto-session")
-                end
-            }
-            -- 全局替换
-            use {
-                "nvim-pack/nvim-spectre",
-                requires = {
-                    "nvim-lua/plenary.nvim", -- Lua 开发模块
-                    "BurntSushi/ripgrep" -- 文字查找
-                },
-                config = function()
-                    require("conf.nvim-spectre")
+                    require("conf.session")
                 end
             }
             -- 多光标模式
@@ -127,13 +116,6 @@ packer.startup(
                 "terryma/vim-multiple-cursors",
                 config = function()
                     require("conf.vim-multiple-cursors")
-                end
-            }
-            -- 显示网页色
-            use {
-                "norcalli/nvim-colorizer.lua",
-                config = function()
-                    require("conf.nvim-colorizer")
                 end
             }
             -- 内置终端
@@ -183,7 +165,7 @@ packer.startup(
                     require("conf.todo-comments")
                 end
             }
-            -- 为状态栏提供上下文信息 
+            -- 为状态栏提供上下文信息
             use {
                 "SmiteshP/nvim-gps",
                 requires = "nvim-treesitter/nvim-treesitter"
@@ -198,11 +180,6 @@ packer.startup(
                     require("conf.lualine")
                 end
             }
-            -- coc.vim
-            --use {
-            --    'neoclide/coc.nvim',
-            --    run = 'yarn install --frozen-lockfile'
-            --}
             -- LSP 基础服务
             use {
                 "neovim/nvim-lspconfig",
@@ -212,9 +189,15 @@ packer.startup(
             }
             -- 自动安装 LSP
             use {
-                "williamboman/nvim-lsp-installer",
+                "williamboman/mason.nvim",
                 config = function()
-                    require("conf.nvim-lsp-installer")
+                    require("conf.mason")
+                end
+            }
+            use {
+                "williamboman/mason-lspconfig.nvim",
+                config = function()
+                    require("conf.mason-lspconfig")
                 end
             }
             -- LSP UI 美化
@@ -279,11 +262,8 @@ packer.startup(
             -- 代码注释
             use {
                 "numToStr/Comment.nvim",
-                requires = {
-                    "JoosepAlviste/nvim-ts-context-commentstring"
-                },
                 config = function()
-                    require("conf.Comment")
+                    require("conf.comment")
                 end
             }
             -- 代码格式化
@@ -307,19 +287,20 @@ packer.startup(
                     require("conf.vista")
                 end
             }
-            -- markdown preview
+            -- markdown
             use {
+                -- markdown preview
                 "iamcco/markdown-preview.nvim",
                 ft = 'markdown',
-                run = 'cd app && yarn install'
-            }
-            -- vim markdown
-            use {
+                run = 'cd app && yarn install',
+                -- vim markdown
                 "preservim/vim-markdown",
-            }
-            -- markdown image paste
-            use{
+                -- markdown image paste
                 "ferrine/md-img-paste.vim",
+                -- -- markdown table
+                -- "dhruvasagar/vim-table-mode",
+                -- -- markdown org
+                -- "demonlord1997/markdown-org",
             }
             -- quick jk
             use {
@@ -351,15 +332,48 @@ packer.startup(
                     require("ftFT").setup()  -- this will create default keymapping for you
                 end
             }
-            -- asyncrun 编译代码
+            -- run code
             use {
+                -- asyncrun 编译代码
                 "skywind3000/asyncrun.vim",
-            }
-            -- tasks 任务系统
-            use {
+                -- tasks 任务系统
                 "skywind3000/asynctasks.vim",
             }
-
+            -- 优秀的暗色主题
+            use {
+                "catppuccin/nvim",
+                -- 改个别名，因为它的名字是 nvim，可能会冲突
+                as = "catppuccin",
+                config = function()
+                    -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
+                    require("conf.catppuccin")
+                end,
+            }
+            -- other theme
+            use {
+                "rebelot/kanagawa.nvim",
+                config = function()
+                    require("conf.kanagawa")
+                end,
+            }
+            -- 全局替换
+            -- use {
+            --     "nvim-pack/nvim-spectre",
+            --     requires = {
+            --         "nvim-lua/plenary.nvim", -- Lua 开发模块
+            --         "BurntSushi/ripgrep" -- 文字查找
+            --     },
+            --     config = function()
+            --         require("conf.nvim-spectre")
+            --     end
+            -- }
+            -- 显示网页色
+            -- use {
+            --     "norcalli/nvim-colorizer.lua",
+            --     config = function()
+            --         require("conf.nvim-colorizer")
+            --     end
+            -- }
             -- 快速运行代码片段
             -- use {
             --     "michaelb/sniprun",
@@ -375,53 +389,12 @@ packer.startup(
             --         require("conf.outline")
             --     end
             -- }
-            -- markdown table
-            -- use {
-            --     "dhruvasagar/vim-table-mode",
-            -- }
-            -- markdown org
-            -- use {
-            --     "demonlord1997/markdown-org",
-            -- }
-            -- git copilot 自动补全
-            -- use {
-            --     "github/copilot.vim",
-            --     config = function()
-            --         require("conf.copilot")
-            --     end
-            -- }
-            -- 另一个bufferline，也不错
-            -- use {
-            --     'noib3/nvim-cokeline',
-            --     requres = 'kyazdani42/nvim-web-devicons',
-            --     config = function ()
-            --         require('cokeline').setup()
-            --     end
-            -- }
+            -- coc.vim
+            --use {
+            --    'neoclide/coc.nvim',
+            --    run = 'yarn install --frozen-lockfile'
+            --}
 
-            ------------------ theme zephyr ----------------------
-            -- 优秀的暗色主题
-            use {
-                "catppuccin/nvim",
-                -- 改个别名，因为它的名字是 nvim，可能会冲突
-                as = "catppuccin",
-                config = function()
-                    -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
-                    require("conf.catppuccin")
-                end
-            }
-            -- use {
-            --     "rebelot/kanagawa.nvim",
-            --     config = function()
-            --         require("conf.kanagawa")
-            --     end
-            -- }
-            -- use {
-            --     "glepnir/zephyr-nvim",
-            -- }
-            -- use {
-            --     "crusoexia/vim-monokai",
-            -- }
         end,
 
         -- 使用浮动窗口
@@ -443,17 +416,6 @@ vim.cmd(
     ]]
 )
 
------------- monokaipro theme -------------------
--- vim.g.monokaipro_filter = "octogon"
--- vim.g.monokaipro_italic_functions = true
--- vim.g.monokaipro_sidebars = { "vista_kind", "packer" }
--- vim.g.monokaipro_flat_term = true
--- vim.g.monokaipro_colors = { hint = "orange", error = "#ff0000" }
--- vim.cmd[[colorscheme monokaipro]]
-
------------- sonokai theme ----------------------
--- vim.g.sonokai_style = "atlantis"
--- vim.cmd[[colorscheme sonokai]]
-
 ------------ sonokai zephyr ----------------------
--- vim.cmd([[colorscheme zephyr]]) -- catppuccin zephyr
+vim.cmd [[colorscheme catppuccin]]
+-- vim.cmd("colorscheme kanagawa")
