@@ -292,7 +292,12 @@ packer.startup(
                 -- markdown preview
                 "iamcco/markdown-preview.nvim",
                 ft = 'markdown',
-                run = 'cd app && yarn install',
+                run = 'cd app && npm install',
+                setup = function()
+                    vim.g.mkdp_filetypes = {"markdown"}
+                end,
+            }
+            use {
                 -- vim markdown
                 "preservim/vim-markdown",
                 -- markdown image paste

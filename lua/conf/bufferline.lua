@@ -1,10 +1,10 @@
 -- https://github.com/akinsho/bufferline.nvim
-
+vim.opt.termguicolors = true
 require('bufferline').setup {
     options = {
         mode = "buffers", -- set to "tabs" to only show tabpages instead
         -- 为每个 buffer 都配置一个序数
-        numbers = "none", -- "none", "both"
+        numbers = "ordinal", -- "none", "both", "buffer_id", "ordinal"
         close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
         right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
         left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
@@ -34,21 +34,17 @@ require('bufferline').setup {
 
         max_name_length = 18,
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-        tab_size = 11,
+        tab_size = 18,
         diagnostics = "nvim_lsp", -- or coc
         diagnostics_update_in_insert = false,
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            local s = " "
-            -- for e, n in pairs(diagnostics_dict) do
-            --     local sym = e == "error" and " " or (e == "warning" and " " or "")
-            --     s = s .. sym
-            -- end
-            for e, n in pairs(diagnostics_dict) do
-                local sym = e == "error" and " " or (e == "warning" and " " or "")
-                s = s .. n .. sym
-            end
-            return s
+        -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        --     return "("..count..")"
+        -- end, -- simple style
+        diagnostics_indicator = function(count, level)
+            local icon = level:match("error") and " " or ""
+            return " " .. icon .. count
         end,
+
         -- NOTE: this will be called a lot so don't do any heavy processing here
         custom_filter = function(buf_number, buf_numbers)
             -- filter out filetypes you don't want to see
@@ -73,29 +69,66 @@ require('bufferline').setup {
             {
                 filetype = "NvimTree",
                 text = "File Explorer",
-                text_align = "center"
+                text_align = "center",
+                separator = true
             },
             {
                 filetype = "SymbolsOutline",
                 text = "Symbols Outline",
-                text_align = "center"
+                text_align = "center",
+                separator = true
             }
         },
 
-        color_icons = true,
+        color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
-        show_buffer_close_icons = false,
+        show_buffer_close_icons = true,
         show_buffer_default_icon = true, -- whether or not an unrecognised filetype should show a default icon
         show_close_icon = false,
         show_tab_indicators = true,
+        show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
         persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
 
         -- can also be a table containing 2 custom separators
         -- [focused and unfocused]. eg: { '|', '|' }
-        separator_style = "thin",
+        separator_style = "thin", --thin, padded_slant, thick, slant, any
         enforce_regular_tabs = false,
         always_show_bufferline = true,
-        sort_by = 'id'
+        hover = {
+            enabled = true,
+            delay = 200,
+            reveal = {'close'}
+        },
+        sort_by = 'id', -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
+
+        -- groups
+        -- groups = {
+        --     options = {
+        --         toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+        --     },
+        --     items = {
+        --         {
+        --             name = "Tests", -- Mandatory
+        --             highlight = {underline = true, sp = "blue"}, -- Optional
+        --             priority = 2, -- determines where it will appear relative to other groups (Optional)
+        --             icon = "", -- Optional
+        --             matcher = function(buf) -- Mandatory
+        --                 return buf.filename:match('%_test') or buf.filename:match('%_spec')
+        --             end,
+        --         },
+        --         {
+        --             name = "Docs",
+        --             highlight = {undercurl = true, sp = "green"},
+        --             auto_close = false,  -- whether or not close this group if it doesn't contain the current buffer
+        --             matcher = function(buf)
+        --                 return buf.filename:match('%.md') or buf.filename:match('%.txt')
+        --             end,
+        --             separator = { -- Optional
+        --                 style = require('bufferline.groups').separator.tab
+        --             },
+        --         }
+        --     }
+        -- },
     }
 }
 
