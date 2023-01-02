@@ -34,6 +34,7 @@ end
 local cmp = require('cmp')
 
 cmp.setup{
+    -- 设置代码片段引擎，用于根据代码片段补全
   snippet = {
     expand = function(args)
       -- for `ultisnips` users.

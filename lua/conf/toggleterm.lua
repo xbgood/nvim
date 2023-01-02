@@ -25,7 +25,7 @@ end
 
 -- 新建浮动终端
 local floatTerm =
-    Terminal:new(
+Terminal:new(
     {
         hidden = true,
         direction = "float",
@@ -57,9 +57,3 @@ vim.keybinds.gmap("n", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", vim.ke
 vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggle()<CR>", vim.keybinds.opts)
 -- 打开或关闭所有终端
 vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
-
--- 要需创建多个终端，可：
--- 1 <键位> leader tt
--- 2 <键位>
--- ... <键位>
--- 另外，上面我们新建了 2 个特殊终端，所以普通终端的顺序应该是从 3 开始

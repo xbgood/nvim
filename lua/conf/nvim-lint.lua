@@ -4,7 +4,7 @@
 -- pip3 install pylint
 
 require("lint").linters_by_ft = {
-    python = {"pylint"}
+    python = {"pylint"},
     -- javascript = {"eslint"},
     -- typescript = {"eslint"},
     go = {"golangcilint"}

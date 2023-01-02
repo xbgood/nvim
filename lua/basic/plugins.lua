@@ -202,7 +202,7 @@ packer.startup(
             }
             -- LSP UI 美化
             use {
-                "tami5/lspsaga.nvim",
+                "kkharji/lspsaga.nvim",
                 config = function()
                     require("conf.lspsaga")
                 end
@@ -362,16 +362,16 @@ packer.startup(
                 end,
             }
             -- 全局替换
-            -- use {
-            --     "nvim-pack/nvim-spectre",
-            --     requires = {
-            --         "nvim-lua/plenary.nvim", -- Lua 开发模块
-            --         "BurntSushi/ripgrep" -- 文字查找
-            --     },
-            --     config = function()
-            --         require("conf.nvim-spectre")
-            --     end
-            -- }
+            use {
+                "nvim-pack/nvim-spectre",
+                requires = {
+                    "nvim-lua/plenary.nvim", -- Lua 开发模块
+                    "BurntSushi/ripgrep" -- 文字查找
+                },
+                config = function()
+                    require("conf.nvim-spectre")
+                end
+            }
             -- 显示网页色
             -- use {
             --     "norcalli/nvim-colorizer.lua",
@@ -415,5 +415,5 @@ vim.cmd(
 )
 
 ------------ sonokai zephyr ----------------------
-vim.cmd [[colorscheme catppuccin]]
--- vim.cmd("colorscheme kanagawa")
+vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "kanagawa"

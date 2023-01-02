@@ -10,7 +10,7 @@ vim.g.neoformat_basic_format_align = 1
 -- 2.自动删除行尾空格
 vim.g.neoformat_basic_format_trim = 1
 -- 3.将制表符替换为空格
-vim.g.neoformat_basic_format_retab = 0
+vim.g.neoformat_basic_format_retab = 1
 vim.g.neoformat_run_all_formatter = 1
 
 -- 只提示错误消息
@@ -21,5 +21,5 @@ vim.g.neoformat_only_msg_on_error = 1
 vim.keybinds.gmap("n", "<leader>cf", "<cmd>Neoformat<CR>", vim.keybinds.opts)
 
 -- 用 astyle 来格式化代码
--- vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --style=google --indent=spaces=4<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --options=/home/wallen/.config/nvim/lua/conf/.astylerc<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --style=google --indent=spaces=4<CR>", vim.keybinds.opts)
+-- vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --options=/home/wallen/.config/nvim/lua/conf/.astylerc<CR>", vim.keybinds.opts)

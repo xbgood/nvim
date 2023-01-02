@@ -156,7 +156,7 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
         expand_all = {
             max_folder_discovery = 300,
             exclude = {},
-},
+        },
         file_popup = {
             open_win_config = {
                 col = 1,
@@ -165,7 +165,7 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
                 border = "shadow",
                 style = "minimal",
             },
-},
+        },
         open_file = {
             quit_on_open = false,
             resize_window = true,
@@ -205,10 +205,6 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
         },
     },
 } -- END_DEFAULT_OPTS
-
-
-
-
 
 
 

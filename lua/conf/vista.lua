@@ -2,15 +2,15 @@
 
 vim.cmd( [[
 " 缩进显示方式
-let g:vista_icon_indent = ["▸ ", ""]
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_icon_indent = ["▸ ", ""]
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 
 " 通过那种方式渲染大纲预览（ctags 或者 nvim_lsp）
-let g:vista_default_executive = 'ctags'
-" let g:vista_default_executive = 'nvim_lsp'
+" let g:vista_default_executive = 'ctags'
+let g:vista_default_executive = 'nvim_lsp'
 
 " 启用fzf的预览窗口
-" let g:vista_fzf_preview = ['right:50%']
+let g:vista_fzf_preview = ['right:50%']
 
 " 选中后光标闪动2下
 let g:vista_blink = [3, 100]
@@ -39,6 +39,16 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 
+" let g:lightline = {
+" \ 'colorscheme': 'wombat',
+" \ 'active': {
+" \   'left': [ [ 'mode', 'paste' ],
+" \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+" \ },
+" \ 'component_function': {
+" \   'method': 'NearestMethodOrFunction'
+" \ },
+" \ }
 ]])
 
 -- 打开大纲预览

@@ -5,6 +5,8 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 require("auto-session").setup(
     {
+        auto_session_enabled = true,
+        auto_save_enabled = nil,
         -- 自动加载最后保存的一次会话
         auto_session_enable_last_session = true,
         -- 保存会话时自动关闭 nvim-tree
