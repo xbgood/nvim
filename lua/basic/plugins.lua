@@ -263,13 +263,6 @@ packer.startup(
                     require("conf.comment")
                 end
             }
-            -- 代码格式化
-            use {
-                "sbdchd/neoformat",
-                config = function()
-                    require("conf.neoformat")
-                end
-            }
             -- 为不支持 LSP 高亮的主题提供默认高亮方案
             use {
                 "folke/lsp-colors.nvim",

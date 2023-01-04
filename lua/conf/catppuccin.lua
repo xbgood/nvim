@@ -46,7 +46,7 @@ require("catppuccin").setup({
             bufferline = true,
             markdown = true,
             dashboard = true,
-            fidget = false,
+            fidget = true,
             ts_rainbow = true,
             hop = true,
             notify = true,
@@ -72,7 +72,7 @@ require("catppuccin").setup({
             fern = false,
             barbar = false,
             lightspeed = false,
-            telekasten = true,
+            telekasten = false,
             aerial = false,
             beacon = false,
             coc_nvim = false,
@@ -93,7 +93,7 @@ require("catppuccin").setup({
             -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
             dap = {
                 enabled = true,
-                enable_ui = false,
+                enable_ui = true,
             },
             native_lsp = {
                 enabled = true,
