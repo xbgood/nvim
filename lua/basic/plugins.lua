@@ -173,9 +173,6 @@ packer.startup(
             -- 美丽的状态栏
             use {
                 'nvim-lualine/lualine.nvim',
-                disable = false,
-                load_file = true,
-                -- after = {"nvim-gps", "gitsigns.nvim", "nvim-web-devicons"}
                 config = function()
                     require("conf.lualine")
                 end
