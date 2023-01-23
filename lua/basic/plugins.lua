@@ -403,7 +403,3 @@ vim.cmd(
     augroup end
     ]]
 )
-
------------- sonokai zephyr ----------------------
-vim.cmd.colorscheme "catppuccin"
--- vim.cmd.colorscheme "kanagawa"

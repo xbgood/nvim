@@ -28,3 +28,5 @@ set mouse-=a
 -- 设置背景色
 vim.g.background_transparency = true
 
+-- 设置颜色主题
+vim.cmd.colorscheme "catppuccin"
