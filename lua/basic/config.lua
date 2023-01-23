@@ -16,7 +16,7 @@ vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- markdown preview
 vim.cmd([[
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 " let g:mkdp_theme = 'dark'
 let g:mkdp_theme = 'light'

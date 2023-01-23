@@ -46,10 +46,10 @@ vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask file-build<CR>", vim.keybinds.o
 vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask file-run<CR>", vim.keybinds.opts)
 
 -- markdown preview runcodeblock 运行markdown代码块
-vim.keybinds.gmap("n", "<leader>mp", ":call org#main#runCodeBlock()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>pp", ":call org#main#runCodeBlock()<CR>", vim.keybinds.opts)
 
 -- markdown image-paste 插入图片
-vim.keybinds.gmap("n", "<leader>p", ":call mdip#MarkdownClipboardImage()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>pi", ":call mdip#MarkdownClipboardImage()<CR>", vim.keybinds.opts)
 
 -- 用 astyle 来格式化代码
 vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --style=google --indent=spaces=4<CR>", vim.keybinds.opts)

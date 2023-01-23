@@ -2,7 +2,8 @@
 
 require("hop").setup{
     keys = 'etovxqpdygfblzhckisuran',
-    jump_on_sole_occurrence = false
+    jump_on_sole_occurrence = true,
+    quit_key = '<Esc>',
 }
 
 -- 搜索并跳转到单词
