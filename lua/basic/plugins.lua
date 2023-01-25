@@ -332,13 +332,15 @@ packer.startup(
                 },
                 {
                     {
+                        -- 优秀的暗色主题
                         "rose-pine/neovim",
                         as = 'rose-pine',
                         config = function()
                             require("conf.rose-pine")
-                        end,},
+                        end,
+                    },
+                    {"projekt0n/github-nvim-theme", as = 'github-theme'},
                     {
-                        -- 优秀的暗色主题
                         "catppuccin/nvim",
                         -- 改个别名，因为它的名字是 nvim，可能会冲突
                         as = "catppuccin",
@@ -348,8 +350,6 @@ packer.startup(
                         end,
 
                     },
-                    {"projekt0n/github-nvim-theme", as = 'github-theme'},
-                    {"dracula/vim", as = "dracula"},
                 },
                 -- 全局替换
                 {
