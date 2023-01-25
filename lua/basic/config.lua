@@ -29,4 +29,7 @@ set mouse-=a
 vim.g.background_transparency = true
 
 -- 设置颜色主题
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "rose-pine"
+-- vim.cmd.colorscheme "github_dark_default"
+-- vim.cmd.colorscheme "catppuccin-mocha"
+-- vim.cmd.colorscheme "dracula"
