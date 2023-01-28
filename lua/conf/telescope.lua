@@ -5,7 +5,7 @@
 -- https://github.com/BurntSushi/ripgrep
 -- theme: dropdown, ivy
 
-require('telescope').setup{
+require('telescope').setup({
     pickers = {
         -- Your special builtin config goes in here
         buffers = {
@@ -14,12 +14,12 @@ require('telescope').setup{
             previewer = false,
             mappings = {
                 i = {
-                  ["<c-d>"] = require("telescope.actions").delete_buffer,
-                  -- Right hand side can also be the name of the action as a string
-                  -- ["<c-d>"] = "delete_buffer",
+                    ["<c-d>"] = require("telescope.actions").delete_buffer,
+                    -- Right hand side can also be the name of the action as a string
+                    -- ["<c-d>"] = "delete_buffer",
                 },
                 n = {
-                  ["<c-d>"] = require("telescope.actions").delete_buffer,
+                    ["<c-d>"] = require("telescope.actions").delete_buffer,
                 }
             }
         },
@@ -53,7 +53,7 @@ require('telescope').setup{
             },
             vertical = {
                 mirror = false,
-            },
+            }
         },
         file_sorter =  require'telescope.sorters'.get_fuzzy_file,
         file_ignore_patterns = {},
@@ -75,17 +75,4 @@ require('telescope').setup{
             n = { ["q"] = require("telescope.actions").close },
         },
     }
-}
-
--- 查找文件
-vim.keybinds.gmap("n", "<leader>ff", "<cmd>Telescope find_files theme=ivy<CR>", vim.keybinds.opts)
--- 查找文字
-vim.keybinds.gmap("n", "<leader>fw", "<cmd>Telescope live_grep theme=ivy<CR>", vim.keybinds.opts)
--- 查找buffers
-vim.keybinds.gmap("n", "<leader>fb", "<cmd>Telescope buffers theme=ivy<CR>", vim.keybinds.opts)
--- 查找帮助文档
-vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=ivy<CR>", vim.keybinds.opts)
--- 查找最近打开的文件
-vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=ivy<CR>", vim.keybinds.opts)
--- 查找 marks 标记
-vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=ivy<CR>", vim.keybinds.opts)
+})

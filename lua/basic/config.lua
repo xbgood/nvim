@@ -28,8 +28,23 @@ set mouse-=a
 -- 设置背景色
 vim.g.background_transparency = true
 
+-- undotree 
+vim.cmd(
+    [[
+if has("persistent_undo")
+    " 在 config.lua 中定义好了 undotree_dir 全局变量
+    let target_path = expand(undotree_dir)
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+    let &undodir = target_path
+    set undofile
+]]
+)
+
 -- 设置颜色主题
 vim.cmd.colorscheme "rose-pine"
 -- vim.cmd.colorscheme "github_dark_default"
 -- vim.cmd.colorscheme "catppuccin-mocha"
 -- vim.cmd.colorscheme "dracula"
+

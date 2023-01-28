@@ -19,16 +19,3 @@ end
 vim.notify = require("notify")
 
 vim.notify.setup(notify_opts)
--- 使用案例：
--- 信息、级别、标题
--- 级别有：info、warn、error、debug、trace
--- 示例：
--- vim.notify("hello world", "info", {title = "info"})
-
--- 显示历史弹窗记录
-vim.keybinds.gmap(
-    "n",
-    "<leader>fn",
-    "<cmd>lua require('telescope').extensions.notify.notify()<CR>",
-    vim.keybinds.opts
-)

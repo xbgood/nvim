@@ -115,8 +115,18 @@ require 'lspconfig'.gopls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+-- Advertise LSP's capabilities for nvim-cmp to LSP servers
+
 require 'lspconfig'.sumneko_lua.setup {
+    flags = lsp_flags,
     on_attach = on_attach,
+
+    name = 'sumneko_lua',
+    -- Path for Sumneko server binary
+    cmd = { 'lua-language-server' },
+
+    filetypes = { 'lua' },
     settings = {
         Lua = {
             runtime = {
@@ -129,7 +139,11 @@ require 'lspconfig'.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
+                -- library = vim.api.nvim_get_runtime_file("", true),
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.stdpath('config') .. '/lua'] = true,
+                },
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {

@@ -1,12 +1,10 @@
-require("lazy").setup {
+require("lazy").setup ({
     -- 中文文档
-    {
-        "yianwillis/vimcdoc",
-    },
+    { "yianwillis/vimcdoc", },
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
-        requires = {
+        dependencies = {
             -- 依赖一个图标插件
             "kyazdani42/nvim-web-devicons"
         },
@@ -18,7 +16,7 @@ require("lazy").setup {
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
         "lewis6991/gitsigns.nvim",
-        requires = {
+        dependencies = {
             -- 依赖于该插件（一款 Lua 开发使用的插件）
             "nvim-lua/plenary.nvim"
         },
@@ -29,19 +27,18 @@ require("lazy").setup {
     -- 支持 LSP 状态的 buffer 栏
     {
         "akinsho/bufferline.nvim",
-        requires = {
-            -- 删除 buffer 时不影响现有布局
-            "famiu/bufdelete.nvim"
+        dependencies = {
+            "famiu/bufdelete.nvim" -- 删除 buffer 时不影响现有布局
         },
         config = function()
             require("conf.bufferline")
-        end,
+        end
     },
     -- 搜索时显示条目
     {
         "kevinhwang91/nvim-hlslens",
         config = function()
-            require("conf.nvim-hlslens")
+            require("conf.hlslens")
         end
     },
     -- 显示缩进线
@@ -115,12 +112,7 @@ require("lazy").setup {
         end
     },
     -- undo tree
-    {
-        "mbbill/undotree",
-        config = function()
-            require("conf.undotree")
-        end
-    },
+    { "mbbill/undotree", },
     -- 键位绑定器
     {
         "folke/which-key.nvim",
@@ -131,7 +123,7 @@ require("lazy").setup {
     -- 模糊查找
     {
         "nvim-telescope/telescope.nvim",
-        requires = {
+        dependencies = {
             "nvim-lua/plenary.nvim", -- Lua 开发模块
             "BurntSushi/ripgrep", -- 文字查找
             "sharkdp/fd" -- 文件查找
@@ -157,13 +149,13 @@ require("lazy").setup {
     -- 为状态栏提供上下文信息
     {
         "SmiteshP/nvim-gps",
-        requires = "nvim-treesitter/nvim-treesitter"
+        dependencies = "nvim-treesitter/nvim-treesitter"
     },
     -- 美丽的状态栏
     {
         'nvim-lualine/lualine.nvim',
         config = function()
-            require("conf.lualine")
+            require("conf.nvim-lualine")
         end
     },
     -- LSP 基础服务
@@ -217,7 +209,7 @@ require("lazy").setup {
     -- 自动代码补全系列插件
     {
         "hrsh7th/nvim-cmp",  -- 代码补全核心插件，下面都是增强补全的体验插件
-        requires = {
+        dependencies = {
             {"onsails/lspkind-nvim"}, -- 为补全添加类似 vscode 的图标
             {"hrsh7th/vim-vsnip"}, -- vsnip 引擎，用于获得代码片段支持
             {"hrsh7th/cmp-vsnip"}, -- 适用于 vsnip 的代码片段源
@@ -238,7 +230,7 @@ require("lazy").setup {
     {
         "nvim-treesitter/nvim-treesitter",
         run = {":TSupdate"},
-        requires = {
+        dependencies = {
             "p00f/nvim-ts-rainbow" -- 彩虹括号
         },
         config = function()
@@ -323,27 +315,31 @@ require("lazy").setup {
         -- tasks 任务系统
         "skywind3000/asynctasks.vim",
     },
-    -- 优秀的暗色主题
     {
-        "catppuccin/nvim",
-        -- 改个别名，因为它的名字是 nvim，可能会冲突
-        as = "catppuccin",
-        config = function()
-            -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
-            require("conf.catppuccin")
-        end,
-    },
-    -- other theme
-    {
-        "rebelot/kanagawa.nvim",
-        config = function()
-            require("conf.kanagawa")
-        end,
+        {
+            -- 优秀的暗色主题
+            "rose-pine/neovim",
+            as = 'rose-pine',
+            config = function()
+                require("conf.rose-pine")
+            end,
+        },
+        {"projekt0n/github-nvim-theme", as = 'github-theme'},
+        {
+            "catppuccin/nvim",
+            -- 改个别名，因为它的名字是 nvim，可能会冲突
+            as = "catppuccin",
+            config = function()
+                -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
+                require("conf.catppuccin")
+            end,
+
+        },
     },
     -- 全局替换
     {
         "nvim-pack/nvim-spectre",
-        requires = {
+        dependencies = {
             "nvim-lua/plenary.nvim", -- Lua 开发模块
             "BurntSushi/ripgrep" -- 文字查找
         },
@@ -352,13 +348,13 @@ require("lazy").setup {
         end
     },
     -- 显示网页色
-    -- {
-    --     "norcalli/nvim-colorizer.lua",
-    --     config = function()
-    --         require("conf.nvim-colorizer")
-    --     end
-    -- },
-    -- 快速运行代码片段
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("conf.nvim-colorizer")
+        end
+    },
+    -- -- 快速运行代码片段
     -- {
     --     "michaelb/sniprun",
     --     run = 'bash ./install.sh',
@@ -366,10 +362,10 @@ require("lazy").setup {
     --         require("conf.sniprun")
     --     end
     -- },
-    -- coc.vim
-    --{
-    --    'neoclide/coc.nvim',
-    --    run = 'yarn install --frozen-lockfile'
-    --},
-}
+    -- -- coc.vim
+    -- {
+    --     'neoclide/coc.nvim',
+    --     run = 'yarn install --frozen-lockfile'
+    -- },
+})
 

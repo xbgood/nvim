@@ -48,12 +48,3 @@ Terminal:new(
 Toggleterm.float_toggle = function()
     floatTerm:toggle()
 end
-
--- 退出终端插入模式
-vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
--- 打开普通终端
-vim.keybinds.gmap("n", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", vim.keybinds.opts)
--- 打开浮动终端
-vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggle()<CR>", vim.keybinds.opts)
--- 打开或关闭所有终端
-vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)

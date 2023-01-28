@@ -214,11 +214,3 @@ require('spectre').setup({
   is_open_target_win = true, --open file on opener window
   is_insert_mode = true -- start open panel on is_insert_mode
 })
-
--- 全项目替换
-vim.keybinds.gmap("n", "<leader>sp", "<cmd>lua require('spectre').open()<CR>", vim.keybinds.opts)
--- 只替换当前文件
-vim.keybinds.gmap("n", "<leader>sf", "viw:lua require('spectre').open_file_search()<CR>", vim.keybinds.opts)
--- 全项目中搜索当前单词
-vim.keybinds.gmap("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<leader>sw", "<esc>:lua require('spectre').open_visual()<CR>", vim.keybinds.opts)
