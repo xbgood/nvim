@@ -1,6 +1,6 @@
 require("lazy").setup({
     -- 中文文档
-    { "yianwillis/vimcdoc", lazy = true, },
+    { "yianwillis/vimcdoc", },
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
@@ -12,7 +12,6 @@ require("lazy").setup({
             -- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
             require("conf.nvim-tree")
         end,
-        lazy = true,
     },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
@@ -21,7 +20,6 @@ require("lazy").setup({
             -- 依赖于该插件（一款 Lua 开发使用的插件）
             "nvim-lua/plenary.nvim"
         },
-        lazy = true,
         config = function()
             require("gitsigns").setup()
         end
@@ -39,7 +37,6 @@ require("lazy").setup({
     -- 搜索时显示条目
     {
         "kevinhwang91/nvim-hlslens",
-        lazy = true,
         config = function()
             require("conf.hlslens")
         end
@@ -75,7 +72,6 @@ require("lazy").setup({
     -- 显示光标下相同词汇
     {
         "RRethy/vim-illuminate",
-        lazy = true,
         config = function()
             require("conf.vim-illuminate")
         end
@@ -104,7 +100,6 @@ require("lazy").setup({
     -- 多光标模式
     {
         "terryma/vim-multiple-cursors",
-        lazy = true,
         config = function()
             require("conf.vim-multiple-cursors")
         end
@@ -112,17 +107,15 @@ require("lazy").setup({
     -- 内置终端
     {
         "akinsho/toggleterm.nvim",
-        lazy = true,
         config = function()
             require("conf.toggleterm")
         end
     },
     -- undo tree
-    { "mbbill/undotree", lazy = true, },
+    { "mbbill/undotree", },
     -- 键位绑定器
     {
         "folke/which-key.nvim",
-        -- lazy = true,
         config = function()
             require("conf.which-key")
         end
@@ -149,7 +142,6 @@ require("lazy").setup({
     -- todo tree
     {
         "folke/todo-comments.nvim",
-        lazy = true,
         config = function()
             require("conf.todo-comments")
         end
@@ -263,7 +255,6 @@ require("lazy").setup({
     -- view tree
     {
         "liuchengxu/vista.vim",
-        lazy = true,
         config = function()
             require("conf.vista")
         end
@@ -273,7 +264,6 @@ require("lazy").setup({
         -- markdown preview
         "iamcco/markdown-preview.nvim",
         ft = 'markdown',
-        lazy = true,
         build = 'cd app && npm install',
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
@@ -281,19 +271,18 @@ require("lazy").setup({
     },
     {
         -- vim markdown
-        { "preservim/vim-markdown", lazy = true, },
+        { "preservim/vim-markdown", },
         -- markdown image paste
-        { "ferrine/md-img-paste.vim", lazy = true, },
+        { "ferrine/md-img-paste.vim", },
         -- markdown table
-        --{ "dhruvasagar/vim-table-mode", lazy = true, },
+        --{ "dhruvasagar/vim-table-mode", },
         -- markdown org
-        --{ "demonlord1997/markdown-org", laze = true, },
+        --{ "demonlord1997/markdown-org", },
     },
     -- quick jk
     {
         "PHSix/faster.nvim",
         event = { "VimEnter *" },
-        lazy = true,
         config = function()
             vim.api.nvim_set_keymap('n', 'j', '<Plug>(faster_move_j)', { noremap = false, silent = true })
             vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_k)', { noremap = false, silent = true })
@@ -305,7 +294,6 @@ require("lazy").setup({
     -- F{char}
     {
         "gukz/ftFT.nvim",
-        lazy = true,
         config = function()
             vim.g.ftFT_hl_group = "Search" -- will use Search hl group to do the highlitgt
 
@@ -324,9 +312,9 @@ require("lazy").setup({
     -- run code
     {
         -- asyncrun 编译代码
-        { "skywind3000/asyncrun.vim", lazy = true, },
+        { "skywind3000/asyncrun.vim", },
         -- tasks 任务系统
-        { "skywind3000/asynctasks.vim", lazy = true, },
+        { "skywind3000/asynctasks.vim", },
     },
     {
         {
@@ -337,12 +325,11 @@ require("lazy").setup({
                 require("conf.rose-pine")
             end,
         },
-        { "projekt0n/github-nvim-theme", name = 'github-theme', lazy = true, },
+        { "projekt0n/github-nvim-theme", name = 'github-theme', },
         {
             "catppuccin/nvim",
             -- 改个别名，因为它的名字是 nvim，可能会冲突
             name = "catppuccin",
-            lazy = true,
             config = function()
                 -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
                 require("conf.catppuccin")
@@ -353,7 +340,6 @@ require("lazy").setup({
     -- 全局替换
     {
         "nvim-pack/nvim-spectre",
-        lazy = true,
         dependencies = {
             "nvim-lua/plenary.nvim", -- Lua 开发模块
             "BurntSushi/ripgrep" -- 文字查找
@@ -365,7 +351,6 @@ require("lazy").setup({
     -- 显示网页色
     {
         "norcalli/nvim-colorizer.lua",
-        lazy = true,
         config = function()
             require("conf.nvim-colorizer")
         end
@@ -374,7 +359,6 @@ require("lazy").setup({
     -- {
     -- 	"michaelb/sniprun",
     -- 	build = 'bash ./install.sh',
-    -- 	lazy = true,
     -- 	config = function()
     -- 		require("conf.sniprun")
     -- 	end
