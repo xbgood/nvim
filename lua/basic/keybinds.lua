@@ -1,7 +1,7 @@
 -- leader 键设置为空格
 vim.g.mapleader = ","
 
--- 默认的键位设置函数太长了，所以这里将它们重新引用一下
+                  -- 默认的键位设置函数太长了，所以这里将它们重新引用一下
 vim.keybinds = {
     gmap = vim.api.nvim_set_keymap,
     bmap = vim.api.nvim_buf_set_keymap,
@@ -134,26 +134,26 @@ vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", vim.keybinds.opts)
 -- nvim-tree --
 -- 目录后加上反斜杠 /
 -- vim.g.nvim_tree_add_trailing = 1
--- 按 leader 1 打开文件树
-vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
--- 按 leader fc 在文件树中找到当前以打开文件的位置
-vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
--- 默认按键
--- o     ：打开目录或文件
--- a     ：新增目录或文件
--- r     ：重命名目录或文件
--- x     ：剪切目录或文件
--- c     ：复制目录或文件
--- d     ：删除目录或文件
--- y     ：复制目录或文件名称
--- Y     ：复制目录或文件相对路径
--- gy    ：复制目录或文件绝对路径
--- p     ：粘贴目录或文件
--- s     ：使用系统默认程序打开目录或文件
--- <Tab> ：将文件添加到缓冲区，但不移动光标
--- <C-v> ：垂直分屏打开文件
--- <C-x> ：水平分屏打开文件
--- <C-]> ：进入光标下的目录
+                                  -- 按 leader 1 打开文件树
+                                  vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
+                                  -- 按 leader fc 在文件树中找到当前以打开文件的位置
+                                  vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
+                                  -- 默认按键
+                                  -- o     ：打开目录或文件
+                                  -- a     ：新增目录或文件
+                                  -- r     ：重命名目录或文件
+                                  -- x     ：剪切目录或文件
+                                  -- c     ：复制目录或文件
+                                  -- d     ：删除目录或文件
+                                  -- y     ：复制目录或文件名称
+                                  -- Y     ：复制目录或文件相对路径
+                                  -- gy    ：复制目录或文件绝对路径
+                                  -- p     ：粘贴目录或文件
+                                  -- s     ：使用系统默认程序打开目录或文件
+                                  -- <Tab> ：将文件添加到缓冲区，但不移动光标
+                                  -- <C-v> ：垂直分屏打开文件
+                                  -- <C-x> ：水平分屏打开文件
+                                  -- <C-]> ：进入光标下的目录
 -- <C-r> ：重命名目录或文件，删除已有目录名称
 -- -     ：返回上层目录
 -- I     ：切换隐藏文件/目录的可见性

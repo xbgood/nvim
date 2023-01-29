@@ -46,9 +46,3 @@ require("nvim-treesitter.configs").setup(
         }
     }
 )
-
--- 开启代码折叠, zc/zo keys
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
--- 默认不折叠
-vim.wo.foldlevel = 99
