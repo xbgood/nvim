@@ -12,14 +12,11 @@ require('bufferline').setup {
         -- NOTE: this plugin is designed with this icon in mind,
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
-        -- indicator_icon = '▎', -- 这里报错了，该命令取消了，不知道换成啥另，所以注释了
         buffer_close_icon = '',
         modified_icon = '●',
         close_icon = '',
-        left_trunc_marker = '|',
-        right_trunc_marker = '|',
-        -- left_trunc_marker = "",
-        -- right_trunc_marker = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
 
         --- name_formatter can be used to change the buffer's label in the bufferline.
         --- Please note some names can/will break the
@@ -37,9 +34,6 @@ require('bufferline').setup {
         tab_size = 18,
         diagnostics = "nvim_lsp", -- or coc
         diagnostics_update_in_insert = false,
-        -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        --     return "("..count..")"
-        -- end, -- simple style
         diagnostics_indicator = function(count, level)
             local icon = level:match("error") and " " or ""
             return " " .. icon .. count
@@ -82,7 +76,7 @@ require('bufferline').setup {
 
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
-        show_buffer_close_icons = true,
+        show_buffer_close_icons = false,
         show_buffer_default_icon = true, -- whether or not an unrecognised filetype should show a default icon
         show_close_icon = false,
         show_tab_indicators = true,
@@ -102,32 +96,32 @@ require('bufferline').setup {
         sort_by = 'id', -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
 
         -- groups
-        -- groups = {
-        --     options = {
-        --         toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
-        --     },
-        --     items = {
-        --         {
-        --             name = "Tests", -- Mandatory
-        --             highlight = {underline = true, sp = "blue"}, -- Optional
-        --             priority = 2, -- determines where it will appear relative to other groups (Optional)
-        --             icon = "", -- Optional
-        --             matcher = function(buf) -- Mandatory
-        --                 return buf.filename:match('%_test') or buf.filename:match('%_spec')
-        --             end,
-        --         },
-        --         {
-        --             name = "Docs",
-        --             highlight = {undercurl = true, sp = "green"},
-        --             auto_close = false,  -- whether or not close this group if it doesn't contain the current buffer
-        --             matcher = function(buf)
-        --                 return buf.filename:match('%.md') or buf.filename:match('%.txt')
-        --             end,
-        --             separator = { -- Optional
-        --                 style = require('bufferline.groups').separator.tab
-        --             },
-        --         }
-        --     }
-        -- },
+        groups = {
+            options = {
+                toggle_hidden_on_enter = true -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+            },
+            items = {
+                {
+                    name = "Tests", -- Mandatory
+                    highlight = {underline = true, sp = "blue"}, -- Optional
+                    priority = 2, -- determines where it will appear relative to other groups (Optional)
+                    icon = "", -- Optional
+                    matcher = function(buf) -- Mandatory
+                        return buf.filename:match('%_test') or buf.filename:match('%_spec')
+                    end,
+                },
+                {
+                    name = "Docs",
+                    highlight = {undercurl = true, sp = "green"},
+                    auto_close = false,  -- whether or not close this group if it doesn't contain the current buffer
+                    matcher = function(buf)
+                        return buf.filename:match('%.md') or buf.filename:match('%.txt')
+                    end,
+                    separator = { -- Optional
+                        style = require('bufferline.groups').separator.tab
+                    },
+                }
+            }
+        },
     }
 }

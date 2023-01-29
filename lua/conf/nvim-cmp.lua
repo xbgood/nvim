@@ -127,7 +127,6 @@ cmp.setup{
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
     -- 关闭补全提示
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
-    --['<C-e>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
     -- enter 确认提示的代码
     ['<CR>'] = cmp.mapping({
       i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
@@ -179,7 +178,7 @@ cmp.setup{
     { name = 'vsnip' }, -- for `vsnip` user.
     { name = 'buffer' },
     { name = 'path' },
-    -- { name = 'cmdline' },
+    { name = 'cmdline' },
     { name = 'spell' },
     { name = 'cmp_tabnine'},
     -- { name = 'snippy' }, -- for `snippy` users.

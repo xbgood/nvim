@@ -1,4 +1,4 @@
--- leader 键设置为空格                                    
+-- leader 键设置为空格
 vim.g.mapleader = ","
 
 -- 默认的键位设置函数太长了，所以这里将它们重新引用一下
@@ -160,34 +160,5 @@ vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.o
 -- H     ：切换点文件的可见性
 -- R     ：刷新资源管理器
 -- 另外，文件资源管理器操作和操作文档方式一致，可按 / ? 进行搜索
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
