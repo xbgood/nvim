@@ -54,4 +54,3 @@ vim.o.foldenable = true
 vim.o.foldmethod = "indent"
 -- 指定代码折叠的最高层级为 100
 vim.o.foldlevel = 100
-

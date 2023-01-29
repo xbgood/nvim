@@ -1,13 +1,13 @@
 -- leader 键设置为空格
 vim.g.mapleader = ","
 
-                  -- 默认的键位设置函数太长了，所以这里将它们重新引用一下
+-- 默认的键位设置函数太长了，所以这里将它们重新引用一下
 vim.keybinds = {
     gmap = vim.api.nvim_set_keymap,
     bmap = vim.api.nvim_buf_set_keymap,
     dgmap = vim.api.nvim_del_keymap,
     dbmap = vim.api.nvim_buf_del_keymap,
-    opts = {noremap = true, silent = true}
+    opts = { noremap = true, silent = true }
 }
 
 -- 插入模下 jj 退出插入模式
@@ -55,7 +55,7 @@ vim.keybinds.gmap("n", "<leader>pi", ":call mdip#MarkdownClipboardImage()<CR>", 
 vim.keybinds.gmap("n", "<leader>cc", "<cmd>%!astyle --style=google --indent=spaces=4<CR>", vim.keybinds.opts)
 
 -- nvim-notify 显示历史弹窗记录
-vim.keybinds.gmap( "n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
 
 -- bufferline --
 -- 关闭当前 buffer，由 bufdelete 插件所提供的方法
@@ -91,8 +91,10 @@ vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=dropdown<CR>", vi
 
 
 -- nvim-hlslens --
-vim.keybinds.gmap( "n", "n", "<Cmd>execute('normal!'.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
-vim.keybinds.gmap( "n", "N", "<Cmd>execute('normal!'.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "n", "<Cmd>execute('normal!'.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>",
+    vim.keybinds.opts)
+vim.keybinds.gmap("n", "N", "<Cmd>execute('normal!'.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>",
+    vim.keybinds.opts)
 vim.keybinds.gmap("n", "*", "*<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 
@@ -105,9 +107,13 @@ vim.keybinds.gmap("n", "<leader>hl", "<cmd>HopLine<CR>", vim.keybinds.opts)
 -- 搜索并跳转到字符
 vim.keybinds.gmap("n", "<leader>hc", "<cmd>HopChar1<CR>", vim.keybinds.opts)
 -- place this in one of your configuration file(s)
-vim.api.nvim_set_keymap('n', '<leader>he', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-vim.api.nvim_set_keymap('v', '<leader>he', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
-vim.api.nvim_set_keymap('o', '<leader>he', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>he',
+    "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
+vim.api.nvim_set_keymap('v', '<leader>he',
+    "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>", {})
+vim.api.nvim_set_keymap('o', '<leader>he',
+    "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>"
+    , {})
 
 -- nvim-spectre --
 -- 全项目替换
@@ -134,31 +140,29 @@ vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", vim.keybinds.opts)
 -- nvim-tree --
 -- 目录后加上反斜杠 /
 -- vim.g.nvim_tree_add_trailing = 1
-                                  -- 按 leader 1 打开文件树
-                                  vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
-                                  -- 按 leader fc 在文件树中找到当前以打开文件的位置
-                                  vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
-                                  -- 默认按键
-                                  -- o     ：打开目录或文件
-                                  -- a     ：新增目录或文件
-                                  -- r     ：重命名目录或文件
-                                  -- x     ：剪切目录或文件
-                                  -- c     ：复制目录或文件
-                                  -- d     ：删除目录或文件
-                                  -- y     ：复制目录或文件名称
-                                  -- Y     ：复制目录或文件相对路径
-                                  -- gy    ：复制目录或文件绝对路径
-                                  -- p     ：粘贴目录或文件
-                                  -- s     ：使用系统默认程序打开目录或文件
-                                  -- <Tab> ：将文件添加到缓冲区，但不移动光标
-                                  -- <C-v> ：垂直分屏打开文件
-                                  -- <C-x> ：水平分屏打开文件
-                                  -- <C-]> ：进入光标下的目录
+-- 按 leader 1 打开文件树
+vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
+-- 按 leader fc 在文件树中找到当前以打开文件的位置
+vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
+-- 默认按键
+-- o     ：打开目录或文件
+-- a     ：新增目录或文件
+-- r     ：重命名目录或文件
+-- x     ：剪切目录或文件
+-- c     ：复制目录或文件
+-- d     ：删除目录或文件
+-- y     ：复制目录或文件名称
+-- Y     ：复制目录或文件相对路径
+-- gy    ：复制目录或文件绝对路径
+-- p     ：粘贴目录或文件
+-- s     ：使用系统默认程序打开目录或文件
+-- <Tab> ：将文件添加到缓冲区，但不移动光标
+-- <C-v> ：垂直分屏打开文件
+-- <C-x> ：水平分屏打开文件
+-- <C-]> ：进入光标下的目录
 -- <C-r> ：重命名目录或文件，删除已有目录名称
 -- -     ：返回上层目录
 -- I     ：切换隐藏文件/目录的可见性
 -- H     ：切换点文件的可见性
 -- R     ：刷新资源管理器
 -- 另外，文件资源管理器操作和操作文档方式一致，可按 / ? 进行搜索
-
-
