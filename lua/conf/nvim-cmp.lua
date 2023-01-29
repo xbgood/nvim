@@ -178,9 +178,9 @@ cmp.setup {
 		{ name = 'vsnip' }, -- for `vsnip` user.
 		{ name = 'buffer' },
 		{ name = 'path' },
-		{ name = 'cmdline' },
 		{ name = 'spell' },
 		{ name = 'cmp_tabnine' },
+		-- { name = 'cmdline' },
 		-- { name = 'snippy' }, -- for `snippy` users.
 		-- { name = 'ultisnips' }, -- for `UltiSnips` users.
 	})
