@@ -262,18 +262,19 @@ require("lazy").setup({
     -- markdown
     {
         -- markdown preview
-        "iamcco/markdown-preview.nvim",
-        ft = 'markdown',
-        build = 'cd app && npm install',
-        init = function()
-            vim.g.mkdp_filetypes = { "markdown" }
-        end,
-    },
-    {
+        {
+            "iamcco/markdown-preview.nvim",
+            ft = 'markdown',
+            build = 'cd app && npm install',
+            init = function()
+                vim.g.mkdp_filetypes = { "markdown" }
+            end,
+
+        },
         -- vim markdown
         { "preservim/vim-markdown", },
         -- markdown image paste
-        { "ferrine/md-img-paste.vim", },
+        { "img-paste-devs/img-paste.vim", },
         -- markdown table
         --{ "dhruvasagar/vim-table-mode", },
         -- markdown org

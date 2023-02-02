@@ -14,17 +14,6 @@ vim.g.undotree_dir = "~/.cache/nvim/undodir"
 -- 指定代码片段存储路径，这个目录我们在第二章节的时候已经创建好了
 vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
--- markdown preview
-vim.cmd([[
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-" let g:mkdp_theme = 'dark'
-let g:mkdp_theme = 'light'
-let g:mdip_imgdir = '.img'
-let g:asyncrun_open = 6
-set mouse-=a
-]])
-
 -- 设置背景色
 vim.g.background_transparency = true
 
@@ -40,18 +29,27 @@ vim.cmd([[
 	set undofile
 ]])
 
--- 设置tab的默认大小
-vim.cmd([[
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-]])
-
 -- 开启代码折叠, zc/zo keys
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- 默认不折叠
 vim.wo.foldlevel = 99
+
+vim.cmd([[
+" markdown preview
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_theme = 'light' "light/dark"
+let g:mdip_imgdir = '.img' " 这里的设置好像没有效果，要修改插件的源码
+" 设置asyncrun
+let g:asyncrun_open = 6
+" 设置鼠标拷贝
+set mouse-=a
+" 设置tab的默认大小
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+]])
 
 -- 设置颜色主题
 vim.cmd.colorscheme "rose-pine"

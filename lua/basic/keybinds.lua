@@ -45,8 +45,11 @@ vim.keybinds.gmap("n", "<ESC>", ":nohlsearch<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask file-build<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask file-run<CR>", vim.keybinds.opts)
 
--- markdown preview runcodeblock 运行markdown代码块
-vim.keybinds.gmap("n", "<leader>pp", ":call org#main#runCodeBlock()<CR>", vim.keybinds.opts)
+-- markdown preview
+vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", vim.keybinds.opts)
+
+-- markdown runcodeblock 运行markdown代码块
+vim.keybinds.gmap("n", "<leader>pr", ":call org#main#runCodeBlock()<CR>", vim.keybinds.opts)
 
 -- markdown image-paste 插入图片
 vim.keybinds.gmap("n", "<leader>pi", ":call mdip#MarkdownClipboardImage()<CR>", vim.keybinds.opts)
