@@ -45,10 +45,10 @@ let g:mdip_imgdir = '.img' " 这里的设置好像没有效果，要修改插件
 let g:asyncrun_open = 6
 " 设置鼠标拷贝
 set mouse-=a
-" 设置tab的默认大小
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+" " 设置tab的默认大小
+" set shiftwidth=4
+" set tabstop=4
+" set softtabstop=4
 ]])
 
 -- 设置颜色主题

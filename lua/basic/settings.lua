@@ -1,5 +1,6 @@
 -- 设定各种文本的字符编码
 vim.o.encoding = "utf-8"
+vim.o.fileencoding = "utf-8"
 -- 设定在无操作时，交换文件刷写到磁盘的等待毫秒数（默认为 4000）
 vim.o.updatetime = 100
 -- 设定等待按键时长的毫秒数
@@ -26,16 +27,28 @@ vim.o.mouse = "a"
 vim.o.clipboard = "unnamedplus"
 -- 是否开启备份文件
 vim.o.backup = false
+vim.o.writebackup = false
+vim.o.swapfile = false
 -- 是否开启交换文件
 vim.o.swapfile = false
 -- 是否特殊显示空格等字符
 vim.o.list = true
+-- 不可见字符显示为一个点
+-- vim.o.listchars = "space:*"
 -- 是否开启自动缩进
 vim.o.autoindent = true
 -- 设定自动缩进的策略为 plugin
 vim.o.filetype = "plugin"
 -- 是否开启高亮搜索
 vim.o.hlsearch = true
+-- 边输入边搜索
+vim.o.incsearch = true
+-- 命令行行高
+vim.o.cmdheight = 1
+-- 当文件被外部程序修改时，自动加载
+vim.o.autoread = true
+-- 行结尾可以跳到下一行
+vim.o.whichwrap = 'b,s<,>,[,],h,l'
 -- 是否在插入括号时短暂跳转到另一半括号上
 vim.o.showmatch = true
 -- 是否开启命令行补全
@@ -54,3 +67,9 @@ vim.o.foldenable = true
 vim.o.foldmethod = "indent"
 -- 指定代码折叠的最高层级为 100
 vim.o.foldlevel = 100
+-- 缩进2个空格等于一个Tab
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftround = true
+-- >> << 时移动长度
+vim.o.shiftwidth = 2

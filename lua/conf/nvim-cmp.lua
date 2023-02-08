@@ -34,6 +34,19 @@ end
 local cmp = require('cmp')
 
 cmp.setup {
+    enabled = true,
+    min_length = 1,
+    autocomplete = true,
+    debug = false,
+    preselect = 'enable',
+    throttle_time = 80,
+    source_timeout = 200,
+    incomplete_delay = 400,
+    max_abbr_width = 100,
+    max_kind_width = 100,
+    max_menu_width = 100,
+    decumentation = false,
+
     -- 设置代码片段引擎，用于根据代码片段补全
     snippet = {
         expand = function(args)
@@ -176,6 +189,8 @@ cmp.setup {
         { name = 'path' },
         { name = 'spell' },
         { name = 'cmp_tabnine' },
+        { name = 'tags' },
+        { name = 'snippets_nvim' },
         -- { name = 'cmdline' },
     })
 }
