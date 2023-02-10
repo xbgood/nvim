@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gp', "<cmd>Lspsaga hover_doc<CR>", bufopts)
     -- vim.keymap.set('n', 'gp', vim.lsp.buf.hover, bufopts)
     -- 预览函数定义
-    vim.keymap.set('n', '<leader>gd', "<cmd>Lspsaga preview_definition<CR>", bufopts)
+    vim.keymap.set('n', 'gy', "<cmd>Lspsaga preview_definition<CR>", bufopts)
     -- 帮助信息
     vim.keymap.set('n', 'gh', "<cmd>Lspsaga lsp_finder<CR>", bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)

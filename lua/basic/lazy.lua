@@ -21,7 +21,7 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim"
         },
         config = function()
-            require("gitsigns").setup()
+            require("conf.gitsigns")
         end
     },
     -- 支持 LSP 状态的 buffer 栏
@@ -254,9 +254,9 @@ require("lazy").setup({
     },
     -- view tree
     {
-        "liuchengxu/vista.vim",
+        'simrat39/symbols-outline.nvim',
         config = function()
-            require("conf.vista")
+            require("conf.symbols-outline")
         end
     },
     -- markdown

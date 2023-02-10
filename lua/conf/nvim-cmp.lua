@@ -157,7 +157,7 @@ cmp.setup {
             vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.menu = ({
                 nvim_lsp = "[Lsp]",
-                snippet = "[Snippet]",
+                -- snippet = "[Snippet]",
                 buffer = "[Buffer]",
                 path = "[Path]",
                 cmp_tabnine = "[TabNine]",
@@ -190,7 +190,7 @@ cmp.setup {
         { name = 'spell' },
         { name = 'cmp_tabnine' },
         { name = 'tags' },
-        { name = 'snippets_nvim' },
+        -- { name = 'snippets_nvim' },
         -- { name = 'cmdline' },
     })
 }

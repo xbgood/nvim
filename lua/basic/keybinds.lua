@@ -72,9 +72,9 @@ vim.keybinds.gmap("n", "<leader>bh", "<cmd>BufferLineCloseLeft<CR>", vim.keybind
 -- 关闭右侧缓冲区
 vim.keybinds.gmap("n", "<leader>bl", "<cmd>BufferLineCloseRight<CR>", vim.keybinds.opts)
 
--- vista --
+-- aerial --
 -- 打开大纲预览
-vim.keybinds.gmap("n", "<leader>2", "<cmd>Vista!!<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>2", "<cmd>SymbolsOutline<CR>", vim.keybinds.opts)
 
 -- telescope --
 -- 查找文件
