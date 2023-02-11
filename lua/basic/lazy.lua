@@ -1,6 +1,8 @@
 require("lazy").setup({
     -- 中文文档
     { "yianwillis/vimcdoc", },
+    -- 更好用的ft
+    { "rhysd/clever-f.vim" },
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
@@ -57,10 +59,15 @@ require("lazy").setup({
     },
     -- 快速跳转
     {
-        "phaazon/hop.nvim",
+        "ggandor/leap.nvim",
+        keys = { "s", "S" },
         config = function()
-            require("conf.hop")
-        end
+            require("leap").set_default_keymaps()
+            vim.keymap.set('n', "s", function ()
+                local current_window = vim.fn.win_getid()
+                require('leap').leap { target_windows = { current_window } }
+            end)
+        end,
     },
     -- 包裹修改
     {
@@ -290,24 +297,6 @@ require("lazy").setup({
             -- if you need map in visual mode
             vim.api.nvim_set_keymap('v', 'j', '<Plug>(faster_vmove_j)', { noremap = false, silent = true })
             vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', { noremap = false, silent = true })
-        end
-    },
-    -- F{char}
-    {
-        "gukz/ftFT.nvim",
-        config = function()
-            vim.g.ftFT_hl_group = "Search" -- will use Search hl group to do the highlitgt
-
-            vim.g.ftFT_keymap_keys = { "f", "t", "F" } -- Will create key binding for "f", "t", "F", but not "T"
-            vim.g.ftFT_keymap_skip_n = 1 -- if set this, will not create key binding for ftFT in normal mode
-            vim.g.ftFT_keymap_skip_ydc = 1 -- if set this, will not create key binding for [ydc][ftFT] in normal mode
-            vim.g.ftFT_keymap_skip_v = 1 -- if set this, will not create key binding for ftFT in visual mode
-
-            -- ftFT will show another sight line below current line, shows you how many `; ` you need to jump there, disabled by default
-            vim.g.ftFT_sight_enable = 1 -- if set this, will show extra sight line
-            vim.g.ftFT_sight_hl_group = "Search" -- if set htis, will use other hl group for sight line
-
-            require("ftFT").setup() -- this will create default keymapping for you
         end
     },
     -- run code
