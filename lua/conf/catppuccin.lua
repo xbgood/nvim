@@ -48,7 +48,7 @@ require("catppuccin").setup({
 			dashboard = true,
 			fidget = true,
 			ts_rainbow = true,
-			hop = true,
+            laep = true,
 			notify = true,
 			indent_blankline = {
 				enabled = true,

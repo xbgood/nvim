@@ -76,13 +76,6 @@ require("lazy").setup({
             require("conf.surround")
         end
     },
-    -- 显示光标下相同词汇
-    {
-        "RRethy/vim-illuminate",
-        config = function()
-            require("conf.vim-illuminate")
-        end
-    },
     -- 自动保存
     {
         "Pocco81/auto-save.nvim",
