@@ -1,6 +1,5 @@
 -- 设定各种文本的字符编码
 vim.o.encoding = "utf-8"
-vim.o.fileencoding = "utf-8"
 -- 设定在无操作时，交换文件刷写到磁盘的等待毫秒数（默认为 4000）
 vim.o.updatetime = 100
 -- 设定等待按键时长的毫秒数
@@ -27,8 +26,6 @@ vim.o.mouse = "a"
 vim.o.clipboard = "unnamedplus"
 -- 是否开启备份文件
 vim.o.backup = false
-vim.o.writebackup = false
-vim.o.swapfile = false
 -- 是否开启交换文件
 vim.o.swapfile = false
 -- 是否特殊显示空格等字符
@@ -67,9 +64,9 @@ vim.o.foldenable = true
 vim.o.foldmethod = "indent"
 -- 指定代码折叠的最高层级为 100
 vim.o.foldlevel = 100
--- 缩进2个空格等于一个Tab
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
+-- 缩进4个空格等于一个Tab
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
 vim.o.shiftround = true
 -- >> << 时移动长度
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4

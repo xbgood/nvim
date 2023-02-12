@@ -90,13 +90,6 @@ require("lazy").setup({
             require("conf.nvim-lastplace")
         end
     },
-    -- 自动会话管理
-    {
-        "rmagatti/auto-session",
-        config = function()
-            require("conf.session")
-        end
-    },
     -- 多光标模式
     {
         "terryma/vim-multiple-cursors",

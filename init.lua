@@ -1,5 +1,7 @@
 -- 加载配置项，有依赖关系   
 require("basic.settings")
+
+-- lazy插件管理
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,7 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-require("basic.lazy")
 
+require("basic.lazy")
 require("basic.keybinds")
 require("basic.config")
