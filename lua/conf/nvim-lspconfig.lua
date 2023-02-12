@@ -118,15 +118,15 @@ require 'lspconfig'.gopls.setup {
 
 -- Advertise LSP's capabilities for nvim-cmp to LSP servers
 
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
     flags = lsp_flags,
     on_attach = on_attach,
-
-    name = 'sumneko_lua',
-    -- Path for Sumneko server binary
+    name = 'lua_ls',
+    -- Path for lus server binary
     cmd = { 'lua-language-server' },
-
+    single_file_support = true,
     filetypes = { 'lua' },
+    log_level = 2,
     settings = {
         Lua = {
             runtime = {
