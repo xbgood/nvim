@@ -346,6 +346,13 @@ require("lazy").setup({
             require("conf.nvim-colorizer")
         end
     },
+    {
+        "nvim-neorg/neorg",
+        run = ":Neorg sync-parsers", -- This is the important bit!
+        config = function()
+            require("conf.neorg")
+        end,
+    },
     -- -- 快速运行代码片段
     -- {
     -- 	"michaelb/sniprun",

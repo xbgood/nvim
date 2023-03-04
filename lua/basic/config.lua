@@ -48,7 +48,6 @@ set mouse-=a
 ]])
 
 -- 设置颜色主题
-vim.cmd.colorscheme "rose-pine"
+-- vim.cmd.colorscheme "rose-pine"
+vim.cmd.colorscheme "catppuccin-mocha"
 -- vim.cmd.colorscheme "github_dark_default"
--- vim.cmd.colorscheme "catppuccin-mocha"
--- vim.cmd.colorscheme "dracula"
