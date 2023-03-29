@@ -35,6 +35,11 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- 默认不折叠
 vim.wo.foldlevel = 99
 
+-- 设置颜色主题
+-- vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "rose-pine"
+-- vim.cmd.colorscheme "github_dark_default"
+
 vim.cmd([[
 " markdown preview
 let g:mkdp_auto_start = 0
@@ -45,9 +50,6 @@ let g:mdip_imgdir = '.img' " 这里的设置好像没有效果，要修改插件
 let g:asyncrun_open = 6
 " 设置鼠标拷贝
 set mouse-=a
+" 设置背景透明
+"highlight Normal guibg=None ctermbg=None
 ]])
-
--- 设置颜色主题
--- vim.cmd.colorscheme "rose-pine"
-vim.cmd.colorscheme "catppuccin-mocha"
--- vim.cmd.colorscheme "github_dark_default"

@@ -72,3 +72,4 @@ vim.o.shiftround = true
 vim.o.shiftwidth = 2
 -- 空格替代tab
 vim.o.expandtab = true
+vim.o.background = "dark"
