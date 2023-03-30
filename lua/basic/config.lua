@@ -15,7 +15,7 @@ vim.g.undotree_dir = "~/.cache/nvim/undodir"
 vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- 设置背景色
-vim.g.background_transparency = true
+-- vim.g.background_transparency = true
 
 -- undotree
 vim.cmd([[
@@ -36,9 +36,8 @@ vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldlevel = 99
 
 -- 设置颜色主题
--- vim.cmd.colorscheme "catppuccin-mocha"
 vim.cmd.colorscheme "rose-pine"
--- vim.cmd.colorscheme "github_dark_default"
+-- vim.cmd.colorscheme "catppuccin-mocha"
 
 vim.cmd([[
 " markdown preview
@@ -51,5 +50,5 @@ let g:asyncrun_open = 6
 " 设置鼠标拷贝
 set mouse-=a
 " 设置背景透明
-"highlight Normal guibg=None ctermbg=None
+highlight Normal guibg=None ctermbg=None
 ]])

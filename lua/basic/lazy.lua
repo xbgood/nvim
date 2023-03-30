@@ -316,7 +316,6 @@ require("lazy").setup({
                 require("conf.rose-pine")
             end,
         },
-        { "projekt0n/github-nvim-theme", name = 'github-theme', },
         {
             "catppuccin/nvim",
             -- 改个别名，因为它的名字是 nvim，可能会冲突
@@ -345,13 +344,6 @@ require("lazy").setup({
         config = function()
             require("conf.nvim-colorizer")
         end
-    },
-    {
-        "nvim-neorg/neorg",
-        run = ":Neorg sync-parsers", -- This is the important bit!
-        config = function()
-            require("conf.neorg")
-        end,
     },
     -- -- 快速运行代码片段
     -- {

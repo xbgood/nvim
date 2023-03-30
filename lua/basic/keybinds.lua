@@ -143,7 +143,7 @@ vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.o
 -- gy    ：复制目录或文件绝对路径
 -- p     ：粘贴目录或文件
 -- s     ：使用系统默认程序打开目录或文件
--- <Tab> ：将文件添加到缓冲区，但不移动光标
+-- <Tab> ：预览文件但不移动光标
 -- <C-v> ：垂直分屏打开文件
 -- <C-x> ：水平分屏打开文件
 -- <C-]> ：进入光标下的目录
