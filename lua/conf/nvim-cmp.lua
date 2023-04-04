@@ -50,8 +50,10 @@ cmp.setup {
     -- 设置代码片段引擎，用于根据代码片段补全
     snippet = {
         expand = function(args)
-            -- for `vsnip` users.
-            vim.fn["vsnip#anonymous"](args.body)
+            -- For `vsnip` users.
+            -- vim.fn["vsnip#anonymous"](args.body)
+            -- For `luasnip` users.
+            require('luasnip').lsp_expand(args.body)
         end,
     },
     window = {
@@ -157,11 +159,13 @@ cmp.setup {
             vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.menu = ({
                 nvim_lsp = "[Lsp]",
-                -- snippet = "[Snippet]",
+                snippet = "[Snippet]",
                 buffer = "[Buffer]",
-                path = "[Path]",
                 cmp_tabnine = "[TabNine]",
+                path = "[Path]",
                 spell = "[Spell]",
+                calc = "[Calc]",
+                emoji = "[Emoji]"
             })[entry.source.name]
             return vim_item
         end,
@@ -184,12 +188,15 @@ cmp.setup {
 
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- for `vsnip` user.
+        -- { name = 'vsnip' }, -- For vsnip users.
+        { name = 'luasnip' }, -- For luasnip users.
         { name = 'buffer' },
         { name = 'path' },
         { name = 'spell' },
         { name = 'cmp_tabnine' },
         { name = 'tags' },
+        { name = 'calc' },
+        { name = 'emoji' },
         -- { name = 'snippets_nvim' },
         -- { name = 'cmdline' },
     })
