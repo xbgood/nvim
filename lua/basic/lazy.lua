@@ -75,10 +75,10 @@ require("lazy").setup({
     -- 快速跳转
     {
         "ggandor/leap.nvim",
-        keys = { "s", "S" },
+        keys = { ";", "S" },
         config = function()
             require("leap").set_default_keymaps()
-            vim.keymap.set('n', "s", function ()
+            vim.keymap.set('n', ";", function ()
                 local current_window = vim.fn.win_getid()
                 require('leap').leap { target_windows = { current_window } }
             end)
@@ -238,7 +238,7 @@ require("lazy").setup({
     -- 语法高亮
     {
         "nvim-treesitter/nvim-treesitter",
-        build = { ":TSupdate" },
+        build = { ":TSUpdate" },
         dependencies = {
             "p00f/nvim-ts-rainbow" -- 彩虹括号
         },

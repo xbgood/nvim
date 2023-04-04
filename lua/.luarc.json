@@ -77,6 +77,7 @@
         "/home/wallen/.local/share/nvim/site/pack/packer/start/cmp-vsnip/after",
         "/home/wallen/.local/share/nvim/site/pack/packer/start/vim-markdown/after",
         "/usr/share/vim/vimfiles",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }
