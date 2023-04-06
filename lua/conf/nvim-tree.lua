@@ -1,4 +1,4 @@
-require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
+require('nvim-tree').setup({
     auto_reload_on_write = true,
     create_in_closed_folder = false,
     disable_netrw = false,
@@ -203,6 +203,4 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
             watcher = false,
         },
     },
-} -- END_DEFAULT_OPTS
-
-
+})

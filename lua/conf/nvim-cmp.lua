@@ -40,7 +40,7 @@ cmp.setup {
     debug = false,
     preselect = 'enable',
     throttle_time = 80,
-    source_timeout = 200,
+    source_timeout = 100,
     incomplete_delay = 400,
     max_abbr_width = 100,
     max_kind_width = 100,

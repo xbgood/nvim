@@ -8,6 +8,8 @@ end
 
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 
+-- nvim-lightbulb
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 -- 指定 undotree 缓存存放路径
 vim.g.undotree_dir = "~/.cache/nvim/undodir"
 

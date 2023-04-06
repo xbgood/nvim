@@ -1,14 +1,14 @@
 -- lazy插件管理
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -55,7 +55,7 @@ require("lazy").setup({
     {
         "kevinhwang91/nvim-hlslens",
         config = function()
-            require("conf.hlslens")
+            require('hlslens').setup()
         end
     },
     -- 显示缩进线
@@ -69,7 +69,9 @@ require("lazy").setup({
     {
         "windwp/nvim-autopairs",
         config = function()
-            require("conf.nvim-autopairs")
+            require("nvim-autopairs").setup({
+                disable_filetype = { "TelescopePrompt" , "vim" },
+            })
         end
     },
     -- 快速跳转
@@ -88,7 +90,7 @@ require("lazy").setup({
     {
         "ur4ltz/surround.nvim",
         config = function()
-            require("conf.surround")
+            require("surround").setup( { mappings_style = "surround" })
         end
     },
     -- 自动保存
@@ -106,12 +108,7 @@ require("lazy").setup({
         end
     },
     -- 多光标模式
-    {
-        "terryma/vim-multiple-cursors",
-        config = function()
-            require("conf.vim-multiple-cursors")
-        end
-    },
+    { "terryma/vim-multiple-cursors", },
     -- 内置终端
     {
         "akinsho/toggleterm.nvim",
@@ -197,7 +194,9 @@ require("lazy").setup({
     {
         "j-hui/fidget.nvim",
         config = function()
-            require("conf.fidget")
+            require("fidget").setup({
+                window = { blend = 0, }
+            })
         end
     },
     -- 插入模式获得函数签名
@@ -209,18 +208,13 @@ require("lazy").setup({
         end
     },
     -- 灯泡提示代码行为
-    {
-        "kosayoda/nvim-lightbulb",
-        config = function()
-            require("conf.nvim-lightbulb")
-        end
-    },
+    { "kosayoda/nvim-lightbulb", },
     -- 自动代码补全系列插件
     {
         "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
         dependencies = {
             -- LuaSnip引擎
-            { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
+            { "L3MON4D3/LuaSnip" },
             { 'saadparwaiz1/cmp_luasnip' },
             -- vsnip引擎
             -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
@@ -348,7 +342,7 @@ require("lazy").setup({
     {
         "norcalli/nvim-colorizer.lua",
         config = function()
-            require("conf.nvim-colorizer")
+            require("colorizer").setup()
         end
     },
     -- -- 快速运行代码片段

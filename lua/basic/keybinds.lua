@@ -111,6 +111,7 @@ vim.keybinds.gmap("n", "<leader>sf", "viw:lua require('spectre').open_file_searc
 vim.keybinds.gmap("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>sw", "<esc>:lua require('spectre').open_visual()<CR>", vim.keybinds.opts)
 
+
 -- toggleterm --
 -- 退出终端插入模式
 vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
@@ -121,8 +122,10 @@ vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggl
 -- 打开或关闭所有终端
 vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
 
+
 -- 查看 undotree
 vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", vim.keybinds.opts)
+
 
 -- nvim-tree --
 -- 目录后加上反斜杠 /
@@ -153,3 +156,19 @@ vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.o
 -- H     ：切换点文件的可见性
 -- R     ：刷新资源管理器
 -- 另外，文件资源管理器操作和操作文档方式一致，可按 / ? 进行搜索
+
+
+-- vim-multiple-cursors
+-- 关闭默认键位绑定
+vim.g.multi_cursor_use_default_mapping = 0
+-- 应用键位
+-- 开始选择单词
+vim.g.multi_cursor_start_word_key = "gb"
+-- 向后选择
+vim.g.multi_cursor_next_key = "<C-n>"
+-- 取消当前选择
+vim.g.multi_cursor_prev_key = "<C-p>"
+-- 跳过选择
+vim.g.multi_cursor_skip_key = "<C-x>"
+-- 退出选择
+vim.g.multi_cursor_quit_key = "<ESC>"
