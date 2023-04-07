@@ -18,6 +18,5 @@ require("mason-lspconfig").setup({
         "cssls",
         "prosemd_lsp",
         "tsserver",
-        "sqlls",
     },
 })

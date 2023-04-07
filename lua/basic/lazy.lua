@@ -77,7 +77,7 @@ require("lazy").setup({
     -- 快速跳转
     {
         "ggandor/leap.nvim",
-        keys = { ";", "S" },
+        keys = { ";" },
         config = function()
             require("leap").set_default_keymaps()
             vim.keymap.set('n', ";", function ()

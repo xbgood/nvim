@@ -28,6 +28,9 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+-- friendly-snippets add snippets files path
+require("luasnip.loaders.from_vscode").lazy_load({path={"~/.local/share/nvim/lazy/friendly-snippets/snippets/"}})
+
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -228,3 +231,4 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
+
