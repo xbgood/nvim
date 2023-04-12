@@ -11,7 +11,7 @@ vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 vim.g.undotree_dir = "~/.cache/nvim/undodir"
 
 -- 自定义代码片段存储路径
-vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
+-- vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- 开启代码折叠, zc/zo keys
 vim.wo.foldmethod = 'expr'
