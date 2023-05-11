@@ -31,27 +31,21 @@ vim.cmd([[
     autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
     " undotree
-	if has("persistent_undo")
-	" 在 config.lua 中定义好了 undotree_dir 全局变量
-	let target_path = expand(undotree_dir)
-	if !isdirectory(target_path)
-	call mkdir(target_path, "p", 0700)
-	endif
-	let &undodir = target_path
-	set undofile
-
-    " markdown preview
-    let g:mkdp_auto_start = 0
-    let g:mkdp_auto_close = 1
-    let g:mkdp_theme = 'light' "light/dark"
-    let g:mdip_imgdir = '.img' " 这里的设置好像没有效果，要修改插件的源码
+    if has("persistent_undo")
+    " 在 config.lua 中定义好了 undotree_dir 全局变量
+    let target_path = expand(undotree_dir)
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+    let &undodir = target_path
+    set undofile
 
     " 设置asyncrun
     let g:asyncrun_open = 6
 
     " 设置鼠标拷贝
     set mouse-=a
- 
+
     " 设置背景透明
     highlight Normal guibg=None ctermbg=None
 

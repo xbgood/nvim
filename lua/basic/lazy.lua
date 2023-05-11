@@ -70,7 +70,7 @@ require("lazy").setup({
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup({
-                disable_filetype = { "TelescopePrompt" , "vim" },
+                disable_filetype = { "TelescopePrompt", "vim" },
             })
         end
     },
@@ -80,7 +80,7 @@ require("lazy").setup({
         keys = { ";" },
         config = function()
             require("leap").set_default_keymaps()
-            vim.keymap.set('n', ";", function ()
+            vim.keymap.set('n', ";", function()
                 local current_window = vim.fn.win_getid()
                 require('leap').leap { target_windows = { current_window } }
             end)
@@ -90,7 +90,7 @@ require("lazy").setup({
     {
         "ur4ltz/surround.nvim",
         config = function()
-            require("surround").setup( { mappings_style = "surround" })
+            require("surround").setup({ mappings_style = "surround" })
         end
     },
     -- 自动保存
@@ -129,9 +129,9 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
-            "nvim-lua/plenary.nvim", -- Lua 开发模块
-            "BurntSushi/ripgrep", -- 文字查找
-            "sharkdp/fd" -- 文件查找
+            "nvim-lua/plenary.nvim",         -- Lua 开发模块
+            "BurntSushi/ripgrep",            -- 文字查找
+            "sharkdp/fd"                     -- 文件查找
         },
         config = function()
             require("conf.telescope")
@@ -211,7 +211,7 @@ require("lazy").setup({
     { "kosayoda/nvim-lightbulb", },
     -- 自动代码补全系列插件
     {
-        "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
+        "hrsh7th/nvim-cmp",         -- 代码补全核心插件，下面都是增强补全的体验插件
         dependencies = {
             -- LuaSnip引擎
             { "L3MON4D3/LuaSnip" },
@@ -219,17 +219,17 @@ require("lazy").setup({
             -- vsnip引擎
             -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
             -- { "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
-            { "hrsh7th/cmp-nvim-lsp" }, -- 替换内置 omnifunc，获得更多补全
-            { "hrsh7th/cmp-path" }, -- 路径补全
-            { "hrsh7th/cmp-buffer" }, -- 缓冲区补全
-            { "hrsh7th/cmp-cmdline" }, -- 命令补全
-            { "hrsh7th/cmp-calc" }, --输入数学算式（如1+1=）自动计算
-            { "hrsh7th/cmp-emoji" }, --输入: 可以显示表情
-            { "f3fora/cmp-spell" }, -- 拼写建议
-            { "onsails/lspkind-nvim" }, -- 为补全添加类似 vscode 的图标
-            { "rafamadriz/friendly-snippets" }, -- 提供多种语言的代码片段
-            { "lukas-reineke/cmp-under-comparator" }, -- 让补全结果的排序更加智能
-            { "tzachar/cmp-tabnine", build = "./install.sh" } -- tabnine 源,提供基于 AI 的智能补全
+            { "hrsh7th/cmp-nvim-lsp" },                                             -- 替换内置 omnifunc，获得更多补全
+            { "hrsh7th/cmp-path" },                                                 -- 路径补全
+            { "hrsh7th/cmp-buffer" },                                               -- 缓冲区补全
+            { "hrsh7th/cmp-cmdline" },                                              -- 命令补全
+            { "hrsh7th/cmp-calc" },                                                 --输入数学算式（如1+1=）自动计算
+            { "hrsh7th/cmp-emoji" },                                                --输入: 可以显示表情
+            { "f3fora/cmp-spell" },                                                 -- 拼写建议
+            { "onsails/lspkind-nvim" },                                             -- 为补全添加类似 vscode 的图标
+            { "rafamadriz/friendly-snippets" },                                     -- 提供多种语言的代码片段
+            { "lukas-reineke/cmp-under-comparator" },                               -- 让补全结果的排序更加智能
+            { "tzachar/cmp-tabnine",               build = "./install.sh" }         -- tabnine 源,提供基于 AI 的智能补全
         },
         config = function()
             require("conf.nvim-cmp")
@@ -240,7 +240,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = { ":TSUpdate" },
         dependencies = {
-            "p00f/nvim-ts-rainbow" -- 彩虹括号
+            "p00f/nvim-ts-rainbow"         -- 彩虹括号
         },
         config = function()
             require("conf.nvim-treesitter")
@@ -277,12 +277,22 @@ require("lazy").setup({
             init = function()
                 vim.g.mkdp_filetypes = { "markdown" }
             end,
-
         },
         -- vim markdown
         { "preservim/vim-markdown", },
         -- markdown image paste
-        { "img-paste-devs/img-paste.vim", },
+        {
+            "img-paste-devs/img-paste.vim",
+            init = function()
+                vim.cmd([[
+                    " markdown preview
+                    let g:mkdp_auto_start = 0
+                    let g:mkdp_auto_close = 1
+                    let g:mkdp_theme = 'light' "light/dark
+                    let g:mdip_imgdir = 'assets/images'
+                ]])
+            end,
+        },
         -- markdown table
         --{ "dhruvasagar/vim-table-mode", },
         -- markdown org
@@ -324,15 +334,14 @@ require("lazy").setup({
                 -- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
                 require("conf.catppuccin")
             end,
-
         },
     },
     -- 全局替换
     {
         "nvim-pack/nvim-spectre",
         dependencies = {
-            "nvim-lua/plenary.nvim", -- Lua 开发模块
-            "BurntSushi/ripgrep" -- 文字查找
+            "nvim-lua/plenary.nvim",         -- Lua 开发模块
+            "BurntSushi/ripgrep"             -- 文字查找
         },
         config = function()
             require("conf.nvim-spectre")
