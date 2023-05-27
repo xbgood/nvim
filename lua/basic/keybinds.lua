@@ -89,8 +89,17 @@ vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=ivy<CR>", v
 vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=ivy<CR>", vim.keybinds.opts)
 -- 查找 marks 标记
 vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=ivy<CR>", vim.keybinds.opts)
--- todo-comments 查找 TODO 标签
-vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=dropdown<CR>", vim.keybinds.opts)
+-- 查找git commits
+vim.keybinds.gmap("n", "<leader>fg", "<cmd>Telescope git_commits theme=ivy<CR>", vim.keybinds.opts)
+--当前buffer内查找
+vim.keybinds.gmap("n", "<leader>fB", "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>", vim.keybinds.opts)
+-- 查找快捷键
+vim.keybinds.gmap("n", "<leader>fk", "<cmd>Telescope keymaps theme=ivy<CR>", vim.keybinds.opts)
+-- 查找man文档
+vim.keybinds.gmap("n", "<leader>fM", "<cmd>Telescope man_pages theme=ivy<CR>", vim.keybinds.opts)
+
+-- 查找 TODO 标签
+vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=ivy<CR>", vim.keybinds.opts)
 
 
 -- nvim-hlslens --
