@@ -16,8 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- 中文文档
     { "yianwillis/vimcdoc", },
-    -- 更好用的ft
-    { "rhysd/clever-f.vim" },
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
@@ -76,15 +74,21 @@ require("lazy").setup({
     },
     -- 快速跳转
     {
-        "ggandor/leap.nvim",
-        keys = { ";" },
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
         config = function()
-            require("leap").set_default_keymaps()
-            vim.keymap.set('n', ";", function()
-                local current_window = vim.fn.win_getid()
-                require('leap').leap { target_windows = { current_window } }
-            end)
-        end,
+            require("conf.nvim-flash")
+        end
+
     },
     -- 包裹修改
     {
