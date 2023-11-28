@@ -82,13 +82,6 @@ require('lspconfig')['rust_analyzer'].setup {
         ["rust-analyzer"] = {}
     }
 }
-require 'lspconfig'.awk_ls.setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    cmd = { 'awk-language-server'},
-    filetypes = {'awk'},
-    single_file_support = true,
-}
 require 'lspconfig'.bashls.setup {
     on_attach = on_attach,
     flags = lsp_flags,

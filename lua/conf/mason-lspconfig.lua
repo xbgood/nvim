@@ -13,7 +13,6 @@ require("mason-lspconfig").setup({
         "jsonls",
         "yamlls",
         "gopls",
-        "awk_ls",
         "cmake",
         "cssls",
         "prosemd_lsp",
