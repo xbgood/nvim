@@ -292,10 +292,11 @@ require("lazy").setup({
             init = function()
                 vim.cmd([[
                     " markdown preview
-                    let g:mkdp_auto_start = 0
+                    let g:mkdp_auto_start = 1
                     let g:mkdp_auto_close = 1
                     let g:mkdp_theme = 'light' "light/dark
                     let g:mdip_imgdir = 'assets/images'
+                    let g:mkdp_browser='firefox'
                 ]])
             end,
         },
