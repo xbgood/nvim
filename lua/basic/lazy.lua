@@ -60,7 +60,21 @@ require("lazy").setup({
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require("conf.indent-blankline")
+            require("ibl").setup({
+                debounce = 100,
+                indent = { char = "|" },
+                whitespace = {
+                    highlight = { "Whitespace", "NonText" },
+                    remove_blankline_trail = true,
+                },
+                scope = {
+                    enabled = true,
+                    show_start = true,
+                    show_end = false,
+                },
+            })
+
+            -- require("conf.indent-blankline")
         end
     },
     -- 自动匹配括号
@@ -80,11 +94,11 @@ require("lazy").setup({
         opts = {},
         -- stylua: ignore
         keys = {
-            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+            { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+            { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+            { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+            { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
         config = function()
             require("conf.nvim-flash")
@@ -134,9 +148,9 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
-            "nvim-lua/plenary.nvim",         -- Lua 开发模块
-            "BurntSushi/ripgrep",            -- 文字查找
-            "sharkdp/fd"                     -- 文件查找
+            "nvim-lua/plenary.nvim", -- Lua 开发模块
+            "BurntSushi/ripgrep",    -- 文字查找
+            "sharkdp/fd"             -- 文件查找
         },
         config = function()
             require("conf.telescope")
@@ -217,7 +231,7 @@ require("lazy").setup({
     { "kosayoda/nvim-lightbulb", },
     -- 自动代码补全系列插件
     {
-        "hrsh7th/nvim-cmp",         -- 代码补全核心插件，下面都是增强补全的体验插件
+        "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
         dependencies = {
             -- LuaSnip引擎
             { "L3MON4D3/LuaSnip" },
@@ -225,17 +239,17 @@ require("lazy").setup({
             -- vsnip引擎
             -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
             -- { "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
-            { "hrsh7th/cmp-nvim-lsp" },                                             -- 替换内置 omnifunc，获得更多补全
-            { "hrsh7th/cmp-path" },                                                 -- 路径补全
-            { "hrsh7th/cmp-buffer" },                                               -- 缓冲区补全
-            { "hrsh7th/cmp-cmdline" },                                              -- 命令补全
-            { "hrsh7th/cmp-calc" },                                                 --输入数学算式（如1+1=）自动计算
-            { "hrsh7th/cmp-emoji" },                                                --输入: 可以显示表情
-            { "f3fora/cmp-spell" },                                                 -- 拼写建议
-            { "onsails/lspkind-nvim" },                                             -- 为补全添加类似 vscode 的图标
-            { "rafamadriz/friendly-snippets" },                                     -- 提供多种语言的代码片段
-            { "lukas-reineke/cmp-under-comparator" },                               -- 让补全结果的排序更加智能
-            { "tzachar/cmp-tabnine",               build = "./install.sh" }         -- tabnine 源,提供基于 AI 的智能补全
+            { "hrsh7th/cmp-nvim-lsp" },                       -- 替换内置 omnifunc，获得更多补全
+            { "hrsh7th/cmp-path" },                           -- 路径补全
+            { "hrsh7th/cmp-buffer" },                         -- 缓冲区补全
+            { "hrsh7th/cmp-cmdline" },                        -- 命令补全
+            { "hrsh7th/cmp-calc" },                           --输入数学算式（如1+1=）自动计算
+            { "hrsh7th/cmp-emoji" },                          --输入: 可以显示表情
+            { "f3fora/cmp-spell" },                           -- 拼写建议
+            { "onsails/lspkind-nvim" },                       -- 为补全添加类似 vscode 的图标
+            { "rafamadriz/friendly-snippets" },               -- 提供多种语言的代码片段
+            { "lukas-reineke/cmp-under-comparator" },         -- 让补全结果的排序更加智能
+            { "tzachar/cmp-tabnine", build = "./install.sh" } -- tabnine 源,提供基于 AI 的智能补全
         },
         config = function()
             require("conf.nvim-cmp")
@@ -246,7 +260,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         build = { ":TSUpdate" },
         dependencies = {
-            "p00f/nvim-ts-rainbow"         -- 彩虹括号
+            "p00f/nvim-ts-rainbow" -- 彩虹括号
         },
         config = function()
             require("conf.nvim-treesitter")
@@ -272,6 +286,31 @@ require("lazy").setup({
         config = function()
             require("conf.symbols-outline")
         end
+    },
+    {
+        'lervag/vimtex',
+        opt = true,
+        config = function()
+            -- vim.cmd([[
+            --     filetype plugin indent on
+            --     syntax enable
+            -- ]])
+            vim.g.tex_flavor = 'latex'
+            vim.g.vimtex_view_method = 'zathura'
+            vim.g.vimtex_view_general_viewer = 'zathura'
+            -- 设置neovim-remote
+            vim.g.vimtex_compiler_progname = 'nvr'
+            vim.g.vimtex_compiler_latexmk_engines = { _ = '-pdflatex' }
+            vim.g.tex_comment_nospell = 1
+            -- 忽略警告
+            vim.g.vimtex_quickfix_open_on_warning = 0
+            -- 关闭编译报错自动弹出错误窗口
+            vim.g.vimtex_quickfix_mode = 0
+            -- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
+            -- 改变vimtex的默认按键为,
+            vim.g.maplocalleader = ","
+        end,
+        ft = 'tex'
     },
     -- markdown
     {
@@ -347,8 +386,8 @@ require("lazy").setup({
     {
         "nvim-pack/nvim-spectre",
         dependencies = {
-            "nvim-lua/plenary.nvim",         -- Lua 开发模块
-            "BurntSushi/ripgrep"             -- 文字查找
+            "nvim-lua/plenary.nvim", -- Lua 开发模块
+            "BurntSushi/ripgrep"     -- 文字查找
         },
         config = function()
             require("conf.nvim-spectre")
