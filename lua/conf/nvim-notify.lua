@@ -18,5 +18,5 @@ if vim.g.background_transparency then
 end
 
 vim.notify = require("notify")
-
 vim.notify.setup(notify_opts)
+-- require("notify").setup(notify_opts)

@@ -57,26 +57,26 @@ require("lazy").setup({
         end
     },
     -- 显示缩进线
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        config = function()
-            require("ibl").setup({
-                debounce = 100,
-                indent = { char = "|" },
-                whitespace = {
-                    highlight = { "Whitespace", "NonText" },
-                    remove_blankline_trail = true,
-                },
-                scope = {
-                    enabled = true,
-                    show_start = true,
-                    show_end = false,
-                },
-            })
-
-            -- require("conf.indent-blankline")
-        end
-    },
+    -- {
+        -- "lukas-reineke/indent-blankline.nvim",
+        -- config = function()
+        --     require("ibl").setup({
+        --         debounce = 100,
+        --         indent = { char = "|" },
+        --         whitespace = {
+        --             highlight = { "Whitespace", "NonText" },
+        --             remove_blankline_trail = true,
+        --         },
+        --         scope = {
+        --             enabled = true,
+        --             show_start = true,
+        --             show_end = false,
+        --         },
+        --     })
+        --
+        --     -- require("conf.indent-blankline")
+        -- end
+    -- },
     -- 自动匹配括号
     {
         "windwp/nvim-autopairs",
@@ -382,17 +382,17 @@ require("lazy").setup({
             end,
         },
     },
-    -- 全局替换
-    {
-        "nvim-pack/nvim-spectre",
-        dependencies = {
-            "nvim-lua/plenary.nvim", -- Lua 开发模块
-            "BurntSushi/ripgrep"     -- 文字查找
-        },
-        config = function()
-            require("conf.nvim-spectre")
-        end
-    },
+    -- -- 全局替换
+    -- {
+    --     "nvim-pack/nvim-spectre",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim", -- Lua 开发模块
+    --         "BurntSushi/ripgrep"     -- 文字查找
+    --     },
+    --     config = function()
+    --         require("conf.nvim-spectre")
+    --     end
+    -- },
     -- 显示网页色
     {
         "norcalli/nvim-colorizer.lua",
