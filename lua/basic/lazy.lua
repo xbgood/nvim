@@ -15,7 +15,24 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- 中文文档
-    { "yianwillis/vimcdoc", },
+    { "yianwillis/vimcdoc" },
+    -- undo tree
+    { "mbbill/undotree" },
+    -- 键位绑定器
+    { "folke/which-key.nvim" },
+    -- 多光标模式
+    { "terryma/vim-multiple-cursors" },
+    -- 查找替换
+    {
+        'MagicDuck/grug-far.nvim',
+        config = function()
+            require('grug-far').setup({
+                -- options, see Configuration section below
+                -- there are no required options atm
+                -- engine = 'ripgrep' is default, but 'astgrep' can be specified
+            });
+        end
+    },
     -- nvim-tree
     {
         "kyazdani42/nvim-tree.lua",
@@ -27,6 +44,11 @@ require("lazy").setup({
             -- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
             require("conf.nvim-tree")
         end,
+    },
+    -- 为状态栏提供上下文信息
+    {
+        "SmiteshP/nvim-gps",
+        dependencies = "nvim-treesitter/nvim-treesitter"
     },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
@@ -49,6 +71,13 @@ require("lazy").setup({
             require("conf.bufferline")
         end
     },
+    -- 美丽的状态栏
+    {
+        'nvim-lualine/lualine.nvim',
+        config = function()
+            require("conf.nvim-lualine")
+        end
+    },
     -- 搜索时显示条目
     {
         "kevinhwang91/nvim-hlslens",
@@ -56,33 +85,12 @@ require("lazy").setup({
             require('hlslens').setup()
         end
     },
-    -- 显示缩进线
-    -- {
-        -- "lukas-reineke/indent-blankline.nvim",
-        -- config = function()
-        --     require("ibl").setup({
-        --         debounce = 100,
-        --         indent = { char = "|" },
-        --         whitespace = {
-        --             highlight = { "Whitespace", "NonText" },
-        --             remove_blankline_trail = true,
-        --         },
-        --         scope = {
-        --             enabled = true,
-        --             show_start = true,
-        --             show_end = false,
-        --         },
-        --     })
-        --
-        --     -- require("conf.indent-blankline")
-        -- end
-    -- },
     -- 自动匹配括号
     {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup({
-                disable_filetype = { "TelescopePrompt", "vim" },
+                disable_filetype = { "vim" },
             })
         end
     },
@@ -105,6 +113,27 @@ require("lazy").setup({
         end
 
     },
+    -- 快速跳转
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        ---@type snacks.Config
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            bigfile = { enabled = true },
+            dashboard = { enabled = true },
+            indent = { enabled = true }, -- 开启缩进线
+            input = { enabled = true },
+            notifier = { enabled = true },
+            quickfile = { enabled = true },
+            scroll = { enabled = true },
+            statuscolumn = { enabled = true },
+            words = { enabled = true },
+        },
+    },
     -- 包裹修改
     {
         "ur4ltz/surround.nvim",
@@ -126,34 +155,11 @@ require("lazy").setup({
             require("conf.nvim-lastplace")
         end
     },
-    -- 多光标模式
-    { "terryma/vim-multiple-cursors", },
     -- 内置终端
     {
         "akinsho/toggleterm.nvim",
         config = function()
             require("conf.toggleterm")
-        end
-    },
-    -- undo tree
-    { "mbbill/undotree", },
-    -- 键位绑定器
-    {
-        "folke/which-key.nvim",
-        config = function()
-            require("conf.which-key")
-        end
-    },
-    -- 模糊查找
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim", -- Lua 开发模块
-            "BurntSushi/ripgrep",    -- 文字查找
-            "sharkdp/fd"             -- 文件查找
-        },
-        config = function()
-            require("conf.telescope")
         end
     },
     -- 精美弹窗
@@ -170,21 +176,24 @@ require("lazy").setup({
             require("conf.todo-comments")
         end
     },
-    -- 为状态栏提供上下文信息
+    -- 美丽的消息通知
     {
-        "SmiteshP/nvim-gps",
-        dependencies = "nvim-treesitter/nvim-treesitter"
-    },
-    -- 美丽的状态栏
-    {
-        'nvim-lualine/lualine.nvim',
-        config = function()
-            require("conf.nvim-lualine")
-        end
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            "rcarriga/nvim-notify",
+        }
     },
     -- LSP 基础服务
     {
         "neovim/nvim-lspconfig",
+        dependencies = { 'saghen/blink.cmp' },
         config = function()
             require("conf.nvim-lspconfig")
         end
@@ -219,6 +228,26 @@ require("lazy").setup({
             })
         end
     },
+    -- blink.cmp
+    {
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+        version = '*',
+        opts = {
+            -- 'default' for mappings similar to built-in completion
+            keymap = { preset = 'default' },
+
+            appearance = {
+                -- use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+        },
+        opts_extend = { "sources.default" }
+    },
     -- 插入模式获得函数签名
     {
         "ray-x/lsp_signature.nvim",
@@ -229,32 +258,6 @@ require("lazy").setup({
     },
     -- 灯泡提示代码行为
     { "kosayoda/nvim-lightbulb", },
-    -- 自动代码补全系列插件
-    {
-        "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
-        dependencies = {
-            -- LuaSnip引擎
-            { "L3MON4D3/LuaSnip" },
-            { 'saadparwaiz1/cmp_luasnip' },
-            -- vsnip引擎
-            -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
-            -- { "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
-            { "hrsh7th/cmp-nvim-lsp" },                       -- 替换内置 omnifunc，获得更多补全
-            { "hrsh7th/cmp-path" },                           -- 路径补全
-            { "hrsh7th/cmp-buffer" },                         -- 缓冲区补全
-            { "hrsh7th/cmp-cmdline" },                        -- 命令补全
-            { "hrsh7th/cmp-calc" },                           --输入数学算式（如1+1=）自动计算
-            { "hrsh7th/cmp-emoji" },                          --输入: 可以显示表情
-            { "f3fora/cmp-spell" },                           -- 拼写建议
-            { "onsails/lspkind-nvim" },                       -- 为补全添加类似 vscode 的图标
-            { "rafamadriz/friendly-snippets" },               -- 提供多种语言的代码片段
-            { "lukas-reineke/cmp-under-comparator" },         -- 让补全结果的排序更加智能
-            { "tzachar/cmp-tabnine", build = "./install.sh" } -- tabnine 源,提供基于 AI 的智能补全
-        },
-        config = function()
-            require("conf.nvim-cmp")
-        end
-    },
     -- 语法高亮
     {
         "nvim-treesitter/nvim-treesitter",
@@ -287,6 +290,7 @@ require("lazy").setup({
             require("conf.symbols-outline")
         end
     },
+    -- latex
     {
         'lervag/vimtex',
         opt = true,
@@ -314,6 +318,15 @@ require("lazy").setup({
     },
     -- markdown
     {
+        -- markdown 文本显示格式
+        {
+            'MeanderingProgrammer/render-markdown.nvim',
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter',
+                'nvim-tree/nvim-web-devicons'
+            },
+            opts = {},
+        },
         -- markdown preview
         {
             "iamcco/markdown-preview.nvim",
@@ -382,7 +395,86 @@ require("lazy").setup({
             end,
         },
     },
-    -- -- 全局替换
+    -- 显示网页色
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end
+    },
+    {
+        "ibhagwan/fzf-lua",
+        -- optional for icon support
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        -- or if using mini.icons/mini.nvim
+        -- dependencies = { "echasnovski/mini.icons" },
+        opts = {}
+    },
+    {
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+               "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
+    },
+    -- 自动代码补全系列插件
+    -- 该插件已经被放弃，用blink.cmp来代替
+    -- {
+    --     "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
+    --     dependencies = {
+    --         -- LuaSnip引擎
+    --         { "L3MON4D3/LuaSnip" },
+    --         { 'saadparwaiz1/cmp_luasnip' },
+    --         -- vsnip引擎
+    --         -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
+    --         -- { "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
+    --         { "hrsh7th/cmp-nvim-lsp" },                       -- 替换内置 omnifunc，获得更多补全
+    --         { "hrsh7th/cmp-path" },                           -- 路径补全
+    --         { "hrsh7th/cmp-buffer" },                         -- 缓冲区补全
+    --         { "hrsh7th/cmp-cmdline" },                        -- 命令补全
+    --         { "hrsh7th/cmp-calc" },                           --输入数学算式（如1+1=）自动计算
+    --         { "hrsh7th/cmp-emoji" },                          --输入: 可以显示表情
+    --         { "f3fora/cmp-spell" },                           -- 拼写建议
+    --         { "onsails/lspkind-nvim" },                       -- 为补全添加类似 vscode 的图标
+    --         { "rafamadriz/friendly-snippets" },               -- 提供多种语言的代码片段
+    --         { "lukas-reineke/cmp-under-comparator" },         -- 让补全结果的排序更加智能
+    --         { "tzachar/cmp-tabnine", build = "./install.sh" } -- tabnine 源,提供基于 AI 的智能补全
+    --     },
+    --     config = function()
+    --         require("conf.nvim-cmp")
+    --     end
+    -- },
+    -- -- 全局替换, 用grag-far来代替
     -- {
     --     "nvim-pack/nvim-spectre",
     --     dependencies = {
@@ -393,19 +485,36 @@ require("lazy").setup({
     --         require("conf.nvim-spectre")
     --     end
     -- },
-    -- 显示网页色
-    {
-        "norcalli/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup()
-        end
-    },
-    -- -- 快速运行代码片段
+    -- 显示缩进线，用snacks的indent来代替来，这个太麻烦来。
     -- {
-    -- 	"michaelb/sniprun",
-    -- 	build = 'bash ./install.sh',
-    -- 	config = function()
-    -- 		require("conf.sniprun")
-    -- 	end
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     main = "ibl",
+    --     config = function()
+    --         require("ibl").setup({
+    --             debounce = 100,
+    --             indent = { char = "|" },
+    --             whitespace = {
+    --                 highlight = { "Whitespace", "NonText" },
+    --                 remove_blankline_trail = true,
+    --             },
+    --             scope = {
+    --                 enabled = true,
+    --                 show_start = true,
+    --                 show_end = false,
+    --             },
+    --         })
+    --     end
+    -- },
+    -- 模糊查找，用fzf-lua来代替
+    -- {
+    --     "nvim-telescope/telescope.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim", -- Lua 开发模块
+    --         "BurntSushi/ripgrep",    -- 文字查找
+    --         "sharkdp/fd"             -- 文件查找
+    --     },
+    --     config = function()
+    --         require("conf.telescope")
+    --     end
     -- },
 })

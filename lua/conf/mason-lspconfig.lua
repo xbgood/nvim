@@ -16,7 +16,7 @@ require("mason-lspconfig").setup({
         "cmake",
         "cssls",
         "prosemd_lsp",
-        "tsserver",
+        "ts_ls",
         "ltex",
     },
 })
