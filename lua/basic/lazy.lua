@@ -27,9 +27,7 @@ require("lazy").setup({
         'MagicDuck/grug-far.nvim',
         config = function()
             require('grug-far').setup({
-                -- options, see Configuration section below
-                -- there are no required options atm
-                -- engine = 'ripgrep' is default, but 'astgrep' can be specified
+                engine = 'ripgrep'
             });
         end
     },
@@ -113,7 +111,7 @@ require("lazy").setup({
         end
 
     },
-    -- 快速跳转
+    -- 一些功能集合
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -447,74 +445,4 @@ require("lazy").setup({
             },
         },
     },
-    -- 自动代码补全系列插件
-    -- 该插件已经被放弃，用blink.cmp来代替
-    -- {
-    --     "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
-    --     dependencies = {
-    --         -- LuaSnip引擎
-    --         { "L3MON4D3/LuaSnip" },
-    --         { 'saadparwaiz1/cmp_luasnip' },
-    --         -- vsnip引擎
-    --         -- { "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
-    --         -- { "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
-    --         { "hrsh7th/cmp-nvim-lsp" },                       -- 替换内置 omnifunc，获得更多补全
-    --         { "hrsh7th/cmp-path" },                           -- 路径补全
-    --         { "hrsh7th/cmp-buffer" },                         -- 缓冲区补全
-    --         { "hrsh7th/cmp-cmdline" },                        -- 命令补全
-    --         { "hrsh7th/cmp-calc" },                           --输入数学算式（如1+1=）自动计算
-    --         { "hrsh7th/cmp-emoji" },                          --输入: 可以显示表情
-    --         { "f3fora/cmp-spell" },                           -- 拼写建议
-    --         { "onsails/lspkind-nvim" },                       -- 为补全添加类似 vscode 的图标
-    --         { "rafamadriz/friendly-snippets" },               -- 提供多种语言的代码片段
-    --         { "lukas-reineke/cmp-under-comparator" },         -- 让补全结果的排序更加智能
-    --         { "tzachar/cmp-tabnine", build = "./install.sh" } -- tabnine 源,提供基于 AI 的智能补全
-    --     },
-    --     config = function()
-    --         require("conf.nvim-cmp")
-    --     end
-    -- },
-    -- -- 全局替换, 用grag-far来代替
-    -- {
-    --     "nvim-pack/nvim-spectre",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim", -- Lua 开发模块
-    --         "BurntSushi/ripgrep"     -- 文字查找
-    --     },
-    --     config = function()
-    --         require("conf.nvim-spectre")
-    --     end
-    -- },
-    -- 显示缩进线，用snacks的indent来代替来，这个太麻烦来。
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     main = "ibl",
-    --     config = function()
-    --         require("ibl").setup({
-    --             debounce = 100,
-    --             indent = { char = "|" },
-    --             whitespace = {
-    --                 highlight = { "Whitespace", "NonText" },
-    --                 remove_blankline_trail = true,
-    --             },
-    --             scope = {
-    --                 enabled = true,
-    --                 show_start = true,
-    --                 show_end = false,
-    --             },
-    --         })
-    --     end
-    -- },
-    -- 模糊查找，用fzf-lua来代替
-    -- {
-    --     "nvim-telescope/telescope.nvim",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim", -- Lua 开发模块
-    --         "BurntSushi/ripgrep",    -- 文字查找
-    --         "sharkdp/fd"             -- 文件查找
-    --     },
-    --     config = function()
-    --         require("conf.telescope")
-    --     end
-    -- },
 })
