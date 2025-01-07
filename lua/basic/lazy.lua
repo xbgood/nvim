@@ -22,11 +22,17 @@ require("lazy").setup({
     { "folke/which-key.nvim" },
     -- 多光标模式
     { "terryma/vim-multiple-cursors" },
+    -- 灯泡提示代码行为
+    { "kosayoda/nvim-lightbulb", },
+    -- 内置终端
+    { "voldikss/vim-floaterm" },
     -- 查找替换
     {
         'MagicDuck/grug-far.nvim',
         config = function()
             require('grug-far').setup({
+                -- options, see Configuration section below
+                -- engine = 'ripgrep' is default, but 'astgrep' can be specified
                 engine = 'ripgrep'
             });
         end
@@ -96,7 +102,6 @@ require("lazy").setup({
     {
         "folke/flash.nvim",
         event = "VeryLazy",
-        ---@type Flash.Config
         opts = {},
         -- stylua: ignore
         keys = {
@@ -151,13 +156,6 @@ require("lazy").setup({
         "ethanholz/nvim-lastplace",
         config = function()
             require("conf.nvim-lastplace")
-        end
-    },
-    -- 内置终端
-    {
-        "akinsho/toggleterm.nvim",
-        config = function()
-            require("conf.toggleterm")
         end
     },
     -- 精美弹窗
@@ -232,11 +230,28 @@ require("lazy").setup({
         dependencies = 'rafamadriz/friendly-snippets',
         version = '*',
         opts = {
-            -- 'default' for mappings similar to built-in completion
-            keymap = { preset = 'default' },
+            keymap = {
+                preset        = "enter",
+                ['<Up>']      = { 'select_prev', 'fallback' },
+                ['<S-Tab>']   = { 'select_prev', 'fallback' },
+                ['<C-p>']     = { 'select_prev', 'fallback' },
+                ['<Down']     = { 'select_next', 'fallback' },
+                ['<Tab>']     = { 'select_next', 'fallback' },
+                ['<C-n>']     = { 'select_next', 'fallback' },
+
+                ['<C-e>']     = { 'hide' },
+                ['<C-y>']     = { 'select_and_accept' },
+
+                ['<C-b>']     = { 'scroll_documentation_up', 'fallback' },
+                ['<C-f>']     = { 'scroll_documentation_down', 'fallback' },
+
+                -- ['<Tab>']     = { 'snippet_forward', 'fallback' },
+                -- ['<S-Tab>']   = { 'snippet_backward', 'fallback' },
+                ['<C-tab>'] = { 'show', 'show_documentation', 'hide_documentation' },
+            },
 
             appearance = {
-                -- use_nvim_cmp_as_default = true,
+                use_nvim_cmp_as_default = false,
                 nerd_font_variant = 'mono'
             },
 
@@ -254,8 +269,6 @@ require("lazy").setup({
             require("conf.lsp-signature")
         end
     },
-    -- 灯泡提示代码行为
-    { "kosayoda/nvim-lightbulb", },
     -- 语法高亮
     {
         "nvim-treesitter/nvim-treesitter",
@@ -411,38 +424,6 @@ require("lazy").setup({
     {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
-        keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
-            },
-            {
-               "<leader>cl",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
-            },
-        },
+        cmd = "Trouble"
     },
 })

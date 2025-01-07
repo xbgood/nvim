@@ -1,15 +1,22 @@
 -- 设定各种文本的字符编码
 vim.o.encoding = "utf-8"
+-- 文件编码方式
+vim.o.fileencoding = "utf-8"
 -- 设定在无操作时，交换文件刷写到磁盘的等待毫秒数（默认为 4000）
 vim.o.updatetime = 100
 -- 设定等待按键时长的毫秒数
 vim.o.timeoutlen = 500
 -- 是否在屏幕最后一行显示命令
 vim.o.showcmd = true
+-- 显示左侧的图标提示列
+vim.o.signcolumn = "yes"
+-- 右侧代码长度参考线
+-- vim.o.colorcolumn = "160"
 -- 是否允许缓冲区未保存时就切换
 vim.o.hidden = true
 -- 是否开启 xterm 兼容的终端 24 位色彩支持
 vim.o.termguicolors = true
+vim.opt.termguicolors = true
 -- 是否高亮当前文本行
 vim.o.cursorline = true
 -- 是否开启语法高亮
@@ -22,10 +29,13 @@ vim.o.relativenumber = false
 vim.o.scrolloff = 10
 -- 是否支持鼠标操作
 vim.o.mouse = "a"
+-- 补全显示10行
+vim.o.pumheight = 10
 -- 是否启用系统剪切板
 vim.o.clipboard = "unnamedplus"
 -- 是否开启备份文件
 vim.o.backup = false
+vim.o.writebackup = false
 -- 是否开启交换文件
 vim.o.swapfile = false
 -- 是否特殊显示空格等字符
@@ -44,12 +54,15 @@ vim.o.incsearch = true
 vim.o.cmdheight = 1
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
+-- 禁止折行
+vim.o.wrap = false
 -- 行结尾可以跳到下一行
 vim.o.whichwrap = 'b,s<,>,[,],h,l'
 -- 是否在插入括号时短暂跳转到另一半括号上
 vim.o.showmatch = true
 -- 是否开启命令行补全
 vim.o.wildmenu = true
+vim.o.wildmode = "list:longest,full"
 -- 是否在搜索时忽略大小写
 vim.o.ignorecase = true
 -- 是否开启在搜索时如果有大写字母，则关闭忽略大小写的选项
@@ -72,3 +85,4 @@ vim.o.shiftround = true
 vim.o.shiftwidth = 4
 -- 空格替代tab
 vim.o.expandtab = true
+vim.o.ruler = true

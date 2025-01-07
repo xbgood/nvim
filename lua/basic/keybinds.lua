@@ -42,8 +42,8 @@ vim.keybinds.gmap("n", "<ESC>", ":nohlsearch<CR>", vim.keybinds.opts)
 -- vim.keybinds.gmap("n", "<leader>cs", "<cmd>set spell!<CR>", vim.keybinds.opts)
 
 -- AsyncTask 快捷键，编译运行
-vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask file-build<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask file-run<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask build<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask run<CR>", vim.keybinds.opts)
 
 -- markdown preview
 vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", vim.keybinds.opts)
@@ -78,28 +78,28 @@ vim.keybinds.gmap("n", "<leader>2", "<cmd>SymbolsOutline<CR>", vim.keybinds.opts
 
 -- telescope --
 -- 查找文件
-vim.keybinds.gmap("n", "<leader>ff", "<cmd>Telescope find_files theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", vim.keybinds.opts)
 -- 查找文字
-vim.keybinds.gmap("n", "<leader>fw", "<cmd>Telescope live_grep theme=ivy<CR>", vim.keybinds.opts)
--- 查找buffers
-vim.keybinds.gmap("n", "<leader>fb", "<cmd>Telescope buffers theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fw", "<cmd>lua require('fzf-lua').live_grep()<CR>", vim.keybinds.opts)
 -- 查找帮助文档
-vim.keybinds.gmap("n", "<leader>fh", "<cmd>Telescope help_tags theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fh", "<cmd>lua require('fzf-lua').tags_grep()<CR>", vim.keybinds.opts)
 -- 查找最近打开的文件
-vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", vim.keybinds.opts)
 -- 查找 marks 标记
-vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fm", "<cmd>lua require('fzf-lua').marks()<CR>", vim.keybinds.opts)
 -- 查找git commits
-vim.keybinds.gmap("n", "<leader>fg", "<cmd>Telescope git_commits theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fg", "<cmd>lua require('fzf-lua').git_commits()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fs", "<cmd>lua require('fzf-lua').git_status()<CR>", vim.keybinds.opts)
 --当前buffer内查找
-vim.keybinds.gmap("n", "<leader>fB", "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fb", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", vim.keybinds.opts)
 -- 查找快捷键
-vim.keybinds.gmap("n", "<leader>fk", "<cmd>Telescope keymaps theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fk", "<cmd>lua require('fzf-lua').keymaps()<CR>", vim.keybinds.opts)
+-- 查找theme标签
+vim.keybinds.gmap("n", "<leader>ft", "<cmd>lua require('fzf-lua').colorschemes()<CR>", vim.keybinds.opts)
 -- 查找man文档
-vim.keybinds.gmap("n", "<leader>fM", "<cmd>Telescope man_pages theme=ivy<CR>", vim.keybinds.opts)
-
--- 查找 TODO 标签
-vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=ivy<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fM", "<cmd>lua require('fzf-lua').manpages()<CR>", vim.keybinds.opts)
+-- 查找buffers
+vim.keybinds.gmap("n", "<leader>fB", "<cmd>lua require('fzf-lua').buffers()<CR>", vim.keybinds.opts)
 
 
 -- nvim-hlslens --
@@ -112,24 +112,10 @@ vim.keybinds.gmap("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", vim.keyb
 
 
 -- nvim-spectre --
--- 全项目替换
-vim.keybinds.gmap("n", "<leader>sp", "<cmd>lua require('spectre').open()<CR>", vim.keybinds.opts)
 -- 只替换当前文件
-vim.keybinds.gmap("n", "<leader>sf", "viw:lua require('spectre').open_file_search()<CR>", vim.keybinds.opts)
--- 全项目中搜索当前单词
-vim.keybinds.gmap("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<leader>sw", "<esc>:lua require('spectre').open_visual()<CR>", vim.keybinds.opts)
-
-
--- toggleterm --
--- 退出终端插入模式
-vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
--- 打开普通终端
-vim.keybinds.gmap("n", "<leader>tt", "<cmd>exe v:count.'ToggleTerm'<CR>", vim.keybinds.opts)
--- 打开浮动终端
-vim.keybinds.gmap("n", "<leader>tf", "<cmd>lua require('toggleterm').float_toggle()<CR>", vim.keybinds.opts)
--- 打开或关闭所有终端
-vim.keybinds.gmap("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>sf", "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>", vim.keybinds.opts)
+-- 搜索当前单词
+vim.keybinds.gmap("n", "<leader>sw", "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>", vim.keybinds.opts)
 
 
 -- 查看 undotree
@@ -181,3 +167,25 @@ vim.g.multi_cursor_prev_key = "<C-p>"
 vim.g.multi_cursor_skip_key = "<C-x>"
 -- 退出选择
 vim.g.multi_cursor_quit_key = "<ESC>"
+
+
+-- toggleterm --
+vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
+-- 打开普通终端
+vim.keybinds.gmap("n", "<leader>tw", "<cmd>FloatermNew<CR>", vim.keybinds.opts)
+-- 退出终端插入模式
+vim.keybinds.gmap("n", "<leader>tk", "<cmd>FloatermKill<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>tp", "<cmd>FloatermPrev<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>tn", "<cmd>FloatermNext<CR>", vim.keybinds.opts)
+-- 打开或关闭所有终端
+vim.keybinds.gmap("n", "<leader>tt", "<cmd>FloatermToggle<CR>", vim.keybinds.opts)
+
+
+-- quickfix 快捷键
+vim.keybinds.gmap("n", "<leader>cn", "<cmd>cnext<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cp", "<cmd>cprevious<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cw", "<cmd>cwindow<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cc", "<cmd>cc<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>cx", "<cmd>cclose<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>co", "<cmd>copen<CR>", vim.keybinds.opts)
+
