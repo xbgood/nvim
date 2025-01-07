@@ -1,9 +1,9 @@
 -- 自动切换输入法（Fcitx 框架）
 vim.g.FcitxToggleInput = function()
-    local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-    if input_status == 2 then
-        vim.fn.system("fcitx5-remote -c")
-    end
+	local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+	if input_status == 2 then
+		vim.fn.system("fcitx5-remote -c")
+	end
 end
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 
@@ -14,8 +14,8 @@ vim.g.undotree_dir = "~/.cache/nvim/undodir"
 -- vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- 开启代码折叠, zc/zo keys
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默认不折叠
 vim.wo.foldlevel = 99
 
@@ -46,14 +46,6 @@ vim.cmd([[
     let &undodir = target_path
     set undofile
 
-    " ---------------- vim-flaoterm --------------
-    let g:floaterm_wintype       = 'float'           " 浮动窗口类型。
-    let g:floaterm_position      = 'bottomright'     " 在窗口中间显示。
-    let g:floaterm_width         = 0.5               " 终端宽(0,1)
-    let g:floaterm_height        = 0.6               " 终端高(0,1)
-    let g:floaterm_title         = 'floaterm: $1/$2' " 终端标题
-    let g:floaterm_autoclose = 2
-
     " asyncrun and asynctasks
     " 自动打开 quickfix window ，高度为 8
     let g:asyncrun_open = 8
@@ -64,11 +56,4 @@ vim.cmd([[
     " 打开运行界面 vim bottom tab floaterm
     let g:asynctasks_term_pos='floaterm'
     let g:asyncrun_term_reuse=1
-
-    " LuaSnip 使用代码片段补全的时候的快捷键，tab下一个，shift+tab返回上一个
-    " press <Tab> to expand or jump in a snippet. These can also be mapped separately
-    " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-    " imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-    " -1 for jumping backwards.
-    " inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 ]])
