@@ -56,4 +56,5 @@ vim.cmd([[
     " 打开运行界面 vim bottom tab floaterm
     let g:asynctasks_term_pos='floaterm'
     let g:asyncrun_term_reuse=1
+    let g:asynctasks_extra_config = ["~/.config/nvim/lua/scripts/asynctasks.ini"]
 ]])

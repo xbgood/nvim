@@ -136,6 +136,15 @@ require("lazy").setup({
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
 		config = function()
 			require("conf.nvim-flash")
 		end,
@@ -145,7 +154,6 @@ require("lazy").setup({
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
 		opts = {
 			-- your configuration comes here or leave it empty to use the default settings refer to the configuration section below
 			bigfile = { enabled = true },
@@ -321,9 +329,15 @@ require("lazy").setup({
 	},
 	-- 函数树
 	{
-		"simrat39/symbols-outline.nvim",
+		"stevearc/aerial.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
 		config = function()
-			require("conf.symbols-outline")
+			require("conf.aerial")
 		end,
 	},
 	-- latex 支持
@@ -407,6 +421,14 @@ require("lazy").setup({
 		-- tasks 任务系统
 		{ "skywind3000/asynctasks.vim" },
 	},
+	-- 现代化的任务管理系统
+	-- {
+	-- 	"stevearc/overseer.nvim",
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		require("conf.nvim-overseer")
+	-- 	end,
+	-- },
 	-- 主题颜色
 	{
 		{

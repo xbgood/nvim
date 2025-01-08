@@ -1,48 +1,6 @@
 require("flash").setup({
 	-- labels = "abcdefghijklmnopqrstuvwxyz",
 	labels = "asdfghjklqwertyuiopzxcvbnm",
-	keys = {
-		{
-			"s",
-			mode = { "n", "x", "o" },
-			function()
-				require("flash").jump()
-			end,
-			desc = "Flash",
-		},
-		{
-			"S",
-			mode = { "n", "o", "x" },
-			function()
-				require("flash").treesitter()
-			end,
-			desc = "Flash Treesitter",
-		},
-		{
-			"r",
-			mode = "o",
-			function()
-				require("flash").remote()
-			end,
-			desc = "Remote Flash",
-		},
-		{
-			"R",
-			mode = { "o", "x" },
-			function()
-				require("flash").treesitter_search()
-			end,
-			desc = "Treesitter Search",
-		},
-		{
-			"<c-s>",
-			mode = { "c" },
-			function()
-				require("flash").toggle()
-			end,
-			desc = "Toggle Flash Search",
-		},
-	},
 	search = {
 		-- search/jump in all windows
 		multi_window = true,
@@ -82,7 +40,7 @@ require("flash").setup({
 		-- max pattern length. If the pattern length is equal to this
 		-- labels will no longer be skipped. When it exceeds this length
 		-- it will either end in a jump or terminate the search
-		max_length = nil, ---@type number?
+		max_length = false, ---@type number|false
 	},
 	jump = {
 		-- save location in the jumplist
@@ -96,7 +54,7 @@ require("flash").setup({
 		-- clear highlight after jump
 		nohlsearch = false,
 		-- automatically jump when there is only one match
-		autojump = true,
+		autojump = false,
 		-- You can force inclusive/exclusive jumps by setting the
 		-- `inclusive` option. By default it will be automatically
 		-- set based on the mode.
@@ -180,7 +138,7 @@ require("flash").setup({
 		search = {
 			-- when `true`, flash will be activated during regular search by default.
 			-- You can always toggle when searching with `require("flash").toggle()`
-			enabled = true,
+			enabled = false,
 			highlight = { backdrop = false },
 			jump = { history = true, register = true, nohlsearch = true },
 			search = {
@@ -196,10 +154,14 @@ require("flash").setup({
 			-- dynamic configuration for ftFT motions
 			config = function(opts)
 				-- autohide flash when in operator-pending mode
-				opts.autohide = vim.fn.mode(true):find("no") and vim.v.operator == "y"
+				opts.autohide = opts.autohide or (vim.fn.mode(true):find("no") and vim.v.operator == "y")
 
-				-- disable jump labels when enabled and when using a count
-				opts.jump_labels = opts.jump_labels and vim.v.count == 0
+				-- disable jump labels when not enabled, when using a count,
+				-- or when recording/executing registers
+				opts.jump_labels = opts.jump_labels
+					and vim.v.count == 0
+					and vim.fn.reg_executing() == ""
+					and vim.fn.reg_recording() == ""
 
 				-- Show jump labels only in operator-pending mode
 				-- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")
@@ -235,13 +197,18 @@ require("flash").setup({
 			end,
 			search = { wrap = false },
 			highlight = { backdrop = true },
-			jump = { register = false },
+			jump = {
+				register = false,
+				-- when using jump labels, set to 'true' to automatically jump
+				-- or execute a motion when there is only one match
+				autojump = false,
+			},
 		},
 		-- options used for treesitter selections
 		-- `require("flash").treesitter()`
 		treesitter = {
 			labels = "abcdefghijklmnopqrstuvwxyz",
-			jump = { pos = "range" },
+			jump = { pos = "range", autojump = true },
 			search = { incremental = false },
 			label = { before = true, after = true, style = "inline" },
 			highlight = {
@@ -262,6 +229,7 @@ require("flash").setup({
 	},
 	-- options for the floating window that shows the prompt,
 	-- for regular jumps
+	-- `require("flash").prompt()` is always available to get the prompt text
 	prompt = {
 		enabled = true,
 		prefix = { { "⚡", "FlashPromptIcon" } },

@@ -3,11 +3,11 @@ vim.g.mapleader = ","
 
 -- 默认的键位设置函数太长了，所以这里将它们重新引用一下
 vim.keybinds = {
-	gmap = vim.api.nvim_set_keymap,
-	bmap = vim.api.nvim_buf_set_keymap,
-	dgmap = vim.api.nvim_del_keymap,
-	dbmap = vim.api.nvim_buf_del_keymap,
-	opts = { noremap = true, silent = true },
+    gmap = vim.api.nvim_set_keymap,
+    bmap = vim.api.nvim_buf_set_keymap,
+    dgmap = vim.api.nvim_del_keymap,
+    dbmap = vim.api.nvim_buf_del_keymap,
+    opts = { noremap = true, silent = true },
 }
 
 -- 插入模下 jj 退出插入模式
@@ -41,6 +41,9 @@ vim.keybinds.gmap("n", "<ESC>", ":nohlsearch<CR>", vim.keybinds.opts)
 -- 通过 leader cs 切换拼写检查
 -- vim.keybinds.gmap("n", "<leader>cs", "<cmd>set spell!<CR>", vim.keybinds.opts)
 
+-- 用 leader cf 格式化代码
+vim.keybinds.gmap("n", "<leader>cf", "<cmd>lua require('conform').format()<CR>", vim.keybinds.opts)
+
 ---------------------------- AsyncTask 快捷键，编译运行 ----------------------------
 vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask build<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask run<CR>", vim.keybinds.opts)
@@ -56,7 +59,7 @@ vim.keybinds.gmap("n", "<leader>pr", ":call org#main#runCodeBlock()<CR>", vim.ke
 vim.keybinds.gmap("n", "<leader>pi", ":call mdip#MarkdownClipboardImage()<CR>", vim.keybinds.opts)
 
 -- nvim-notify 显示历史弹窗记录
-vim.keybinds.gmap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
+-- vim.keybinds.gmap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
 
 ------------------------------------- bufferline ----------------------------------
 -- 关闭当前 buffer，由 bufdelete 插件所提供的方法
@@ -72,9 +75,9 @@ vim.keybinds.gmap("n", "<leader>bl", "<cmd>BufferLineCloseRight<CR>", vim.keybin
 
 -- aerial --
 -- 打开大纲预览
-vim.keybinds.gmap("n", "<leader>2", "<cmd>SymbolsOutline<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>2", "<cmd>AerialToggle!<CR>", vim.keybinds.opts)
 
------------------------------------- telescope ------------------------------------
+------------------------------------ fzf-lua ------------------------------------
 -- 查找文件
 vim.keybinds.gmap("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", vim.keybinds.opts)
 -- 查找文字
@@ -100,36 +103,16 @@ vim.keybinds.gmap("n", "<leader>fM", "<cmd>lua require('fzf-lua').manpages()<CR>
 vim.keybinds.gmap("n", "<leader>fB", "<cmd>lua require('fzf-lua').buffers()<CR>", vim.keybinds.opts)
 
 ----------------------------------- nvim-hlslens -------------------------------
-vim.keybinds.gmap(
-	"n",
-	"n",
-	"<Cmd>execute('normal!'.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>",
-	vim.keybinds.opts
-)
-vim.keybinds.gmap(
-	"n",
-	"N",
-	"<Cmd>execute('normal!'.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>",
-	vim.keybinds.opts
-)
+vim.keybinds.gmap( "n", "n", "<Cmd>execute('normal!'.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
+vim.keybinds.gmap( "n", "N", "<Cmd>execute('normal!'.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "*", "*<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 
 --------------------------------- grug-far ---------------------------------
 -- 只替换当前文件
-vim.keybinds.gmap(
-	"n",
-	"<leader>sf",
-	"<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>",
-	vim.keybinds.opts
-)
+vim.keybinds.gmap( "n", "<leader>sf", "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>", vim.keybinds.opts)
 -- 搜索当前单词
-vim.keybinds.gmap(
-	"n",
-	"<leader>sw",
-	"<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>",
-	vim.keybinds.opts
-)
+vim.keybinds.gmap( "n", "<leader>sw", "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>", vim.keybinds.opts)
 
 --------------------------------- 查看 undotree ----------------------------
 vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", vim.keybinds.opts)
@@ -197,3 +180,7 @@ vim.keybinds.gmap("n", "<leader>cw", "<cmd>cwindow<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cc", "<cmd>cc<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cx", "<cmd>cclose<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>co", "<cmd>copen<CR>", vim.keybinds.opts)
+
+--------------------------- overseer 任务管理系统 ---------------------------
+vim.keybinds.gmap("n", "<Leader>ot", "<cmd>OverseerToggle<cr>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<Leader>or", "<cmd>OverseerRun<cr>", vim.keybinds.opts)

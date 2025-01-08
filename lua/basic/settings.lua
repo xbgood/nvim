@@ -104,8 +104,6 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 -- 打开状态栏标尺
 vim.o.ruler = true
--- 格式化代码
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 -- 逐行滚动
 vim.o.smoothscroll = true
 -- 分词: 带有如下符号的单词不被分割
