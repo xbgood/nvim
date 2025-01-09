@@ -99,7 +99,7 @@ require("lazy").setup({
 			require("conf.gitsigns")
 		end,
 	},
-	-- 支持 LSP 状态的 buffer 栏
+	-- 顶部状态栏
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = {
@@ -109,7 +109,7 @@ require("lazy").setup({
 			require("conf.bufferline")
 		end,
 	},
-	-- 美丽的状态栏
+	-- 底部美丽的状态栏
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
@@ -162,7 +162,7 @@ require("lazy").setup({
 			input = { enabled = true },
 			notifier = { enabled = true },
 			quickfile = { enabled = true },
-			scroll = { enabled = true },
+			-- scroll = { enabled = true },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
@@ -195,7 +195,7 @@ require("lazy").setup({
 			require("conf.nvim-notify")
 		end,
 	},
-	-- todo tree
+	-- todo树
 	{
 		"folke/todo-comments.nvim",
 		config = function()
