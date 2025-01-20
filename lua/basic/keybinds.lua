@@ -48,15 +48,9 @@ vim.keybinds.gmap("n", "<leader>cf", "<cmd>lua require('conform').format()<CR>",
 vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask build<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask run<CR>", vim.keybinds.opts)
 
+-------------------------------------  markdown  -----------------------------------
 -- markdown preview
 vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", vim.keybinds.opts)
-
--------------------------------------  markdown  -----------------------------------
--- markdown runcodeblock 运行markdown代码块
-vim.keybinds.gmap("n", "<leader>pr", ":call org#main#runCodeBlock()<CR>", vim.keybinds.opts)
-
--- markdown image-paste 插入图片
-vim.keybinds.gmap("n", "<leader>pi", ":call mdip#MarkdownClipboardImage()<CR>", vim.keybinds.opts)
 
 -- nvim-notify 显示历史弹窗记录
 -- vim.keybinds.gmap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
@@ -116,36 +110,6 @@ vim.keybinds.gmap( "n", "<leader>sw", "<cmd>lua require('grug-far').open({ prefi
 
 --------------------------------- 查看 undotree ----------------------------
 vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", vim.keybinds.opts)
-
------------------------------------- nvim-tree -----------------------------
--- 目录后加上反斜杠 /
--- vim.g.nvim_tree_add_trailing = 1
--- 按 leader 1 打开文件树
-vim.keybinds.gmap("n", "<leader>1", "<cmd>NvimTreeToggle<CR>", vim.keybinds.opts)
--- 按 leader fc 在文件树中找到当前以打开文件的位置
-vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.opts)
--- 默认按键
--- o     ：打开目录或文件
--- a     ：新增目录或文件
--- r     ：重命名目录或文件
--- x     ：剪切目录或文件
--- c     ：复制目录或文件
--- d     ：删除目录或文件
--- y     ：复制目录或文件名称
--- Y     ：复制目录或文件相对路径
--- gy    ：复制目录或文件绝对路径
--- p     ：粘贴目录或文件
--- s     ：使用系统默认程序打开目录或文件
--- <Tab> ：预览文件但不移动光标
--- <C-v> ：垂直分屏打开文件
--- <C-x> ：水平分屏打开文件
--- <C-]> ：进入光标下的目录
--- <C-r> ：重命名目录或文件，删除已有目录名称
--- -     ：返回上层目录
--- I     ：切换隐藏文件/目录的可见性
--- H     ：切换点文件的可见性
--- R     ：刷新资源管理器
--- 另外，文件资源管理器操作和操作文档方式一致，可按 / ? 进行搜索
 
 --------------------------- vim-multiple-cursors ------------------------
 -- 关闭默认键位绑定

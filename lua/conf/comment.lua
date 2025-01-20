@@ -15,13 +15,13 @@ require("Comment").setup(
         -- 切换行注释
         line = "gcc",
         --- 切换块注释
-        block = "gCC"
+        block = "gbc"
     },
     opleader = {
         -- 可视模式下的行注释
         line = "gc",
         -- 可视模式下的块注释
-        block = "gC"
+        block = "gb"
     },
     extra = {
         -- 在当前行上方新增行注释

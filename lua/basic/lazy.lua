@@ -26,6 +26,20 @@ require("lazy").setup({
 	{ "kosayoda/nvim-lightbulb" },
 	-- 为状态栏提供上下文信息
 	{ "SmiteshP/nvim-gps" },
+	-- 搜索时显示条目
+	{ "kevinhwang91/nvim-hlslens" },
+	-- 自动保存
+	{ "Pocco81/auto-save.nvim", },
+	-- todo树
+	{ "folke/todo-comments.nvim", opts = {} },
+	-- fzf 搜索工具
+	{ "ibhagwan/fzf-lua", opts = {} },
+    -- 光标移动时突出显示
+    { 'danilamihailov/beacon.nvim' },
+    -- 上次编辑的位置
+    { "ethanholz/nvim-lastplace", opts = {}, },
+	-- 自动匹配括号
+	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter", },
 	-- 内置终端
 	{
 		"voldikss/vim-floaterm",
@@ -54,19 +68,9 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- fzf 搜索工具
-	{
-		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		-- dependencies = { "nvim-tree/nvim-web-devicons" },
-		-- or if using mini.icons/mini.nvim
-		dependencies = { "echasnovski/mini.icons" },
-		opts = {},
-	},
 	-- 问题显示插件
 	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		"folke/trouble.nvim", opts = {},
 		cmd = "Trouble",
 	},
 	-- 格式化
@@ -76,25 +80,42 @@ require("lazy").setup({
 			require("conf.conform")
 		end,
 	},
-	-- nvim-tree
-	{
-		"kyazdani42/nvim-tree.lua",
-		dependencies = {
-			-- 依赖一个图标插件
-			"kyazdani42/nvim-web-devicons",
-		},
-		config = function()
-			-- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
-			require("conf.nvim-tree")
-		end,
-	},
+    -- yazi 文件浏览器
+    {
+        "mikavilpas/yazi.nvim",
+        event = "VeryLazy",
+        keys = {
+            { "<leader>-", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
+            { "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory" , },
+            { '<c-up>', "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session", },
+        },
+        opts = {
+            -- if you want to open yazi instead of netrw, see below for more info
+            open_for_directories = false,
+            keymaps = { show_help = '<f1>', },
+        },
+    },
+    -- lazigit 提交代码到git
+    {
+        "kdheepak/lazygit.nvim",
+        event = "VeryLazy",
+        -- dependencies = { "nvim-lua/plenary.nvim", },
+        keys = {
+            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+        },
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+    },
 	-- 为了能让状态栏显示 git 信息，所以这个插件是必须的
 	{
-		"lewis6991/gitsigns.nvim",
-		dependencies = {
-			-- 依赖于该插件（一款 Lua 开发使用的插件）
-			"nvim-lua/plenary.nvim",
-		},
+		"lewis6991/gitsigns.nvim", 
+        -- opts = {},
+		dependencies = { "nvim-lua/plenary.nvim", },
 		config = function()
 			require("conf.gitsigns")
 		end,
@@ -102,11 +123,10 @@ require("lazy").setup({
 	-- 顶部状态栏
 	{
 		"akinsho/bufferline.nvim",
-		dependencies = {
-			"famiu/bufdelete.nvim", -- 删除 buffer 时不影响现有布局
-		},
+		dependencies = { "famiu/bufdelete.nvim", },
 		config = function()
-			require("conf.bufferline")
+            require("bufferline").setup({})
+			-- require("conf.bufferline")
 		end,
 	},
 	-- 底部美丽的状态栏
@@ -116,28 +136,10 @@ require("lazy").setup({
 			require("conf.nvim-lualine")
 		end,
 	},
-	-- 搜索时显示条目
-	{
-		"kevinhwang91/nvim-hlslens",
-		config = function()
-			require("hlslens").setup()
-		end,
-	},
-	-- 自动匹配括号
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({
-				disable_filetype = { "vim" },
-			})
-		end,
-	},
 	-- 快速跳转
 	{
-		"folke/flash.nvim",
+		"folke/flash.nvim", opts = {},
 		event = "VeryLazy",
-        opts = {},
-        -- stylua: ignore
         keys = {
             { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
             { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
@@ -168,26 +170,16 @@ require("lazy").setup({
 		},
 	},
 	-- 包裹修改
-	{
-		"ur4ltz/surround.nvim",
-		config = function()
-			require("surround").setup({ mappings_style = "surround" })
-		end,
-	},
-	-- 自动保存
-	{
-		"Pocco81/auto-save.nvim",
-		config = function()
-			require("conf.auto-save")
-		end,
-	},
-	-- 自动恢复光标位置
-	{
-		"ethanholz/nvim-lastplace",
-		config = function()
-			require("conf.nvim-lastplace")
-		end,
-	},
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
 	-- 精美弹窗
 	{
 		"rcarriga/nvim-notify",
@@ -195,109 +187,111 @@ require("lazy").setup({
 			require("conf.nvim-notify")
 		end,
 	},
-	-- todo树
-	{
-		"folke/todo-comments.nvim",
-		config = function()
-			require("conf.todo-comments")
-		end,
-	},
 	-- 美丽的消息通知
 	{
-		"folke/noice.nvim",
+		"folke/noice.nvim", opts = {},
 		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
 		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
 	},
-	-- LSP 基础服务
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = { "saghen/blink.cmp" },
-		config = function()
-			require("conf.nvim-lspconfig")
-		end,
-	},
-	-- 自动安装 LSP
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("conf.mason")
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("conf.mason-lspconfig")
-		end,
-	},
-	-- LSP UI 美化
-	{
-		"kkharji/lspsaga.nvim",
-		config = function()
-			require("conf.lspsaga")
-		end,
-	},
-	-- LSP 进度提示
-	{
-		"j-hui/fidget.nvim",
-		tag = "legacy",
-		config = function()
-			require("fidget").setup({
-				window = { blend = 0 },
-			})
-		end,
-	},
-	-- blink.cmp 替代nvim.cmp
-	{
-		"saghen/blink.cmp",
-		dependencies = "rafamadriz/friendly-snippets",
-		version = "*",
-		opts = {
-			keymap = {
-				preset = "enter",
-				["<Up>"] = { "select_prev", "fallback" },
-				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<C-p>"] = { "select_prev", "fallback" },
-				["<Down"] = { "select_next", "fallback" },
-				["<Tab>"] = { "select_next", "fallback" },
-				["<C-n>"] = { "select_next", "fallback" },
+	-- 快速的jk
+    {
+        "rainbowhxch/accelerated-jk.nvim",
+        config =function()
+            vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
+            vim.api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
+        end
+    },
+    -- LSP 系列插件
+    {
+        -- LSP 基础服务
+        {
+            "neovim/nvim-lspconfig",
+            dependencies = { "saghen/blink.cmp" },
+            config = function()
+                require("conf.nvim-lspconfig")
+            end,
+        },
+        -- LSP 进度提示
+        {
+            "j-hui/fidget.nvim",
+            opts = { window = { blend = 0 }, },
+        },
+        -- mason 自动安装 LSP 的工具
+        { "williamboman/mason.nvim", opts = {}, },
+        {
+            "williamboman/mason-lspconfig.nvim",
+            config = function()
+                require("mason-lspconfig").setup({
+                    -- 确保安装，根据需要填写
+                    ensure_installed = { "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls", "yamlls", "gopls", "cmake", "cssls", "prosemd_lsp", "ts_ls", "ltex", },
+                })
+            end,
+        },
+        -- LSP UI 美化
+        {
+            "nvimdev/lspsaga.nvim",
+            config = function()
+                require("lspsaga").setup({})
+            end,
+        },
+        -- blink.cmp 替代nvim.cmp
+        {
+            "saghen/blink.cmp",
+            dependencies = "rafamadriz/friendly-snippets",
+            version = "*",
+            opts = {
+                keymap = {
+                    preset = "enter",
+                    ["<Up>"] = { "select_prev", "fallback" },
+                    ["<S-Tab>"] = { "select_prev", "fallback" },
+                    ["<C-p>"] = { "select_prev", "fallback" },
+                    ["<Down"] = { "select_next", "fallback" },
+                    ["<Tab>"] = { "select_next", "fallback" },
+                    ["<C-n>"] = { "select_next", "fallback" },
 
-				["<C-e>"] = { "hide" },
-				["<C-y>"] = { "select_and_accept" },
+                    ["<C-e>"] = { "hide" },
+                    ["<C-y>"] = { "select_and_accept" },
 
-				["<C-b>"] = { "scroll_documentation_up", "fallback" },
-				["<C-f>"] = { "scroll_documentation_down", "fallback" },
+                    ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+                    ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-				-- ['<Tab>']     = { 'snippet_forward', 'fallback' },
-				-- ['<S-Tab>']   = { 'snippet_backward', 'fallback' },
-				["<C-tab>"] = { "show", "show_documentation", "hide_documentation" },
-			},
+                    -- ['<Tab>']     = { 'snippet_forward', 'fallback' },
+                    -- ['<S-Tab>']   = { 'snippet_backward', 'fallback' },
+                    ["<C-tab>"] = { "show", "show_documentation", "hide_documentation" },
+                },
 
-			appearance = {
-				use_nvim_cmp_as_default = false,
-				nerd_font_variant = "mono",
-			},
+                appearance = {
+                    use_nvim_cmp_as_default = false,
+                    nerd_font_variant = "mono",
+                },
 
-			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
-				-- 默认关掉cmdline，否则命令行输入时候会很多干扰
-				cmdline = {},
-			},
+                sources = {
+                    default = { "lsp", "path", "snippets", "buffer", "markdown" },
+                    -- 默认关掉cmdline，否则命令行输入时候会很多干扰
+                    cmdline = {},
+                    providers = {
+                        -- markdown 模块
+                        markdown = {
+                            name = "RenderMarkdown",
+                            module = "render-markdown.integ.blink",
+                            fallbacks = { "lsp" },
+                        },
+                    },
+                },
 
-			-- 实验性质的功能
-			signature = { enabled = true },
-		},
-	},
+                -- 实验性质的功能
+                signature = { enabled = true },
+            },
+            opts_extend = { "sources.default" },
+        },
+    },
 	-- 插入模式获得函数签名
 	{
-		"ray-x/lsp_signature.nvim",
-		name = "lsp-signature",
+		"ray-x/lsp_signature.nvim", opts = {},
+        event = "VeryLazy",
 		config = function()
 			require("conf.lsp-signature")
 		end,
@@ -306,9 +300,7 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = { ":TSUpdate" },
-		dependencies = {
-			"p00f/nvim-ts-rainbow", -- 彩虹括号
-		},
+		dependencies = { "p00f/nvim-ts-rainbow", },
 		config = function()
 			require("conf.nvim-treesitter")
 		end,
@@ -320,22 +312,10 @@ require("lazy").setup({
 			require("conf.comment")
 		end,
 	},
-	-- 为不支持 LSP 高亮的主题提供默认高亮方案
-	{
-		"folke/lsp-colors.nvim",
-		config = function()
-			require("conf.lsp-colors")
-		end,
-	},
 	-- 函数树
 	{
-		"stevearc/aerial.nvim",
-		opts = {},
-		-- Optional dependencies
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
+		"stevearc/aerial.nvim", opts = {},
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons", },
 		config = function()
 			require("conf.aerial")
 		end,
@@ -372,47 +352,35 @@ require("lazy").setup({
 				"nvim-treesitter/nvim-treesitter",
 				"nvim-tree/nvim-web-devicons",
 			},
-			opts = {},
+			opts = {
+                render_modes = true,
+                pipe_table = { preset = 'round' },
+            },
 		},
-		-- markdown preview
+		-- markdown 预览
 		{
 			"iamcco/markdown-preview.nvim",
-			ft = "markdown",
+            cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+            ft = { "markdown" },
 			build = "cd app && npm install",
 			init = function()
 				vim.g.mkdp_filetypes = { "markdown" }
 			end,
 		},
-		-- vim markdown
-		{ "preservim/vim-markdown" },
-		-- markdown image paste
-		{
-			-- markdown preview
-			"img-paste-devs/img-paste.vim",
-			config = function()
-				vim.g.mkdp_auto_start = 1
-				vim.g.mkdp_auto_close = 1
-				vim.g.mkdp_theme = "light" --light/dark
-				vim.g.mdip_imgdir = "assets/images"
-				vim.g.mkdp_browser = "firefox"
-			end,
-		},
-		-- markdown table
-		--{ "dhruvasagar/vim-table-mode", },
-		-- markdown org
-		--{ "demonlord1997/markdown-org", },
-	},
-	-- 快速的jk
-	{
-		"PHSix/faster.nvim",
-		event = { "VimEnter *" },
-		config = function()
-			vim.api.nvim_set_keymap("n", "j", "<Plug>(faster_move_j)", { noremap = false, silent = true })
-			vim.api.nvim_set_keymap("n", "k", "<Plug>(faster_move_k)", { noremap = false, silent = true })
-			-- if you need map in visual mode
-			vim.api.nvim_set_keymap("v", "j", "<Plug>(faster_vmove_j)", { noremap = false, silent = true })
-			vim.api.nvim_set_keymap("v", "k", "<Plug>(faster_vmove_k)", { noremap = false, silent = true })
-		end,
+		-- markdown 图片插入
+        {
+            "HakonHarnes/img-clip.nvim",
+            event = "VeryLazy",
+            opts = { },
+            keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" }, },
+        },
+        -- nvim 预览markdown中的图片
+        -- {
+        --     "3rd/image.nvim", opts = {},
+        --     config = function()
+        --         require("conf.images")
+        --     end
+        -- },
 	},
 	-- 运行代码的任务系统
 	{
@@ -429,6 +397,13 @@ require("lazy").setup({
 	-- 		require("conf.nvim-overseer")
 	-- 	end,
 	-- },
+	-- 显示网页色
+	{
+        'brenoprata10/nvim-highlight-colors',
+		config = function()
+            require('nvim-highlight-colors').setup({})
+		end,
+	},
 	-- 主题颜色
 	{
 		{
@@ -445,16 +420,8 @@ require("lazy").setup({
 			-- 改个别名，因为它的名字是 nvim，可能会冲突
 			name = "catppuccin",
 			config = function()
-				-- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
 				require("conf.catppuccin")
 			end,
 		},
-	},
-	-- 显示网页色
-	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
 	},
 })

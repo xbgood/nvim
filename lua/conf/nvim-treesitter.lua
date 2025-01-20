@@ -26,9 +26,7 @@ require("nvim-treesitter.configs").setup({
         }
     },
     -- 缩进，关闭
-    indent = {
-        enable = true
-    },
+    indent = { enable = true },
     -- 彩虹括号，由 nvim-ts-rainbow 插件提供
     rainbow = {
         enable = true,
@@ -37,7 +35,5 @@ require("nvim-treesitter.configs").setup({
         -- termcolors = {} -- table of colour name strings
     },
     -- 根据当前上下文定义文件类型，由 nvim-ts-context-commentstring 插件提供
-    context_commentstring = {
-        enable = true
-    }
+    context_commentstring = { enable = true }
 })

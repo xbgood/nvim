@@ -69,7 +69,7 @@ vim.o.autoread = true
 -- 设置自动保存
 vim.o.autowriteall = true
 -- 禁止折行
-vim.o.wrap = false
+vim.o.wrap = true
 -- 行结尾可以跳到下一行
 vim.o.whichwrap = "b,s<,>,[,],h,l"
 -- 是否在插入括号时短暂跳转到另一半括号上

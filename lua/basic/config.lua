@@ -57,4 +57,9 @@ vim.cmd([[
     let g:asynctasks_term_pos='floaterm'
     let g:asyncrun_term_reuse=1
     let g:asynctasks_extra_config = ["~/.config/nvim/lua/scripts/asynctasks.ini"]
+
+    " markdown preview
+    let g:mkdp_auto_start = 1
+    let g:mkdp_auto_close = 1
+    let g:mkdp_theme = "light"
 ]])

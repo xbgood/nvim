@@ -63,12 +63,12 @@ require('bufferline').setup {
             end
         end,
         offsets = {
-            {
-                filetype = "NvimTree",
-                text = "File Explorer",
-                text_align = "center",
-                separator = true
-            },
+            -- {
+            --     filetype = "NvimTree",
+            --     text = "File Explorer",
+            --     text_align = "center",
+            --     separator = true
+            -- },
             {
                 filetype = "SymbolsOutline",
                 text = "Symbols Outline",

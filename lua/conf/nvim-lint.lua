@@ -26,3 +26,4 @@ vim.cmd([[
 au BufEnter * lua require('lint').try_lint()
 au BufWritePost * lua require('lint').try_lint()
 ]])
+
