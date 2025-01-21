@@ -80,21 +80,21 @@ require('lspconfig')['rust_analyzer'].setup {
         ["rust-analyzer"] = {}
     }
 }
-require 'lspconfig'.bashls.setup {
+require('lspconfig').bashls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     cmd = {'bash-language-server', "start"},
     filetypes = {"sh"},
     single_file_support = true,
 }
-require 'lspconfig'.clangd.setup {
+require('lspconfig').clangd.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     cmd = {'clangd'},
     filetypes = {"c", "cpp", "objc", "objcpp", "cuda", "proto"},
     single_file_support = true,
 }
-require 'lspconfig'.cmake.setup {
+require('lspconfig').cmake.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     cmd = {'cmake-language-server'},
@@ -102,44 +102,35 @@ require 'lspconfig'.cmake.setup {
     init_options = {buildDirectory = "build"},
     single_file_support = true,
 }
-require 'lspconfig'.gopls.setup {
+require('lspconfig').gopls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
-
--- Advertise LSP's capabilities for nvim-cmp to LSP servers
-
-require 'lspconfig'.lua_ls.setup {
+require('lspconfig').lua_ls.setup {
     flags = lsp_flags,
     on_attach = on_attach,
     name = 'lua_ls',
-    -- Path for lus server binary
     cmd = { 'lua-language-server' },
     single_file_support = true,
     filetypes = { 'lua' },
     log_level = 2,
     settings = {
         Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
+            runtime = { version = 'LuaJIT', },
+            diagnostics = { globals = { 'vim' }, },
             workspace = {
-                -- Make the server aware of Neovim runtime files
-                -- library = vim.api.nvim_get_runtime_file("", true),
                 library = {
                     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     [vim.fn.stdpath('config') .. '/lua'] = true,
                 },
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
+            telemetry = { enable = false, },
         },
     },
+}
+require('lspconfig').emmet_ls.setup{
+    on_attach = on_attach,
+    filetypes = { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" },
+    cmd = { "emmet-ls", "--stdio" },
+    single_file_support = true,
 }

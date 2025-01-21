@@ -33,9 +33,6 @@ vim.cmd([[
     " 设置背景透明
     " highlight Normal guibg=none ctermbg=none ctermfg=none
 
-    " nvim-lightbulb
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-
     " undotree
     if has("persistent_undo")
     " 在 config.lua 中定义好了 undotree_dir 全局变量
