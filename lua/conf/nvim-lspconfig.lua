@@ -6,20 +6,20 @@
 local opts = { noremap = true, silent = true }
 
 -- 查看错误的提示
-vim.keymap.set('n', 'go', "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Diagnostic Show" })
+vim.keymap.set('n', 'go', "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Lsp Diagnostic Show" })
 -- vim.keymap.set('n', 'go', vim.diagnostic.open_float, opts) -- 和上面的一样效果，就是显示不如上面好看
 
 -- 集中列出所有的错误提示
 -- vim.keymap.set('n', 'gl', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', 'gl', "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Diagnostic List" })
+vim.keymap.set('n', 'gl', "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Lsp Diagnostic List" })
 
 -- 跳转到上一个错误提示的地方
 -- vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Diagnostic Prev"})
+vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lsp Diagnostic Prev"})
 
 -- 跳转到下一个错误提示的地方
 -- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Diagnostic Next"})
+vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lsp Diagnostic Next"})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -28,42 +28,42 @@ local on_attach = function(client, bufnr)
 
     -- 显示函数定义
     -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'gd', "<cmd>Lspsaga peek_definition<CR>", { desc = "Show Definition" })
+    vim.keymap.set('n', 'gd', "<cmd>Lspsaga peek_definition<CR>", { desc = "Lsp Show Definition" })
 
     -- 跳转到函数声明
     -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gD', "<cmd>Lspsaga goto_definition<CR>", { desc = "Goto Definition" })
+    vim.keymap.set('n', 'gD', "<cmd>Lspsaga goto_definition<CR>", { desc = "Lsp Goto Definition" })
 
     -- 显示当前变量的类型
     -- vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', 'gt', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Show Type Definition"})
+    vim.keymap.set('n', 'gt', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Lsp Show Type Definition"})
 
     -- 跳转到当前变量的类型
-    vim.keymap.set('n', 'gT', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Goto Type Definition"})
+    vim.keymap.set('n', 'gT', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lsp Goto Type Definition"})
 
     -- 列出引用过该变量或函数的地方
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "References"})
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Lsp References"})
 
     -- 类似fzf显示使用过该变量的行
     vim.keymap.set('n', 'gf', "<cmd>Lspsaga finder<CR>", { desc = "Lsp Finder" })
 
     -- 查看函数原型
     -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- 下面的更加美观
-    vim.keymap.set('n', 'K', "<cmd>Lspsaga hover_doc<CR>", { desc = "Hover Doc" })
+    vim.keymap.set('n', 'K', "<cmd>Lspsaga hover_doc<CR>", { desc = "Lsp Hover Doc" })
     -- vim.keymap.set('i', '<C-k>', vim.lsp.buf.hover, bufopts) -- 插入模式下看函数原型
-    vim.keymap.set('i', '<C-k>', "<cmd>Lspsaga hover_doc<CR>", { desc = "Hover Doc" })
+    vim.keymap.set('i', '<C-k>', "<cmd>Lspsaga hover_doc<CR>", { desc = "Lsp Hover Doc" })
 
 
     -- 重命名变量名
     -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) -- 和下面的一样的功能，就是显示和细节不一样，总的来说下面的好看点。
-    vim.keymap.set('n', 'gm', "<cmd>Lspsaga rename<CR>", { desc = "Rename" })
+    vim.keymap.set('n', 'gm', "<cmd>Lspsaga rename<CR>", { desc = "Lsp Rename" })
 
     -- 修正错误code action
     -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts) -- 和下面一样的功能，下面好看
-    vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
+    vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Lsp Code Action" })
 
     -- 函数树，替代来aerial.nvim
-    vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Outline" })
+    vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Lsp Outline" })
 
     -- 添加工作目录
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
