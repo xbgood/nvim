@@ -20,7 +20,7 @@ require('gitsigns').setup {
         untracked    = { text = '┆' },
     },
     signs_staged_enable          = true,
-    signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
+    signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
     numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
     linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
     word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
@@ -35,6 +35,8 @@ require('gitsigns').setup {
         virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
         delay = 1000,
         ignore_whitespace = false,
+        virt_text_priority = 100,
+        use_focus = true,
     },
     current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     sign_priority                = 6,
@@ -59,43 +61,47 @@ require('gitsigns').setup {
         end
 
         -- Navigation
-        map('n', ']c', function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-        end, { expr = true })
+        map('n', ']c',
+            function()
+                if vim.wo.diff then return ']c' end
+                vim.schedule(function() gs.next_hunk() end)
+                return '<Ignore>'
+            end,
+            { expr = true, desc = "Git Next Hunk" })
 
-        map('n', '[c', function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-        end, { expr = true })
+        map('n', '[c',
+            function()
+                if vim.wo.diff then return '[c' end
+                vim.schedule(function() gs.prev_hunk() end)
+                return '<Ignore>'
+            end,
+            { expr = true, desc = "Git Prev Hunk" })
 
         -- Actions
         -- 将当前行的改动提交到暂存区，即add
-        map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>')
+        map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', { desc = "Git Stage Hunk" })
         -- 撤销提交暂存区，即undo
-        map({ 'n', 'v' }, '<leader>gu', ':Gitsigns undo_stage_hunk<CR>')
+        map({ 'n', 'v' }, '<leader>gu', ':Gitsigns undo_stage_hunk<CR>', { desc = "Git Undo Stage Hunk" })
         -- 重置当前行的改动
-        map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>')
+        map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', { desc = "Git Reset Hunk" })
         -- 将当前buffer的改动提交到暂存区
-        map('n', '<leader>gS', gs.stage_buffer)
+        map('n', '<leader>gS', gs.stage_buffer, { desc = "Git Stage Buffer" })
         -- 重置当前buffer的改动
-        map('n', '<leader>gR', gs.reset_buffer)
+        map('n', '<leader>gR', gs.reset_buffer, { desc = "Git Reset Buffer" })
         -- 显示出当前buffer被删除的行
-        map('n', '<leader>gt', gs.toggle_deleted)
+        map('n', '<leader>gt', gs.toggle_deleted, { desc = "Git Toggle Deleted" })
         -- 新建窗口显示差异，类似git diff
-        map('n', '<leader>gd', gs.diffthis)
+        map('n', '<leader>gd', gs.diffthis, { desc = "Git Diff" })
         -- 预览当前行的改动，即diff
-        map('n', '<leader>gp', gs.preview_hunk)
+        map('n', '<leader>gp', gs.preview_hunk, { desc = "Git Preview Hunk" })
         -- 查看上一处的改动
-        map('n', '<leader>gk', gs.prev_hunk)
+        map('n', '<leader>gk', gs.prev_hunk, { desc = "Git Prev Hunk" })
         -- 查看下一处的改动
-        map('n', '<leader>gj', gs.next_hunk)
+        map('n', '<leader>gj', gs.next_hunk, { desc = "Git Next Hunk" })
         -- 显示当前上一个提交的内容
-        map('n', '<leader>gb', function() gs.blame_line { full = true } end)
+        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = "Git Blame Line" })
         -- 在当前行的后面显示提交记录
-        map('n', '<leader>gc', gs.toggle_current_line_blame)
+        map('n', '<leader>gc', gs.toggle_current_line_blame, { desc = "Git Toggle Current Line Blame" })
 
     end
 }

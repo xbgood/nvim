@@ -19,6 +19,9 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默认不折叠
 vim.wo.foldlevel = 99
 
+-- 关闭nvim右边的 diagnostic 错误提示
+vim.diagnostic.config({ virtual_text = false })
+
 -- 设置颜色主题
 vim.cmd.colorscheme("rose-pine")
 -- vim.cmd.colorscheme("catppuccin-mocha")

@@ -25,7 +25,7 @@ require("lazy").setup({
 	-- 搜索时显示条目
 	{ "kevinhwang91/nvim-hlslens" },
 	-- 自动保存
-	{ "Pocco81/auto-save.nvim", },
+	{ "Pocco81/auto-save.nvim" },
 	-- fzf 搜索工具
 	{ "ibhagwan/fzf-lua", opts = {} },
     -- 光标移动时突出显示
@@ -33,18 +33,18 @@ require("lazy").setup({
 	-- 顶部状态栏
     { "romgrk/barbar.nvim", opts = {}, },
     -- 上次编辑的位置
-    { "ethanholz/nvim-lastplace", opts = {}, },
+    { "ethanholz/nvim-lastplace", opts = {} },
 	-- todo树
 	{ "folke/todo-comments.nvim", opts = {} },
 	-- 查找替换
-	{ "MagicDuck/grug-far.nvim", opts = {}, },
+	{ "MagicDuck/grug-far.nvim", opts = {} },
 	-- 底部美丽的状态栏
 	{ "nvim-lualine/lualine.nvim", opts = {} },
 	-- 问题显示插件
 	{ "folke/trouble.nvim", opts = {}, cmd = "Trouble", },
 	-- 自动匹配括号
 	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter", },
-	-- 格式化
+	-- 代码格式化
 	{
 		"stevearc/conform.nvim",
 		config = function()
@@ -75,7 +75,7 @@ require("lazy").setup({
 	-- 包裹修改
     {
         "kylechui/nvim-surround",
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        version = "*",
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({ })
@@ -120,23 +120,11 @@ require("lazy").setup({
 			require("conf.lsp-signature")
 		end,
 	},
-	-- 函数树
-	{
-		"stevearc/aerial.nvim", opts = {},
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons", },
-		config = function()
-			require("conf.aerial")
-		end,
-	},
     -- yazi 文件浏览器
     {
         "mikavilpas/yazi.nvim",
         event = "VeryLazy",
-        keys = {
-            { "<leader>-", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
-            { "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory" , },
-            { '<c-up>', "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session", },
-        },
+        keys = { { "<leader>1", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "FileManager", }, },
         opts = { open_for_directories = false, },
     },
 	-- 内置终端
@@ -162,7 +150,7 @@ require("lazy").setup({
         event = "VeryLazy",
         -- dependencies = { "nvim-lua/plenary.nvim", },
         keys = {
-            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+            { "<leader>sg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
         },
         cmd = {
             "LazyGit",
@@ -194,8 +182,6 @@ require("lazy").setup({
     {
         -- LSP UI 美化
         { "nvimdev/lspsaga.nvim", opts = {}, },
-        -- LSP 进度提示
-        { "j-hui/fidget.nvim", opts = { window = { blend = 0 }, }, },
         -- LSP 基础服务
         {
             "neovim/nvim-lspconfig",
@@ -212,7 +198,7 @@ require("lazy").setup({
                 "williamboman/mason-lspconfig.nvim",
                 config = function()
                     require("mason-lspconfig").setup({
-                        ensure_installed = { "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls", "yamlls", "gopls", "cmake", "cssls", "prosemd_lsp", "ts_ls", "ltex", },
+                        ensure_installed = { "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex", },
                     })
                 end,
             },
@@ -272,7 +258,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter", build = { ":TSUpdate" },
 		config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = { "c", "cpp", "lua", "vim", "html", "rust", "python", "go", "markdown", "markdown_inline", "bash", "diff", "ini", "json", "sql", "yaml", "vimdoc", "toml" },
+                ensure_installed = { "c", "cpp", "lua", "vim", "html", "rust", "python", "go", "markdown", "markdown_inline", "bash", "diff", "ini", "json", "sql", "yaml", "vimdoc", "toml", "regex" },
                 sync_install = false,
                 indent = { enable = true },
                 highlight = {
@@ -333,7 +319,7 @@ require("lazy").setup({
             "HakonHarnes/img-clip.nvim",
             event = "VeryLazy",
             opts = { },
-            keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" }, },
+            keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste Image" }, },
         },
         -- nvim 预览markdown中的图片
         -- {
