@@ -40,8 +40,6 @@ require("lazy").setup({
 	{ "MagicDuck/grug-far.nvim", opts = {} },
 	-- 底部美丽的状态栏
 	{ "nvim-lualine/lualine.nvim", opts = {} },
-	-- 问题显示插件
-	{ "folke/trouble.nvim", opts = {}, cmd = "Trouble", },
 	-- 自动匹配括号
 	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter", },
 	-- 代码格式化

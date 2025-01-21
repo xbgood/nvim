@@ -1,11 +1,18 @@
-# telescope
+# fzf-lua
 ```lua
 ,ff           查找文件
 ,fw           查找文字
-,fb           查找buffer
 ,fh           查找帮助文档
 ,fo           查找最近打开的文件
 ,fm           查找mark标记
+,fg           查找commits
+,fs           查找status
+,fb           查找当前buffer
+,fk           查找快捷键
+,ft           查找主题colorschemes
+,fM           查找man手册
+,fB           查找buffers
+
 C-d/u         预览内容上下移动
 C-v           垂直拆分打开选中的搜索结果
 C-x           水平拆分打开选中的搜索结果
@@ -18,26 +25,42 @@ j/k           选择下/上一个项目（普通模式下）
 <Tab>         选中当前的搜索结果，可搭配 <CR> 一次性打开多个
 ```
 
-# bufferline
+# buffer
 ```lua
-:bn           正向遍历buffer
-:bp           前向遍历buffer
-:bf           跳转到开头的buffer
-:bl           跳转到结尾的buffer
-:ls           列出所有buffer
-C-q           关闭当前buffer
-,bh           关闭左侧缓冲区
-,bl           关闭右侧缓冲区
-:bd           关闭当前buffer (bdelete)
-:3,5bd        关闭3-5 buffer
-C-h/l         切换到上/下一个缓冲区
 vim a b c d   打开abcd四个buffer文件
 :e file       新开buffer创建一个file文件
 :badd file    新开buffer创建一个file文件，光标保持当前buffer
 :new file     横向打开file文件
 :vnew file    纵向打开file文件
+
+:bn           正向遍历buffer :bnext
+:bp           前向遍历buffer :bprevious
+:bf           跳转到开头的buffer :bfirst
+:bl           跳转到结尾的buffer :blast
+:ls           列出所有buffer
+:bd           关闭当前buffer (bdelete)
+:3,5bd        关闭3-5 buffer
+
+,bl           列出所有buffer
+,bc           关闭当前buffer
+C-h/l         切换到上/下一个缓冲区
+C-q           关闭当前buffer
 ```
 
+# quickfix
+```lua
+,cn cnext     光标跳到下一个编译错误
+,cp cprevious 光标跳到上一个编译错误
+,cx cclose    关闭quickfix窗口
+,cw cwindow   如果有错误列表，则打开quickfix窗口
+,co copen     打开quickfix窗口
+
+:cc           显示错误详细信息
+:cl           列出所有的编译错误
+:cnfile       移动到下一个文件的第一个匹配处
+:cpfile       移动到上一个文件的最后匹配处
+
+```
 # Comment
 ```lua
 gcc    行注释
@@ -116,35 +139,54 @@ C-e       关闭或出现补全
 
 # nvim-lspconfig
 ```lua
-g[       跳转到上一个问题
-g]       跳转到下一个问题
-gD       跳转到函数声明处
-gd       跳转到函数定义
-gr       列出光标下所有引用
-gh       查看帮助信息
-gp       查看函数悬浮文档
 go       查看错误的提示
 gl       集中列出所有的错误提示
-gi       执行代码？
-,gd      预览函数定义
-,cf      代码格式化
-,cc      用astyle格式化c/cpp程序
-,ca      修复错误
-,rn      变量重命名
-,td      列出变量类型
+
+g[       跳转到上一个错误提示
+g]       跳转到下一个错误提示
+
+gd       显示函数定义
+gD       跳转到函数定义处
+
+gt       显示当前变量的类型
+gT       跳转到当前变量的类型定义处
+
+gr       列出光标下所有引用
+gf       列出该变量出现行，类似fzf搜索
+
+K        normal模式下查看函数原型
+Ctrl+k   insert模式下查看函数原型
+
+gm       重命名变量名
+ga        修正错误code action
+
 ,wa      添加工作目录
 ,wr      移除工作目录
 ,wl      列出工作目录
-K        normal模式下查看函数原型
-ctrl + k insert模式下查看函数原型
+
+,cf      代码格式化
 ```
 
-# hop
+# gitsigns
 ```lua
-,hw     搜索并跳转到单词
-,hl     搜索并跳转到行
-,hc     搜索并跳转到字符，按了,hc后需要输入一个字符
-,he     搜索并跳转到单词的尾部
+]c 下一个git hunk处
+[c 上一个git hunk处
+,gs stage hunk
+,gu undo stage hunk
+,gr reset hunk
+,gS stage buffer
+,gR Reset buffer
+,gt toggle deleted 
+,gd diff
+,gk prev hunk 
+,gj next hunk 
+,gb blame line 
+,gc toggle current line blame 
+```
+
+# flash
+```lua
+s     搜索并跳转到单词
 ```
 
 # surround
@@ -154,11 +196,11 @@ ds 字符     ：删除包裹
 ys 范围 字符：增加包裹
 ```
 
-# nvim-spectre
+# grug-far
+替换文本的插件
 ```lua
-,sp    全项目替换
 ,sf    只替换当前文件
-,sw    全项目中搜索当前单词
+,sw    搜索当前单词
 ```
 
 # vim-multiple-cursors
@@ -177,9 +219,9 @@ C-p    向前选择
 Esc    退出
 ```
 
-# vista
+# outline
 ```lua
-,2 显示目录导航
+,2 显示函数树导航
 ```
 
 # nvim-hlslens
@@ -188,11 +230,14 @@ Esc    退出
 # 反向搜索当前所在的单词
 ```
 
-# toggleterm
+# floaterm
 ```lua
-Esc 推出浮动终端
-,tf 打开浮动终端
-,tt 打开底部终端
+,tt 打开/关闭循环切换终端
+,tw 新建一个终端
+,tk 关闭一个终端
+,tp 上一个终端
+,tn 切换到下一个终端
+Esc 进入命令模式
 ```
 
 # AsyncTask
@@ -208,21 +253,11 @@ Esc 推出浮动终端
 ,3
 ```
 
-# notify
-```lua
-,fn 显示历史弹窗记录
-```
-
-# todo-comments
-```lua
-,ft 查看todo标签
-```
-
 # markdown
 markdown 插入图片和预览文档
 ```lua
-,mp 预览markdown文档
-,p  插入图片
+,pp  预览markdown文档
+,pi  插入图片
 ```
 
 # 其他组建
@@ -549,7 +584,4 @@ vim file1 file2 file3       以buffer的形式打开三个文件，这是最常�
 vim -p file1 file2 file3    以tab的形式打开三个文件
 vim -o/O file1 file2 file3  以window的形式打开文件并分屏，用-O垂直分屏用于对比文件
 ```
-
-
-
 

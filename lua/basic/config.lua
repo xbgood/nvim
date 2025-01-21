@@ -20,7 +20,28 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldlevel = 99
 
 -- 关闭nvim右边的 diagnostic 错误提示
-vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.config {
+    --  关闭diagnostic 设置
+    virtual_text = false,
+    -- virtual_text = { prefix = "●" },
+    -- 设置符号栏符号
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        },
+    },
+    severity_sort = true,
+    update_in_insert = false
+}
+-- 同样功能设置符号栏符号
+-- vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
+-- vim.fn.sign_define("DiagnosticSignWarn",  { text = "", texthl = "DiagnosticSignWarn" })
+-- vim.fn.sign_define("DiagnosticSignInfo",  { text = "", texthl = "DiagnosticSignInfo" })
+-- vim.fn.sign_define("DiagnosticSignHint",  { text = "", texthl = "DiagnosticSignHint" })
+
 
 -- 设置颜色主题
 vim.cmd.colorscheme("rose-pine")
