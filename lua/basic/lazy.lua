@@ -85,10 +85,7 @@ require("lazy").setup({
 	{
 		"folke/noice.nvim", opts = {},
 		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", },
 	},
 	-- 显示网页色
 	{
@@ -106,10 +103,10 @@ require("lazy").setup({
 	},
     -- yazi 文件浏览器
     {
-        "mikavilpas/yazi.nvim",
+        "mikavilpas/yazi.nvim", opts = {},
         event = "VeryLazy",
         keys = { { "<leader>1", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "FileManager", }, },
-        opts = { open_for_directories = false, },
+        -- opts = { open_for_directories = false, },
     },
 	-- 内置终端
 	{
@@ -148,7 +145,10 @@ require("lazy").setup({
                 "williamboman/mason-lspconfig.nvim",
                 config = function()
                     require("mason-lspconfig").setup({
-                        ensure_installed = { "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex", },
+                        ensure_installed = {
+                            "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html",
+                            "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex",
+                        },
                     })
                 end,
             },
@@ -208,8 +208,11 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter", build = { ":TSUpdate" },
 		config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = { "c", "cpp", "lua", "vim", "html", "rust", "python", "go", "markdown", "markdown_inline", "bash", "diff", "ini", "json", "sql", "yaml", "vimdoc", "toml", "regex" },
                 sync_install = false,
+                ensure_installed = {
+                    "c", "cpp", "lua", "vim", "html", "rust", "python", "go", "markdown", "markdown_inline",
+                    "bash", "diff", "ini", "json", "sql", "yaml", "vimdoc", "toml", "regex"
+                },
                 highlight = {
                     enable = true,
                     -- 使用 treesitter 高亮而不是 neovim 内置的高亮
@@ -234,9 +237,9 @@ require("lazy").setup({
 			vim.g.vimtex_quickfix_open_on_warning = 0
 			-- 关闭编译报错自动弹出错误窗口
 			vim.g.vimtex_quickfix_mode = 0
-			-- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 			-- 改变vimtex的默认按键为,
 			vim.g.maplocalleader = ","
+			-- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 		end,
 	},
 	-- markdown
@@ -244,10 +247,7 @@ require("lazy").setup({
 		-- markdown 文本显示格式
 		{
 			"MeanderingProgrammer/render-markdown.nvim",
-			dependencies = {
-				"nvim-treesitter/nvim-treesitter",
-				"nvim-tree/nvim-web-devicons",
-			},
+			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 			opts = {
                 render_modes = true,
                 pipe_table = { preset = 'round' },
@@ -255,8 +255,7 @@ require("lazy").setup({
 		},
 		-- markdown 预览
 		{
-			"iamcco/markdown-preview.nvim",
-            ft = { "markdown" },
+			"iamcco/markdown-preview.nvim", ft = { "markdown" },
 			build = "cd app && npm install",
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 			init = function()
@@ -265,9 +264,8 @@ require("lazy").setup({
 		},
 		-- markdown 图片插入
         {
-            "HakonHarnes/img-clip.nvim",
+            "HakonHarnes/img-clip.nvim", opts = {},
             event = "VeryLazy",
-            opts = { },
             keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste Image" }, },
         },
         -- nvim 预览markdown中的图片
@@ -297,17 +295,14 @@ require("lazy").setup({
 	{
 		{
 			-- 优秀的暗色主题
-			"rose-pine/neovim",
-			name = "rose-pine",
+			"rose-pine/neovim", name = "rose-pine",
 			config = function()
 				require("conf.rose-pine")
 			end,
 		},
 		{
-			-- catppuccin 颜色
-			"catppuccin/nvim",
-			-- 改个别名，因为它的名字是 nvim，可能会冲突
-			name = "catppuccin",
+			-- catppuccin 改个别名，因为它的名字是 nvim，可能会冲突
+			"catppuccin/nvim", name = "catppuccin",
 			config = function()
 				require("conf.catppuccin")
 			end,
@@ -328,7 +323,7 @@ require("lazy").setup({
             dashboard = { enabled = true },
             quickfile = { enabled = true },
             statuscolumn = { enabled = true },
-            styles = { notification = { wo = { wrap = true } } }
+            -- styles = { notification = { wo = { wrap = true } } }
         },
         init = function()
             vim.api.nvim_create_autocmd("User", {
@@ -398,8 +393,7 @@ require("lazy").setup({
 
             -- git
             { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-            { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
-            { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+            { "<leader>gg", function() Snacks.picker.git_log() end, desc = "Git Log" },
 
             -- Grep
             { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
@@ -422,7 +416,7 @@ require("lazy").setup({
             { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
             { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
             { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-            { "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
+            { "<leader>sp", function() Snacks.picker.projects() end, desc = "Projects" },
 
             -- LSP
             { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },

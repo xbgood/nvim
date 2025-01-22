@@ -30,8 +30,8 @@ vim.keybinds.gmap("n", "<C-left>", "<cmd>vertical resize-1<CR>", vim.keybinds.op
 vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize+1<CR>", vim.keybinds.opts)
 
 
--- 切换拼写检查
-vim.keybinds.gmap('n', "<leader>cs", "<cmd>set spell!<cr>", { desc = "Spell Check" })
+-- 取消搜索的高亮
+vim.keybinds.gmap('n', "<Esc>", "<cmd>nohlsearch<cr>", { desc = "nohlsearch" })
 
 -------------------------------------- conform -------------------------------------
 -- 用 leader cf 格式化代码

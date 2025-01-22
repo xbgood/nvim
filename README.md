@@ -126,10 +126,10 @@ R     ：刷新资源管理器
 另外，文件资源管理器操作和操作文档方式一致，可按 / ? 进行搜索
 ```
 
-# nvim-cmp
+# blink.cmp
 ```lua
-Tab       选择补全
-Shift-Tab 取消预选
+Tab       下一条补全
+Shift-Tab 上一条补全
 C-n       下一条补全
 C-p       上一条补全
 C-d       代码左移4格
@@ -202,9 +202,60 @@ git 中用 `hunk` 表示一个文件中邻近区域中的代码修改块。
 ,gc 在当前行的后面灰色显示上次该行的提交记录 toggle current line blame
 ```
 
-# lazygit
+# snacks
 ```lua
-,sg 打开lazygit
+,lg       打开lazygit
+,us       打开/关闭拼写检查
+,uw 打开/关闭 折行
+,uL 打开/关闭 相对行号
+,ul 打开/关闭 行号
+,ud 打开/关闭 diagnostics
+,uc 打开/关闭 conceal
+,uT 打开/关闭 treesitter
+,ub 打开/关闭 背景
+,uh 打开/关闭 内嵌提示，inlay hint，函数的参数名提示等
+,ug 打开/关闭 indentline
+,uD 打开/关闭 只显示关注的代码，跳暗未使部分dim
+
+,z  打开/关闭 无干扰编程
+,.  打开/关闭 当前buffer的记事本
+,S  打开所有buffer 的记事本
+,n  打开/关闭 历史提醒记录
+,un 
+
+,ll lazygit打开log记录
+,lg 打开lazygit
+,lf lazygit 当前文件的历史记录
+
+-- 类似fzf-lua和telescope
+,fr 搜索最近打开的文件
+,fb 搜索buffers
+,fc 搜索nvim配置文件
+,ff 搜索文件
+,fg 搜索git文件
+
+,gg  git的日志
+,sb 搜索单词显示行号
+,sB 搜索打开的buffer的单词
+,sg Grep搜索
+,sw 搜索当前光标所在单词
+,sa 搜索自动执行的命令Autodcmds
+,sc 搜索历史命令
+,sC 搜索命令
+,sh 搜索帮助
+,sH 搜索高亮
+,sj 搜索跳转历史
+,sk 搜索快捷键
+,sl 搜索loclist
+,sM 搜索man pages
+,sm 搜索标记marks
+,sR 搜索Resume
+,sq 搜索quickfix
+,uC 搜索主题
+,sp 搜索项目project
+,ss 搜索函数树 lsp symbols
+,sd 搜索diagnostics
+,s" 搜索vim寄存器
 ```
 
 # flash
@@ -226,20 +277,22 @@ ys 范围 字符：增加包裹
 ,sw    搜索当前单词
 ```
 
-# vim-multiple-cursors
+# vim-visual-multi
 用法：
 用f+字符来搜索下一个字符，可以快速定位到字符。
-用gb选中任意文本后，使用 Ctrl+n 和 Ctrl+p 找到下一个匹配的字符
-
-选中完成后，可以使用i,c等vim编辑操作进入insert模式，开始修改文本.
+用 C-n 选中单词，然后使用n选择下一个同样的单词，按q跳过当前单词并选中下一个。
+选中完成后，可以使用i,a,I,A 等vim编辑操作进入insert模式，开始修改文本.
 
 ```lua
 快捷键：
-gb     开始选择单词
-C-x    跳过当前选择，选中下一个
-C-n    向后选择
-C-p    向前选择
-Esc    退出
+Shift-arrows 精确选择一个字符
+C-n          选择单词
+C-up/down    创建垂直选择
+q            跳过当前选择，选中下一个
+Q            移除当前的选择
+n            向后选择
+N            向前选择
+Esc          退出
 ```
 
 # outline
@@ -247,10 +300,10 @@ Esc    退出
 ,2 显示函数树导航
 ```
 
-# nvim-hlslens
+# undotree
+查看undotre
 ```lua
-* 正向搜索当前所在的单词
-# 反向搜索当前所在的单词
+,3
 ```
 
 # floaterm
@@ -270,12 +323,6 @@ Esc 进入命令模式
 ,cr 运行
 ```
 
-# undotree
-查看undotre
-```lua
-,3
-```
-
 # markdown
 markdown 插入图片和预览文档
 ```lua
@@ -291,9 +338,6 @@ nvim --startuptime ./nvimstart.log
 
 # keybinds
 ```lua
-jj                      插入模式下退出插入模式
-,cs                     切换拼写检查
-
 Ctrl-o/c/[              退出插入模式，作用和esc一样
 Alt-w/e                 插入模式下自动退出并前进一个单词
 Alt-b                   插入模式下自动退出并后退一个单词
