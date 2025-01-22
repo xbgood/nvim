@@ -22,10 +22,8 @@ require("lazy").setup({
     { "mg979/vim-visual-multi" },
 	-- 自动保存
 	{ "Pocco81/auto-save.nvim" },
-	-- fzf 搜索工具
-	{ "ibhagwan/fzf-lua", opts = {} },
     -- 光标移动时突出显示
-    { 'danilamihailov/beacon.nvim' },
+    -- { 'danilamihailov/beacon.nvim' },
 	-- 顶部状态栏
     { "romgrk/barbar.nvim", opts = {}, },
     -- 上次编辑的位置
@@ -130,39 +128,24 @@ require("lazy").setup({
 			vim.g.floaterm_autoclose = 2
 		end,
 	},
+	-- fzf 搜索工具
+	-- { "ibhagwan/fzf-lua", opts = {} },
     -- lazigit 提交代码到git
-    {
-        "kdheepak/lazygit.nvim",
-        event = "VeryLazy",
-        -- dependencies = { "nvim-lua/plenary.nvim", },
-        keys = {
-            { "<leader>sg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-        },
-        cmd = {
-            "LazyGit",
-            "LazyGitConfig",
-            "LazyGitCurrentFile",
-            "LazyGitFilter",
-            "LazyGitFilterCurrentFile",
-        },
-    },
-	-- 一些功能集合
-	{
-		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
-		opts = {
-			bigfile = { enabled = true },
-			dashboard = { enabled = true },
-			indent = { enabled = true }, -- 开启缩进线
-			input = { enabled = true },
-			notifier = { enabled = true },
-			quickfile = { enabled = true },
-			-- scroll = { enabled = true },
-			statuscolumn = { enabled = true },
-			words = { enabled = true },
-		},
-	},
+    -- {
+    --     "kdheepak/lazygit.nvim",
+    --     event = "VeryLazy",
+    --     -- dependencies = { "nvim-lua/plenary.nvim", },
+    --     keys = {
+    --         { "<leader>sg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    --     },
+    --     cmd = {
+    --         "LazyGit",
+    --         "LazyGitConfig",
+    --         "LazyGitCurrentFile",
+    --         "LazyGitFilter",
+    --         "LazyGitFilterCurrentFile",
+    --     },
+    -- },
     -- LSP 系列插件
     {
         -- LSP UI 美化
@@ -245,7 +228,6 @@ require("lazy").setup({
             require("nvim-treesitter.configs").setup({
                 ensure_installed = { "c", "cpp", "lua", "vim", "html", "rust", "python", "go", "markdown", "markdown_inline", "bash", "diff", "ini", "json", "sql", "yaml", "vimdoc", "toml", "regex" },
                 sync_install = false,
-                indent = { enable = true },
                 highlight = {
                     enable = true,
                     -- 使用 treesitter 高亮而不是 neovim 内置的高亮
@@ -349,4 +331,121 @@ require("lazy").setup({
 			end,
 		},
 	},
+	-- 一些功能集合
+    {
+        "folke/snacks.nvim",
+		event = "VeryLazy",
+        opts = {
+            scope = { enabled = true },
+            words = { enabled = true },
+            notify = { enabled = true },
+            notifier = { enabled = true },
+            scroll = { enabled = true },
+            animate = { enabled = true },
+            bigfile = { enabled = true },
+            dashboard = { enabled = true },
+            quickfile = { enabled = true },
+            statuscolumn = { enabled = true },
+            styles = { notification = { wo = { wrap = true } } }
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("User", {
+            pattern = "VeryLazy",
+            callback = function()
+                local sk = Snacks
+
+                -- Setup some globals for debugging (lazy-loaded)
+                _G.dd = function(...) sk.debug.inspect(...) end
+                _G.bt = function() sk.debug.backtrace() end
+                vim.print = _G.dd
+
+                --  打开indent
+                sk.indent.enable()
+                sk.input.enable()
+
+                -- Create some toggle mappings
+                local st = sk.toggle
+                -- 拼写
+                st.option("spell", { name = "Spelling" }):map("<leader>us")
+                -- 是否折行
+                st.option("wrap", { name = "Wrap" }):map("<leader>uw")
+                -- 相对行号
+                st.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+                -- 行号
+                st.line_number():map("<leader>ul")
+                -- 关闭打开diagnostics
+                st.diagnostics():map("<leader>ud")
+                -- 打开conceal
+                st.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+                -- 切换 treesitter 配色
+                st.treesitter():map("<leader>uT")
+                -- 打开背景
+                st.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+                -- 打开函数的参数提醒
+                st.inlay_hints():map("<leader>uh")
+                -- 打开indentline
+                st.indent():map("<leader>ug")
+                -- 打开dim
+                st.dim():map("<leader>uD")
+            end,
+            })
+        end,
+
+        keys = {
+            -- zen
+            { "<leader>z",   function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+
+            -- scratch
+            { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+            { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+
+            -- notifier
+            { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+            { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+
+            -- lazygit
+            { "<leader>lf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
+            { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
+            { "<leader>ll", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
+
+            -- find
+            { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+            { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+            { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+            { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+
+            -- git
+            { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+            { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
+            { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+
+            -- Grep
+            { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+            { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+            { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+            { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+
+            -- search
+            { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+            { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+            { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+            { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+            { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+            { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+            { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+            { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+            { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+            { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
+            { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
+            { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
+            { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+            { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+            { "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
+
+            -- LSP
+            { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+            { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+        },
+    },
+
 })

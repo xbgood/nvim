@@ -62,28 +62,28 @@ vim.keybinds.gmap("n", "<leader>bl", "<cmd>buffers<CR>", { desc = "Buffer List" 
 
 ------------------------------------ fzf-lua ---------------------------------------
 -- 查找文件
-vim.keybinds.gmap("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "search files" })
--- 查找文字
-vim.keybinds.gmap("n", "<leader>fw", "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "search words"})
--- 查找帮助文档
-vim.keybinds.gmap("n", "<leader>fh", "<cmd>lua require('fzf-lua').tags_grep()<CR>", { desc = "search tags" })
--- 查找最近打开的文件
-vim.keybinds.gmap("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "search old files" })
--- 查找 marks 标记
-vim.keybinds.gmap("n", "<leader>fm", "<cmd>lua require('fzf-lua').marks()<CR>", { desc = "search marks" })
--- 查找git commits
-vim.keybinds.gmap("n", "<leader>fg", "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "search commits" })
-vim.keybinds.gmap("n", "<leader>fs", "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "search status" })
---当前buffer内查找
-vim.keybinds.gmap("n", "<leader>fb", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { desc = "search current buffers" })
--- 查找快捷键
-vim.keybinds.gmap("n", "<leader>fk", "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "search keymaps" })
--- 查找theme标签
-vim.keybinds.gmap("n", "<leader>ft", "<cmd>lua require('fzf-lua').colorschemes()<CR>", { desc = "search colorschemes" })
--- 查找man文档
-vim.keybinds.gmap("n", "<leader>fM", "<cmd>lua require('fzf-lua').manpages()<CR>", { desc = "search manpages" })
--- 查找buffers
-vim.keybinds.gmap("n", "<leader>fB", "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "search buffers" })
+-- vim.keybinds.gmap("n", "<leader>ff", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "search files" })
+-- -- 查找文字
+-- vim.keybinds.gmap("n", "<leader>fw", "<cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "search words"})
+-- -- 查找帮助文档
+-- vim.keybinds.gmap("n", "<leader>fh", "<cmd>lua require('fzf-lua').tags_grep()<CR>", { desc = "search tags" })
+-- -- 查找最近打开的文件
+-- vim.keybinds.gmap("n", "<leader>fo", "<cmd>lua require('fzf-lua').oldfiles()<CR>", { desc = "search old files" })
+-- -- 查找 marks 标记
+-- vim.keybinds.gmap("n", "<leader>fm", "<cmd>lua require('fzf-lua').marks()<CR>", { desc = "search marks" })
+-- -- 查找git commits
+-- vim.keybinds.gmap("n", "<leader>fg", "<cmd>lua require('fzf-lua').git_commits()<CR>", { desc = "search commits" })
+-- vim.keybinds.gmap("n", "<leader>fs", "<cmd>lua require('fzf-lua').git_status()<CR>", { desc = "search status" })
+-- --当前buffer内查找
+-- vim.keybinds.gmap("n", "<leader>fb", "<cmd>lua require('fzf-lua').lgrep_curbuf()<CR>", { desc = "search current buffers" })
+-- -- 查找快捷键
+-- vim.keybinds.gmap("n", "<leader>fk", "<cmd>lua require('fzf-lua').keymaps()<CR>", { desc = "search keymaps" })
+-- -- 查找theme标签
+-- vim.keybinds.gmap("n", "<leader>ft", "<cmd>lua require('fzf-lua').colorschemes()<CR>", { desc = "search colorschemes" })
+-- -- 查找man文档
+-- vim.keybinds.gmap("n", "<leader>fM", "<cmd>lua require('fzf-lua').manpages()<CR>", { desc = "search manpages" })
+-- -- 查找buffers
+-- vim.keybinds.gmap("n", "<leader>fB", "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "search buffers" })
 
 ------------------------------------- grug-far ---------------------------------
 -- 只替换当前文件

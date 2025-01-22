@@ -75,7 +75,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "List Workspace Folders"})
 
     -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
-    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     -- 代码自动格式化，不过这个用插件ok
     -- vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, } end, bufopts)
 
