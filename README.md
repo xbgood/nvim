@@ -338,7 +338,7 @@ nvim --startuptime ./nvimstart.log
 
 # keybinds
 ```lua
-Ctrl-o/c/[              退出插入模式，作用和esc一样
+Ctrl-[/c/o              退出插入模式，作用和esc一样
 Alt-w/e                 插入模式下自动退出并前进一个单词
 Alt-b                   插入模式下自动退出并后退一个单词
 Alt-h/j/k/l             自定义的快捷键，插入模式下的上下左右移动

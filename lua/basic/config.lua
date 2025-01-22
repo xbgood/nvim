@@ -1,17 +1,12 @@
 -- 自动切换输入法（Fcitx 框架）
 vim.g.FcitxToggleInput = function()
 	local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-	if input_status == 2 then
-		vim.fn.system("fcitx5-remote -c")
-	end
+	if input_status == 2 then vim.fn.system("fcitx5-remote -c") end
 end
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 
 -- 指定 undotree 缓存放路径
 vim.g.undotree_dir = "~/.cache/nvim/undodir"
-
--- 自定义代码片段存储路径
--- vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet/"
 
 -- 开启代码折叠, zc/zo keys
 vim.wo.foldmethod = "expr"
@@ -22,8 +17,10 @@ vim.wo.foldlevel = 99
 -- 关闭nvim右边的 diagnostic 错误提示
 vim.diagnostic.config {
     --  关闭diagnostic 设置
-    virtual_text = false,
-    -- virtual_text = { prefix = "●" },
+    -- virtual_text = false,
+    virtual_text = { prefix = "●" },
+    severity_sort = true,
+    update_in_insert = false,
     -- 设置符号栏符号
     signs = {
         text = {
@@ -33,15 +30,7 @@ vim.diagnostic.config {
             [vim.diagnostic.severity.HINT] = "",
         },
     },
-    severity_sort = true,
-    update_in_insert = false
 }
--- 同样功能设置符号栏符号
--- vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
--- vim.fn.sign_define("DiagnosticSignWarn",  { text = "", texthl = "DiagnosticSignWarn" })
--- vim.fn.sign_define("DiagnosticSignInfo",  { text = "", texthl = "DiagnosticSignInfo" })
--- vim.fn.sign_define("DiagnosticSignHint",  { text = "", texthl = "DiagnosticSignHint" })
-
 
 -- 设置颜色主题
 vim.cmd.colorscheme("rose-pine")

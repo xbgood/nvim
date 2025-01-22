@@ -10,9 +10,6 @@ vim.keybinds = {
     opts = { noremap = true, silent = true },
 }
 
--- 插入模下 jj 退出插入模式
--- vim.keybinds.gmap("i", "jj", "<Esc>", vim.keybinds.opts)
-
 -- 将 C-u 和 C-d 调整为10行而不是半页
 vim.keybinds.gmap("n", "<C-u>", "10k", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-d>", "10j", vim.keybinds.opts)
@@ -29,7 +26,6 @@ vim.keybinds.gmap("n", "<C-down>", "<cmd>res -1<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-left>", "<cmd>vertical resize-1<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize+1<CR>", vim.keybinds.opts)
 
-
 -- 取消搜索的高亮
 vim.keybinds.gmap('n', "<Esc>", "<cmd>nohlsearch<cr>", { desc = "nohlsearch" })
 
@@ -43,9 +39,6 @@ vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", { desc = "Undotree" }
 -------------------------------------  markdown  -----------------------------------
 -- markdown preview
 vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", { desc = "Markdown Perview" })
-
--- nvim-notify 显示历史弹窗记录
--- vim.keybinds.gmap("n", "<leader>fn", "<cmd>lua require('telescope').extensions.notify.notify()<CR>", vim.keybinds.opts)
 
 ------------------------------------- buffer --------------------------------------
 -- 切换上一个缓冲区

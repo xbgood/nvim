@@ -23,7 +23,7 @@ require("lazy").setup({
 	-- 自动保存
 	{ "Pocco81/auto-save.nvim" },
     -- 光标移动时突出显示
-    -- { 'danilamihailov/beacon.nvim' },
+    { 'danilamihailov/beacon.nvim' },
 	-- 顶部状态栏
     { "romgrk/barbar.nvim", opts = {}, },
     -- 上次编辑的位置
@@ -103,10 +103,8 @@ require("lazy").setup({
 	},
     -- yazi 文件浏览器
     {
-        "mikavilpas/yazi.nvim", opts = {},
-        event = "VeryLazy",
+        "mikavilpas/yazi.nvim", opts = {}, event = "VeryLazy",
         keys = { { "<leader>1", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "FileManager", }, },
-        -- opts = { open_for_directories = false, },
     },
 	-- 内置终端
 	{
@@ -173,8 +171,6 @@ require("lazy").setup({
                     ["<C-b>"] = { "scroll_documentation_up", "fallback" },
                     ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-                    -- ['<Tab>']     = { 'snippet_forward', 'fallback' },
-                    -- ['<S-Tab>']   = { 'snippet_backward', 'fallback' },
                     ["<C-tab>"] = { "show", "show_documentation", "hide_documentation" },
                 },
 
@@ -276,13 +272,6 @@ require("lazy").setup({
         --     end
         -- },
 	},
-	-- 运行代码的任务系统
-	{
-		-- asyncrun 编译代码
-		{ "skywind3000/asyncrun.vim" },
-		-- tasks 任务系统
-		{ "skywind3000/asynctasks.vim" },
-	},
 	-- 现代化的任务管理系统
 	-- {
 	-- 	"stevearc/overseer.nvim",
@@ -291,6 +280,13 @@ require("lazy").setup({
 	-- 		require("conf.nvim-overseer")
 	-- 	end,
 	-- },
+	-- 运行代码的任务系统
+	{
+		-- asyncrun 编译代码
+		{ "skywind3000/asyncrun.vim" },
+		-- tasks 任务系统
+		{ "skywind3000/asynctasks.vim" },
+	},
 	-- 主题颜色
 	{
 		{
@@ -315,8 +311,8 @@ require("lazy").setup({
         opts = {
             scope = { enabled = true },
             words = { enabled = true },
-            notify = { enabled = true },
-            notifier = { enabled = true },
+            -- notify = { enabled = true },
+            -- notifier = { enabled = true },
             scroll = { enabled = true },
             animate = { enabled = true },
             bigfile = { enabled = true },
