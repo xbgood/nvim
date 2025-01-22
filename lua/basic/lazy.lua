@@ -18,12 +18,8 @@ require("lazy").setup({
 	{ "yianwillis/vimcdoc" },
 	-- undo tree
 	{ "mbbill/undotree" },
-	-- 键位绑定器
-	{ "folke/which-key.nvim" },
 	-- 多光标模式
     { "mg979/vim-visual-multi" },
-	-- 搜索时显示条目
-	{ "kevinhwang91/nvim-hlslens" },
 	-- 自动保存
 	{ "Pocco81/auto-save.nvim" },
 	-- fzf 搜索工具
@@ -34,12 +30,12 @@ require("lazy").setup({
     { "romgrk/barbar.nvim", opts = {}, },
     -- 上次编辑的位置
     { "ethanholz/nvim-lastplace", opts = {} },
-	-- todo树
-	{ "folke/todo-comments.nvim", opts = {} },
 	-- 查找替换
 	{ "MagicDuck/grug-far.nvim", opts = {} },
 	-- 底部美丽的状态栏
 	{ "nvim-lualine/lualine.nvim", opts = {} },
+	-- 键位绑定器
+	{ "folke/which-key.nvim", opts = {}, event = "VeryLazy", },
 	-- 自动匹配括号
 	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter", },
 	-- 代码格式化
@@ -110,14 +106,6 @@ require("lazy").setup({
 			require("conf.comment")
 		end,
 	},
-	-- 插入模式获得函数签名
-	{
-		"ray-x/lsp_signature.nvim", opts = {},
-        event = "VeryLazy",
-		config = function()
-			require("conf.lsp-signature")
-		end,
-	},
     -- yazi 文件浏览器
     {
         "mikavilpas/yazi.nvim",
@@ -164,7 +152,6 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false,
 		opts = {
-			-- your configuration comes here or leave it empty to use the default settings refer to the configuration section below
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
 			indent = { enabled = true }, -- 开启缩进线

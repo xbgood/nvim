@@ -51,57 +51,65 @@ require('gitsigns').setup {
         row = 0,
         col = 1
     },
+
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
-        local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-        end
-
         -- Navigation
-        map('n', ']c',
-            function()
+        vim.keymap.set('n', ']c', function()
                 if vim.wo.diff then return ']c' end
-                vim.schedule(function() gs.next_hunk() end)
+                    vim.schedule(function() gs.next_hunk() end)
                 return '<Ignore>'
-            end,
-            { expr = true, desc = "Git Next Hunk" })
+            end, { expr = true, desc = "Git Next Hunk" })
 
-        map('n', '[c',
-            function()
+        vim.keymap.set('n', '[c', function()
                 if vim.wo.diff then return '[c' end
-                vim.schedule(function() gs.prev_hunk() end)
+                    vim.schedule(function() gs.prev_hunk() end)
                 return '<Ignore>'
-            end,
-            { expr = true, desc = "Git Prev Hunk" })
+            end, { expr = true, desc = "Git Prev Hunk" })
 
         -- Actions
+
         -- 将当前行的改动提交到暂存区，即add
-        map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', { desc = "Git Stage Hunk" })
+        vim.keymap.set({ 'n', 'v' }, '<leader>gs', gs.stage_hunk, { desc = "Git Stage Hunk" })
         -- 撤销提交暂存区，即undo
-        map({ 'n', 'v' }, '<leader>gu', ':Gitsigns undo_stage_hunk<CR>', { desc = "Git Undo Stage Hunk" })
+        vim.keymap.set({ 'n', 'v' }, '<leader>gu', gs.undo_stage_hunk, { desc = "Git Undo Stage Hunk" })
         -- 重置当前行的改动
-        map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', { desc = "Git Reset Hunk" })
-        -- 将当前buffer的改动提交到暂存区
-        map('n', '<leader>gS', gs.stage_buffer, { desc = "Git Stage Buffer" })
-        -- 重置当前buffer的改动
-        map('n', '<leader>gR', gs.reset_buffer, { desc = "Git Reset Buffer" })
-        -- 显示出当前buffer被删除的行
-        map('n', '<leader>gt', gs.toggle_deleted, { desc = "Git Toggle Deleted" })
-        -- 新建窗口显示差异，类似git diff
-        map('n', '<leader>gd', gs.diffthis, { desc = "Git Diff" })
-        -- 预览当前行的改动，即diff
-        map('n', '<leader>gp', gs.preview_hunk, { desc = "Git Preview Hunk" })
+        vim.keymap.set({ 'n', 'v' }, '<leader>gr', gs.reset_hunk, { desc = "Git Reset Hunk" })
+
         -- 查看上一处的改动
-        map('n', '<leader>gk', gs.prev_hunk, { desc = "Git Prev Hunk" })
+        vim.keymap.set('n', '<leader>gk', gs.prev_hunk, { desc = "Git Prev Hunk" })
         -- 查看下一处的改动
-        map('n', '<leader>gj', gs.next_hunk, { desc = "Git Next Hunk" })
+        vim.keymap.set('n', '<leader>gj', gs.next_hunk, { desc = "Git Next Hunk" })
+
+        -- 将当前buffer的改动提交到暂存区
+        vim.keymap.set('n', '<leader>gS', gs.stage_buffer, { desc = "Git Stage Buffer" })
+        -- 重置当前buffer的改动
+        vim.keymap.set('n', '<leader>gR', gs.reset_buffer, { desc = "Git Reset Buffer" })
+
+        -- 显示出当前buffer被删除的行
+        vim.keymap.set('n', '<leader>gt', gs.toggle_deleted, { desc = "Git Toggle Deleted" })
+        --  显示当前文件的修改列表
+        vim.keymap.set('n', '<leader>gl', gs.setqflist, { desc = "Git File List" })
+        --  显示当前项目的所有修改列表
+        vim.keymap.set('n', '<leader>gQ', function() gs.setqflist('all') end, { desc = "Git Project List" })
+
+        -- 新建窗口显示差异，类似git diff
+        vim.keymap.set('n', '<leader>gd', gs.diffthis, { desc = "Git Diff" })
+        vim.keymap.set('n', '<leader>gD', function() gs.diffthis('~') end, { desc = "Git All Diff" })
+
+        -- 预览当前行的改动，即diff
+        vim.keymap.set('n', '<leader>gp', gs.preview_hunk, { desc = "Git Preview Hunk" })
+        -- 在当前行上面显示修改
+        vim.keymap.set('n', '<leader>gi', gs.preview_hunk_inline, { desc = "Git Preview Hunk Inline" })
+
+        -- 选择当前修改过的代码
+        vim.keymap.set('n', '<leader>ge', gs.select_hunk, { desc = "Git Select Hunk" })
+
         -- 显示当前上一个提交的内容
-        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = "Git Blame Line" })
+        vim.keymap.set('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = "Git Blame Line" })
         -- 在当前行的后面显示提交记录
-        map('n', '<leader>gc', gs.toggle_current_line_blame, { desc = "Git Toggle Current Line Blame" })
+        vim.keymap.set('n', '<leader>gc', gs.toggle_current_line_blame, { desc = "Git Toggle Current Line Blame" })
 
     end
 }

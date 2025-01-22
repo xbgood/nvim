@@ -11,11 +11,11 @@ vim.keybinds = {
 }
 
 -- 插入模下 jj 退出插入模式
-vim.keybinds.gmap("i", "jj", "<Esc>", vim.keybinds.opts)
+-- vim.keybinds.gmap("i", "jj", "<Esc>", vim.keybinds.opts)
 
 -- 将 C-u 和 C-d 调整为10行而不是半页
--- vim.keybinds.gmap("n", "<C-u>", "10k", vim.keybinds.opts)
--- vim.keybinds.gmap("n", "<C-d>", "10j", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-u>", "10k", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<C-d>", "10j", vim.keybinds.opts)
 
 -- 插入模式下的上下左右移动
 vim.keybinds.gmap("i", "<A-k>", "<up>", vim.keybinds.opts)
@@ -29,8 +29,9 @@ vim.keybinds.gmap("n", "<C-down>", "<cmd>res -1<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-left>", "<cmd>vertical resize-1<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize+1<CR>", vim.keybinds.opts)
 
--- 正常模式下按 ESC 取消高亮显示
-vim.keybinds.gmap("n", "<ESC>", ":nohlsearch<CR>", vim.keybinds.opts)
+
+-- 切换拼写检查
+vim.keybinds.gmap('n', "<leader>cs", "<cmd>set spell!<cr>", { desc = "Spell Check" })
 
 -------------------------------------- conform -------------------------------------
 -- 用 leader cf 格式化代码
@@ -83,12 +84,6 @@ vim.keybinds.gmap("n", "<leader>ft", "<cmd>lua require('fzf-lua').colorschemes()
 vim.keybinds.gmap("n", "<leader>fM", "<cmd>lua require('fzf-lua').manpages()<CR>", { desc = "search manpages" })
 -- 查找buffers
 vim.keybinds.gmap("n", "<leader>fB", "<cmd>lua require('fzf-lua').buffers()<CR>", { desc = "search buffers" })
-
------------------------------------ nvim-hlslens -------------------------------
-vim.keybinds.gmap( "n", "n", "<Cmd>execute('normal!'.v:count1.'n')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
-vim.keybinds.gmap( "n", "N", "<Cmd>execute('normal!'.v:count1.'N')<CR><Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "*", "*<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "#", "#<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 
 ------------------------------------- grug-far ---------------------------------
 -- 只替换当前文件

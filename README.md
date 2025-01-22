@@ -64,17 +64,18 @@ C-q           关闭当前buffer
 # Comment
 ```lua
 gcc    行注释
-gCC    块注释
+gbc    块注释
 gc     可视模式下的注释
-gC     可视模式下的块注释
+gb     可视模式下的块注释
 gcO    在当前行上方新增行注释
 gco    在当前行下方新增行注释
 gcA    在当前行行尾新增行注释
-
 ```
 
 # yazi.nvim
 ```lua
+,1 打开yazi
+
 目录导航：
     j：向下移动光标
     k：向上移动光标
@@ -168,20 +169,42 @@ ga        修正错误code action
 ```
 
 # gitsigns
+
+git 中用 `hunk` 表示一个文件中邻近区域中的代码修改块。
+
 ```lua
-]c 下一个git hunk处
-[c 上一个git hunk处
-,gs stage hunk
-,gu undo stage hunk
-,gr reset hunk
+[c 查看上一处的改动 prev hunk
+]c 查看下一处的改动 next hunk
+
+,gs 将当前行的改动提交到暂存区，相当于 git add。stage hunk
+,gu 撤销当前行提交到暂存区的hunk，即 undo stage hunk
+,gr 重置当前行的hunk，相当于回到修改前的状态reset hunk
+
+,gk 查看上一处的改动 prev hunk
+,gj 查看下一处的改动 next hunk
+
 ,gS stage buffer
 ,gR Reset buffer
-,gt toggle deleted 
-,gd diff
-,gk prev hunk 
-,gj next hunk 
-,gb blame line 
-,gc toggle current line blame 
+
+,gt 显示/关闭当前buffer被删除的行
+,gl 显示当前文件的修改列表
+,gQ 显示当前项目的所有修改列表
+
+,gd 新建窗口显示当前文件的差异，即 git diff
+,gD 新建窗口显示当前文件的差异，即 git diff ~
+
+,gp 浮动显示预览当前行的修改，即 diff
+,gi 在当前行上面显示修改
+
+,ge 选择当前修改过的代码 select hunk
+
+,gb 显示当前行上次修改提交的内容对比 blame line
+,gc 在当前行的后面灰色显示上次该行的提交记录 toggle current line blame
+```
+
+# lazygit
+```lua
+,sg 打开lazygit
 ```
 
 # flash
@@ -269,8 +292,12 @@ nvim --startuptime ./nvimstart.log
 # keybinds
 ```lua
 jj                      插入模式下退出插入模式
-Alt-h/j/k/l             插入模式下的上下左右移动
 ,cs                     切换拼写检查
+
+Ctrl-o/c/[              退出插入模式，作用和esc一样
+Alt-w/e                 插入模式下自动退出并前进一个单词
+Alt-b                   插入模式下自动退出并后退一个单词
+Alt-h/j/k/l             自定义的快捷键，插入模式下的上下左右移动
 ```
 
 # 查找替换
