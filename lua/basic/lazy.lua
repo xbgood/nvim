@@ -128,24 +128,6 @@ require("lazy").setup({
 			vim.g.floaterm_autoclose = 2
 		end,
 	},
-	-- fzf 搜索工具
-	-- { "ibhagwan/fzf-lua", opts = {} },
-    -- lazigit 提交代码到git
-    -- {
-    --     "kdheepak/lazygit.nvim",
-    --     event = "VeryLazy",
-    --     -- dependencies = { "nvim-lua/plenary.nvim", },
-    --     keys = {
-    --         { "<leader>sg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    --     },
-    --     cmd = {
-    --         "LazyGit",
-    --         "LazyGitConfig",
-    --         "LazyGitCurrentFile",
-    --         "LazyGitFilter",
-    --         "LazyGitFilterCurrentFile",
-    --     },
-    -- },
     -- LSP 系列插件
     {
         -- LSP UI 美化
