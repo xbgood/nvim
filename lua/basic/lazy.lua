@@ -256,6 +256,13 @@ require("lazy").setup({
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 			init = function()
 				vim.g.mkdp_filetypes = { "markdown" }
+                vim.g.mkdp_auto_start = 1
+                vim.g.mkdp_auto_close = 1
+                vim.g.mkdp_browser = 'firefox'
+                vim.g.mkdp_echo_preview_url = 1
+                vim.g.mkdp_refresh_slow = 0
+                vim.g.mkdp_theme = 'light'
+                vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 			end,
 		},
 		-- markdown 图片插入

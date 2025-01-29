@@ -33,15 +33,12 @@ vim.diagnostic.config {
 }
 
 -- 设置颜色主题
-vim.cmd.colorscheme("rose-pine")
--- vim.cmd.colorscheme("catppuccin-mocha")
-
--- 设置背景色透明
-vim.g.background_transparency = true
+-- vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("catppuccin-mocha")
 
 vim.cmd([[
     " 设置鼠标拷贝
-    " set mouse-=a
+    set mouse-=a
 
     " 设置背景透明
     " highlight Normal guibg=none ctermbg=none ctermfg=none
@@ -67,9 +64,4 @@ vim.cmd([[
     let g:asynctasks_term_pos='floaterm'
     let g:asyncrun_term_reuse=1
     let g:asynctasks_extra_config = ["~/.config/nvim/lua/scripts/asynctasks.ini"]
-
-    " markdown preview
-    let g:mkdp_auto_start = 1
-    let g:mkdp_auto_close = 1
-    let g:mkdp_theme = "light"
 ]])
