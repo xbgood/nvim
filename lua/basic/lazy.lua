@@ -137,8 +137,8 @@ require("lazy").setup({
                 config = function()
                     require("mason-lspconfig").setup({
                         ensure_installed = {
-                            "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html",
-                            "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex", "asm_lsp", "pyright"
+                            "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "ast_grep", "jsonls",
+                            "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex", "asm_lsp", "pyright",
                         },
                     })
                 end,

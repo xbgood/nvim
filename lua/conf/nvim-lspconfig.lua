@@ -86,15 +86,17 @@ local lsp_flags = {
     debounce_text_changes = 150,
 }
 
-require('lspconfig')['pyright'].setup {
+require('lspconfig').ast_grep.setup { }
+require('lspconfig').cssls.setup {}
+require('lspconfig').jsonls.setup {}
+require('lspconfig').prosemd_lsp.setup{}
+require('lspconfig').ltex.setup{}
+require('lspconfig').yamlls.setup{}
+require('lspconfig').ts_ls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['ts_ls'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['rust_analyzer'].setup {
+require('lspconfig').rust_analyzer.setup {
     on_attach = on_attach,
     flags = lsp_flags,
     -- Server-specific settings...
@@ -163,7 +165,9 @@ require('lspconfig').asm_lsp.setup {
     single_file_support = true,
 }
 require('lspconfig').pyright.setup {
+    init_options = { doucumentFormatting = true, },
     on_attach = on_attach,
+    flags = lsp_flags,
     filetypes = { "python" },
     cmd = { "pyright-langserver", "--stdio" },
     single_file_support = true,
@@ -173,8 +177,7 @@ require('lspconfig').pyright.setup {
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
                 useLibraryCodeForTypes = true,
-            }
-        }
-    }
+            },
+        },
+    },
 }
-
