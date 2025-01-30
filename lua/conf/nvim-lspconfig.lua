@@ -15,11 +15,11 @@ vim.keymap.set('n', 'gl', "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Lsp
 
 -- 跳转到上一个错误提示的地方
 -- vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lsp Diagnostic Prev"})
+vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lsp Diagnostic Prev" })
 
 -- 跳转到下一个错误提示的地方
 -- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lsp Diagnostic Next"})
+vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lsp Diagnostic Next" })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -36,13 +36,13 @@ local on_attach = function(client, bufnr)
 
     -- 显示当前变量的类型
     -- vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', 'gt', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Lsp Show Type Definition"})
+    vim.keymap.set('n', 'gt', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Lsp Show Type Definition" })
 
     -- 跳转到当前变量的类型
-    vim.keymap.set('n', 'gT', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lsp Goto Type Definition"})
+    vim.keymap.set('n', 'gT', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lsp Goto Type Definition" })
 
     -- 列出引用过该变量或函数的地方
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Lsp References"})
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Lsp References" })
 
     -- 类似fzf显示使用过该变量的行
     vim.keymap.set('n', 'gf', "<cmd>Lspsaga finder<CR>", { desc = "Lsp Finder" })
@@ -72,13 +72,13 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
 
     -- 列出当前nvim的工作目录
-    vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "List Workspace Folders"})
+    vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+        { desc = "List Workspace Folders" })
 
     -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
     -- 代码自动格式化，不过这个用插件ok
-    -- vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, } end, bufopts)
-
+    vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, } end, bufopts)
 end
 
 local lsp_flags = {
@@ -105,23 +105,23 @@ require('lspconfig')['rust_analyzer'].setup {
 require('lspconfig').bashls.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    cmd = {'bash-language-server', "start"},
-    filetypes = {"sh"},
+    cmd = { 'bash-language-server', "start" },
+    filetypes = { "sh" },
     single_file_support = true,
 }
 require('lspconfig').clangd.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    cmd = {'clangd'},
-    filetypes = {"c", "cpp", "objc", "objcpp", "cuda", "proto"},
+    cmd = { 'clangd' },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     single_file_support = true,
 }
 require('lspconfig').cmake.setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    cmd = {'cmake-language-server'},
-    filetypes = {'cmake'},
-    init_options = {buildDirectory = "build"},
+    cmd = { 'cmake-language-server' },
+    filetypes = { 'cmake' },
+    init_options = { buildDirectory = "build" },
     single_file_support = true,
 }
 require('lspconfig').gopls.setup {
@@ -150,9 +150,31 @@ require('lspconfig').lua_ls.setup {
         },
     },
 }
-require('lspconfig').emmet_ls.setup{
+require('lspconfig').emmet_ls.setup {
     on_attach = on_attach,
     filetypes = { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" },
     cmd = { "emmet-ls", "--stdio" },
     single_file_support = true,
 }
+require('lspconfig').asm_lsp.setup {
+    on_attach = on_attach,
+    filetypes = { "s", "asm", "vmasm" },
+    cmd = { "asm-lsp" },
+    single_file_support = true,
+}
+require('lspconfig').pyright.setup {
+    on_attach = on_attach,
+    filetypes = { "python" },
+    cmd = { "pyright-langserver", "--stdio" },
+    single_file_support = true,
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+            }
+        }
+    }
+}
+

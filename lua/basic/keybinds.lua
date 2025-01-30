@@ -29,9 +29,6 @@ vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize+1<CR>", vim.keybinds.o
 -- 取消搜索的高亮
 vim.keybinds.gmap('n', "<Esc>", "<cmd>nohlsearch<cr>", { desc = "nohlsearch" })
 
--------------------------------------- conform -------------------------------------
--- 用 leader cf 格式化代码
-vim.keybinds.gmap("n", "<leader>cf", "<cmd>lua require('conform').format()<CR>", { desc = "formatter" })
 
 ------------------------------------ 查看 undotree ---------------------------------
 vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", { desc = "Undotree" })

@@ -36,13 +36,6 @@ require("lazy").setup({
 	{ "folke/which-key.nvim", opts = {}, event = "VeryLazy", },
 	-- 自动匹配括号
 	{ "windwp/nvim-autopairs", opts = {}, event = "InsertEnter", },
-	-- 代码格式化
-	{
-		"stevearc/conform.nvim",
-		config = function()
-			require("conf.conform")
-		end,
-	},
 	-- 为了能让状态栏显示 git 信息，所以这个插件是必须的
 	{
 		"lewis6991/gitsigns.nvim",
@@ -144,8 +137,8 @@ require("lazy").setup({
                 config = function()
                     require("mason-lspconfig").setup({
                         ensure_installed = {
-                            "lua_ls", "pyright", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html",
-                            "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex",
+                            "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html",
+                            "jsonls", "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "ltex", "asm_lsp", "pyright"
                         },
                     })
                 end,
