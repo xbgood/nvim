@@ -11,6 +11,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- 中文文档
     { "yianwillis/vimcdoc" },
+    -- 精美弹窗
+    { "rcarriga/nvim-notify" },
     -- 多光标模式
     { "mg979/vim-visual-multi" },
     -- 自动保存
@@ -37,13 +39,6 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim", },
         config = function()
             require("conf.gitsigns")
-        end,
-    },
-    -- 精美弹窗
-    {
-        "rcarriga/nvim-notify",
-        config = function()
-            require("conf.nvim-notify")
         end,
     },
     -- 内置终端
