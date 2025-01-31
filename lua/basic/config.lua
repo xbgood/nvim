@@ -43,18 +43,6 @@ vim.diagnostic.config {
 }
 
 
--- asyncrun and asynctasks
--- 自动打开 quickfix window，高度为 8
-vim.g.asyncrun_open = 8
--- 任务结束时候响铃提醒
-vim.g.asyncrun_bell = 1
--- 项目根目录
-vim.g.asyncrun_rootmarks = { '.git', '.svn', '.root', '.project', '.hg' }
--- 打开运行界面 vim bottom tab floaterm
-vim.g.asynctasks_term_pos = 'floaterm'
-vim.g.asyncrun_term_reuse = 1
-vim.g.asynctasks_extra_config = { "~/.config/nvim/lua/scripts/asynctasks.ini" }
-
 
 -- latex 配置
 vim.g.tex_flavor = "latex"
@@ -72,20 +60,6 @@ vim.g.vimtex_quickfix_mode = 0
 -- 改变vimtex的默认按键为,
 vim.g.maplocalleader = ","
 -- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
-
-
--- floaterm 浮动窗口
--- 浮动窗口类型
-vim.g.floaterm_wintype = "float"
--- 在窗口中间显示
-vim.g.floaterm_position = "bottomright"
--- 终端宽(0,1)
-vim.g.floaterm_width = 0.5
--- 终端高(0,1)
-vim.g.floaterm_height = 0.6
--- 终端标题
-vim.g.floaterm_title = "floaterm: $1/$2"
-vim.g.floaterm_autoclose = 2
 
 
 -- markdown 预览设置

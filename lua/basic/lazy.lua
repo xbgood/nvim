@@ -11,16 +11,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- 中文文档
     { "yianwillis/vimcdoc" },
-    -- 内置终端
-    { "voldikss/vim-floaterm" },
     -- 多光标模式
     { "mg979/vim-visual-multi" },
     -- 自动保存
     { "Pocco81/auto-save.nvim" },
-    -- asyncrun 编译代码
-    { "skywind3000/asyncrun.vim" },
-    -- tasks 任务系统
-    { "skywind3000/asynctasks.vim" },
     -- 光标移动时突出显示
     { 'danilamihailov/beacon.nvim' },
     -- 顶部状态栏
@@ -51,6 +45,14 @@ require("lazy").setup({
         config = function()
             require("conf.nvim-notify")
         end,
+    },
+    -- 内置终端
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            require("conf.toggleterm")
+        end
     },
     -- 快速跳转
     {
@@ -220,13 +222,12 @@ require("lazy").setup({
         -- },
     },
     -- 现代化的任务管理系统
-    -- {
-    -- 	"stevearc/overseer.nvim",
-    -- 	opts = {},
-    -- 	config = function()
-    -- 		require("conf.nvim-overseer")
-    -- 	end,
-    -- },
+    {
+    	"stevearc/overseer.nvim", opts = {},
+    	config = function()
+    		require("conf.nvim-overseer")
+    	end,
+    },
     {
     },
     -- 主题颜色

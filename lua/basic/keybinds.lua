@@ -30,13 +30,6 @@ vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize+1<CR>", vim.keybinds.o
 vim.keybinds.gmap('n', "<Esc>", "<cmd>nohlsearch<cr>", { desc = "nohlsearch" })
 
 
------------------------------------- 查看 undotree ---------------------------------
--- vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", { desc = "Undotree" })
-
--------------------------------------  markdown  -----------------------------------
--- markdown preview
-vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", { desc = "Markdown Perview" })
-
 ------------------------------------- buffer --------------------------------------
 -- 切换上一个缓冲区
 vim.keybinds.gmap("n", "<C-h>", "<cmd>BufferPrevious<CR>", vim.keybinds.opts)
@@ -55,17 +48,6 @@ vim.keybinds.gmap( "n", "<leader>sf", "<cmd>lua require('grug-far').open({ prefi
 -- 搜索当前单词
 vim.keybinds.gmap( "n", "<leader>sw", "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>", { desc = "Replace Current Word" })
 
------------------------------------- floaterm -----------------------------------
-vim.keybinds.gmap("t", "<Esc>", "<C-\\><C-n>", vim.keybinds.opts)
--- 打开普通终端
-vim.keybinds.gmap("n", "<leader>tw", "<cmd>FloatermNew<CR>", { desc = "Floaterm New" })
--- 退出终端插入模式
-vim.keybinds.gmap("n", "<leader>tk", "<cmd>FloatermKill<CR>", { desc = "Floaterm Kill" })
-vim.keybinds.gmap("n", "<leader>tp", "<cmd>FloatermPrev<CR>", { desc = "Floaterm Prev" })
-vim.keybinds.gmap("n", "<leader>tn", "<cmd>FloatermNext<CR>", { desc = "Floaterm Next" })
--- 打开或关闭所有终端
-vim.keybinds.gmap("n", "<leader>tt", "<cmd>FloatermToggle<CR>", { desc = "Floaterm Toggle" })
-
 --------------------------------- quickfix 快捷键 -------------------------------
 vim.keybinds.gmap("n", "<leader>cn", "<cmd>cnext<CR>", { desc = "cnext" })
 vim.keybinds.gmap("n", "<leader>cp", "<cmd>cprevious<CR>", { desc = "cprev" })
@@ -74,10 +56,10 @@ vim.keybinds.gmap("n", "<leader>cx", "<cmd>cclose<CR>", { desc = "cclose" })
 vim.keybinds.gmap("n", "<leader>co", "<cmd>copen<CR>", { desc = "copen" })
 
 ------------------------------- overseer 任务管理系统 ---------------------------
--- vim.keybinds.gmap("n", "<Leader>ct", "<cmd>OverseerToggle<cr>", vim.keybinds.opts)
--- vim.keybinds.gmap("n", "<Leader>cr", "<cmd>OverseerRun<cr>", vim.keybinds.opts)
+vim.keymap.set("n", "<leader>cb", "<cmd>OverseerBuild<cr>", { desc = "Build Task"})
+vim.keymap.set("n", "<leader>cr", "<cmd>OverseerRun<cr>", { desc = "Run Task"})
+vim.keymap.set("n", "<leader>cq", "<cmd>OverseerQuickAction<cr>", { desc = "Quick Action"})
 
------------------------------------ AsyncTask 编译运行 -----------------------------
-vim.keybinds.gmap("n", "<leader>cb", ":AsyncTask build<CR>", { desc = "task build" })
-vim.keybinds.gmap("n", "<leader>cr", ":AsyncTask run<CR>", { desc = "task run" })
-
+-------------------------------------  markdown  -----------------------------------
+-- markdown preview
+vim.keybinds.gmap("n", "<leader>pp", ":MarkdownPreview<CR>", { desc = "Markdown Perview" })
