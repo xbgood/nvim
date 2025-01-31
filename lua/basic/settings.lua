@@ -83,16 +83,16 @@ vim.o.completeopt = "menuone,preview,noselect"
 -- 设定自带补全的来源
 vim.o.complete = ".,s,k,w,b,u,i,t,d"
 -- 是否开启单词拼写检查
-vim.o.spell = true
+vim.o.spell = false
 -- 设定单词拼写检查的语言
 vim.o.spelllang = "en_us,cjk"
 -- 是否开启代码折叠
 vim.o.foldenable = true
 -- 指定代码折叠的策略是按照缩进进行的
 vim.o.foldmethod = "indent"
--- 指定代码折叠的最高层级为 1
+-- 指定代码折叠的最低层级为 1
 vim.o.foldlevel = 1
--- 打开默认不折叠
+-- 打开文件默认不折叠
 vim.o.foldlevelstart = 99
 -- 缩进4个空格等于一个Tab
 vim.o.tabstop = 4

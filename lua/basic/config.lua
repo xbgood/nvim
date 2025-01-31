@@ -1,18 +1,28 @@
--- 自动切换输入法（Fcitx 框架）
+-- fcitx5 自动切换输入法
 vim.g.FcitxToggleInput = function()
-	local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-	if input_status == 2 then vim.fn.system("fcitx5-remote -c") end
+    local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+    if input_status == 2 then vim.fn.system("fcitx5-remote -c") end
 end
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 
--- 指定 undotree 缓存放路径
-vim.g.undotree_dir = "~/.cache/nvim/undodir"
 
--- 开启代码折叠, zc/zo keys
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
--- 默认不折叠
-vim.wo.foldlevel = 99
+-- undotree 缓存放路径
+local function setup_undotree()
+    local undo_dir = vim.fn.expand("~/.cache/nvim/undodir")
+    if vim.fn.isdirectory(undo_dir) == 0 then
+        local success = vim.fn.mkdir(undo_dir, 'p', 0700)
+        if success == 0 then
+            vim.notify("Failed to create undotree directory: " .. undo_dir, vim.log.levels.ERROR)
+            return
+        else
+            vim.notify("Create undotree directory: " .. undo_dir)
+        end
+    end
+    vim.opt.undofile = true
+    vim.opt.undodir = undo_dir
+end
+setup_undotree()
+
 
 -- 关闭nvim右边的 diagnostic 错误提示
 vim.diagnostic.config {
@@ -32,36 +42,69 @@ vim.diagnostic.config {
     },
 }
 
--- 设置颜色主题
--- vim.cmd.colorscheme("rose-pine")
-vim.cmd.colorscheme("catppuccin-mocha")
 
-vim.cmd([[
-    " 设置鼠标拷贝
-    set mouse-=a
+-- asyncrun and asynctasks
+-- 自动打开 quickfix window，高度为 8
+vim.g.asyncrun_open = 8
+-- 任务结束时候响铃提醒
+vim.g.asyncrun_bell = 1
+-- 项目根目录
+vim.g.asyncrun_rootmarks = { '.git', '.svn', '.root', '.project', '.hg' }
+-- 打开运行界面 vim bottom tab floaterm
+vim.g.asynctasks_term_pos = 'floaterm'
+vim.g.asyncrun_term_reuse = 1
+vim.g.asynctasks_extra_config = { "~/.config/nvim/lua/scripts/asynctasks.ini" }
 
-    " 设置背景透明
-    " highlight Normal guibg=none ctermbg=none ctermfg=none
 
-    " undotree
-    if has("persistent_undo")
-    " 在 config.lua 中定义好了 undotree_dir 全局变量
-    let target_path = expand(undotree_dir)
-    if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-    endif
-    let &undodir = target_path
-    set undofile
+-- latex 配置
+vim.g.tex_flavor = "latex"
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_view_general_viewer = "zathura"
+-- 设置neovim-remote
+vim.g.vimtex_compiler_progname = "nvr"
+vim.g.vimtex_compiler_latexmk_engines = { _ = "-pdflatex" }
+-- 不拼写检查
+vim.g.tex_comment_nospell = 1
+-- 忽略警告
+vim.g.vimtex_quickfix_open_on_warning = 0
+-- 关闭编译报错自动弹出错误窗口
+vim.g.vimtex_quickfix_mode = 0
+-- 改变vimtex的默认按键为,
+vim.g.maplocalleader = ","
+-- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 
-    " asyncrun and asynctasks
-    " 自动打开 quickfix window ，高度为 8
-    let g:asyncrun_open = 8
-    " 任务结束时候响铃提醒
-    let g:asyncrun_bell = 1
-    " 项目根目录
-    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-    " 打开运行界面 vim bottom tab floaterm
-    let g:asynctasks_term_pos='floaterm'
-    let g:asyncrun_term_reuse=1
-    let g:asynctasks_extra_config = ["~/.config/nvim/lua/scripts/asynctasks.ini"]
-]])
+
+-- floaterm 浮动窗口
+-- 浮动窗口类型
+vim.g.floaterm_wintype = "float"
+-- 在窗口中间显示
+vim.g.floaterm_position = "bottomright"
+-- 终端宽(0,1)
+vim.g.floaterm_width = 0.5
+-- 终端高(0,1)
+vim.g.floaterm_height = 0.6
+-- 终端标题
+vim.g.floaterm_title = "floaterm: $1/$2"
+vim.g.floaterm_autoclose = 2
+
+
+-- markdown 预览设置
+vim.g.mkdp_filetypes = { "markdown" }
+vim.g.mkdp_auto_start = 1
+vim.g.mkdp_auto_close = 1
+vim.g.mkdp_browser = 'firefox'
+vim.g.mkdp_echo_preview_url = 1
+vim.g.mkdp_refresh_slow = 0
+vim.g.mkdp_theme = 'light'
+vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
+
+
+-- colorscheme 颜色主题
+-- vim.cmd.colorscheme("duskfox")
+-- vim.cmd.colorscheme("everforest")
+-- vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("tokyonight-night")
+
+-- 设置背景透明
+-- vim.cmd([[ highlight Normal guibg=none ctermbg=none ctermfg=none ]])

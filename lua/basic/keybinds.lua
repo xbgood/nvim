@@ -31,7 +31,7 @@ vim.keybinds.gmap('n', "<Esc>", "<cmd>nohlsearch<cr>", { desc = "nohlsearch" })
 
 
 ------------------------------------ 查看 undotree ---------------------------------
-vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", { desc = "Undotree" })
+-- vim.keybinds.gmap("n", "<leader>3", ":UndotreeToggle<CR>", { desc = "Undotree" })
 
 -------------------------------------  markdown  -----------------------------------
 -- markdown preview

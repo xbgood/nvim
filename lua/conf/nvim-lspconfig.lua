@@ -86,11 +86,12 @@ local lsp_flags = {
     debounce_text_changes = 150,
 }
 
+-- require('lspconfig').ltex.setup{}
+require('lspconfig').texlab.setup{}
 require('lspconfig').ast_grep.setup { }
 require('lspconfig').cssls.setup {}
 require('lspconfig').jsonls.setup {}
 require('lspconfig').prosemd_lsp.setup{}
-require('lspconfig').ltex.setup{}
 require('lspconfig').yamlls.setup{}
 require('lspconfig').ts_ls.setup {
     on_attach = on_attach,

@@ -95,7 +95,7 @@ require('gitsigns').setup {
         vim.keymap.set('n', '<leader>gQ', function() gs.setqflist('all') end, { desc = "Git Project List" })
 
         -- 新建窗口显示差异，类似git diff
-        vim.keymap.set('n', '<leader>gd', gs.diffthis, { desc = "Git Diff" })
+        -- vim.keymap.set('n', '<leader>gd', gs.diffthis, { desc = "Git Diff" }) -- 用snacks的diff代替
         vim.keymap.set('n', '<leader>gD', function() gs.diffthis('~') end, { desc = "Git All Diff" })
 
         -- 预览当前行的改动，即diff
