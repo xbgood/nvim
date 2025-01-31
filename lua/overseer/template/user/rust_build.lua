@@ -1,12 +1,12 @@
 return {
-    name = "gcc build and run",
+    name = "rust build and run",
 
     builder = function()
         local file = vim.fn.expand("%:p")
-        local outfile = vim.fn.expand("%:p:r") .. ".out"
+        local outfile = vim.fn.expand("%:p:r")
 
         return {
-            cmd = { "gcc", "-Wall", file, "-o", outfile, "&&", outfile },
+            cmd = { "rustc", file, "&&", outfile },
             components = {
                 { "open_output", direction = "float" },
                 -- 运行结束删除可执行文件
@@ -16,5 +16,5 @@ return {
             },
         }
     end,
-    condition = { filetype = { "c" } },
+    condition = { filetype = { "rust" } },
 }

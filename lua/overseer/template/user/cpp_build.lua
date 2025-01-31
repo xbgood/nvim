@@ -6,13 +6,11 @@ return {
         local outfile = vim.fn.expand("%:p:r") .. ".out"
 
         return {
-            cmd = { outfile },
+            cmd = { "g++", "-Wall", file, "-o", outfile, "&&", outfile },
+            -- cmd = { outfile },
             components = {
-                {
-                    "dependencies", task_names = {{
-                        cmd = { "g++", "-Wall", file, "-o", outfile },
-                    }}
-                },
+                -- 先后顺序，为改成 && 执行了，更加好些
+                -- { "dependencies", task_names = { { cmd = { "g++", "-Wall", file, "-o", outfile }, } } },
                 { "open_output", direction = "float" },
                 -- 运行结束删除可执行文件
                 { "run_after",   task_names = { { cmd = { "rm", outfile } } } },

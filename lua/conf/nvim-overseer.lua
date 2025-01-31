@@ -12,7 +12,7 @@ require("overseer").setup({
     -- Template modules to load
     templates = {
         "make", "cargo", "sheel",
-        "user.cpp_build", "user.c_build", "user.run_script", "user.go_build"
+        "user.cpp_build", "user.c_build", "user.run_script", "user.go_build", "user.rust_build",
     },
     -- templates = { "user.cpp_build", "user.c_build", "user.run_script" },
     -- Directories where overseer will look for template definitions (relative to rtp)

@@ -56,7 +56,6 @@ vim.keybinds.gmap("n", "<leader>cx", "<cmd>cclose<CR>", { desc = "cclose" })
 vim.keybinds.gmap("n", "<leader>co", "<cmd>copen<CR>", { desc = "copen" })
 
 ------------------------------- overseer 任务管理系统 ---------------------------
-vim.keymap.set("n", "<leader>cb", "<cmd>OverseerBuild<cr>", { desc = "Build Task"})
 vim.keymap.set("n", "<leader>cr", "<cmd>OverseerRun<cr>", { desc = "Run Task"})
 vim.keymap.set("n", "<leader>cq", "<cmd>OverseerQuickAction<cr>", { desc = "Quick Action"})
 
