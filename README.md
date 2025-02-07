@@ -72,6 +72,14 @@ gco    在当前行下方新增行注释
 gcA    在当前行行尾新增行注释
 ```
 
+# scope
+```lua
+vi + i/w/b/p/t/s
+va + i/w/b/p/t/s
+vi 选择的内容比va少点前后的范围，比如括号，空白等。
+i/w/b/p/t/s 分别是选择： 内部/词/块/段/tag/句
+```
+
 # yazi.nvim
 ```lua
 ,1 打开yazi
