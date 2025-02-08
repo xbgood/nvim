@@ -79,6 +79,3 @@ vim.cmd.colorscheme("duskfox")
 -- vim.cmd.colorscheme("rose-pine")
 -- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("tokyonight-night")
-
--- 设置背景透明
--- vim.cmd([[ highlight Normal guibg=none ctermbg=none ctermfg=none ]])
