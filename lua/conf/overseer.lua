@@ -12,9 +12,11 @@ require("overseer").setup({
     -- Template modules to load
     templates = {
         "make", "cargo", "sheel",
-        "user.cpp_build", "user.c_build", "user.run_script", "user.go_build", "user.rust_build",
+        "user.run_script",
+        "user.go_build", "user.rust_build",
+        "user.cpp_build", "user.c_build",
+        "user.c_run", "user.cpp_run",
     },
-    -- templates = { "user.cpp_build", "user.c_build", "user.run_script" },
     -- Directories where overseer will look for template definitions (relative to rtp)
     template_dirs = { "overseer.template" },
     -- When true, tries to detect a green color from your colorscheme to use for success highlight
@@ -210,3 +212,4 @@ require("overseer").setup({
         },
     },
 })
+

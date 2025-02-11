@@ -1,19 +1,17 @@
 return {
-    name = "g++ build and run",
+    name = "g++ build",
 
     builder = function()
         local file = vim.fn.expand("%:p")
-        local outfile = vim.fn.expand("%:p:r") .. ".out"
+        -- local outfile = vim.fn.expand("%:p:r") .. ".out"
+        local outfile = "a.out"
 
         return {
-            cmd = { "g++", "-Wall", file, "-o", outfile, "&&", outfile },
-            -- cmd = { outfile },
+            cmd = { "g++", "-Wall", file, "-o", outfile, "-g" },
             components = {
-                -- 先后顺序，为改成 && 执行了，更加好些
-                -- { "dependencies", task_names = { { cmd = { "g++", "-Wall", file, "-o", outfile }, } } },
                 { "open_output", direction = "float" },
                 -- 运行结束删除可执行文件
-                { "run_after",   task_names = { { cmd = { "rm", outfile } } } },
+                -- { "run_after",   task_names = { { cmd = { "rm", outfile } } } },
                 "on_result_diagnostics",
                 "default"
             },

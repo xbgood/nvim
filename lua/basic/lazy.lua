@@ -19,20 +19,30 @@ require("lazy").setup({
     { "Pocco81/auto-save.nvim" },
     -- 光标移动时突出显示
     { 'danilamihailov/beacon.nvim' },
+    -- 快速的jk
+    { "rainbowhxch/accelerated-jk.nvim" },
+    -- 显示网页色
+    { 'brenoprata10/nvim-highlight-colors', opts = {} },
     -- 顶部状态栏
-    { "romgrk/barbar.nvim", opts = {}, },
+    { "romgrk/barbar.nvim",                 opts = {} },
     -- 上次编辑的位置
-    { "ethanholz/nvim-lastplace",  opts = {} },
+    { "ethanholz/nvim-lastplace",           opts = {} },
     -- 查找替换
-    { "MagicDuck/grug-far.nvim",   opts = {} },
+    { "MagicDuck/grug-far.nvim",            opts = {} },
     -- 底部美丽的状态栏
-    { "nvim-lualine/lualine.nvim", opts = {} },
-    -- latex 支持
-    { "lervag/vimtex",         opt = true, ft = "tex" },
+    { "nvim-lualine/lualine.nvim",          opts = {} },
+    -- 快速跳转
+    { "folke/flash.nvim",                   opts = {}, event = "VeryLazy" },
+    -- yazi 文件浏览器
+    { "mikavilpas/yazi.nvim",               opts = {}, event = "VeryLazy" },
     -- 键位绑定器
-    { "folke/which-key.nvim",  opts = {},  event = "VeryLazy", },
+    { "folke/which-key.nvim",               opts = {}, event = "VeryLazy" },
+    -- markdown 图片插入
+    { "HakonHarnes/img-clip.nvim",          opts = {}, event = "VeryLazy" },
     -- 自动匹配括号
-    { "windwp/nvim-autopairs", opts = {},  event = "InsertEnter", },
+    { "windwp/nvim-autopairs",              opts = {}, event = "InsertEnter" },
+    -- 包裹修改
+    { "kylechui/nvim-surround",             opts = {}, event = "VeryLazy" },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
         "lewis6991/gitsigns.nvim",
@@ -49,37 +59,21 @@ require("lazy").setup({
             require("conf.toggleterm")
         end
     },
-    -- 快速跳转
+    -- latex 支持
     {
-        "folke/flash.nvim", opts = {}, event = "VeryLazy",
-        keys = { { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" }, },
-    },
-    -- 包裹修改
-    {
-        "kylechui/nvim-surround", version = "*", event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end
-    },
-    -- 快速的jk
-    {
-        "rainbowhxch/accelerated-jk.nvim",
-        config = function()
-            vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
-            vim.api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
+        "lervag/vimtex",
+        lazy = false,
+        ft = "tex",
+        init = function()
+            vim.g.vimtex_view_method = "zathura"
         end
     },
     -- 美丽的消息通知
     {
-        "folke/noice.nvim", opts = {}, event = "VeryLazy",
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", },
-    },
-    -- 显示网页色
-    {
-        'brenoprata10/nvim-highlight-colors',
-        config = function()
-            require('nvim-highlight-colors').setup({})
-        end,
+        "folke/noice.nvim",
+        opts = {},
+        event = "VeryLazy",
+        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     },
     -- 代码注释
     {
@@ -88,25 +82,13 @@ require("lazy").setup({
             require("conf.comment")
         end,
     },
-    -- yazi 文件浏览器
-    {
-        "mikavilpas/yazi.nvim", opts = {}, event = "VeryLazy",
-        keys = { { "<leader>1", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "FileManager", }, },
-    },
     -- 现代化的任务管理系统
     {
-    	"stevearc/overseer.nvim", opts = {},
-    	config = function()
-    		require("conf.nvim-overseer")
-    	end,
-    },
-    -- 主题颜色
-    {
-        { "rose-pine/neovim",       name = "rosepine", },
-        { "catppuccin/nvim",        name = "catppuccin", },
-        { "EdenEast/nightfox.nvim", name = "nightfox" },
-        { "sainnhe/everforest",     name = "everforest" },
-        { "folke/tokyonight.nvim",  name = "tokyonight" },
+        "stevearc/overseer.nvim",
+        opts = {},
+        config = function()
+            require("conf.overseer")
+        end,
     },
     -- LSP 系列插件
     {
@@ -114,15 +96,16 @@ require("lazy").setup({
         { "nvimdev/lspsaga.nvim", opts = { extend_gitsigns = true }, },
         -- LSP 基础服务
         {
-            "neovim/nvim-lspconfig", dependencies = { "saghen/blink.cmp" },
+            "neovim/nvim-lspconfig",
+            dependencies = { "saghen/blink.cmp" },
             config = function()
-                require("conf.nvim-lspconfig")
+                require("conf.lspconfig")
             end,
         },
         -- mason 自动安装相关的包
         {
             -- mason 自动安装 LSP 的工具，否则需要手动用npm安装包
-            { "williamboman/mason.nvim", opts = {}, },
+            { "williamboman/mason.nvim", opts = {} },
             {
                 "williamboman/mason-lspconfig.nvim",
                 config = function()
@@ -137,7 +120,8 @@ require("lazy").setup({
         },
         -- blink.cmp 替代nvim.cmp
         {
-            "saghen/blink.cmp", version = "*",
+            "saghen/blink.cmp",
+            version = "*",
             dependencies = "rafamadriz/friendly-snippets",
             opts = {
                 keymap = {
@@ -185,7 +169,8 @@ require("lazy").setup({
     },
     -- 语法高亮
     {
-        "nvim-treesitter/nvim-treesitter", build = { ":TSUpdate" },
+        "nvim-treesitter/nvim-treesitter",
+        build = { ":TSUpdate" },
         config = function()
             require("nvim-treesitter.configs").setup({
                 sync_install = false,
@@ -214,14 +199,10 @@ require("lazy").setup({
         },
         -- markdown 预览
         {
-            "iamcco/markdown-preview.nvim", ft = { "markdown" },
+            "iamcco/markdown-preview.nvim",
+            ft = { "markdown" },
             build = "cd app && npm install",
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        },
-        -- markdown 图片插入
-        {
-            "HakonHarnes/img-clip.nvim", opts = {}, event = "VeryLazy",
-            keys = { { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste Image" }, },
         },
         -- nvim 预览markdown中的图片
         -- {
@@ -235,60 +216,97 @@ require("lazy").setup({
     {
         'abecodes/tabout.nvim',
         lazy = false,
-        config = function()
-        require('tabout').setup {
-            tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
-            backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-            act_as_tab = true, -- shift content if tab out is not possible
-            act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-            default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-            default_shift_tab = '<C-d>', -- reverse shift default action,
-            enable_backwards = true, -- well ...
-            completion = false, -- if the tabkey is used in a completion pum
-            tabouts = {
-            { open = "'", close = "'" },
-            { open = '"', close = '"' },
-            { open = '`', close = '`' },
-            { open = '(', close = ')' },
-            { open = '[', close = ']' },
-            { open = '{', close = '}' }
-            },
-            ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-            exclude = {} -- tabout will ignore these filetypes
-        }
-        end,
-        dependencies = { "nvim-treesitter/nvim-treesitter", },
-        opt = true,  -- Set this to true if the plugin is optional
-        event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
+        opt = true,
         priority = 1000,
+        event = 'InsertCharPre',
+        dependencies = { "nvim-treesitter/nvim-treesitter", },
+        config = function()
+            require('tabout').setup {
+                tabkey = '<Tab>',             -- key to trigger tabout, set to an empty string to disable
+                backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+                act_as_tab = true,            -- shift content if tab out is not possible
+                act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+                default_tab = '<C-t>',        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+                default_shift_tab = '<C-d>',  -- reverse shift default action,
+                enable_backwards = true,      -- well ...
+                completion = false,           -- if the tabkey is used in a completion pum
+                tabouts = {
+                    { open = "'", close = "'" },
+                    { open = '"', close = '"' },
+                    { open = '`', close = '`' },
+                    { open = '(', close = ')' },
+                    { open = '[', close = ']' },
+                    { open = '{', close = '}' }
+                },
+                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+                exclude = {} -- tabout will ignore these filetypes
+            }
+        end,
+    },
+    -- dap调试代码
+    {
+        -- dap 核心调试插件
+        {
+            "mfussenegger/nvim-dap",
+            event = "VeryLazy",
+            config = function()
+                require('conf.nvim-dap')
+            end,
+        },
+        -- 类似vscode的ui显示
+        {
+            "rcarriga/nvim-dap-ui",
+            dependencies = {
+                "mfussenegger/nvim-dap",
+                "nvim-neotest/nvim-nio"
+            },
+            opts = function()
+                local dap, dapui                                   = require("dap"), require("dapui")
+                dap.listeners.before.attach.dapui_config           = function() dapui.open() end
+                dap.listeners.before.launch.dapui_config           = function() dapui.open() end
+                dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+                dap.listeners.before.event_exited.dapui_config     = function() dapui.close() end
+            end,
+        },
+        -- 显示变量值 virtual-text
+        {
+            "theHamsta/nvim-dap-virtual-text",
+            opts = {
+                -- eol 在行尾显示，inline 在变量定义处显示
+                virt_text_pos = 'eol',
+            },
+        },
     },
     -- 一些功能集合
     {
-        "folke/snacks.nvim", event = "VeryLazy", priority = 1000, lazy = true,
+        "folke/snacks.nvim",
+        event = "VeryLazy",
+        priority = 1000,
+        lazy = true,
         opts = {
-            input = { enabled = true },
-            picker = { enabled = true },
-            scope = { enabled = true },
-            words = { enabled = true },
-            notify = { enabled = true },
-            notifier = { enabled = true },
-            scroll = { enabled = true },
-            animate = { enabled = true },
-            bigfile = { enabled = true },
-            quickfile = { enabled = true },
+            input        = { enabled = true },
+            picker       = { enabled = true },
+            scope        = { enabled = true },
+            words        = { enabled = true },
+            notify       = { enabled = true },
+            notifier     = { enabled = true },
+            scroll       = { enabled = true },
+            animate      = { enabled = true },
+            bigfile      = { enabled = true },
+            quickfile    = { enabled = true },
             statuscolumn = { enabled = true },
-            styles = { notification = { wo = { wrap = true } } },
-            explorer = { enabled = true, replace_netrw = true },
-            dashboard = {
+            styles       = { notification = { wo = { wrap = true } } },
+            explorer     = { enabled = true, replace_netrw = true },
+            dashboard    = {
                 formats = {
                     key = function(item) return { { "[", hl = "special" }, { item.key, hl = "key" }, { "]", hl = "special" } } end,
                 },
                 sections = {
-                    { title = "MRU", padding = 1 },
-                    { section = "recent_files", limit = 8, padding = 1 },
-                    { title = "Sessions", padding = 1 },
-                    { section = "projects", padding = 1 },
-                    { title = "Bookmarks", padding = 1 },
+                    { title = "MRU",            padding = 1 },
+                    { section = "recent_files", limit = 8,  padding = 1 },
+                    { title = "Sessions",       padding = 1 },
+                    { section = "projects",     padding = 1 },
+                    { title = "Bookmarks",      padding = 1 },
                     { section = "keys" },
                 },
             },
@@ -297,19 +315,17 @@ require("lazy").setup({
             vim.api.nvim_create_autocmd("User", {
                 pattern = "VeryLazy",
                 callback = function()
-                    local sk = Snacks
-
                     -- Setup some globals for debugging (lazy-loaded)
-                    _G.dd = function(...) sk.debug.inspect(...) end
-                    _G.bt = function() sk.debug.backtrace() end
+                    _G.dd = function(...) require('snacks').debug.inspect(...) end
+                    _G.bt = function() require('snacks').debug.backtrace() end
                     vim.print = _G.dd
 
                     --  打开indent
-                    sk.indent.enable()
-                    sk.input.enable()
+                    require('snacks').indent.enable()
+                    require('snacks').input.enable()
 
                     -- Create some toggle mappings
-                    local st = sk.toggle
+                    local st = require('snacks').toggle
                     -- 拼写
                     st.option("spell", { name = "Spelling" }):map("<leader>us")
                     -- 是否折行
@@ -322,7 +338,7 @@ require("lazy").setup({
                     st.diagnostics():map("<leader>ud")
                     -- 打开conceal
                     st.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-                    "<leader>uc")
+                        "<leader>uc")
                     -- 切换 treesitter 配色
                     st.treesitter():map("<leader>uT")
                     -- 打开背景
@@ -336,65 +352,13 @@ require("lazy").setup({
                 end,
             })
         end,
-
-        keys = {
-            -- zen
-            { "<leader>z",  function() Snacks.zen() end,                     desc = "Toggle Zen Mode" },
-
-            -- scratch
-            { "<leader>.",  function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
-            { "<leader>S",  function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
-
-            -- notifier
-            { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
-            { "<leader>n",  function() Snacks.picker.notifications() end,    desc = "Notification History" },
-
-            -- lazygit
-            { "<leader>lf", function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" },
-            { "<leader>lg", function() Snacks.lazygit() end,                 desc = "Lazygit" },
-            { "<leader>ll", function() Snacks.lazygit.log() end,             desc = "Lazygit Log (cwd)" },
-
-            -- find
-            { "<leader>se", function() Snacks.explorer() end,                desc = "Explorer" },
-            { "<leader>fr", function() Snacks.picker.recent() end,           desc = "Recent" },
-            { "<leader>fb", function() Snacks.picker.buffers() end,          desc = "Buffers" },
-            { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true, }) end, desc = "Buffers(all)" },
-            { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,  desc = "Find Config File" },
-            { "<leader>ff", function() Snacks.picker.files() end,            desc = "Find Files" },
-
-            -- git
-            { "<leader>fg", function() Snacks.picker.git_files() end,        desc = "Find Git Files" },
-            { "<leader>gg", function() Snacks.picker.git_log() end,          desc = "Git Log" },
-            { "<leader>gd", function() Snacks.picker.git_diff() end,         desc = "Git Diff" },
-
-            -- Grep
-            { "<leader>sb", function() Snacks.picker.lines() end,            desc = "Buffer Lines" },
-            { "<leader>sB", function() Snacks.picker.grep_buffers() end,     desc = "Grep Open Buffers" },
-            { "<leader>sg", function() Snacks.picker.grep() end,             desc = "Grep" },
-            { "<leader>sw", function() Snacks.picker.grep_word() end,        desc = "Visual selection or word",    mode = { "n", "x" } },
-
-            -- search
-            { '<leader>s"', function() Snacks.picker.registers() end,        desc = "Registers" },
-            { "<leader>sa", function() Snacks.picker.autocmds() end,         desc = "Autocmds" },
-            { "<leader>sc", function() Snacks.picker.command_history() end,  desc = "Command History" },
-            { "<leader>sC", function() Snacks.picker.commands() end,         desc = "Commands" },
-            { "<leader>sh", function() Snacks.picker.help() end,             desc = "Help Pages" },
-            { "<leader>sH", function() Snacks.picker.highlights() end,       desc = "Highlights" },
-            { "<leader>sj", function() Snacks.picker.jumps() end,            desc = "Jumps" },
-            { "<leader>sk", function() Snacks.picker.keymaps() end,          desc = "Keymaps" },
-            { "<leader>sl", function() Snacks.picker.loclist() end,          desc = "Location List" },
-            { "<leader>sM", function() Snacks.picker.man() end,              desc = "Man Pages" },
-            { "<leader>sm", function() Snacks.picker.marks() end,            desc = "Marks" },
-            { "<leader>sR", function() Snacks.picker.resume() end,           desc = "Resume" },
-            { "<leader>sq", function() Snacks.picker.qflist() end,           desc = "Quickfix List" },
-            { "<leader>uC", function() Snacks.picker.colorschemes() end,     desc = "Colorschemes" },
-            { "<leader>sp", function() Snacks.picker.projects() end,         desc = "Projects" },
-            { "<leader>su", function() Snacks.picker.undo() end,             desc = "UndoTree" },
-
-            -- LSP
-            { "<leader>ss", function() Snacks.picker.lsp_symbols() end,      desc = "LSP Symbols" },
-            { "<leader>sd", function() Snacks.picker.diagnostics() end,      desc = "Diagnostics" },
-        },
     },
-
+    -- 主题颜色
+    {
+        { "rose-pine/neovim",       name = "rosepine", },
+        { "catppuccin/nvim",        name = "catppuccin", },
+        { "EdenEast/nightfox.nvim", name = "nightfox" },
+        { "sainnhe/everforest",     name = "everforest" },
+        { "folke/tokyonight.nvim",  name = "tokyonight" },
+    },
 })

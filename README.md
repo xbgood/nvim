@@ -1,4 +1,4 @@
-# fzf-lua
+# snacks.picker
 ```lua
 ,ff           查找文件
 ,fw           查找文字
@@ -47,6 +47,13 @@ C-h/l         切换到上/下一个缓冲区
 C-q           关闭当前buffer
 ```
 
+# buffer, window, tab
+```lua
+vim file1 file2 file3       以buffer的形式打开三个文件，这是最常用的
+vim -p file1 file2 file3    以tab的形式打开三个文件
+vim -o/O file1 file2 file3  以window的形式打开文件并分屏，用-O垂直分屏用于对比文件
+```
+
 # quickfix
 ```lua
 ,cn cnext     光标跳到下一个编译错误
@@ -78,6 +85,11 @@ vi + i/w/b/p/t/s
 va + i/w/b/p/t/s
 vi 选择的内容比va少点前后的范围，比如括号，空白等。
 i/w/b/p/t/s 分别是选择： 内部/词/块/段/tag/句
+```
+
+# flash
+```lua
+s     搜索并跳转到单词
 ```
 
 # yazi.nvim
@@ -146,6 +158,16 @@ C-e       关闭或出现补全
 <CR>      选择补全
 ```
 
+# nvim-dap
+```lua
+F5   continue
+F9   toggle breakpoint
+F10  step into
+F11  step over
+F12  step out
+F8   terminate
+```
+
 # nvim-lspconfig
 ```lua
 go       查看错误的提示
@@ -181,8 +203,8 @@ ga        修正错误code action
 git 中用 `hunk` 表示一个文件中邻近区域中的代码修改块。
 
 ```lua
-[c 查看上一处的改动 prev hunk
-]c 查看下一处的改动 next hunk
+[h 查看上一处的改动 prev hunk
+]h 查看下一处的改动 next hunk
 
 ,gs 将当前行的改动提交到暂存区，相当于 git add。stage hunk
 ,gu 撤销当前行提交到暂存区的hunk，即 undo stage hunk
@@ -212,64 +234,60 @@ git 中用 `hunk` 表示一个文件中邻近区域中的代码修改块。
 
 # snacks
 ```lua
-,lg       打开lazygit
-,us       打开/关闭拼写检查
-,uw 打开/关闭 折行
-,uL 打开/关闭 相对行号
-,ul 打开/关闭 行号
-,ud 打开/关闭 diagnostics
-,uc 打开/关闭 conceal
-,uT 打开/关闭 treesitter
-,ub 打开/关闭 背景
-,uh 打开/关闭 内嵌提示，inlay hint，函数的参数名提示等
-,ug 打开/关闭 indentline
-,uD 打开/关闭 只显示关注的代码，跳暗未使部分dim
+,lg  打开lazygit
+,us  打开/关闭拼写检查
+,uw  打开/关闭 折行
+,uL  打开/关闭 相对行号
+,ul  打开/关闭 行号
+,ud  打开/关闭 diagnostics
+,uc  打开/关闭 conceal
+,uT  打开/关闭 treesitter
+,ub  打开/关闭 背景
+,uh  打开/关闭 内嵌提示，inlay hint，函数的参数名提示等
+,ug  打开/关闭 indentline
+,uD  打开/关闭 只显示关注的代码，跳暗未使部分dim
 
-,z  打开/关闭 无干扰编程
-,.  打开/关闭 当前buffer的记事本
-,S  打开所有buffer 的记事本
-,n  打开/关闭 历史提醒记录
-,un 
+,sz  打开/关闭 无干扰编程
+,.   打开/关闭 当前buffer的记事本
+,st  打开所有buffer 的记事本
+,sn  打开/关闭 历史提醒记录
+,un  隐藏提醒记录
 
-,ll lazygit打开log记录
-,lg 打开lazygit
-,lf lazygit 当前文件的历史记录
+,ll  lazygit打开log记录
+,lg  打开lazygit
+,lf  lazygit 当前文件的历史记录
 
 -- 类似fzf-lua和telescope
-,fr 搜索最近打开的文件
-,fb 搜索buffers
-,fc 搜索nvim配置文件
-,ff 搜索文件
-,fg 搜索git文件
+,fr  搜索最近打开的文件
+,fb  搜索buffers
+,fc  搜索nvim配置文件
+,ff  搜索文件
+,fg  搜索git文件
 
 ,gg  git的日志
-,sb 搜索单词显示行号
-,sB 搜索打开的buffer的单词
-,sg Grep搜索
-,sw 搜索当前光标所在单词
-,sa 搜索自动执行的命令Autodcmds
-,sc 搜索历史命令
-,sC 搜索命令
-,sh 搜索帮助
-,sH 搜索高亮
-,sj 搜索跳转历史
-,sk 搜索快捷键
-,sl 搜索loclist
-,sM 搜索man pages
-,sm 搜索标记marks
-,sR 搜索Resume
-,sq 搜索quickfix
-,uC 搜索主题
-,sp 搜索项目project
-,ss 搜索函数树 lsp symbols
-,sd 搜索diagnostics
-,s" 搜索vim寄存器
+,sb  搜索单词显示行号
+,sB  搜索打开的buffer的单词
+,sg  Grep搜索
+,sw  搜索当前光标所在单词
+,sa  搜索自动执行的命令Autodcmds
+,sc  搜索历史命令
+,sC  搜索命令
+,sh  搜索帮助
+,sH  搜索高亮
+,sj  搜索跳转历史
+,sk  搜索快捷键
+,sl  搜索loclist
+,sM  搜索man pages
+,sm  搜索标记marks
+,sR  搜索Resume
+,sq  搜索quickfix
+,uC  搜索主题
+,sp  搜索项目project
+,ss  搜索函数树 lsp symbols
+,sd  搜索diagnostics
+,s"  搜索vim寄存器
 ```
 
-# flash
-```lua
-s     搜索并跳转到单词
-```
 
 # surround
 ```lua
@@ -316,19 +334,15 @@ Esc          退出
 
 # floaterm
 ```lua
-,tt 打开/关闭循环切换终端
-,tw 新建一个终端
-,tk 关闭一个终端
-,tp 上一个终端
-,tn 切换到下一个终端
-Esc 进入命令模式
+Ctrl-t 打开/关闭循环切换终端
 ```
 
-# AsyncTask
-用AsyncTask编译运行代码。
+# overseer
+用overseer 编译运行代码。
 ```lua
-,cb 编译
 ,cr 运行
+,cb 编译
+,cq 打开overseerQuickAction
 ```
 
 # markdown
@@ -655,12 +669,5 @@ Ctrl+w k                  把光标移到上边的屏幕中
 Ctrl+w w                  光标在打开的屏幕之间顺时针选择
 Ctrl+w p                  把光标移到上一个屏中
 Ctrl+up/down/right/left   切换屏幕
-```
-
-# buffer、window、tab
-```lua
-vim file1 file2 file3       以buffer的形式打开三个文件，这是最常用的
-vim -p file1 file2 file3    以tab的形式打开三个文件
-vim -o/O file1 file2 file3  以window的形式打开文件并分屏，用-O垂直分屏用于对比文件
 ```
 
