@@ -1,29 +1,3 @@
-# snacks.picker
-```lua
-,ff           查找文件
-,fw           查找文字
-,fh           查找帮助文档
-,fo           查找最近打开的文件
-,fm           查找mark标记
-,fg           查找commits
-,fs           查找status
-,fb           查找当前buffer
-,fk           查找快捷键
-,ft           查找主题colorschemes
-,fM           查找man手册
-,fB           查找buffers
-
-C-d/u         预览内容上下移动
-C-v           垂直拆分打开选中的搜索结果
-C-x           水平拆分打开选中的搜索结果
-C-c           退出搜索框关闭telescope
-C-t           打开一个新的tab查看当前文件
-Esc           正常模式下关闭telescope
-C-n/p         选择下/上一项目（插入模式下）
-j/k           选择下/上一个项目（普通模式下）
-<CR>          打开选中的搜索结果
-<Tab>         选中当前的搜索结果，可搭配 <CR> 一次性打开多个
-```
 
 # buffer
 ```lua
@@ -58,8 +32,8 @@ vim -o/O file1 file2 file3  以window的形式打开文件并分屏，用-O垂�
 ```lua
 ,cn cnext     光标跳到下一个编译错误
 ,cp cprevious 光标跳到上一个编译错误
-,cx cclose    关闭quickfix窗口
 ,cw cwindow   如果有错误列表，则打开quickfix窗口
+,cx cclose    关闭quickfix窗口
 ,co copen     打开quickfix窗口
 
 :cc           显示错误详细信息
@@ -168,7 +142,7 @@ F12  step out
 F8   terminate
 ```
 
-# nvim-lspconfig
+# lspsaga
 ```lua
 go       查看错误的提示
 gl       集中列出所有的错误提示
@@ -179,18 +153,23 @@ g]       跳转到下一个错误提示
 gd       显示函数定义
 gD       跳转到函数定义处
 
+gs       将当前行的改动提交到暂存区 git add。stage hunk
+gS       将当前buffer的改动提交到暂存区 stage buffer
+
 gt       显示当前变量的类型
 gT       跳转到当前变量的类型定义处
 
-gr       列出光标下所有引用
 gf       列出该变量出现行，类似fzf搜索
+gi       显示 implementation #TODO
+gr       列出光标下所有引用
 
 K        normal模式下查看函数原型
 Ctrl+k   insert模式下查看函数原型
 
 gm       重命名变量名
-ga        修正错误code action
+ga       修正错误code action
 
+,2       显示函数树导航
 ,wa      添加工作目录
 ,wr      移除工作目录
 ,wl      列出工作目录
@@ -206,88 +185,112 @@ git 中用 `hunk` 表示一个文件中邻近区域中的代码修改块。
 [h 查看上一处的改动 prev hunk
 ]h 查看下一处的改动 next hunk
 
-,gs 将当前行的改动提交到暂存区，相当于 git add。stage hunk
 ,gu 撤销当前行提交到暂存区的hunk，即 undo stage hunk
 ,gr 重置当前行的hunk，相当于回到修改前的状态reset hunk
 
 ,gk 查看上一处的改动 prev hunk
 ,gj 查看下一处的改动 next hunk
-
-,gS stage buffer
-,gR Reset buffer
+,gR Git Reset buffer
 
 ,gt 显示/关闭当前buffer被删除的行
 ,gl 显示当前文件的修改列表
-,gQ 显示当前项目的所有修改列表
 
-,gd 新建窗口显示当前文件的差异，即 git diff
+-- ,gd 新建窗口显示当前文件的差异，即 git diff
 ,gD 新建窗口显示当前文件的差异，即 git diff ~
 
 ,gp 浮动显示预览当前行的修改，即 diff
 ,gi 在当前行上面显示修改
 
 ,ge 选择当前修改过的代码 select hunk
-
-,gb 显示当前行上次修改提交的内容对比 blame line
 ,gc 在当前行的后面灰色显示上次该行的提交记录 toggle current line blame
+,gQ 显示当前项目的所有修改列表
 ```
 
 # snacks
 ```lua
-,lg  打开lazygit
-,us  打开/关闭拼写检查
-,uw  打开/关闭 折行
-,uL  打开/关闭 相对行号
-,ul  打开/关闭 行号
-,ud  打开/关闭 diagnostics
-,uc  打开/关闭 conceal
-,uT  打开/关闭 treesitter
-,ub  打开/关闭 背景
-,uh  打开/关闭 内嵌提示，inlay hint，函数的参数名提示等
-,ug  打开/关闭 indentline
-,uD  打开/关闭 只显示关注的代码，跳暗未使部分dim
+,us    打开/关闭 spell拼写检查
+,uw    打开/关闭 折行
+,uL    打开/关闭 相对行号
+,ul    打开/关闭 行号
+,ud    打开/关闭 diagnostics
+,uc    打开/关闭 conceal
+,uT    打开/关闭 treesitter
+,ub    打开/关闭 背景
+,uh    打开/关闭 内嵌提示，inlay hint，函数的参数名提示等
+,ug    打开/关闭 indentline
+,uD    打开/关闭 只显示关注的代码，跳暗未使部分dim
 
-,sz  打开/关闭 无干扰编程
-,.   打开/关闭 当前buffer的记事本
-,st  打开所有buffer 的记事本
-,sn  打开/关闭 历史提醒记录
-,un  隐藏提醒记录
+,uz    打开/关闭 无干扰zen编程
+,uC    搜索主题
+Ctrl+/ 打开终端
+,cR    重命名文件 
+,s/    打开搜索过的文本记录
 
-,ll  lazygit打开log记录
-,lg  打开lazygit
-,lf  lazygit 当前文件的历史记录
+-- notifier
+,sn    打开历史提醒记录
+,uy    显示所有的提醒
+,un    隐藏提醒记录
 
--- 类似fzf-lua和telescope
-,fr  搜索最近打开的文件
-,fb  搜索buffers
-,fc  搜索nvim配置文件
-,ff  搜索文件
-,fg  搜索git文件
-
-,gg  git的日志
-,sb  搜索单词显示行号
-,sB  搜索打开的buffer的单词
-,sg  Grep搜索
-,sw  搜索当前光标所在单词
-,sa  搜索自动执行的命令Autodcmds
-,sc  搜索历史命令
-,sC  搜索命令
-,sh  搜索帮助
-,sH  搜索高亮
-,sj  搜索跳转历史
-,sk  搜索快捷键
-,sl  搜索loclist
-,sM  搜索man pages
-,sm  搜索标记marks
-,sR  搜索Resume
-,sq  搜索quickfix
-,uC  搜索主题
-,sp  搜索项目project
+-- lsp
 ,ss  搜索函数树 lsp symbols
-,sd  搜索diagnostics
-,s"  搜索vim寄存器
-```
+,sS  搜索 lsp workspace symbols
 
+-- scratch
+,.     打开/关闭 当前buffer的记事本
+,st    打开 所有buffer 的记事本
+
+-- lazygit
+,lf  lazygit 当前文件的历史记录
+,lg  打开lazygit
+,ll  lazygit打开log记录
+
+-- Find 搜索文件
+,fc  查找nvim配置文件
+,ff  查找当前目录下的文件
+,fg  查找git所在项目的文件
+,fr  查找最近打开的文件
+,ft  查找文件更加聪明的算法
+,fb  查找当前打开的buffer
+,fB  查找所有的buffers，包括隐藏buffers
+,fp  搜索项目project
+
+-- Git
+,gd  git diff     搜索diff   
+,gf  git log file 搜索当前文件的log
+,gg  git log      搜索项目的log
+,gb  git branches 显示branch
+,gB  git browse   在浏览器中打开github项目
+,gs  git status   显示当前项目的status
+,gS  git stash
+
+-- diagnostics
+,sd  搜索diagnostics
+,sD  搜索 Buffer diagnostics
+
+-- 搜索文本
+,sg  Grep搜索
+,sw  搜索当前光标所在单词在当前目录中的所有文件的位置
+,sb  搜索打开的buffer的单词
+,sB  搜索单词显示行号
+
+-- search
+,sa  搜索自动执行的命令 autodcmds
+,sc  搜索使用过的历史命令 command history
+,sC  搜索系统的所有命令 commands
+,se  添加snacks的文件浏览器 explorer
+,sh  搜索帮助 help
+,sH  搜索高亮 highlights
+,si  搜索所有的图标 icons
+,sj  搜索跳转历史 jumps
+,sk  搜索快捷键 keymaps
+,sl  搜索 loclist
+,sm  搜索标记 marks
+,sM  搜索 man pages
+,sr  搜索 registers
+,sR  搜索 Resume
+,sq  搜索 quickfix list
+,su  搜索 undo tree
+```
 
 # surround
 ```lua
@@ -321,18 +324,13 @@ N            向前选择
 Esc          退出
 ```
 
-# outline
-```lua
-,2 显示函数树导航
-```
-
 # undotree
 查看undotre
 ```lua
 ,3
 ```
 
-# floaterm
+# toggleterm
 ```lua
 Ctrl-t 打开/关闭循环切换终端
 ```
