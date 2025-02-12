@@ -174,16 +174,11 @@ vim.keymap.set('n', "<leader>su", "<cmd>lua require('snacks').picker.undo()<cr>"
 ------------------------------------- gitsigns -----------------------------------
 -- 显示neovim的新闻
 vim.keymap.set('n', "<leader>pn", function() require('snacks').win({
-                        file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-                        width = 0.6, height = 0.6,
-                        wo = {
-                            spell = false,
-                            wrap = false,
-                            signcolumn = "yes",
-                            statuscolumn = " ",
-                            conceallevel = 3,
-                        },
-                    }) end, { desc = "Neovim News", })
+    file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+    width = 0.6, height = 0.6,
+    wo = { spell = false, wrap = false, signcolumn = "yes", statuscolumn = " ", conceallevel = 3, },
+}) end, { desc = "Neovim News", })
+
 -- Navigation
 vim.keymap.set('n', ']h', function() if vim.wo.diff then return ']c' end
         vim.schedule(function() require('gitsigns').next_hunk() end)
