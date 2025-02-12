@@ -48,7 +48,7 @@ require("lazy").setup({
         "lewis6991/gitsigns.nvim",
         dependencies = { "nvim-lua/plenary.nvim", },
         config = function()
-            require("conf.gitsigns")
+            require("conf.nvim-gitsigns")
         end,
     },
     -- 内置终端
