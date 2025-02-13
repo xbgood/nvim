@@ -1,9 +1,5 @@
--- https://github.com/lewis6991/gitsigns.nvim
--- TODO: 您也可以绑定一些快捷键位快速查看 git 信息
--- 参见：https://github.com/lewis6991/gitsigns.nvim/#keymaps
-
 require('gitsigns').setup {
-    signs = {
+    signs                        = {
         add          = { text = '┃' },
         change       = { text = '┃' },
         delete       = { text = '_' },
@@ -11,7 +7,7 @@ require('gitsigns').setup {
         changedelete = { text = '~' },
         untracked    = { text = '┆' },
     },
-    signs_staged = {
+    signs_staged                 = {
         add          = { text = '┃' },
         change       = { text = '┃' },
         delete       = { text = '_' },
@@ -32,7 +28,7 @@ require('gitsigns').setup {
     current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
     current_line_blame_opts      = {
         virt_text = true,
-        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        virt_text_pos = 'eol',   -- 'eol' | 'overlay' | 'right_align'
         delay = 1000,
         ignore_whitespace = false,
         virt_text_priority = 100,
@@ -41,10 +37,9 @@ require('gitsigns').setup {
     current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     sign_priority                = 6,
     update_debounce              = 100,
-    status_formatter             = nil, -- Use default
+    status_formatter             = nil,   -- Use default
     max_file_length              = 40000, -- Disable if file is longer than this (in lines)
     preview_config               = {
-        -- Options passed to nvim_open_win
         border = 'single',
         style = 'minimal',
         relative = 'cursor',

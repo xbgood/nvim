@@ -1,6 +1,3 @@
--- https://github.com/neovim/nvim-lspconfig
--- 更多样式定制，参见：https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
-
 local lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,

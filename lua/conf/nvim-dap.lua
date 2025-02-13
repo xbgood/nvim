@@ -1,5 +1,3 @@
--- https://github.com/mfussenegger/nvim-dap
-
 -- 设置调试相关的字符和颜色
 local dap_breakpoint_color = {
     breakpoint = {
@@ -23,8 +21,6 @@ vim.api.nvim_set_hl(0, 'DapBreakpoint', dap_breakpoint_color.breakpoint)
 vim.api.nvim_set_hl(0, 'DapLogPoint', dap_breakpoint_color.logpoing)
 vim.api.nvim_set_hl(0, 'DapStopped', dap_breakpoint_color.stopped)
 
--- 输入unicode的方法：ctrl + v + u 再输入unicode码
--- 可在https://www.nerdfonts.com/cheat-sheet查询想要的字符
 local dap_breakpoint = {
     error = {
         text = "",
@@ -63,16 +59,14 @@ vim.fn.sign_define('DapBreakpointCondition', dap_breakpoint.condition)
 vim.fn.sign_define('DapBreakpointRejected', dap_breakpoint.rejected)
 vim.fn.sign_define('DapLogPoint', dap_breakpoint.logpoint)
 vim.fn.sign_define('DapStopped', dap_breakpoint.stopped)
--- end dap
 
 --------------------------------- dap configurations -------------------------------
-
 local dap = require("dap")
 
 -- python
 dap.adapters.python = {
     type = 'executable',
-    command = '/usr/bin/python',
+    command = 'python',
     args = { '-m', 'debugpy.adapter' },
 }
 
@@ -82,43 +76,93 @@ dap.configurations.python = {
         request = 'launch',
         name = "Launch file",
         program = "${file}",
+        -- 在终端显示结果
+        -- console = "integratedTerminal",
         pythonPath = function()
             return '/usr/bin/python'
-        end
+        end,
+        stopOnEntry = true, -- 在入口处暂停
     },
 }
 
--- c/cpp
+-- gdb
 dap.adapters.gdb = {
     type = "executable",
-    command = "/usr/bin/gdb",
-    args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+    command = "gdb",
+    args = {
+        "-q", -- 不显示gdb的开机提示信息
+        "--interpreter=dap",
+    }
 }
 
+-- c
 dap.configurations.c = {
     {
         name = "Launch",
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            local default_file = vim.fn.expand("%:p:r") .. ".out"
+            if vim.fn.filereadable(default_file) == 1 then
+                -- 打开在overseer默认编译为file.out的可执行文件
+                return default_file
+            else
+                -- 如果不存在file.out可执行文件则手动输入c编译的可执行文件名
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end
         end,
         cwd = "${workspaceFolder}",
-        -- stopAtBeginningOfMainSubprogram = false,
-        stopAtEntry = true,
+        stopAtBeginningOfMainSubprogram = true,
+        stopOnEntry = true, -- 在入口处暂停
+        externalConsole = false,
+        runInTerminal = true,
     },
 }
 
+-- cpp
 dap.configurations.cpp = {
     {
         name = "Launch",
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            local default_file = vim.fn.expand("%:p:r") .. ".out"
+            if vim.fn.filereadable(default_file) == 1 then
+                -- 打开在overseer默认编译为file.out的可执行文件
+                return default_file
+            else
+                -- 如果不存在file.out可执行文件则手动输入cpp编译的可执行文件名
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end
         end,
         cwd = "${workspaceFolder}",
-        -- stopAtBeginningOfMainSubprogram = false,
-        stopAtEntry = true,
+        stopAtBeginningOfMainSubprogram = true,
+        stopOnEntry = true, -- 在入口处暂停
+        externalConsole = false,
+        runInTerminal = true,
+    },
+}
+
+-- rust
+dap.configurations.rust = {
+    {
+        name = "Launch",
+        type = "gdb",
+        request = "launch",
+        program = function()
+            local default_file = vim.fn.expand("%:p:r") .. ".out"
+            if vim.fn.filereadable(default_file) == 1 then
+                -- 打开在overseer默认编译为file.out的可执行文件
+                return default_file
+            else
+                -- 如果不存在file.out可执行文件则手动输入cpp编译的可执行文件名
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end
+        end,
+        cwd = "${workspaceFolder}",
+        stopAtBeginningOfMainSubprogram = true,
+        stopOnEntry = true, -- 在入口处暂停
+        externalConsole = false,
+        runInTerminal = true,
     },
 }

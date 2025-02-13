@@ -133,14 +133,77 @@ C-e       关闭或出现补全
 ```
 
 # nvim-dap
+对于脚本语言，按 `f9` 打上断点，然后按 `f5` 即可开始断点执行。
+
+对于编译语言如 `c/c++` 等，需要先编译成可执行文件，再按 `f9` 打上断点后，按 `f5` 开始执行，执行的时候需要输入可执行文件名，如 `a.out`，然后将可以调试了。
+
 ```lua
-F5   continue
-F9   toggle breakpoint
-F10  step into
-F11  step over
+F5   continue  开始执行
+F9   toggle breakpoint 打上断点
+F10  step into 进入函数单步调试
+F11  step over 跳过函数执行
 F12  step out
-F8   terminate
+F8   terminate 关闭调试界面
+
+,dq  关闭dap的调试
+,dl  运行到上一次的运行结果
+,du  打开关闭dap的ui界面
+,dt  step back
+,de  toggle pause
+,dr  toggle repl
+,dd  disconnect
+,dR  run to cursor
+,dc  添加自定义名字的断点
+,di  添加条件变量
+
+,de  evaluate
+,dE  evaluate input
+
+,dh  dap hover
+,dp  dap preview
+,df  dap frames
+,ds  dap scopes
 ```
+dapui 的配置主要以 element为基础，每个 element 代表一个提供对应功能的窗口。我们先来根据它默认的配置来讲解每部分的含义
+
+首先最上面的 icons 表示，各个部分显示的图标，这里分别定义了展开的，合并的以及当前位置的图标信息，我们可以观察一下变量栏或者调用栈显示信息的左侧就可以看到这里定义的图标。
+mappings 代表的是部分窗口动作定义的快捷键。例如上面定义的 expand = { “<CR>”, “<2-LeftMouse>” }表示可以在待展开项上按下回车或者鼠标左键双击来展开。
+
+element_mappings表示的是我们为某些窗口特意定制的一些快捷键。例如上面注释的是针对调用栈定义的快捷键。
+
+layouts代表布局，每个布局都有一个子table，而每个子table主要由 elements、size、position组成，它们分别代表采取该种布局的元素(也可以说是窗口)，窗口大小以及窗口的位置。窗口一般通过id来描述，每种窗口都有固定的ID，根据官方文档的描述，它支持这么几种窗口:
+
+- scopes显示全局或者当前局部变量，它支持的操作主要是 edit编辑变量的值、expand展开结构化的变量、repl将变量拷贝到repl窗口
+- stacks显示当前正在运行的线程以及它们对应的调用栈，它主要支持的操作是 open :运行代码到当前被选中的位置， toggle:打开或者关闭该窗口
+- watches显示我们需要追踪的变量，它支持的主要操作是 edit: 输入想要追踪的变量或者给对应的变量赋值。expand: 展开结构化的变量，remove:删除当前监视的变量，repl:将变量拷贝到repl窗口
+- breakpoints显示当前激活的断点。它支持的主要操作有 open:执行代码到当前选中的断点处, toggle :激活或者使当前断点无效
+- repl显示repl窗口
+- console显示控制台窗口
+
+这些窗口的这些操作的快捷键我们已经通过上方的 mappings做了定义了，只要保持光标在对应窗口然后按下快捷键就可以执行对应的窗口命令了。如果想要单独对窗口进行快捷键定义可以在element_mappings 中被注释的代码
+
+controls 部分配置的是在repl窗口上方显示的那一堆调试按钮。由于我们定义了一些快捷键，这些按钮没太大的作用。这里我不需要它显示调试用的按键，所以我就在 controls 项中设置 enabled = false 禁用它。
+
+floating、window、render则定义的是悬浮窗口样式和普通窗口的一些样式。这里就不深究了。
+
+repl 窗口的主要命令如下:
+```sh
+    .exit: 退出/关闭一个 repl 窗口
+    .c/.continue: 继续执行代码
+    .n/.next: 执行下一行代码
+    .into: 跳转到函数中继续执行
+    .out: 跳出函数
+    .scopes: 打印当前栈的一些变量信息
+    .threads: 打印线程信息
+    .frames: 打印当前线程的调用栈
+    .capabilities: 打印当前适配器实现的一些功能
+    .p 暂停当前运行的程序
+    .up                 Same as |dap.up|
+    .down               Same as |dap.down|
+    .goto               Same as |dap.goto_|
+```
+见 dap.repl.commands
+
 
 # lspsaga
 ```lua
@@ -476,7 +539,7 @@ t + x   到下一个x的前一个字符(按t前进，按T后退)
 ## 删除命令
 ```lua
 x       剪切光标后边的字符
-X       剪切光标前边的字符
+
 3x      剪切3个字符
 d0      剪切光标前的字符串
 d^      剪切至行首

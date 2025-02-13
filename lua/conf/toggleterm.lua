@@ -1,6 +1,5 @@
 require('toggleterm').setup({
-    -- 快捷键
-    open_mapping = [[<C-t>]],
+    open_mapping = [[<C-t>]], -- 快捷键
     direction = 'float',
     terminal_mappings = true,
     shell = vim.o.shell,
@@ -12,7 +11,7 @@ require('toggleterm').setup({
     shade_terminals = true,
     shading_factor = -80,
     shading_ratio = -6,
-    hide_numbers = true, -- hide the number column in toggleterm buffers
+    hide_numbers = true,
     size = 10,
 
     float_opts = {

@@ -82,14 +82,6 @@ require("lazy").setup({
             require("conf.comment")
         end,
     },
-    -- 现代化的任务管理系统
-    {
-        "stevearc/overseer.nvim",
-        opts = {},
-        config = function()
-            require("conf.overseer")
-        end,
-    },
     -- LSP 系列插件
     {
         -- LSP UI 美化
@@ -191,7 +183,10 @@ require("lazy").setup({
         -- markdown 文本显示格式
         {
             "MeanderingProgrammer/render-markdown.nvim",
-            dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+            dependencies = {
+                "nvim-treesitter/nvim-treesitter",
+                "nvim-tree/nvim-web-devicons"
+            },
             opts = {
                 render_modes = true,
                 pipe_table = { preset = 'round' },
@@ -204,13 +199,6 @@ require("lazy").setup({
             build = "cd app && npm install",
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         },
-        -- nvim 预览markdown中的图片
-        -- {
-        --     "3rd/image.nvim", opts = {},
-        --     config = function()
-        --         require("conf.images")
-        --     end
-        -- },
     },
     -- tab跳出括号
     {
@@ -243,37 +231,40 @@ require("lazy").setup({
             }
         end,
     },
+    -- 现代化的任务管理系统
+    {
+        "stevearc/overseer.nvim",
+        event = "VeryLazy",
+        -- opts = {},
+        config = function()
+            require("conf.nvim-overseer")
+        end,
+    },
     -- dap调试代码
     {
-        -- dap 核心调试插件
+        -- 提供基本的dap支持
         {
             "mfussenegger/nvim-dap",
-            event = "VeryLazy",
             config = function()
                 require('conf.nvim-dap')
             end,
         },
-        -- 类似vscode的ui显示
+        -- 提供类似VSCode的调试界面
         {
             "rcarriga/nvim-dap-ui",
             dependencies = {
                 "mfussenegger/nvim-dap",
                 "nvim-neotest/nvim-nio"
             },
-            opts = function()
-                local dap, dapui                                   = require("dap"), require("dapui")
-                dap.listeners.before.attach.dapui_config           = function() dapui.open() end
-                dap.listeners.before.launch.dapui_config           = function() dapui.open() end
-                dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-                dap.listeners.before.event_exited.dapui_config     = function() dapui.close() end
+            config = function()
+                require("conf.dapui")
             end,
         },
-        -- 显示变量值 virtual-text
+        -- 在调试的代码附近用虚显的文件显示变量信息
         {
             "theHamsta/nvim-dap-virtual-text",
             opts = {
-                -- eol 在行尾显示，inline 在变量定义处显示
-                virt_text_pos = 'eol',
+                virt_text_pos = 'eol', -- eol 在行尾显示，inline 在变量定义处显示
             },
         },
     },
