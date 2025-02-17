@@ -92,7 +92,8 @@ dap.adapters.gdb = {
     args = {
         "-q", -- 不显示gdb的开机提示信息
         "--interpreter=dap",
-    }
+        "--eval-command", "set print pretty on",
+    },
 }
 
 -- c
@@ -113,9 +114,11 @@ dap.configurations.c = {
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,
-        stopOnEntry = true, -- 在入口处暂停
-        externalConsole = false,
-        runInTerminal = true,
+        -- 在入口处暂停
+        stopOnEntry = true,
+        MIMode = "gdb",
+        -- 允许在repl中直接输入gdb命令
+        miDebuggerArgs = '-interpreter=console',
     },
 }
 
@@ -137,9 +140,11 @@ dap.configurations.cpp = {
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,
-        stopOnEntry = true, -- 在入口处暂停
-        externalConsole = false,
-        runInTerminal = true,
+        -- 在入口处暂停
+        stopOnEntry = true,
+        MIMode = "gdb",
+        -- 允许在repl中直接输入gdb命令
+        miDebuggerArgs = '-interpreter=console',
     },
 }
 
@@ -161,8 +166,7 @@ dap.configurations.rust = {
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,
-        stopOnEntry = true, -- 在入口处暂停
-        externalConsole = false,
-        runInTerminal = true,
+        -- 在入口处暂停
+        stopOnEntry = true,
     },
 }

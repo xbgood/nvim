@@ -161,6 +161,7 @@ F8   terminate 关闭调试界面
 
 ,dh  dap hover
 ,dp  dap preview
+
 ,df  dap frames
 ,ds  dap scopes
 ```

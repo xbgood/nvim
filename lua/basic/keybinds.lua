@@ -39,13 +39,13 @@ vim.keymap.set({ 'n', 'v' }, "<leader>1", "<cmd>Yazi<CR>", { desc = "FileManager
 
 
 ------------------------------- overseer 任务管理系统 ---------------------------
-vim.keymap.set('n', "<leader>ot", "<cmd>OverseerToggle<cr>", { desc = "Task List" })
-vim.keymap.set('n', "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Run task"})
-vim.keymap.set('n', "<leader>oq", "<cmd>OverseerQuickAction<cr>", { desc = "Action recent task" })
-vim.keymap.set('n', "<leader>oi", "<cmd>OverseerInfo<cr>",        { desc = "Overseer Info" })
-vim.keymap.set('n', "<leader>ob", "<cmd>OverseerBuild<cr>",       { desc = "Build Task" })
-vim.keymap.set('n', "<leader>oa", "<cmd>OverseerTaskAction<cr>",  { desc = "Task action" })
-vim.keymap.set('n', "<leader>oc", "<cmd>OverseerClearCache<cr>",  { desc = "Clear cache" })
+vim.keymap.set('n', "<leader>ot", "<cmd>OverseerToggle<cr>",      { desc = "Overseer: Task List" })
+vim.keymap.set('n', "<leader>or", "<cmd>OverseerRun<cr>",         { desc = "Overseer: Run task"})
+vim.keymap.set('n', "<leader>oq", "<cmd>OverseerQuickAction<cr>", { desc = "Overseer: Action recent task" })
+vim.keymap.set('n', "<leader>oi", "<cmd>OverseerInfo<cr>",        { desc = "Overseer: Info" })
+vim.keymap.set('n', "<leader>ob", "<cmd>OverseerBuild<cr>",       { desc = "Overseer: Build Task" })
+vim.keymap.set('n', "<leader>oa", "<cmd>OverseerTaskAction<cr>",  { desc = "Overseer: Task action" })
+vim.keymap.set('n', "<leader>oc", "<cmd>OverseerClearCache<cr>",  { desc = "Overseer: Clear cache" })
 
 -- 定义不同语言的编译运行快捷键
 vim.keymap.set("n", "<leader>cb",
@@ -93,38 +93,38 @@ vim.keymap.set('n', "<leader>sw", "<cmd>lua require('grug-far').open({ prefills 
 
 ------------------------------------- markdown  -----------------------------------
 -- markdown 预览
-vim.keymap.set('n', "<leader>pp", ":MarkdownPreview<CR>", { desc = "Markdown Perview" })
+vim.keymap.set('n', "<leader>pp", ":MarkdownPreview<CR>", { desc = "Markdown: Perview" })
 -- markdown插入图片
-vim.keymap.set('n', "<leader>pi", "<cmd>PasteImage<CR>",  { desc = "Paste Image" })
+vim.keymap.set('n', "<leader>pi", "<cmd>PasteImage<CR>",  { desc = "Markdown: Paste Image" })
 
 
 -------------------------------------- dap ----------------------------------------
-vim.keymap.set({ 'i', 'n', 'v' }, "<F5>",  function() require('dap').continue() end,  { desc = "continue" })
-vim.keymap.set({ 'i', 'n', 'v' }, "<F12>", function() require('dap').step_out() end,  { desc = "step out" })
-vim.keymap.set({ 'i', 'n', 'v' }, "<F9>",  function() require('dap').toggle_breakpoint() end, { desc = "toggle breakpoint" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F5>",  function() require('dap').continue() end,  { desc = "DAP: continue" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F12>", function() require('dap').step_out() end,  { desc = "DAP: step out" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F9>",  function() require('dap').toggle_breakpoint() end, { desc = "DAP: toggle breakpoint" })
 -- vim.keymap.set('n', '<Leader>db', function() require('dap').set_breakpoint() end, { desc = "set breakpoint" })
-vim.keymap.set({ 'i', 'n', 'v' }, "<F10>", function() require('dap').step_into() end, { desc = "step into" })
-vim.keymap.set({ 'i', 'n', 'v' }, "<F11>", function() require('dap').step_over() end, { desc = "step over" })
-vim.keymap.set({ 'i', 'n', 'v' }, "<F8>",  function() require('dap').terminate() end, { desc = "terminate" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F10>", function() require('dap').step_into() end, { desc = "DAP: step into" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F11>", function() require('dap').step_over() end, { desc = "DAP: step over" })
+vim.keymap.set({ 'i', 'n', 'v' }, "<F8>",  function() require('dap').terminate() end, { desc = "DAP: terminate" })
 
-vim.keymap.set('n', '<Leader>dq', function() require('dap').close() end, { desc = "dap close" })
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "run last" })
-vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "toggle ui" })
-vim.keymap.set('n', '<Leader>dt', function() require('dap').step_back() end, { desc = "step back" })
-vim.keymap.set('n', '<Leader>de', function() require('dap').pause.toggle() end, { desc = "dap pause" })
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.toggle() end, { desc = "toggle repl" })
-vim.keymap.set('n', '<Leader>dd', function() require('dap').disconnect() end, { desc = "dap disconnect" })
-vim.keymap.set('n', '<Leader>dR', function() require('dap').run_to_cursor() end, { desc = "Run to Cursor" })
-vim.keymap.set('n', '<Leader>dc', function() require('dap').set_breakpoint(vim.fn.input '[Condition] > ') end, {desc = "conditional breakpoint" })
-vim.keymap.set('n', '<Leader>di', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "input breakpoint" })
+vim.keymap.set('n', '<Leader>dq', function() require('dap').close() end, { desc = "DAP: close" })
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "DAP: run last" })
+vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "DAP: toggle ui" })
+vim.keymap.set('n', '<Leader>dt', function() require('dap').step_back() end, { desc = "DAP: step back" })
+vim.keymap.set('n', '<Leader>de', function() require('dap').pause.toggle() end, { desc = "DAP: pause" })
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.toggle() end, { desc = "DAP: toggle repl" })
+vim.keymap.set('n', '<Leader>dd', function() require('dap').disconnect() end, { desc = "DAP: disconnect" })
+vim.keymap.set('n', '<Leader>dR', function() require('dap').run_to_cursor() end, { desc = "DAP: Run to Cursor" })
+vim.keymap.set('n', '<Leader>dc', function() require('dap').set_breakpoint(vim.fn.input '[Condition] > ') end, {desc = "DAP: conditional breakpoint" })
+vim.keymap.set('n', '<Leader>di', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "DAP: input breakpoint" })
 
-vim.keymap.set('n', '<Leader>de', function() require('dapui').eval() end, { desc = "evaluate" })
-vim.keymap.set('n', '<Leader>dE', function() require('dapui').eval(vim.fn.input '[Expression] > ') end, { desc = "evaluate input" })
+vim.keymap.set('n', '<Leader>de', function() require('dapui').eval() end, { desc = "DAP: evaluate" })
+vim.keymap.set('n', '<Leader>dE', function() require('dapui').eval(vim.fn.input '[Expression] > ') end, { desc = "DAP: evaluate input" })
 
-vim.keymap.set({'n', 'v'}, '<Leader>dh', function() require('dap.ui.widgets').hover() end,   { desc = "dap hover" })
-vim.keymap.set({'n', 'v'}, '<Leader>dp', function() require('dap.ui.widgets').preview() end, { desc = "dap preview" })
-vim.keymap.set('n', '<Leader>df', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.frames) end, { desc = "dap frames" })
-vim.keymap.set('n', '<Leader>ds', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.scopes) end, { desc = "dap scopes" })
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function() require('dap.ui.widgets').hover() end,   { desc = "DAP: hover" })
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function() require('dap.ui.widgets').preview() end, { desc = "DAP: preview" })
+vim.keymap.set('n', '<Leader>df', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.frames) end, { desc = "DAP: frames" })
+vim.keymap.set('n', '<Leader>ds', function() local widgets = require('dap.ui.widgets') widgets.centered_float(widgets.scopes) end, { desc = "DAP: scopes" })
 -- vim.keymap.set({'n', 'v'}, '<Leader>ds', function() require('dap.ui.widgets').scopes() end,  { desc = "dap scopes" })
 -- vim.keymap.set('n', '<Leader>dS', function() require('dap').session() end, { desc = "dap session" })
 -- vim.keymap.set('n', '<Leader>dk', function() require('dap').repl.open() end, { desc = "open repl" })
@@ -167,9 +167,9 @@ vim.keymap.set('n', "<leader>.", "<cmd>lua require('snacks').scratch()<cr>", { d
 vim.keymap.set('n', "<leader>st", "<cmd>lua require('snacks').scratch.select()<cr>", { desc = "Scratch Select" })
 
 -- LazyGit
-vim.keymap.set('n', "<leader>lf", "<cmd>lua require('snacks').lazygit.log_file()<cr>", { desc = "Lazygit Current File History" })
-vim.keymap.set('n', "<leader>lg", "<cmd>lua require('snacks').lazygit()<cr>", { desc = "Lazygit" })
-vim.keymap.set('n', "<leader>ll", "<cmd>lua require('snacks').lazygit.log()<cr>", { desc = "Lazygit Log (cwd)" })
+vim.keymap.set('n', "<leader>lf", "<cmd>lua require('snacks').lazygit.log_file()<cr>", { desc = "Lazygit: Current File Git History" })
+vim.keymap.set('n', "<leader>lg", "<cmd>lua require('snacks').lazygit()<cr>", { desc = "Lazygit: Toggle Open" })
+vim.keymap.set('n', "<leader>ll", "<cmd>lua require('snacks').lazygit.log()<cr>", { desc = "Lazygit: Git Log (cwd)" })
 
 -- Find
 vim.keymap.set('n', "<leader>fc", "<cmd>lua require('snacks').picker.files({ cwd = vim.fn.stdpath('config') }) <cr>", { desc = "Find Config File" })
@@ -333,14 +333,16 @@ vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Lsp Code Act
 -- 函数树，替代来aerial.nvim
 vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Lsp Outline" })
 -- 添加工作目录
-vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
+vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = "Workspace: Add Folder" })
 -- 移除当前文件的详细目录
-vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
+vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = "Workspace: Remove Folder" })
 -- 列出当前nvim的工作目录
-vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "List Workspace Folders" })
+vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "Workspace: List Folders" })
 
 -- 代码自动格式化，不过这个用插件ok
 vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, } end, { desc = "Format" })
 
 -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
 
+
+vim.g.snacks_animate = true

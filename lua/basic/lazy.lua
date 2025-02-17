@@ -18,7 +18,7 @@ require("lazy").setup({
     -- 自动保存
     { "Pocco81/auto-save.nvim" },
     -- 光标移动时突出显示
-    { 'danilamihailov/beacon.nvim' },
+    { "sphamba/smear-cursor.nvim", opts = {}},
     -- 快速的jk
     { "rainbowhxch/accelerated-jk.nvim" },
     -- 显示网页色
@@ -117,20 +117,18 @@ require("lazy").setup({
             dependencies = "rafamadriz/friendly-snippets",
             opts = {
                 keymap = {
-                    preset = "enter",
-                    ["<Up>"] = { "select_prev", "fallback" },
+                    preset      = "enter",
                     ["<S-Tab>"] = { "select_prev", "fallback" },
-                    ["<C-p>"] = { "select_prev", "fallback" },
-                    ["<Down"] = { "select_next", "fallback" },
-                    ["<Tab>"] = { "select_next", "fallback" },
-                    ["<C-n>"] = { "select_next", "fallback" },
+                    ["<C-p>"]   = { "select_prev", "fallback" },
+                    ["<Up>"]    = { "select_prev", "fallback" },
+                    ["<Down"]   = { "select_next", "fallback" },
+                    ["<Tab>"]   = { "select_next", "fallback" },
+                    ["<C-n>"]   = { "select_next", "fallback" },
 
-                    ["<C-e>"] = { "hide" },
-                    ["<C-y>"] = { "select_and_accept" },
-
-                    ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-                    ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-
+                    ["<C-e>"]   = { "hide" },
+                    ["<C-y>"]   = { "select_and_accept" },
+                    ["<C-b>"]   = { "scroll_documentation_up", "fallback" },
+                    ["<C-f>"]   = { "scroll_documentation_down", "fallback" },
                     ["<C-tab>"] = { "show", "show_documentation", "hide_documentation" },
                 },
 
@@ -139,11 +137,19 @@ require("lazy").setup({
                     nerd_font_variant = "mono",
                 },
 
+                cmdline = {
+                    enabled = false,
+                },
+
                 sources = {
                     default = { "lsp", "path", "snippets", "buffer", "markdown" },
                     -- 默认关掉cmdline，否则命令行输入时候会很多干扰
-                    cmdline = {},
                     providers = {
+                        lsp = {
+                            name = 'LSP',
+                            module = 'blink.cmp.sources.lsp',
+                            enabled = true,
+                        },
                         -- markdown 模块
                         markdown = {
                             name = "RenderMarkdown",

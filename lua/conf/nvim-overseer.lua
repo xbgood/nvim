@@ -150,7 +150,7 @@ require("overseer").setup({
 
 ------------------------------------------------------ 配置编译源码的命令 -------------------------------
 local overseer = require("overseer")
--- Define a task to compile C code
+-- gcc
 overseer.register_template(
     {
         name = "gcc build",
@@ -195,7 +195,7 @@ overseer.register_template(
     }
 )
 
-
+-- g++ run
 overseer.register_template({
     name = "g++ build",
 
@@ -241,6 +241,7 @@ overseer.register_template({
     condition = { filetype = { "cpp" } },
 })
 
+-- rust
 overseer.register_template({
     name = "rust build",
 
@@ -249,7 +250,7 @@ overseer.register_template({
         local outfile = vim.fn.expand("%:p:r") .. ".out"
 
         return {
-            cmd = { "rustc", file, "-o", outfile },
+            cmd = { "rustc", file, "-o", outfile, "-g" },
             components = {
                 { "open_output", direction = "float" },
                 -- 运行结束删除可执行文件
@@ -269,7 +270,7 @@ overseer.register_template({
         local outfile = vim.fn.expand("%:p:r") .. ".out"
 
         return {
-            cmd = { "rustc", file, "-o", outfile, "&&", outfile },
+            cmd = { "rustc", file, "-o", outfile, "-g", "&&", outfile },
             components = {
                 { "open_output", direction = "float" },
                 -- 运行结束删除可执行文件
@@ -282,6 +283,7 @@ overseer.register_template({
     condition = { filetype = { "rust" } },
 })
 
+-- go
 overseer.register_template({
     name = "go run",
 
@@ -303,6 +305,8 @@ overseer.register_template({
     end,
     condition = { filetype = { "go" } },
 })
+
+-- script
 overseer.register_template({
     name = "script run",
 
