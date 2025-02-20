@@ -49,7 +49,7 @@
 }
 .markdown-body {
   /* font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-  font-family: "Source Code Pro", "Source Han Sans CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
+  font-family: "Hasklug Nerd Font", "AR PL UKai CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
   font-size: 16px;
   color: var(--color-text-primary);
   line-height: 1.6;
@@ -222,7 +222,7 @@
   display: inline-block;
   padding: 5px 6px;
   /* font: 14px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; */
-  font: 14px  "Source Code Pro", "Source Han Sans CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
+  font: 14px "Hasklug Nerd Font", "AR PL UKai CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
   line-height: 10px;
   color: var(--color-kbd-foreground);
   vertical-align: middle;
@@ -262,7 +262,7 @@
 }
 .markdown-body code {
   /* font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; */
-  font-family: "Source Code Pro", "Source Han Sans CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
+  font-family: "Hasklug Nerd Font", "AR PL UKai CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
@@ -300,7 +300,7 @@
 }
 .task-list-item input {
   /* font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-  font: 13px/1.4  "Source Code Pro", "Source Han Sans CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
+  font: 13px/1.4 "Hasklug Nerd Font", "AR PL UKai CN", "Cascadia Mono PL", "JetBrains Mono", "Fira Code Light", "Mononoki Nerd Font", "PT mono";
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }
