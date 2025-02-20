@@ -17,10 +17,10 @@ require("lazy").setup({
     { "mg979/vim-visual-multi" },
     -- 自动保存
     { "Pocco81/auto-save.nvim" },
-    -- 光标移动时突出显示
-    { "sphamba/smear-cursor.nvim", opts = {}},
     -- 快速的jk
     { "rainbowhxch/accelerated-jk.nvim" },
+    -- 光标移动时突出显示
+    { "sphamba/smear-cursor.nvim",          opts = {} },
     -- 显示网页色
     { 'brenoprata10/nvim-highlight-colors', opts = {} },
     -- 顶部状态栏
@@ -35,14 +35,20 @@ require("lazy").setup({
     { "folke/flash.nvim",                   opts = {}, event = "VeryLazy" },
     -- yazi 文件浏览器
     { "mikavilpas/yazi.nvim",               opts = {}, event = "VeryLazy" },
-    -- 键位绑定器
-    { "folke/which-key.nvim",               opts = {}, event = "VeryLazy" },
     -- markdown 图片插入
     { "HakonHarnes/img-clip.nvim",          opts = {}, event = "VeryLazy" },
     -- 自动匹配括号
     { "windwp/nvim-autopairs",              opts = {}, event = "InsertEnter" },
     -- 包裹修改
     { "kylechui/nvim-surround",             opts = {}, event = "VeryLazy" },
+    -- 键位绑定器
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            icons = { separator = "", },
+        },
+    },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
         "lewis6991/gitsigns.nvim",
@@ -191,7 +197,7 @@ require("lazy").setup({
             "MeanderingProgrammer/render-markdown.nvim",
             dependencies = {
                 "nvim-treesitter/nvim-treesitter",
-                "nvim-tree/nvim-web-devicons"
+                "nvim-tree/nvim-web-devicons",
             },
             opts = {
                 render_modes = true,
