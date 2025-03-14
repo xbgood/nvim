@@ -200,8 +200,15 @@ require("lazy").setup({
                 "nvim-tree/nvim-web-devicons",
             },
             opts = {
-                render_modes = true,
+                latex = { enabled = false, },
+                sign  = { enabled = false, },
                 pipe_table = { preset = 'round' },
+                -- indent = {
+                --     enabled = true,
+                --     per_level = 4,
+                --     skip_level = 0,
+                --     skip_heading = true,
+                -- }
             },
         },
         -- markdown 预览
