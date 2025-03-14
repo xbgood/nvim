@@ -288,12 +288,15 @@
 }
 .markdown-body strong {
   font-weight: bold;
+  color: #e03e3e;
 }
 .markdown-body em {
   font-style: italic;
+  color: #9a490e;
 }
 .markdown-body del {
   text-decoration: line-through;
+  color: #3a990e;
 }
 .task-list-item {
   list-style-type: none;
