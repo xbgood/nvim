@@ -148,7 +148,8 @@ require("lazy").setup({
                 },
 
                 sources = {
-                    default = { "lsp", "path", "snippets", "buffer", "markdown" },
+                    default = { "lsp", "path", "snippets", "buffer" },
+
                     -- 默认关掉cmdline，否则命令行输入时候会很多干扰
                     providers = {
                         lsp = {
@@ -156,13 +157,10 @@ require("lazy").setup({
                             module = 'blink.cmp.sources.lsp',
                             enabled = true,
                         },
-                        -- markdown 模块
-                        markdown = {
-                            name = "RenderMarkdown",
-                            module = "render-markdown.integ.blink",
-                            fallbacks = { "lsp" },
-                        },
                     },
+
+                    -- markview的markdown 模块
+                    per_filetype = { markdown = { "markview" }, },
                 },
 
                 -- 实验性质的功能
@@ -194,23 +192,14 @@ require("lazy").setup({
     {
         -- markdown 文本显示格式
         {
-            "MeanderingProgrammer/render-markdown.nvim",
-            dependencies = {
-                "nvim-treesitter/nvim-treesitter",
-                "nvim-tree/nvim-web-devicons",
-            },
+            "OXY2DEV/markview.nvim",
+            lazy = false,
+            dependencies = { "nvim-tree/nvim-web-devicons", },
             opts = {
-                latex = { enabled = false, },
-                sign  = { enabled = false, },
-                pipe_table = { preset = 'round' },
-                -- indent = {
-                --     enabled = true,
-                --     per_level = 4,
-                --     skip_level = 0,
-                --     skip_heading = true,
-                -- }
-            },
+                code_blocks = { sign = false, label_direction = "left" },
+            }
         },
+
         -- markdown 预览
         {
             "iamcco/markdown-preview.nvim",
