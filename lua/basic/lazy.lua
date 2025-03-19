@@ -9,8 +9,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- 中文文档
-    { "yianwillis/vimcdoc" },
     -- 精美弹窗
     { "rcarriga/nvim-notify" },
     -- 多光标模式
@@ -203,8 +201,8 @@ require("lazy").setup({
         -- markdown 预览
         {
             "iamcco/markdown-preview.nvim",
+            build = "cd app && bash install.sh",
             ft = { "markdown" },
-            build = "cd app && npm install",
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         },
     },
