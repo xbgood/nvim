@@ -8,7 +8,9 @@ vim.o.shortmess = "atI"
 vim.o.updatetime = 100
 -- 设定等待按键时长的毫秒数
 vim.o.timeoutlen = 500
--- 是否在屏幕最后一行显示命令
+-- 底部显示当前模式
+vim.o.showmode = true
+-- 命令模式下显示输入的命令
 vim.o.showcmd = true
 -- 显示左侧的图标提示列
 vim.o.signcolumn = "yes"
@@ -77,7 +79,7 @@ vim.o.showmatch = true
 -- 命名行模式智能补全
 vim.o.wildmenu = true
 -- 设定命令的补全列表
-vim.o.wildmode = "list:longest,full"
+vim.o.wildmode = "longest:full"
 -- 代码补全
 vim.o.completeopt = "menuone,preview,noselect"
 -- 设定自带补全的来源

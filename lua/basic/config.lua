@@ -28,9 +28,13 @@ setup_undotree()
 vim.diagnostic.config {
     --  关闭diagnostic 设置
     -- virtual_text = false,
+
+    -- 设置diagnostic 前缀
     virtual_text = { prefix = "●" },
+
     severity_sort = true,
     update_in_insert = false,
+
     -- 设置符号栏符号
     signs = {
         text = {

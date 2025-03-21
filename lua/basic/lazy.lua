@@ -9,8 +9,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- 精美弹窗
-    { "rcarriga/nvim-notify" },
     -- 多光标模式
     { "mg979/vim-visual-multi" },
     -- 自动保存
@@ -29,6 +27,8 @@ require("lazy").setup({
     { "MagicDuck/grug-far.nvim",            opts = {} },
     -- 底部美丽的状态栏
     { "nvim-lualine/lualine.nvim",          opts = {} },
+    -- 美丽的消息通知
+    { "folke/noice.nvim",                   opts = {}, event = "VeryLazy" },
     -- 快速跳转
     { "folke/flash.nvim",                   opts = {}, event = "VeryLazy" },
     -- yazi 文件浏览器
@@ -43,9 +43,7 @@ require("lazy").setup({
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        opts = {
-            icons = { separator = "", },
-        },
+        opts = { icons = { separator = "" } },
     },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
@@ -71,13 +69,6 @@ require("lazy").setup({
         init = function()
             vim.g.vimtex_view_method = "zathura"
         end
-    },
-    -- 美丽的消息通知
-    {
-        "folke/noice.nvim",
-        opts = {},
-        event = "VeryLazy",
-        dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     },
     -- 代码注释
     {

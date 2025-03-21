@@ -345,4 +345,3 @@ vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, 
 -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
 
 
-vim.g.snacks_animate = true
