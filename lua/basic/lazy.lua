@@ -98,7 +98,7 @@ require("lazy").setup({
                 config = function()
                     require("mason-lspconfig").setup({
                         ensure_installed = {
-                            "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "ast_grep", "jsonls",
+                            "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
                             "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "asm_lsp", "pyright", "texlab"
                         },
                     })
@@ -133,29 +133,59 @@ require("lazy").setup({
                 },
 
                 cmdline = {
-                    enabled = false,
+                    completion = {
+                        -- 幽灵文本：后面灰色提示的文本
+                        ghost_text = { enabled = true },
+                        -- 弹窗列表
+                        menu = { auto_show = false },
+                    }
+                },
+
+                -- 补全配置
+                completion = {
+                    documentation = { auto_show = true },
+                    ghost_text = { enabled = true },
+                    list = {
+                        selection = {
+                            preselect = true,
+                            auto_insert = true,
+                        },
+                    },
+                    menu = {
+                        draw = {
+                            treesitter = { 'lsp' },
+                            columns = {
+                                {
+                                    "label",
+                                    "label_description",
+                                    gap = 1,
+                                },
+                                {
+                                    "kind_icon", -- 图标
+                                    -- "kind", -- 类型，文本提示
+                                }
+                            }
+                        },
+                    },
                 },
 
                 sources = {
                     default = { "lsp", "path", "snippets", "buffer" },
 
-                    -- 默认关掉cmdline，否则命令行输入时候会很多干扰
                     providers = {
                         lsp = {
                             name = 'LSP',
                             module = 'blink.cmp.sources.lsp',
+                            opts = {},
                             enabled = true,
+                            async = false,
                         },
                     },
-
-                    -- markview的markdown 模块
-                    per_filetype = { markdown = { "markview" }, },
                 },
 
                 -- 实验性质的功能
                 signature = { enabled = true },
             },
-            opts_extend = { "sources.default" },
         },
     },
     -- 语法高亮
@@ -344,9 +374,9 @@ require("lazy").setup({
     -- 主题颜色
     {
         { "rose-pine/neovim",       name = "rosepine", },
-        { "catppuccin/nvim",        name = "catppuccin", },
+        -- { "catppuccin/nvim",        name = "catppuccin", },
         { "EdenEast/nightfox.nvim", name = "nightfox" },
-        { "sainnhe/everforest",     name = "everforest" },
-        { "folke/tokyonight.nvim",  name = "tokyonight" },
+        -- { "sainnhe/everforest",     name = "everforest" },
+        -- { "folke/tokyonight.nvim",  name = "tokyonight" },
     },
 })

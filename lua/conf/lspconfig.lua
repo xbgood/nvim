@@ -1,8 +1,3 @@
-local lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-}
-
 -- require('lspconfig').ltex.setup{}
 require('lspconfig').texlab.setup {}
 require('lspconfig').ast_grep.setup {}
@@ -10,40 +5,50 @@ require('lspconfig').cssls.setup {}
 require('lspconfig').jsonls.setup {}
 require('lspconfig').prosemd_lsp.setup {}
 require('lspconfig').yamlls.setup {}
-require('lspconfig').ts_ls.setup {
-    flags = lsp_flags,
-}
-require('lspconfig').rust_analyzer.setup {
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-        ["rust-analyzer"] = {}
-    }
-}
+require('lspconfig').ts_ls.setup {}
+require('lspconfig').gopls.setup {}
 require('lspconfig').bashls.setup {
-    flags = lsp_flags,
     cmd = { 'bash-language-server', "start" },
     filetypes = { "sh" },
     single_file_support = true,
 }
+require('lspconfig').asm_lsp.setup {
+    filetypes = { "s", "asm", "vmasm" },
+    cmd = { "asm-lsp" },
+    single_file_support = true,
+}
 require('lspconfig').clangd.setup {
-    flags = lsp_flags,
     cmd = { 'clangd' },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     single_file_support = true,
 }
 require('lspconfig').cmake.setup {
-    flags = lsp_flags,
     cmd = { 'cmake-language-server' },
     filetypes = { 'cmake' },
     init_options = { buildDirectory = "build" },
     single_file_support = true,
 }
-require('lspconfig').gopls.setup {
-    flags = lsp_flags,
+require('lspconfig').emmet_ls.setup {
+    filetypes = { "astro", "css", "eruby", "html", "htmldjango",
+        "javascriptreact", "less", "pug", "sass", "scss",
+        "svelte", "typescriptreact", "vue", "htmlangular" },
+    cmd = { "emmet-ls", "--stdio" },
+    single_file_support = true,
+}
+require('lspconfig').rust_analyzer.setup {
+    cmd = { 'rust-analyzer' },
+    filetypes = { "rust" },
+    single_file_support = true,
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
+    settings = {
+        ['rust-analyzer'] = {
+            diagnostics = {
+                enable = true,
+            }
+        }
+    },
 }
 require('lspconfig').lua_ls.setup {
-    flags = lsp_flags,
     name = 'lua_ls',
     cmd = { 'lua-language-server' },
     single_file_support = true,
@@ -63,19 +68,8 @@ require('lspconfig').lua_ls.setup {
         },
     },
 }
-require('lspconfig').emmet_ls.setup {
-    filetypes = { "astro", "css", "eruby", "html", "htmldjango", "javascriptreact", "less", "pug", "sass", "scss", "svelte", "typescriptreact", "vue", "htmlangular" },
-    cmd = { "emmet-ls", "--stdio" },
-    single_file_support = true,
-}
-require('lspconfig').asm_lsp.setup {
-    filetypes = { "s", "asm", "vmasm" },
-    cmd = { "asm-lsp" },
-    single_file_support = true,
-}
 require('lspconfig').pyright.setup {
     init_options = { doucumentFormatting = true, },
-    flags = lsp_flags,
     filetypes = { "python" },
     cmd = { "pyright-langserver", "--stdio" },
     single_file_support = true,
