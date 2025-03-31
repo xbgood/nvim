@@ -45,6 +45,15 @@ require("lazy").setup({
         event = "VeryLazy",
         opts = { icons = { separator = "" } },
     },
+    -- 现代化的任务管理系统
+    {
+        "stevearc/overseer.nvim",
+        event = "VeryLazy",
+        -- opts = {},
+        config = function()
+            require("conf.nvim-overseer")
+        end,
+    },
     -- 为了能让状态栏显示 git 信息，所以这个插件是必须的
     {
         "lewis6991/gitsigns.nvim",
@@ -52,14 +61,6 @@ require("lazy").setup({
         config = function()
             require("conf.nvim-gitsigns")
         end,
-    },
-    -- 内置终端
-    {
-        'akinsho/toggleterm.nvim',
-        version = "*",
-        config = function()
-            require("conf.toggleterm")
-        end
     },
     -- latex 支持
     {
@@ -73,9 +74,75 @@ require("lazy").setup({
     -- 代码注释
     {
         "numToStr/Comment.nvim",
-        config = function()
-            require("conf.comment")
-        end,
+        opts = {
+            padding = true,
+            sticky = true,
+            ignore = nil,
+            toggler = {
+                line = "gcc",  -- 切换行注释
+                block = "gbc", --- 切换块注释
+            },
+            opleader = {
+                line = "gc",  -- 可视模式下的行注释
+                block = "gb", -- 可视模式下的块注释
+            },
+            extra = {
+                above = "gcO", -- 在当前行上方新增行注释
+                below = "gco", -- 在当前行下方新增行注释
+                eol = "gcA",   -- 在当前行行尾新增行注释
+            },
+            mappings = {
+                ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+                basic = true,
+                ---Extra mapping; `gco`, `gcO`, `gcA`
+                extra = true,
+            },
+            pre_hook = nil,
+            post_hook = nil,
+
+        },
+    },
+    -- 内置终端
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        opts = {
+            open_mapping = [[<C-t>]], -- 快捷键
+            direction = 'float',
+            terminal_mappings = true,
+            shell = vim.o.shell,
+            start_in_insert = true,
+            close_on_exit = true,
+            auto_scroll = true,
+            persist_size = true,
+            persist_mode = true,
+            shade_terminals = true,
+            shading_factor = -80,
+            shading_ratio = -6,
+            hide_numbers = true,
+            size = 10,
+
+            float_opts = {
+                close_on_esc = true,
+                shading_factor = 0.9,
+                relative = 'editor',
+                border = 'curved',
+                width = 80,
+                height = 20,
+                row = 100,
+                col = 200,
+                winblend = 3,
+                title_pos = 'left',
+                zindex = 10,
+            },
+
+            winbar = {
+                enabled = true,
+                name_formatter = function(term)
+                    return term.name
+                end
+            },
+        }
     },
     -- LSP 系列插件
     {
@@ -155,11 +222,7 @@ require("lazy").setup({
                         draw = {
                             treesitter = { 'lsp' },
                             columns = {
-                                {
-                                    "label",
-                                    "label_description",
-                                    gap = 1,
-                                },
+                                { "label", "label_description", gap = 1, },
                                 {
                                     "kind_icon", -- 图标
                                     -- "kind", -- 类型，文本提示
@@ -256,15 +319,6 @@ require("lazy").setup({
                 ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
                 exclude = {} -- tabout will ignore these filetypes
             }
-        end,
-    },
-    -- 现代化的任务管理系统
-    {
-        "stevearc/overseer.nvim",
-        event = "VeryLazy",
-        -- opts = {},
-        config = function()
-            require("conf.nvim-overseer")
         end,
     },
     -- dap调试代码
