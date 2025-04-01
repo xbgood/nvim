@@ -9,8 +9,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- 多光标模式
-    { "mg979/vim-visual-multi" },
     -- 自动保存
     { "Pocco81/auto-save.nvim" },
     -- 快速的jk
@@ -44,6 +42,15 @@ require("lazy").setup({
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = { icons = { separator = "" } },
+    },
+    -- 多光标模式
+    -- { "mg979/vim-visual-multi" },
+    {
+        "jake-stewart/multicursor.nvim",
+        branch = "1.0",
+        config = function()
+            require("conf.multicursor")
+        end
     },
     -- 现代化的任务管理系统
     {
@@ -274,14 +281,21 @@ require("lazy").setup({
     {
         -- markdown 文本显示格式
         {
-            "OXY2DEV/markview.nvim",
-            lazy = false,
-            dependencies = { "nvim-tree/nvim-web-devicons", },
+            'MeanderingProgrammer/render-markdown.nvim',
+            dependencies = { 'nvim-tree/nvim-web-devicons' },
             opts = {
-                code_blocks = { sign = false, label_direction = "left" },
-            }
+                debounce = 5,
+                render_modes = true,
+                heading = { sign = false },
+                code = {
+                    sign = false,
+                    style = "right",
+                },
+                completions = {
+                    blink = { enabled = true }
+                },
+            },
         },
-
         -- markdown 预览
         {
             "iamcco/markdown-preview.nvim",
