@@ -31,12 +31,16 @@ require("lazy").setup({
     { "folke/flash.nvim",                   opts = {}, event = "VeryLazy" },
     -- yazi 文件浏览器
     { "mikavilpas/yazi.nvim",               opts = {}, event = "VeryLazy" },
-    -- markdown 图片插入
-    { "HakonHarnes/img-clip.nvim",          opts = {}, event = "VeryLazy" },
     -- 自动匹配括号
     { "windwp/nvim-autopairs",              opts = {}, event = "InsertEnter" },
     -- 包裹修改
     { "kylechui/nvim-surround",             opts = {}, event = "VeryLazy" },
+    -- 扩展的文本对象
+    {
+        "chrisgrieser/nvim-various-textobjs",
+        lazy = false,
+        opts = { keymaps = { useDefaults = true } },
+    },
     -- 键位绑定器
     {
         "folke/which-key.nvim",
@@ -47,7 +51,6 @@ require("lazy").setup({
     -- { "mg979/vim-visual-multi" },
     {
         "jake-stewart/multicursor.nvim",
-        branch = "1.0",
         config = function()
             require("conf.multicursor")
         end
@@ -279,6 +282,8 @@ require("lazy").setup({
     },
     -- markdown
     {
+        -- markdown 图片插入
+        { "HakonHarnes/img-clip.nvim", opts = {}, event = "VeryLazy" },
         -- markdown 文本显示格式
         {
             'MeanderingProgrammer/render-markdown.nvim',

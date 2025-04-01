@@ -10,20 +10,19 @@ set({ "n", "x" }, "<c-n>", mc.toggleCursor)
 set({ "n", "x" }, "<up>", function() mc.lineAddCursor(-1) end)
 set({ "n", "x" }, "<down>", function() mc.lineAddCursor(1) end)
 
--- 字符添加前后的光标
-set({ "n", "x" }, "n", function() mc.matchAddCursor(1) end)
-set({ "n", "x" }, "N", function() mc.matchAddCursor(-1) end)
-
--- 字符跳过前后的光标
-set({ "n", "x" }, "q", function() mc.matchSkipCursor(1) end)
-set({ "n", "x" }, "Q", function() mc.matchSkipCursor(-1) end)
-
 mc.addKeymapLayer(function(layerSet)
     -- 选择一个不同的光标
     layerSet({ "n", "x" }, "<left>", mc.prevCursor)
     layerSet({ "n", "x" }, "<right>", mc.nextCursor)
 
-    -- Delete the main cursor.
+    -- 字符添加前后的光标
+    layerSet({ "n", "x" }, "n", function() mc.matchAddCursor(1) end)
+    layerSet({ "n", "x" }, "N", function() mc.matchAddCursor(-1) end)
+
+    -- 字符跳过前后的光标
+    layerSet({ "n", "x" }, "q", function() mc.matchSkipCursor(1) end)
+    layerSet({ "n", "x" }, "Q", function() mc.matchSkipCursor(-1) end)
+
     -- 删除一个选中的光标
     layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
 

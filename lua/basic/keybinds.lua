@@ -23,7 +23,7 @@ vim.keymap.set('n', "<C-h>", "<cmd>BufferPrevious<CR>", {})
 -- 切换下一个缓冲区
 vim.keymap.set('n', "<C-l>", "<cmd>BufferNext<CR>", {})
 -- 关闭当前 buffer，由 bufdelete 插件所提供的方法
--- vim.keymap.set('n', "<C-q>", "<cmd>BufferDelete<CR>", {})
+vim.keymap.set('n', "<C-q>", "<cmd>BufferDelete<CR>", {})
 -- 关闭缓冲区
 vim.keymap.set('n', "<leader>bc", "<cmd>BufferClose<CR>", { desc = "Buffer Close" })
 -- 列出所有缓冲区
