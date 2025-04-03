@@ -3,10 +3,10 @@
 vim.g.mapleader = ","
 
 -- 插入模式下的上下左右移动
-vim.keymap.set('i', "<A-k>", "<up>", {})
-vim.keymap.set('i', "<A-j>", "<down>", {})
-vim.keymap.set('i', "<A-h>", "<left>", {})
-vim.keymap.set('i', "<A-l>", "<right>", {})
+-- vim.keymap.set('i', "<A-k>", "<up>", {})
+-- vim.keymap.set('i', "<A-j>", "<down>", {})
+-- vim.keymap.set('i', "<A-h>", "<left>", {})
+-- vim.keymap.set('i', "<A-l>", "<right>", {})
 
 -- 修改分屏大小
 vim.keymap.set('n', "<C-up>", "<cmd>res +1<CR>", {})
@@ -330,7 +330,7 @@ vim.keymap.set('n', 'gm', "<cmd>Lspsaga rename<CR>", { desc = "Lsp Rename" })
 -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts) -- 和下面一样的功能，下面好看
 vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Lsp Code Action" })
 
--- 函数树，替代来aerial.nvim
+-- 函数树，替代来aerial.nvim，按键o用来折叠展开或进入，q离开，e进入
 vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Lsp Outline" })
 -- 添加工作目录
 vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = "Workspace: Add Folder" })

@@ -21,9 +21,9 @@ vim.o.hidden = true
 -- 输入文本的时候隐藏光标
 vim.o.mousehide = true
 -- 设置conceal自动隐藏文本
-vim.o.concealcursor = "i"
--- 完全不显示隐藏文本
-vim.o.conceallevel = 3
+vim.o.concealcursor = "nvc"
+-- 隐藏文本，不显示替代字符
+vim.o.conceallevel = 2
 -- 是否开启 xterm 兼容的终端 24 位色彩支持
 vim.o.termguicolors = true
 vim.opt.termguicolors = true

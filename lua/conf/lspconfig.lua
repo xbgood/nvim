@@ -3,10 +3,10 @@ require('lspconfig').texlab.setup {}
 require('lspconfig').ast_grep.setup {}
 require('lspconfig').cssls.setup {}
 require('lspconfig').jsonls.setup {}
-require('lspconfig').prosemd_lsp.setup {}
 require('lspconfig').yamlls.setup {}
 require('lspconfig').ts_ls.setup {}
 require('lspconfig').gopls.setup {}
+require('lspconfig').marksman.setup {}
 require('lspconfig').bashls.setup {
     cmd = { 'bash-language-server', "start" },
     filetypes = { "sh" },

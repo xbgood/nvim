@@ -176,7 +176,7 @@ require("lazy").setup({
                     require("mason-lspconfig").setup({
                         ensure_installed = {
                             "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
-                            "yamlls", "gopls", "cssls", "prosemd_lsp", "ts_ls", "asm_lsp", "pyright", "texlab"
+                            "yamlls", "cssls", "ts_ls", "asm_lsp", "pyright", "texlab", "marksman"
                         },
                     })
                 end,
@@ -284,23 +284,6 @@ require("lazy").setup({
     {
         -- markdown 图片插入
         { "HakonHarnes/img-clip.nvim", opts = {}, event = "VeryLazy" },
-        -- markdown 文本显示格式
-        {
-            'MeanderingProgrammer/render-markdown.nvim',
-            dependencies = { 'nvim-tree/nvim-web-devicons' },
-            opts = {
-                debounce = 5,
-                render_modes = true,
-                heading = { sign = false },
-                code = {
-                    sign = false,
-                    style = "right",
-                },
-                completions = {
-                    blink = { enabled = true }
-                },
-            },
-        },
         -- markdown 预览
         {
             "iamcco/markdown-preview.nvim",
@@ -353,11 +336,12 @@ require("lazy").setup({
         {
             "rcarriga/nvim-dap-ui",
             dependencies = {
+                'nvim-tree/nvim-web-devicons',
                 "mfussenegger/nvim-dap",
                 "nvim-neotest/nvim-nio"
             },
             config = function()
-                require("conf.dapui")
+                require("conf.nvim-dapui")
             end,
         },
         -- 在调试的代码附近用虚显的文件显示变量信息
@@ -385,7 +369,7 @@ require("lazy").setup({
             animate      = { enabled = true },
             bigfile      = { enabled = true },
             quickfile    = { enabled = true },
-            statuscolumn = { enabled = true },
+            statuscolumn = { enabled = false },
             styles       = { notification = { wo = { wrap = true } } },
             explorer     = { enabled = true, replace_netrw = true },
             dashboard    = {

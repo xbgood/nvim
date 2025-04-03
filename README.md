@@ -349,11 +349,27 @@ Ctrl+/ 打开终端
 ,su  搜索 undo tree
 ```
 
-# surround
-```lua
+# nvim-surround
+```bash
 cs 字符 字符：修改包裹
 ds 字符     ：删除包裹
 ys 范围 字符：增加包裹
+
+cs'"      将环绕文本的单引号修改为双引号
+csw'      将环绕单词的添加单引号
+csW'      同上，不过会多包含空格或其他符号，相当于a
+cs)]      将小括号替换为中括号
+cst<h1>   给标签添加tag <h1></h1>
+
+ds'       删除单引号
+ds(       删除括号
+dst       删除包括的tag
+
+ysiw]/'/"/*   给单词添加[] '' "" **
+ysiwt<strong> 给单词添加标签
+ys3w)         给光标后的三个单词添加一个中括号()
+ysf"t<em>     给光标后找到的第一个"之间的文本添加标签<em>
+
 ```
 
 # chrisgrieser/nvim-various-textobjs 
