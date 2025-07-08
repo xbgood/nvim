@@ -86,9 +86,9 @@ vim.keymap.set('n', "k", "<Plug>(accelerated_jk_gk)", { desc = "Accelerated k" }
 
 ------------------------------------- grug-far -----------------------------------
 -- 只替换当前文件
-vim.keymap.set('n', "<leader>sf", "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>", { desc = "Replace Current File" })
+vim.keymap.set('n', "<leader>rf", "<cmd>lua require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })<CR>", { desc = "Replace Current File" })
 -- 搜索当前单词
-vim.keymap.set('n', "<leader>sw", "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>", { desc = "Replace Current Word" })
+vim.keymap.set('n', "<leader>rw", "<cmd>lua require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })<CR>", { desc = "Replace Current Word" })
 
 
 ------------------------------------- markdown  -----------------------------------

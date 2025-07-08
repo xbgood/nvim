@@ -102,9 +102,7 @@ require("lazy").setup({
                 eol = "gcA",   -- 在当前行行尾新增行注释
             },
             mappings = {
-                ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
                 basic = true,
-                ---Extra mapping; `gco`, `gcO`, `gcA`
                 extra = true,
             },
             pre_hook = nil,
@@ -170,17 +168,17 @@ require("lazy").setup({
         {
             -- mason 自动安装 LSP 的工具，否则需要手动用npm安装包
             { "williamboman/mason.nvim", opts = {} },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                config = function()
-                    require("mason-lspconfig").setup({
-                        ensure_installed = {
-                            "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
-                            "yamlls", "cssls", "ts_ls", "asm_lsp", "pyright", "texlab", "marksman"
-                        },
-                    })
-                end,
-            },
+            -- {
+            --     "williamboman/mason-lspconfig.nvim",
+            --     config = function()
+            --         require("mason-lspconfig").setup({
+            --             ensure_installed = {
+            --                 "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
+            --                 "yamlls", "cssls", "ts_ls", "asm_lsp", "pyright", "texlab", "marksman"
+            --             },
+            --         })
+            --     end,
+            -- },
         },
         -- blink.cmp 替代nvim.cmp
         {
@@ -284,6 +282,14 @@ require("lazy").setup({
     {
         -- markdown 图片插入
         { "HakonHarnes/img-clip.nvim", opts = {}, event = "VeryLazy" },
+        -- markdown 文本显示格式
+        {
+            'MeanderingProgrammer/render-markdown.nvim',
+            opts = {
+                debounce = 0,
+                code = { sign = false },
+            },
+        },
         -- markdown 预览
         {
             "iamcco/markdown-preview.nvim",
@@ -291,37 +297,6 @@ require("lazy").setup({
             ft = { "markdown" },
             cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         },
-    },
-    -- tab跳出括号
-    {
-        'abecodes/tabout.nvim',
-        lazy = false,
-        opt = true,
-        priority = 1000,
-        event = 'InsertCharPre',
-        dependencies = { "nvim-treesitter/nvim-treesitter", },
-        config = function()
-            require('tabout').setup {
-                tabkey = '<Tab>',             -- key to trigger tabout, set to an empty string to disable
-                backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
-                act_as_tab = true,            -- shift content if tab out is not possible
-                act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-                default_tab = '<C-t>',        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-                default_shift_tab = '<C-d>',  -- reverse shift default action,
-                enable_backwards = true,      -- well ...
-                completion = false,           -- if the tabkey is used in a completion pum
-                tabouts = {
-                    { open = "'", close = "'" },
-                    { open = '"', close = '"' },
-                    { open = '`', close = '`' },
-                    { open = '(', close = ')' },
-                    { open = '[', close = ']' },
-                    { open = '{', close = '}' }
-                },
-                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-                exclude = {} -- tabout will ignore these filetypes
-            }
-        end,
     },
     -- dap调试代码
     {
@@ -355,9 +330,9 @@ require("lazy").setup({
     -- 一些功能集合
     {
         "folke/snacks.nvim",
-        event = "VeryLazy",
-        priority = 1000,
-        lazy = true,
+        -- event = "VeryLazy",
+        -- priority = 1000,
+        -- lazy = true,
         opts = {
             input        = { enabled = true },
             picker       = { enabled = true },
