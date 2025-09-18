@@ -1,41 +1,42 @@
 -- require('lspconfig').ltex.setup{}
-require('lspconfig').texlab.setup {}
-require('lspconfig').ast_grep.setup {}
-require('lspconfig').cssls.setup {}
-require('lspconfig').jsonls.setup {}
-require('lspconfig').yamlls.setup {}
-require('lspconfig').ts_ls.setup {}
-require('lspconfig').gopls.setup {}
-require('lspconfig').marksman.setup {}
-require('lspconfig').bashls.setup {
+vim.lsp.enable('texlab')
+vim.lsp.enable('ast_grep')
+vim.lsp.enable('cssls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('yamlls')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('gopls')
+vim.lsp.enable('marksman')
+
+vim.lsp.config('bashls', {
     cmd = { 'bash-language-server', "start" },
     filetypes = { "sh" },
     single_file_support = true,
-}
-require('lspconfig').asm_lsp.setup {
+})
+vim.lsp.config('asm_lsp', {
     filetypes = { "s", "asm", "vmasm" },
     cmd = { "asm-lsp" },
     single_file_support = true,
-}
-require('lspconfig').clangd.setup {
+})
+vim.lsp.config('clangd', {
     cmd = { 'clangd' },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     single_file_support = true,
-}
-require('lspconfig').cmake.setup {
+})
+vim.lsp.config('cmake', {
     cmd = { 'cmake-language-server' },
     filetypes = { 'cmake' },
     init_options = { buildDirectory = "build" },
     single_file_support = true,
-}
-require('lspconfig').emmet_ls.setup {
+})
+vim.lsp.config('emmet_ls', {
     filetypes = { "astro", "css", "eruby", "html", "htmldjango",
         "javascriptreact", "less", "pug", "sass", "scss",
         "svelte", "typescriptreact", "vue", "htmlangular" },
     cmd = { "emmet-ls", "--stdio" },
     single_file_support = true,
-}
-require('lspconfig').rust_analyzer.setup {
+})
+vim.lsp.config('rust-analyzer', {
     cmd = { 'rust-analyzer' },
     filetypes = { "rust" },
     single_file_support = true,
@@ -47,8 +48,8 @@ require('lspconfig').rust_analyzer.setup {
             }
         }
     },
-}
-require('lspconfig').lua_ls.setup {
+})
+vim.lsp.config('lua_ls', {
     name = 'lua_ls',
     cmd = { 'lua-language-server' },
     single_file_support = true,
@@ -67,8 +68,8 @@ require('lspconfig').lua_ls.setup {
             telemetry = { enable = false, },
         },
     },
-}
-require('lspconfig').pyright.setup {
+})
+vim.lsp.config('pyright', {
     init_options = { doucumentFormatting = true, },
     filetypes = { "python" },
     cmd = { "pyright-langserver", "--stdio" },
@@ -82,4 +83,4 @@ require('lspconfig').pyright.setup {
             },
         },
     },
-}
+})
