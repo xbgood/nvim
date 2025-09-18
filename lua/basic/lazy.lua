@@ -9,6 +9,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    rocks = {
+        enabled = false,
+        hererocks = nil,
+    },
     -- 自动保存
     { "Pocco81/auto-save.nvim" },
     -- 快速的jk
@@ -288,6 +292,7 @@ require("lazy").setup({
             opts = {
                 debounce = 0,
                 code = { sign = false },
+                latex = { enabled = false }
             },
         },
         -- markdown 预览
@@ -331,7 +336,7 @@ require("lazy").setup({
     {
         "folke/snacks.nvim",
         -- event = "VeryLazy",
-        -- priority = 1000,
+        priority = 1000,
         -- lazy = true,
         opts = {
             input        = { enabled = true },

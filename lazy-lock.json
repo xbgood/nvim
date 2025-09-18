@@ -39,5 +39,5 @@
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
   "vimtex": { "branch": "master", "commit": "77f31bd02cec678823c8614e6400db97390b5ce7" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
-  "yazi.nvim": { "branch": "main", "commit": "fbe2544d61b1f3172891cdabc875e15efcb135f4" }
+  "yazi.nvim": { "branch": "main", "commit": "acd50311d83e0332dad4a2c172de00359b647d6a" }
 }
