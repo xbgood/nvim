@@ -168,17 +168,17 @@ require("lazy").setup({
         {
             -- mason 自动安装 LSP 的工具，否则需要手动用npm安装包
             { "williamboman/mason.nvim", opts = {} },
-            -- {
-            --     "williamboman/mason-lspconfig.nvim",
-            --     config = function()
-            --         require("mason-lspconfig").setup({
-            --             ensure_installed = {
-            --                 "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
-            --                 "yamlls", "cssls", "ts_ls", "asm_lsp", "pyright", "texlab", "marksman"
-            --             },
-            --         })
-            --     end,
-            -- },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                config = function()
+                    require("mason-lspconfig").setup({
+                        ensure_installed = {
+                            "ast_grep", "lua_ls", "clangd", "rust_analyzer", "bashls", "emmet_ls", "html", "jsonls",
+                            "yamlls", "cssls", "ts_ls", "asm_lsp", "pyright", "texlab", "marksman"
+                        },
+                    })
+                end,
+            },
         },
         -- blink.cmp 替代nvim.cmp
         {
@@ -405,9 +405,15 @@ require("lazy").setup({
     },
     -- 主题颜色
     {
-        { "rose-pine/neovim",       name = "rosepine", },
+        {
+            "rose-pine/neovim",
+            name = "rosepine",
+            config = function()
+                require("conf.rose-pine")
+            end,
+        },
         -- { "catppuccin/nvim",        name = "catppuccin", },
-        { "EdenEast/nightfox.nvim", name = "nightfox" },
+        -- { "EdenEast/nightfox.nvim", name = "nightfox" },
         -- { "sainnhe/everforest",     name = "everforest" },
         -- { "folke/tokyonight.nvim",  name = "tokyonight" },
     },

@@ -25,7 +25,6 @@ vim.o.concealcursor = "nvc"
 -- 隐藏文本，不显示替代字符
 vim.o.conceallevel = 2
 -- 是否开启 xterm 兼容的终端 24 位色彩支持
-vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 是否高亮当前文本行
 vim.o.cursorline = true

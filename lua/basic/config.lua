@@ -78,9 +78,9 @@ vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 
 -- colorscheme 颜色主题
 -- vim.cmd.colorscheme("duskfox")
-vim.cmd.colorscheme("carbonfox")
+-- vim.cmd.colorscheme("carbonfox")
 -- vim.cmd.colorscheme("everforest")
--- vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("rose-pine")
 -- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("tokyonight-night")
 
