@@ -97,6 +97,7 @@ vim.o.foldlevel = 1
 vim.o.foldlevelstart = 99
 -- 缩进4个空格等于一个Tab
 vim.o.tabstop = 4
+-- 退格一次删除4格
 vim.o.softtabstop = 4
 vim.o.shiftround = true
 -- >> << 时移动长度

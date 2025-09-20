@@ -47,24 +47,6 @@ vim.diagnostic.config {
 }
 
 
--- latex 配置
-vim.g.tex_flavor = "latex"
-vim.g.vimtex_view_method = "zathura"
-vim.g.vimtex_view_general_viewer = "zathura"
--- 设置neovim-remote
-vim.g.vimtex_compiler_progname = "nvr"
-vim.g.vimtex_compiler_latexmk_engines = { _ = "-pdflatex" }
--- 不拼写检查
-vim.g.tex_comment_nospell = 1
--- 忽略警告
-vim.g.vimtex_quickfix_open_on_warning = 0
--- 关闭编译报错自动弹出错误窗口
-vim.g.vimtex_quickfix_mode = 0
--- 改变vimtex的默认按键为,
-vim.g.maplocalleader = ","
--- vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
-
-
 -- markdown 预览设置
 vim.g.mkdp_filetypes = { "markdown" }
 vim.g.mkdp_auto_start = 0
@@ -77,10 +59,10 @@ vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 
 
 -- colorscheme 颜色主题
--- vim.cmd.colorscheme("duskfox")
+vim.cmd.colorscheme("duskfox")
 -- vim.cmd.colorscheme("carbonfox")
 -- vim.cmd.colorscheme("everforest")
-vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("rose-pine")
 -- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("tokyonight-night")
 

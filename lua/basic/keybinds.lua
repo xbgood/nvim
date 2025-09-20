@@ -167,9 +167,9 @@ vim.keymap.set('n', "<leader>.", "<cmd>lua require('snacks').scratch()<cr>", { d
 vim.keymap.set('n', "<leader>st", "<cmd>lua require('snacks').scratch.select()<cr>", { desc = "Scratch Select" })
 
 -- LazyGit
-vim.keymap.set('n', "<leader>lf", "<cmd>lua require('snacks').lazygit.log_file()<cr>", { desc = "Lazygit: Current File Git History" })
-vim.keymap.set('n', "<leader>lg", "<cmd>lua require('snacks').lazygit()<cr>", { desc = "Lazygit: Toggle Open" })
-vim.keymap.set('n', "<leader>ll", "<cmd>lua require('snacks').lazygit.log()<cr>", { desc = "Lazygit: Git Log (cwd)" })
+vim.keymap.set('n', "<leader>zf", "<cmd>lua require('snacks').lazygit.log_file()<cr>", { desc = "Lazygit: Current File Git History" })
+vim.keymap.set('n', "<leader>zg", "<cmd>lua require('snacks').lazygit()<cr>", { desc = "Lazygit: Toggle Open" })
+vim.keymap.set('n', "<leader>zl", "<cmd>lua require('snacks').lazygit.log()<cr>", { desc = "Lazygit: Git Log (cwd)" })
 
 -- Find
 vim.keymap.set('n', "<leader>fc", "<cmd>lua require('snacks').picker.files({ cwd = vim.fn.stdpath('config') }) <cr>", { desc = "Find Config File" })
@@ -340,7 +340,8 @@ vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 
 vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "Workspace: List Folders" })
 
 -- 代码自动格式化，不过这个用插件ok
-vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true, } end, { desc = "Format" })
+vim.keymap.set('n', '<leader>cf', function() require("conform").format {async = true, lsp_fallback = true } end, { desc = "Conform Format" })
+vim.keymap.set('n', '<leader>cF', function() vim.lsp.buf.format { async = true, } end, { desc = "Lsp Format" })
 
 -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
 
