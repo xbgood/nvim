@@ -427,15 +427,15 @@ require("lazy").setup({
 		opts = {
 			input = { enabled = true },
 			picker = { enabled = true },
-			scope = { enabled = true },
-			words = { enabled = true },
+			scope = { enabled = false },
+			words = { enabled = false },
 			notify = { enabled = true },
 			notifier = { enabled = true },
 			scroll = { enabled = true },
 			animate = { enabled = true },
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			statuscolumn = { enabled = false },
+			statuscolumn = { enabled = true },
 			styles = { notification = { wo = { wrap = true } } },
 			explorer = { enabled = true, replace_netrw = true },
 			image = { enabled = true },
@@ -459,21 +459,22 @@ require("lazy").setup({
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "VeryLazy",
 				callback = function()
-					-- Setup some globals for debugging (lazy-loaded)
+					local snacks = require("snacks")
+					local st = snacks.toggle
+
 					_G.dd = function(...)
-						require("snacks").debug.inspect(...)
+						snacks.debug.inspect(...)
 					end
 					_G.bt = function()
-						require("snacks").debug.backtrace()
+						snacks.debug.backtrace()
 					end
+
 					vim.print = _G.dd
-
 					--  打开indent
-					require("snacks").indent.enable()
-					require("snacks").input.enable()
+					snacks.indent.enable()
+					-- 打开 input
+					snacks.input.enable()
 
-					-- Create some toggle mappings
-					local st = require("snacks").toggle
 					-- 拼写
 					st.option("spell", { name = "Spelling" }):map("<leader>us")
 					-- 是否折行

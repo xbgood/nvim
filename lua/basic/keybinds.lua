@@ -162,7 +162,7 @@ vim.keymap.set('n', "<leader>un", "<cmd>lua require('snacks').notifier.hide()<cr
 vim.keymap.set('n', "<leader>ss", "<cmd>lua require('snacks').picker.lsp_symbols()<cr>", { desc = "LSP Symbols" })
 vim.keymap.set('n', "<leader>sS", "<cmd>lua require('snacks').picker.lsp_workspace_symbols()<cr>", { desc = "LSP Workspace Symbols" })
 
--- Scratch
+-- Scratch 一个便签的功能
 vim.keymap.set('n', "<leader>.", "<cmd>lua require('snacks').scratch()<cr>", { desc = "Toggle Scratch Buffer" })
 vim.keymap.set('n', "<leader>st", "<cmd>lua require('snacks').scratch.select()<cr>", { desc = "Scratch Select" })
 
