@@ -232,6 +232,9 @@ vim.keymap.set('n', "<leader>sR", "<cmd>lua require('snacks').picker.resume()<cr
 vim.keymap.set('n', "<leader>sq", "<cmd>lua require('snacks').picker.qflist()<cr>", { desc = "Quickfix List" })
 -- 显示undo树
 vim.keymap.set('n', "<leader>su", "<cmd>lua require('snacks').picker.undo()<cr>", { desc = "UndoTree" })
+-- zoxide
+vim.keymap.set('n', "<leader>sz", "<cmd>lua require('snacks').picker.zoxide()<cr>", { desc = "Zoxide" })
+-- vim.keymap.set('n', "gr", "<cmd>lua require('snacks').picker.lsp_references()<cr>", { desc = "References" })
 
 
 ------------------------------------- gitsigns -----------------------------------
@@ -286,63 +289,87 @@ vim.keymap.set('n', '<leader>gc', require('gitsigns').toggle_current_line_blame,
 --  显示当前项目的所有修改列表
 vim.keymap.set('n', '<leader>gQ', function() require('gitsigns').setqflist('all') end, { desc = "Git Project List" })
 
-
-------------------------------------- Lspsaga -----------------------------------
--- 查看错误的提示
-vim.keymap.set('n', 'go', "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Lsp Diagnostic Show" })
--- vim.keymap.set('n', 'go', vim.diagnostic.open_float, opts) -- 和上面的一样效果，就是显示不如上面好看
--- 集中列出所有的错误提示
--- vim.keymap.set('n', 'gl', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', 'gl', "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Lsp Diagnostic List" })
-
--- 跳转到上一个错误提示的地方
--- vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lsp Diagnostic Prev" })
--- 跳转到下一个错误提示的地方
--- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lsp Diagnostic Next" })
-
--- 显示函数定义
--- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-vim.keymap.set('n', 'gd', "<cmd>Lspsaga peek_definition<CR>", { desc = "Lsp Show Definition" })
--- 跳转到函数声明
--- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'gD', "<cmd>Lspsaga goto_definition<CR>", { desc = "Lsp Goto Definition" })
-
 -- 将当前行的改动提交到暂存区，即add
 vim.keymap.set('n', 'gs', require('gitsigns').stage_hunk,   { desc = "Git Stage Hunk" })
 -- 将当前buffer的改动提交到暂存区
 vim.keymap.set('n', 'gS', require('gitsigns').stage_buffer, { desc = "Git Stage Buffer" })
 
--- 显示当前变量的类型
--- vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', 'gt', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Lsp Show Type Definition" })
--- 跳转到当前变量的类型
-vim.keymap.set('n', 'gT', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lsp Goto Type Definition" })
+----------------------------------- Lspsaga 和 vim.lsp -----------------------------------
+---删除系统lsp内置的快捷键
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'grt')
+vim.keymap.del('n', 'grn')
 
--- 类似fzf显示使用过该变量的行
-vim.keymap.set('n', 'gf', "<cmd>Lspsaga finder<CR>", { desc = "Lsp Finder" })
--- implementation
+--- 禁用默认的lsp快捷键
+vim.g.lsp_default_mappings = false
+-- 查看错误的提示
+-- vim.keymap.set('n', 'go', "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Lsp Diagnostic Show" })
+vim.keymap.set('n', 'go', vim.diagnostic.open_float, { desc = "Lsp Diagnostic Show" }) -- 和上面的一样效果，就是显示不如上面好看
+
+-- 集中列出所有的错误提示
+vim.keymap.set('n', 'gl', vim.diagnostic.setloclist, { desc = "Lsp Diagnostic List" })
+-- vim.keymap.set('n', 'gl', "<cmd>Lspsaga show_buf_diagnostics<CR>", { desc = "Lsp Diagnostic List" })
+
+-- 跳转到上一个错误提示的地方
+vim.keymap.set('n', 'g[', function() vim.diagnostic.jump({ count=-1, float=true }) end, {desc="Lsp Diagnostic Prev"})
+-- vim.keymap.set('n', 'g[', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Lsp Diagnostic Prev" })
+-- 跳转到下一个错误提示的地方
+-- vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', 'g]', function() vim.diagnostic.jump({ count=1, float=true }) end, {desc="Lsp Diagnostic Next"})
+-- vim.keymap.set('n', 'g]', "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Lsp Diagnostic Next" })
+
+-- 跳转到声明
+-- vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, { desc = "Lsp Goto Definition" })
+
+-- 跳转到定义 
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Lsp Goto Definition" })
+-- vim.keymap.set('n', 'gd', "<cmd>Lspsaga goto_definition<CR>", { desc = "Lsp Goto Definition" })
+
+-- 预览定义
+-- vim.keymap.set('n', 'gD', "<cmd>Lspsaga peek_definition<CR>", { desc = "Lsp Show Definition" })
+
+-- 预览类型定义
+-- vim.keymap.set('n', 'gT', "<cmd>Lspsaga peek_type_definition<CR>", { desc = "Lsp Show Type Definition" })
+
+-- 跳转到类型定义
+vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { desc = "Lsp Goto Type Definition" })
+-- vim.keymap.set('n', 'gt', "<cmd>Lspsaga goto_type_definition<CR>", { desc = "Lsp Goto Type Definition" })
+
+
+-- 跳转到接口的实现
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Lsp Goto Implementation" })
+
 -- 列出引用过该变量或函数的地方
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Lsp References" })
+-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Lsp References" })
 
 -- 查看函数原型
--- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- 下面的更加美观
-vim.keymap.set('n', 'K', "<cmd>Lspsaga hover_doc<CR>", { desc = "Lsp Hover Doc" })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Lsp Hover Doc" })
+-- vim.keymap.set('n', 'K', "<cmd>Lspsaga hover_doc<CR>", { desc = "Lsp Hover Doc" })
 -- 插入模式下看函数原型
--- vim.keymap.set('i', '<C-k>', vim.lsp.buf.hover, bufopts)
-vim.keymap.set('i', '<C-k>', "<cmd>Lspsaga hover_doc<CR>", { desc = "Lsp Hover Doc" })
+vim.keymap.set('i', '<C-k>', vim.lsp.buf.hover, { desc = "Lsp Hover Doc" })
 
 -- 重命名变量名
--- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) -- 和下面的一样的功能，就是显示和细节不一样，总的来说下面的好看点。
-vim.keymap.set('n', 'gm', "<cmd>Lspsaga rename<CR>", { desc = "Lsp Rename" })
+vim.keymap.set('n', 'gm', vim.lsp.buf.rename, { desc = "Lsp Rename" })
 -- 修正错误code action
--- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts) -- 和下面一样的功能，下面好看
-vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Lsp Code Action" })
+vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { desc = "Lsp Code Action" })
+-- vim.keymap.set('n', 'ga', "<cmd>Lspsaga code_action<CR>", { desc = "Lsp Code Action" })
+
+
+-- 该函数被那些函数调用
+vim.keymap.set('n', 'gp', vim.lsp.buf.incoming_calls, { desc = "Lsp Income Calls" })
+-- 该函数调用过那些函数（调用链）
+vim.keymap.set('n', 'gn', vim.lsp.buf.outgoing_calls, { desc = "Lsp Outgo Calls" })
+-- 继承关系
+vim.keymap.set('n', 'gy', vim.lsp.buf.typehierarchy, { desc = "Lsp Outgo Calls" })
+
 
 -- 函数树，替代来aerial.nvim，按键o用来折叠展开或进入，q离开，e进入
-vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Lsp Outline" })
+-- vim.keymap.set('n', '<leader>2', "<cmd>Lspsaga outline<CR>", { desc = "Lsp Outline" })
+vim.keymap.set('n', '<leader>2', vim.lsp.buf.document_symbol, { desc = "Lsp Document Symbols" })
+
+
 -- 添加工作目录
 vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = "Workspace: Add Folder" })
 -- 移除当前文件的详细目录
@@ -350,14 +377,26 @@ vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 
 -- 列出当前nvim的工作目录
 vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = "Workspace: List Folders" })
 
--- 代码自动格式化，不过这个用插件ok
-vim.keymap.set('n', '<leader>cf', function() require("conform").format {async = true, lsp_fallback = true } end, { desc = "Conform Format" })
-vim.keymap.set('n', '<leader>cF', function() vim.lsp.buf.format { async = true, } end, { desc = "Lsp Format" })
 
 -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
+
+-- 类似fzf显示使用过该变量的行
+-- vim.keymap.set('n', 'gf', "<cmd>Lspsaga finder<CR>", { desc = "Lsp Finder" })
+
+
 
 
 
 ------------------------------------- kd translate -----------------------------------
 vim.keymap.set("n", "<leader>kd", ":TranslateNormal<CR>", { desc = "Translate" })
 vim.keymap.set("v", "<leader>kd", ":TranslateVisual<CR>", { desc = "Translate" })
+
+
+------------------------------------- vim.lsp -----------------------------------
+
+
+
+-- 代码自动格式化，不过这个用插件ok
+vim.keymap.set('n', '<leader>cf', function() require("conform").format {async = true, lsp_fallback = true } end, { desc = "Conform Format" })
+vim.keymap.set('n', '<leader>cF', function() vim.lsp.buf.format { async = true, } end, { desc = "Lsp Format" })
+

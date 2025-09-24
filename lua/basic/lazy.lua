@@ -285,13 +285,13 @@ require("lazy").setup({
 	-- LSP 系列插件
 	{
 		-- LSP UI 美化
-		{
-			"nvimdev/lspsaga.nvim",
-			event = "VeryLazy",
-			opts = {
-				extend_gitsigns = true,
-			},
-		},
+		-- {
+		-- 	"nvimdev/lspsaga.nvim",
+		-- 	event = "VeryLazy",
+		-- 	opts = {
+		-- 		extend_gitsigns = true,
+		-- 	},
+		-- },
 		-- LSP 基础服务
 		{
 			"neovim/nvim-lspconfig",
