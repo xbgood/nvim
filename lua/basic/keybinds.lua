@@ -31,7 +31,10 @@ vim.keymap.set('n', "<leader>bl", "<cmd>buffers<CR>", { desc = "Buffer List" })
 
 
 ------------------------------------- flash ------------------------------------
+---搜索词
 vim.keymap.set({ 'n', 'x', 'o' }, "s", "<cmd>lua require('flash').jump()<CR>", { desc = "Flash" })
+-- 搜索行
+vim.keymap.set({ 'n' }, "<leader>l", "<cmd>lua require('flash').jump({ search = { mode = 'search', max_length=0}, label = { after = {0, 0}}, pattern = '^'})<CR>", { desc = "Flash Line Jump" })
 
 
 --------------------------------------- yazi -----------------------------------
@@ -77,6 +80,14 @@ function()
         require('overseer').run_template({ name = "script run" })
     end
 end, { desc = "Run" })
+
+vim.keymap.set("n", "<leader>ct",
+function()
+    local filetype = vim.bo.filetype
+    if filetype == "rust" then
+        require('overseer').run_template({ name = "rust test" })
+    end
+end, { desc = "Test" })
 
 
 ------------------------------------- accelerated jk -----------------------------
@@ -346,3 +357,7 @@ vim.keymap.set('n', '<leader>cF', function() vim.lsp.buf.format { async = true, 
 -- vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, bufopts)
 
 
+
+------------------------------------- kd translate -----------------------------------
+vim.keymap.set("n", "<leader>kd", ":TranslateNormal<CR>", { desc = "Translate" })
+vim.keymap.set("v", "<leader>kd", ":TranslateVisual<CR>", { desc = "Translate" })

@@ -10,7 +10,7 @@ vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 local function setup_undotree()
     local undo_dir = vim.fn.expand("~/.cache/nvim/undodir")
     if vim.fn.isdirectory(undo_dir) == 0 then
-        local success = vim.fn.mkdir(undo_dir, 'p', 0700)
+        local success = vim.fn.mkdir(undo_dir, 'p', '0700')
         if success == 0 then
             vim.notify("Failed to create undotree directory: " .. undo_dir, vim.log.levels.ERROR)
             return
@@ -59,10 +59,9 @@ vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 
 
 -- colorscheme 颜色主题
-vim.cmd.colorscheme("duskfox")
--- vim.cmd.colorscheme("carbonfox")
 -- vim.cmd.colorscheme("everforest")
--- vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("nightfox")
 -- vim.cmd.colorscheme("catppuccin")
--- vim.cmd.colorscheme("tokyonight-night")
+-- vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("tokyonight")
 

@@ -109,6 +109,6 @@ vim.o.ruler = true
 -- 逐行滚动
 vim.o.smoothscroll = true
 -- 分词: 带有如下符号的单词不被分割
--- vim.o.iskeyword = "-,@,$,%,#,48-57"
+vim.o.iskeyword = "-,@,$,%,#,48-57"
 -- 滚动的时候距离上下边框空出3行
 vim.o.scrolloff = 3
