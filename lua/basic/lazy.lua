@@ -275,6 +275,7 @@ require("lazy").setup({
 					{ open = "(", close = ")" },
 					{ open = "[", close = "]" },
 					{ open = "{", close = "}" },
+					{ open = "<", close = ">" },
 				},
 				ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
 				exclude = {}, -- tabout will ignore these filetypes
@@ -424,6 +425,7 @@ require("lazy").setup({
 							-- 最多提供5个单词补全
 							max_items = 8,
 							opts = {
+                                -- 需要安装words词典
 								dictionary_files = { vim.fn.expand("/usr/share/dict/american-english") },
 								max_items = 5,
 							},
@@ -534,6 +536,7 @@ require("lazy").setup({
 		-- 在调试的代码附近用虚显的文件显示变量信息
 		{
 			"theHamsta/nvim-dap-virtual-text",
+			event = "VeryLazy",
 			opts = {
 				virt_text_pos = "eol", -- eol 在行尾显示，inline 在变量定义处显示
 			},
@@ -636,4 +639,6 @@ require("lazy").setup({
 		{ "sainnhe/everforest", name = "everforest" },
 		{ "folke/tokyonight.nvim", name = "tokyonight" },
 	},
+    -- venn.nvim -- 在nvim中用ascii画图
+    -- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch
 })

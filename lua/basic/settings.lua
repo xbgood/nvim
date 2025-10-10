@@ -34,8 +34,6 @@ vim.o.syntax = "enable"
 vim.o.number = false
 -- 是否显示相对行号
 vim.o.relativenumber = false
--- 设定光标上下两侧最少保留的屏幕行数
-vim.o.scrolloff = 10
 -- 是否支持鼠标操作
 vim.o.mouse = "a"
 -- 补全菜单高度显示20行
@@ -110,5 +108,7 @@ vim.o.ruler = true
 vim.o.smoothscroll = true
 -- 分词: 带有如下符号的单词不被分割
 vim.o.iskeyword = "-,@,$,%,#,48-57"
--- 滚动的时候距离上下边框空出3行
-vim.o.scrolloff = 3
+-- 设定光标上下两侧最少保留的屏幕行数
+vim.o.scrolloff = 10
+-- 背景颜色透明
+vim.g.background_transparency = true
