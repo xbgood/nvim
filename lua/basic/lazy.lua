@@ -13,70 +13,24 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- 自动保存
-	{
-		"Pocco81/auto-save.nvim",
-	},
 	-- 快速的jk
-	{
-		"rainbowhxch/accelerated-jk.nvim",
-	},
+	{ "rainbowhxch/accelerated-jk.nvim" },
 	-- 光标移动时突出显示
-	{
-		"sphamba/smear-cursor.nvim",
-		opts = {},
-	},
+	{ "sphamba/smear-cursor.nvim", opts = {} },
 	-- 显示网页色
-	{
-		"brenoprata10/nvim-highlight-colors",
-		opts = {},
-	},
+	{ "brenoprata10/nvim-highlight-colors", opts = {} },
 	-- 上次编辑的位置
-	{
-		"ethanholz/nvim-lastplace",
-		opts = {},
-	},
+	{ "ethanholz/nvim-lastplace", opts = {} },
 	-- 查找替换
-	{
-		"MagicDuck/grug-far.nvim",
-		opts = {},
-	},
-	-- 美丽的消息通知
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "MagicDuck/grug-far.nvim", opts = {} },
 	-- 快速跳转
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
-	-- yazi 文件浏览器
-	{
-		"mikavilpas/yazi.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "folke/flash.nvim", event = "VeryLazy", opts = {} },
 	-- 自动匹配括号
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {},
-	},
+	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 	-- 包裹修改
-	{
-		"kylechui/nvim-surround",
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
 	-- 顶部状态栏
-	{
-		"romgrk/barbar.nvim",
-		event = "BufReadPost",
-		opts = {},
-	},
+	{ "romgrk/barbar.nvim", event = "BufReadPost", opts = {} },
 	-- 底部美丽的状态栏
 	{
 		"nvim-lualine/lualine.nvim",
@@ -195,7 +149,8 @@ require("lazy").setup({
 		version = "*",
 		event = "VeryLazy",
 		opts = {
-			open_mapping = [[<C-t>]], -- 快捷键
+			-- 快捷键
+			open_mapping = [[<C-/>]],
 			direction = "float",
 			terminal_mappings = true,
 			shell = vim.o.shell,
@@ -255,19 +210,20 @@ require("lazy").setup({
 	{
 		"abecodes/tabout.nvim",
 		lazy = false,
-		opt = true, -- Set this to true if the plugin is optional
-		event = "InsertCharPre", -- Set the event to 'InsertCharPre' for better compatibility
+		opt = true,
+		event = "InsertCharPre", -- 插入模式才加载
 		priority = 1000,
 		config = function()
 			require("tabout").setup({
+				-- 跳出到括号右边
 				tabkey = "<Tab>",
+				-- 反向跳到括号左边
 				backwards_tabkey = "<S-Tab>",
-				act_as_tab = true, -- shift content if tab out is not possible
-				act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-				default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-				default_shift_tab = "<C-d>", -- reverse shift default action,
-				enable_backwards = true, -- well ...
-				completion = false, -- if the tabkey is used in a completion pum
+				act_as_tab = true, -- 不能跳就tab
+				act_as_shift_tab = false, -- 不能跳反向缩进
+				enable_backwards = true, -- 允许shift-tab往回跳
+				completion = false, -- 补全菜单是关闭tabout
+				-- 需要跳出的括号
 				tabouts = {
 					{ open = "'", close = "'" },
 					{ open = '"', close = '"' },
@@ -277,21 +233,13 @@ require("lazy").setup({
 					{ open = "{", close = "}" },
 					{ open = "<", close = ">" },
 				},
-				ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-				exclude = {}, -- tabout will ignore these filetypes
+				ignore_beginning = true, -- 光标前是单词字符时不跳出（防误跳）
+				exclude = {}, -- 文件类型黑名单
 			})
 		end,
 	},
 	-- LSP 系列插件
 	{
-		-- LSP UI 美化
-		-- {
-		-- 	"nvimdev/lspsaga.nvim",
-		-- 	event = "VeryLazy",
-		-- 	opts = {
-		-- 		extend_gitsigns = true,
-		-- 	},
-		-- },
 		-- LSP 基础服务
 		{
 			"neovim/nvim-lspconfig",
@@ -301,8 +249,11 @@ require("lazy").setup({
 			end,
 		},
 		-- mason 自动安装 LSP 的工具，否则需要手动用npm安装包
-		{ "williamboman/mason.nvim", opts = {} },
-		-- mason 自动安装相关的包
+		{
+			"williamboman/mason.nvim",
+			opts = {},
+		},
+		-- mason-lspconfig 关联lsp
 		{
 			-- 说明： mason的包在ensure_installed 中不一定能用，需要在mason中按i手动安装
 			"williamboman/mason-lspconfig.nvim",
@@ -341,19 +292,24 @@ require("lazy").setup({
 			},
 			opts = {
 				keymap = {
-					preset = "enter",
-					["<S-Tab>"] = { "select_prev", "fallback" },
-					["<C-p>"] = { "select_prev", "fallback" },
+					preset = "default",
+					["<CR>"] = { "accept", "fallback" },
+
+					["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+					["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+
 					["<Up>"] = { "select_prev", "fallback" },
 					["<Down"] = { "select_next", "fallback" },
-					["<Tab>"] = { "select_next", "fallback" },
+					["<C-p>"] = { "select_prev", "fallback" },
 					["<C-n>"] = { "select_next", "fallback" },
 
-					["<C-e>"] = { "hide" },
-					["<C-y>"] = { "select_and_accept" },
+					["<C-e>"] = { "hide", "fallback" },
+					["<C-y>"] = { "select_and_accept", "fallback" },
+
 					["<C-b>"] = { "scroll_documentation_up", "fallback" },
 					["<C-f>"] = { "scroll_documentation_down", "fallback" },
-					["<C-tab>"] = { "show", "show_documentation", "hide_documentation" },
+
+					["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				},
 
 				appearance = {
@@ -362,9 +318,7 @@ require("lazy").setup({
 				},
 
 				cmdline = {
-					-- keymap = {
-					--     ['<Tab>'] = { 'show', 'accept' },
-					-- },
+					-- keymap = { ['<Tab>'] = { 'show', 'accept' }, },
 					completion = {
 						-- 幽灵文本：后面灰色提示的文本
 						ghost_text = { enabled = true },
@@ -376,16 +330,12 @@ require("lazy").setup({
 				-- 补全配置
 				completion = {
 					documentation = { auto_show = true },
-					ghost_text = {
-						enabled = true,
-					},
-					trigger = {
-						show_on_keyword = true,
-					},
+					ghost_text = { enabled = true },
+					trigger = { show_on_keyword = true },
 					list = {
 						selection = {
-							preselect = true,
 							auto_insert = true,
+							preselect = false,
 						},
 					},
 					menu = {
@@ -400,13 +350,8 @@ require("lazy").setup({
 
 				sources = {
 					default = { "lsp", "path", "snippets", "buffer", "dictionary" },
-
 					providers = {
-						snippets = {
-							opts = {
-								friendly_snippets = true,
-							},
-						},
+						snippets = { opts = { friendly_snippets = true } },
 						lsp = {
 							name = "LSP",
 							module = "blink.cmp.sources.lsp",
@@ -425,14 +370,13 @@ require("lazy").setup({
 							-- 最多提供5个单词补全
 							max_items = 8,
 							opts = {
-                                -- 需要安装words词典
+								-- 需要安装words词典
 								dictionary_files = { vim.fn.expand("/usr/share/dict/american-english") },
 								max_items = 5,
 							},
 						},
 					},
 				},
-
 				-- 实验性质的功能
 				signature = { enabled = true },
 			},
@@ -548,24 +492,73 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false,
 		opts = {
-			input = { enabled = true },
-			picker = { enabled = true },
-			scope = { enabled = false },
-			words = { enabled = false },
-			notify = { enabled = true },
-			notifier = { enabled = true },
-			scroll = { enabled = true },
+			-- 动画引擎
 			animate = { enabled = true },
-			bigfile = { enabled = true },
+			-- 负责接受notify数据
+			notify = { enabled = true },
+			-- 自动把光标所在的单词在文件中高亮出来
+			words = { enabled = true },
+			-- bdelete 关闭窗口不影响布局
+			bufdelete = { enabled = true },
+			-- 层级指示线
+			indent = { enabled = true },
+			-- 平滑滚动
+			scroll = { enabled = true },
+			-- 输入工具，替换系统的vim.ui.input
+			input = { enabled = true },
+			-- lazygit 插件
+			lazygit = { enabled = true },
+			-- 快速打开大文件，抢先加载
 			quickfile = { enabled = true },
-			statuscolumn = { enabled = false }, -- 关闭，写代码干扰大
-			styles = { notification = { wo = { wrap = true } } },
-			explorer = { enabled = true, replace_netrw = true },
-			image = { enabled = true },
+			-- 大文件优化，禁用耗时的功能
+			bigfile = {
+				notify = true,
+				enabled = true,
+				size = 1025 * 1024,
+			},
+			-- 检索工具
+			picker = {
+				enabled = true,
+				sources = {
+					files = { cmd = "fd" },
+					grep = { cmd = "rg" },
+				},
+			},
+			-- 文件浏览器
+			explorer = {
+				enabled = true,
+				-- 替代默认的netrw
+				replace_netrw = true,
+			},
+			-- 替换系统的vim.notify，用于展示notify
+			notifier = {
+				enabled = true,
+				-- 不压缩内容
+				concat = false,
+				-- 从顶部显示？
+				-- top_down = false,
+			},
+			-- 各个模块的样式控制代码
+			styles = {
+				notification = {
+					-- notifier 文本过长时换行
+					wo = { wrap = true },
+				},
+			},
+			win = {
+				style = "picker",
+				relative = "editor",
+			},
+			-- 开启默认窗口
 			dashboard = {
+				enabled = true,
 				formats = {
 					key = function(item)
-						return { { "[", hl = "special" }, { item.key, hl = "key" }, { "]", hl = "special" } }
+						return {
+							{ "[", hl = "special" },
+							{ item.key, hl = "key" },
+							{ "]", hl = "special" },
+						}
 					end,
 				},
 				sections = {
@@ -577,53 +570,31 @@ require("lazy").setup({
 					{ section = "keys" },
 				},
 			},
+			-- snacks的终端
+			-- terminal = {
+			-- 	-- 关闭终端terminal
+			-- enabled = false,
+			-- 	win = {
+			-- 		style = "float",
+			-- 		height = 0.4,
+			-- 		width = 0.8,
+			-- 		border = "rounded",
+			-- 		title = "Terminal",
+			-- 		title_pos = "center",
+			-- 		winblend = 10,
+			-- 	},
+			-- },
+			-- 关闭，写代码干扰大
+			-- statuscolumn = { enabled = false },
+			-- 代码块范围计算
+			-- scope = { enabled = false },
+			-- 专注模式，自动淡化背景
+			-- dim = { enabled = false },
+			-- 聚焦写作
+			-- zen = { enabled = false },
+			-- 图片预览
+			-- image = { enabled = true },
 		},
-		init = function()
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "VeryLazy",
-				callback = function()
-					local snacks = require("snacks")
-					local st = snacks.toggle
-
-					_G.dd = function(...)
-						snacks.debug.inspect(...)
-					end
-					_G.bt = function()
-						snacks.debug.backtrace()
-					end
-
-					vim.print = _G.dd
-					--  打开indent
-					snacks.indent.enable()
-					-- 打开 input
-					snacks.input.enable()
-
-					-- 拼写
-					st.option("spell", { name = "Spelling" }):map("<leader>us")
-					-- 是否折行
-					st.option("wrap", { name = "Wrap" }):map("<leader>uw")
-					-- 相对行号
-					st.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-					-- 行号
-					st.line_number():map("<leader>ul")
-					-- 关闭打开diagnostics
-					st.diagnostics():map("<leader>ud")
-					-- 打开conceal
-					st.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-						:map("<leader>uc")
-					-- 切换开关 treesitter 配色
-					st.treesitter():map("<leader>uT")
-					-- 打开背景
-					st.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-					-- 打开函数的参数提醒
-					st.inlay_hints():map("<leader>uh")
-					-- 打开indentline
-					st.indent():map("<leader>ug")
-					-- 打开dim
-					st.dim():map("<leader>uD")
-				end,
-			})
-		end,
 	},
 	-- 主题颜色
 	{
@@ -639,6 +610,6 @@ require("lazy").setup({
 		{ "sainnhe/everforest", name = "everforest" },
 		{ "folke/tokyonight.nvim", name = "tokyonight" },
 	},
-    -- venn.nvim -- 在nvim中用ascii画图
-    -- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch
+	-- venn.nvim -- 在nvim中用ascii画图
+	-- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch
 })
