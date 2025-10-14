@@ -15,31 +15,22 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- 快速的jk
 	{ "rainbowhxch/accelerated-jk.nvim" },
+    -- Breadcrumbs: 顶部展示层级关系
+	{ "Bekaboo/dropbar.nvim", opts = {} },
 	-- 光标移动时突出显示
 	{ "sphamba/smear-cursor.nvim", opts = {} },
-	-- 显示网页色
-	{ "brenoprata10/nvim-highlight-colors", opts = {} },
 	-- 上次编辑的位置
 	{ "ethanholz/nvim-lastplace", opts = {} },
 	-- 查找替换
 	{ "MagicDuck/grug-far.nvim", opts = {} },
+	-- 显示网页色
+	-- { "brenoprata10/nvim-highlight-colors", opts = {} },
 	-- 快速跳转
 	{ "folke/flash.nvim", event = "VeryLazy", opts = {} },
 	-- 自动匹配括号
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 	-- 包裹修改
 	{ "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
-	-- 顶部状态栏
-	{ "romgrk/barbar.nvim", event = "BufReadPost", opts = {} },
-	-- 底部美丽的状态栏
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		opts = {
-			globalstatus = true,
-			refresh = 1000,
-		},
-	},
 	-- 扩展的文本对象
 	{
 		"chrisgrieser/nvim-various-textobjs",
@@ -292,7 +283,7 @@ require("lazy").setup({
 			},
 			opts = {
 				keymap = {
-					preset = "default",
+					preset = "enter",
 					["<CR>"] = { "accept", "fallback" },
 
 					["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -334,8 +325,10 @@ require("lazy").setup({
 					trigger = { show_on_keyword = true },
 					list = {
 						selection = {
-							auto_insert = true,
-							preselect = false,
+							-- 这两个选项互斥的，预选模式会自动选择第一个
+							-- 插入模式不会自动选，只有按tab后才会选择第一个
+							auto_insert = false,
+							preselect = true,
 						},
 					},
 					menu = {
@@ -377,7 +370,7 @@ require("lazy").setup({
 						},
 					},
 				},
-				-- 实验性质的功能
+				-- signature 帮助
 				signature = { enabled = true },
 			},
 		},
@@ -605,10 +598,10 @@ require("lazy").setup({
 				require("conf.rose-pine")
 			end,
 		},
-		{ "catppuccin/nvim", name = "catppuccin" },
-		{ "EdenEast/nightfox.nvim", name = "nightfox" },
 		{ "sainnhe/everforest", name = "everforest" },
-		{ "folke/tokyonight.nvim", name = "tokyonight" },
+		-- { "catppuccin/nvim", name = "catppuccin" },
+		-- { "folke/tokyonight.nvim", name = "tokyonight" },
+		-- { "EdenEast/nightfox.nvim", name = "nightfox" },
 	},
 	-- venn.nvim -- 在nvim中用ascii画图
 	-- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch

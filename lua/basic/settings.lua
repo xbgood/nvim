@@ -27,8 +27,8 @@ vim.o.relativenumber= true          -- 相对行号
 vim.o.signcolumn    = "yes"         -- 始终 1 列 sign yes:1
 vim.o.cursorline    = true          -- 当前行高亮
 vim.o.cursorcolumn  = true          -- 当前列高亮（按需）
-vim.o.scrolloff     = 8             -- 上下保留 8 行
-vim.o.sidescrolloff = 8             -- 左右保留 8 列
+vim.o.scrolloff     = 0             -- 上下保留 0 行
+vim.o.sidescrolloff = 0             -- 左右保留 0 列
 vim.o.wrap          = true          -- 折行
 vim.o.linebreak     = false         -- 抵达边界才折行（需 wrap=true）
 vim.o.showmode      = true          -- 状态栏插件会显示模式，这里关掉

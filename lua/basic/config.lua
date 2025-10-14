@@ -47,20 +47,20 @@ vim.diagnostic.config({
 })
 
 -- markdown 预览设置
-vim.g.mkdp_filetypes = { "markdown" }
 vim.g.mkdp_auto_start = 0
 vim.g.mkdp_auto_close = 1
-vim.g.mkdp_browser = "firefox"
-vim.g.mkdp_echo_preview_url = 1
 vim.g.mkdp_refresh_slow = 0
+vim.g.mkdp_echo_preview_url = 1
 vim.g.mkdp_theme = "light"
+vim.g.mkdp_browser = "firefox"
+vim.g.mkdp_filetypes = { "markdown" }
 vim.g.mkdp_markdown_css = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 
 -- colorscheme 颜色主题
 vim.cmd.colorscheme("everforest")
--- vim.cmd.colorscheme("nightfox")
--- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("tokyonight")
+-- vim.cmd.colorscheme("nightfox")
 
 
