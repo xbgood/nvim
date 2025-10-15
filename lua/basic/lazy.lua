@@ -2,52 +2,47 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"--branch=stable",
-		"https://github.com/folke/lazy.nvim.git",
-		lazypath,
+		"git", "clone", "--filter=blob:none", "--branch=stable",
+		"https://github.com/folke/lazy.nvim.git", lazypath,
 	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- 快速的jk
-	{ "rainbowhxch/accelerated-jk.nvim" },
+	-- 快速的jkhl
+    { "xiyaowong/fast-cursor-move.nvim" },
     -- Breadcrumbs: 顶部展示层级关系
-	{ "Bekaboo/dropbar.nvim", opts = {} },
-	-- 光标移动时突出显示
-	{ "sphamba/smear-cursor.nvim", opts = {} },
-	-- 上次编辑的位置
-	{ "ethanholz/nvim-lastplace", opts = {} },
-	-- 查找替换
-	{ "MagicDuck/grug-far.nvim", opts = {} },
-	-- 显示网页色
-	-- { "brenoprata10/nvim-highlight-colors", opts = {} },
+    { "Bekaboo/dropbar.nvim",opts = {} },
+    -- 上次编辑的位置
+    { "ethanholz/nvim-lastplace", opts = {} },
+    -- 查找替换
+    { "MagicDuck/grug-far.nvim",  opts = {} },
 	-- 快速跳转
-	{ "folke/flash.nvim", event = "VeryLazy", opts = {} },
-	-- 自动匹配括号
-	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
+	{ "folke/flash.nvim",       event = "VeryLazy",    opts = {} },
+	-- 代码注释
+	{ "numToStr/Comment.nvim",event = "VeryLazy",    opts = {} },
 	-- 包裹修改
-	{ "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
+	{ "kylechui/nvim-surround", event = "VeryLazy",    opts = {} },
+	-- 自动匹配括号
+	{ "windwp/nvim-autopairs",  event = "InsertEnter", opts = {} },
+    -- 文本对齐
+    {
+        "junegunn/vim-easy-align",
+        keys = {
+            { mode={'x','v','n'}, 'ga', '<Plug>(EasyAlign)', desc='EasyAlign Section' }
+        }
+    },
 	-- 扩展的文本对象
 	{
 		"chrisgrieser/nvim-various-textobjs",
 		lazy = false,
-		opts = {
-			keymaps = {
-				useDefaults = true,
-			},
-		},
+		opts = { keymaps = { useDefaults = true } },
 	},
 	-- 键位绑定器
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		opts = {
-			icons = { separator = "" },
-		},
+		opts = { icons = { separator = "" } },
 	},
 	-- 多光标模式
 	-- { "mg979/vim-visual-multi" },
@@ -105,35 +100,6 @@ require("lazy").setup({
 			-- vim.g.vimtex_quickfix_mode = 1
 		end,
 	},
-	-- 代码注释
-	{
-		"numToStr/Comment.nvim",
-		event = "VeryLazy",
-		opts = {
-			padding = true,
-			sticky = true,
-			ignore = nil,
-			toggler = {
-				line = "gcc", -- 切换行注释
-				block = "gbc", --- 切换块注释
-			},
-			opleader = {
-				line = "gc", -- 可视模式下的行注释
-				block = "gb", -- 可视模式下的块注释
-			},
-			extra = {
-				above = "gcO", -- 在当前行上方新增行注释
-				below = "gco", -- 在当前行下方新增行注释
-				eol = "gcA", -- 在当前行行尾新增行注释
-			},
-			mappings = {
-				basic = true,
-				extra = true,
-			},
-			pre_hook = nil,
-			post_hook = nil,
-		},
-	},
 	-- 内置终端
 	{
 		"akinsho/toggleterm.nvim",
@@ -185,15 +151,15 @@ require("lazy").setup({
 		opts = {
 			-- checkhealth conform
 			formatters_by_ft = {
-				cpp = { "clang-format" }, -- mason 手动安装
-				tex = { "tex-fmt" }, -- mason 手动安装
+				cpp      = { "clang-format" },  -- mason 手动安装
+				tex      = { "tex-fmt" },       -- mason 手动安装
 				markdown = { "mdformat" }, -- mason 手动安装
-				c = { "clang-format" },
-				lua = { "stylua" },
-				python = { "black" },
-				rust = { "rustfmt", lsp_format = "fallback" },
-				sh = { "shfmt" },
-				toml = { "taplo" },
+				c        = { "clang-format" },
+				lua      = { "stylua" },
+				python   = { "black" },
+				rust     = { "rustfmt", lsp_format = "fallback" },
+				sh       = { "shfmt" },
+				toml     = { "taplo" },
 			},
 		},
 	},
@@ -213,7 +179,7 @@ require("lazy").setup({
 				act_as_tab = true, -- 不能跳就tab
 				act_as_shift_tab = false, -- 不能跳反向缩进
 				enable_backwards = true, -- 允许shift-tab往回跳
-				completion = false, -- 补全菜单是关闭tabout
+				completion = false,      -- 补全菜单是关闭tabout
 				-- 需要跳出的括号
 				tabouts = {
 					{ open = "'", close = "'" },
@@ -226,6 +192,24 @@ require("lazy").setup({
 				},
 				ignore_beginning = true, -- 光标前是单词字符时不跳出（防误跳）
 				exclude = {}, -- 文件类型黑名单
+			})
+		end,
+	},
+	-- 语法高亮
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = { ":TSUpdate" },
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- 只有首次打开的文件没有安装模块才会自动安装
+				auto_install = true,
+				sync_install = false,
+				ensure_installed = {},
+				highlight = {
+					enable = true,
+					-- 使用 treesitter 高亮而不是 neovim 内置的高亮
+					additional_vim_regex_highlighting = false,
+				},
 			})
 		end,
 	},
@@ -283,13 +267,10 @@ require("lazy").setup({
 			},
 			opts = {
 				keymap = {
-					preset = "enter",
-					["<CR>"] = { "accept", "fallback" },
+					preset    = "enter",
+					["<CR>"]  = { "accept", "fallback" },
 
-					["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-					["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-
-					["<Up>"] = { "select_prev", "fallback" },
+					["<Up>"]  = { "select_prev", "fallback" },
 					["<Down"] = { "select_next", "fallback" },
 					["<C-p>"] = { "select_prev", "fallback" },
 					["<C-n>"] = { "select_next", "fallback" },
@@ -300,6 +281,8 @@ require("lazy").setup({
 					["<C-b>"] = { "scroll_documentation_up", "fallback" },
 					["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
+					["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+					["<S-Tab>"]   = { "select_prev", "snippet_backward", "fallback" },
 					["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				},
 
@@ -374,24 +357,6 @@ require("lazy").setup({
 				signature = { enabled = true },
 			},
 		},
-	},
-	-- 语法高亮
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = { ":TSUpdate" },
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- 只有首次打开的文件没有安装模块才会自动安装
-				auto_install = true,
-				sync_install = false,
-				ensure_installed = {},
-				highlight = {
-					enable = true,
-					-- 使用 treesitter 高亮而不是 neovim 内置的高亮
-					additional_vim_regex_highlighting = false,
-				},
-			})
-		end,
 	},
 	-- markdown
 	{
@@ -485,24 +450,24 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false,
 		opts = {
+			-- 输入工具，替换系统的vim.ui.input
+			input   = { enabled = true },
+			-- 自动把光标所在的单词在文件中高亮出来
+			words   = { enabled = true },
+			-- 负责接受notify数据
+			notify  = { enabled = true },
+			-- 层级指示线
+			indent  = { enabled = true },
+			-- 平滑滚动
+			scroll  = { enabled = true },
 			-- 动画引擎
 			animate = { enabled = true },
-			-- 负责接受notify数据
-			notify = { enabled = true },
-			-- 自动把光标所在的单词在文件中高亮出来
-			words = { enabled = true },
-			-- bdelete 关闭窗口不影响布局
-			bufdelete = { enabled = true },
-			-- 层级指示线
-			indent = { enabled = true },
-			-- 平滑滚动
-			scroll = { enabled = true },
-			-- 输入工具，替换系统的vim.ui.input
-			input = { enabled = true },
 			-- lazygit 插件
 			lazygit = { enabled = true },
 			-- 快速打开大文件，抢先加载
 			quickfile = { enabled = true },
+			-- bdelete 关闭窗口不影响布局
+			bufdelete = { enabled = true },
 			-- 大文件优化，禁用耗时的功能
 			bigfile = {
 				notify = true,
@@ -548,18 +513,18 @@ require("lazy").setup({
 				formats = {
 					key = function(item)
 						return {
-							{ "[", hl = "special" },
+							{ "[", hl      = "special" },
 							{ item.key, hl = "key" },
-							{ "]", hl = "special" },
+							{ "]", hl      = "special" },
 						}
 					end,
 				},
 				sections = {
-					{ title = "MRU", padding = 1 },
+					{ title   = "MRU", padding        = 1 },
 					{ section = "recent_files", limit = 8, padding = 1 },
-					{ title = "Sessions", padding = 1 },
-					{ section = "projects", padding = 1 },
-					{ title = "Bookmarks", padding = 1 },
+					{ title   = "Sessions", padding   = 1 },
+					{ section = "projects", padding   = 1 },
+					{ title   = "Bookmarks", padding  = 1 },
 					{ section = "keys" },
 				},
 			},
@@ -598,9 +563,9 @@ require("lazy").setup({
 				require("conf.rose-pine")
 			end,
 		},
-		{ "sainnhe/everforest", name = "everforest" },
-		-- { "catppuccin/nvim", name = "catppuccin" },
-		-- { "folke/tokyonight.nvim", name = "tokyonight" },
+		{ "sainnhe/everforest",     name = "everforest" },
+		-- { "catppuccin/nvim",        name = "catppuccin" },
+		-- { "folke/tokyonight.nvim",  name = "tokyonight" },
 		-- { "EdenEast/nightfox.nvim", name = "nightfox" },
 	},
 	-- venn.nvim -- 在nvim中用ascii画图
