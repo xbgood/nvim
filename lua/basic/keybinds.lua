@@ -351,10 +351,10 @@ vim.keymap.set("n", "g[", function() vim.diagnostic.jump({ count = -1, float = t
 vim.keymap.set("n", "g]", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next Diagnostic [LSP]" })
 
 -- 跳转到声明
-vim.keymap.set("n", "gd", vim.lsp.buf.declaration,     { desc = "Goto Declaration [LSP]" })
+vim.keymap.set("n", "ge", vim.lsp.buf.declaration,     { desc = "Goto Declaration [LSP]" })
 
 -- 跳转到定义
-vim.keymap.set("n", "ge", vim.lsp.buf.definition,      { desc = "Goto Definition [LSP]" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition,      { desc = "Goto Definition [LSP]" })
 
 -- 跳转到类型定义
 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Goto Type Definition [LSP]" })
@@ -436,7 +436,14 @@ vim.keymap.set("v", "<leader>kd", ":TranslateVisual<CR>", { desc = "Translate" }
 -- 文本对齐
 -- ga: 文本对齐
 
-
+-- vimtex 快捷键
+-- ll 编译文件
+-- lv 查看pdf文档
+-- li 文件信息
+-- lt 打开目录
+-- li 查看插入模式下定义的映射
+-- K 查看宏包信息
+-- 按 q 关闭
 
 
 

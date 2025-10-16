@@ -12,7 +12,7 @@ require("lazy").setup({
 	-- 快速的jkhl
     { "xiyaowong/fast-cursor-move.nvim" },
     -- Breadcrumbs: 顶部展示层级关系
-    { "Bekaboo/dropbar.nvim",opts = {} },
+    { "Bekaboo/dropbar.nvim",     opts = {} },
     -- 上次编辑的位置
     { "ethanholz/nvim-lastplace", opts = {} },
     -- 查找替换
@@ -20,7 +20,7 @@ require("lazy").setup({
 	-- 快速跳转
 	{ "folke/flash.nvim",       event = "VeryLazy",    opts = {} },
 	-- 代码注释
-	{ "numToStr/Comment.nvim",event = "VeryLazy",    opts = {} },
+	{ "numToStr/Comment.nvim",  event = "VeryLazy",    opts = {} },
 	-- 包裹修改
 	{ "kylechui/nvim-surround", event = "VeryLazy",    opts = {} },
 	-- 自动匹配括号
@@ -198,18 +198,17 @@ require("lazy").setup({
 	-- 语法高亮
 	{
 		"nvim-treesitter/nvim-treesitter",
+        lazy = false,
 		build = { ":TSUpdate" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- 只有首次打开的文件没有安装模块才会自动安装
-				auto_install = true,
+				auto_install = false,
 				sync_install = false,
-				ensure_installed = {},
-				highlight = {
-					enable = true,
-					-- 使用 treesitter 高亮而不是 neovim 内置的高亮
-					additional_vim_regex_highlighting = false,
-				},
+				ensure_installed = {
+                    'c', 'cpp', 'rust', 'latex', 'markdown', 'lua',
+                    'markdown_inline', 'bash', 'toml', 'html', 
+                    'diff', 'cmake', 'bibtex' }
 			})
 		end,
 	},
@@ -556,17 +555,14 @@ require("lazy").setup({
 	},
 	-- 主题颜色
 	{
-		{
-			"rose-pine/neovim",
-			name = "rosepine",
-			config = function()
-				require("conf.rose-pine")
-			end,
-		},
-		{ "sainnhe/everforest",     name = "everforest" },
-		-- { "catppuccin/nvim",        name = "catppuccin" },
-		-- { "folke/tokyonight.nvim",  name = "tokyonight" },
-		-- { "EdenEast/nightfox.nvim", name = "nightfox" },
+		{ "rose-pine/neovim",        name = "rosepine",   opts = { styles = { transparency = false } } },
+		{ "catppuccin/nvim",         name = "catppuccin", opts = { transparent_background = false } },
+		{ "folke/tokyonight.nvim",  opts = { transparent = false } },
+		{ "EdenEast/nightfox.nvim", opts = { options = { transparent = false } } },
+        { "sainnhe/everforest", config = function () vim.g.everforest_transparent_background = 0 end },
+        { "sainnhe/gruvbox-material" },
+        { "sainnhe/edge" },
+        { "sainnhe/sonokai" },
 	},
 	-- venn.nvim -- 在nvim中用ascii画图
 	-- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch

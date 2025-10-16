@@ -16,9 +16,9 @@ vim.diagnostic.config({
 	virtual_text = {
 		-- 虚拟文本前缀
 		prefix = "●",
-		spacing = 4,
+		-- spacing = 4,
 		-- 与代码留空
-		suffix = " ",
+		-- suffix = " ",
 		-- 只有 >= 警告才显示
 		-- severity_limit = 'Warning',
 	},
@@ -56,11 +56,32 @@ vim.g.mkdp_browser          = "firefox"
 vim.g.mkdp_filetypes        = { "markdown" }
 vim.g.mkdp_markdown_css     = "/home/wallen/.config/nvim/lua/scripts/markdown.css"
 
+-- nvim default
+-- vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("default")
+-- vim.cmd.colorscheme("quiet")
+-- vim.cmd.colorscheme("slate")
+-- vim.cmd.colorscheme("zaibatsu")
+-- vim.cmd.colorscheme("wildcharm")
+-- vim.cmd.colorscheme("unokai")
+
 -- colorscheme 颜色主题
-vim.cmd.colorscheme("everforest")
+-- vim.cmd.colorscheme("everforest")
+vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("rose-pine")
--- vim.cmd.colorscheme("catppuccin")
+-- vim.cmd.colorscheme("edge")
 -- vim.cmd.colorscheme("tokyonight")
+-- vim.cmd.colorscheme("gruvbox-material")
+-- vim.cmd.colorscheme("sonokai")
+
+-- nightfox主题
 -- vim.cmd.colorscheme("nightfox")
+-- vim.cmd.colorscheme("nordfox")
+-- vim.cmd.colorscheme("duskfox")
+-- vim.cmd.colorscheme("carbonfox")
+-- vim.cmd.colorscheme("terafox")
+-- vim.cmd.colorscheme("dayfox")
+
+
 
 
