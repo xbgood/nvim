@@ -7,21 +7,55 @@ vim.g.FcitxToggleInput = function()
 end
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 
--- 关闭nvim右边的 diagnostic 错误提示
-vim.diagnostic.config({
-	--  关闭diagnostic 设置
-	-- virtual_text = false,
+-- snacks.notifier 内置lsp进度条
+---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
+local progress = vim.defaulttable()
+vim.api.nvim_create_autocmd("LspProgress", {
+  ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+    if not client or type(value) ~= "table" then
+      return
+    end
+    local p = progress[client.id]
 
-	-- 设置diagnostic 前缀
-	virtual_text = {
-		-- 虚拟文本前缀
-		prefix = "●",
-		-- spacing = 4,
-		-- 与代码留空
-		-- suffix = " ",
-		-- 只有 >= 警告才显示
-		-- severity_limit = 'Warning',
-	},
+    for i = 1, #p + 1 do
+      if i == #p + 1 or p[i].token == ev.data.params.token then
+        p[i] = {
+          token = ev.data.params.token,
+          msg = ("[%3d%%] %s%s"):format(
+            value.kind == "end" and 100 or value.percentage or 100,
+            value.title or "",
+            value.message and (" **%s**"):format(value.message) or ""
+          ),
+          done = value.kind == "end",
+        }
+        break
+      end
+    end
+
+    local msg = {} ---@type string[]
+    progress[client.id] = vim.tbl_filter(function(v)
+      return table.insert(msg, v.msg) or not v.done
+    end, p)
+
+    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    vim.notify(table.concat(msg, "\n"), "info", {
+      id = "lsp_progress",
+      title = client.name,
+      opts = function(notif)
+        notif.icon = #progress[client.id] == 0 and " "
+          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+      end,
+    })
+  end,
+})
+
+-- diagnostic 错误提示
+vim.diagnostic.config({
+    -- 虚拟文本前缀
+	virtual_text = { prefix = "●" },
 
 	-- 出错处下划线
 	underline = true,
@@ -31,8 +65,8 @@ vim.diagnostic.config({
 	severity_sort = true,
 
 	float = {
-		header = "Diagnostic:",
 		border = "rounded",
+		header = "Diagnostic:",
 	},
 
 	-- 设置符号栏符号
@@ -66,8 +100,8 @@ vim.g.mkdp_markdown_css     = "/home/wallen/.config/nvim/lua/scripts/markdown.cs
 -- vim.cmd.colorscheme("unokai")
 
 -- colorscheme 颜色主题
--- vim.cmd.colorscheme("everforest")
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("everforest")
+-- vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("rose-pine")
 -- vim.cmd.colorscheme("edge")
 -- vim.cmd.colorscheme("tokyonight")
@@ -81,7 +115,6 @@ vim.cmd.colorscheme("catppuccin")
 -- vim.cmd.colorscheme("carbonfox")
 -- vim.cmd.colorscheme("terafox")
 -- vim.cmd.colorscheme("dayfox")
-
 
 
 

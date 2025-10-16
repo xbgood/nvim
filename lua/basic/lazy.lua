@@ -11,6 +11,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- 快速的jkhl
     { "xiyaowong/fast-cursor-move.nvim" },
+    -- 只要修改来就会自动保存
+    { "pocco81/auto-save.nvim",   opts = {} },
     -- Breadcrumbs: 顶部展示层级关系
     { "Bekaboo/dropbar.nvim",     opts = {} },
     -- 上次编辑的位置
@@ -24,7 +26,7 @@ require("lazy").setup({
 	-- 包裹修改
 	{ "kylechui/nvim-surround", event = "VeryLazy",    opts = {} },
 	-- 自动匹配括号
-	{ "windwp/nvim-autopairs",  event = "InsertEnter", opts = {} },
+    { "windwp/nvim-autopairs",  event = "InsertEnter", opts = {} },
     -- 文本对齐
     {
         "junegunn/vim-easy-align",
@@ -206,9 +208,8 @@ require("lazy").setup({
 				auto_install = false,
 				sync_install = false,
 				ensure_installed = {
-                    'c', 'cpp', 'rust', 'latex', 'markdown', 'lua',
-                    'markdown_inline', 'bash', 'toml', 'html', 
-                    'diff', 'cmake', 'bibtex' }
+                    'c', 'cpp', 'rust', 'bash', 'toml', 'html', 'diff', 'cmake', 'python', 'make', 'go',
+                    'latex', 'bibtex', 'markdown', 'lua', 'markdown_inline', 'vimdoc', 'yaml' }
 			})
 		end,
 	},
@@ -236,21 +237,8 @@ require("lazy").setup({
 				require("mason-lspconfig").setup({
 					automatic_installation = false,
 					ensure_installed = {
-						"html",
-						"cssls",
-						"ts_ls",
-						"lua_ls",
-						"clangd",
-						"bashls",
-						"jsonls",
-						"yamlls",
-						"asm_lsp",
-						"pyright",
-						"emmet_ls",
-						"rust_analyzer",
-						"texlab", -- latex 格式化软件
-						"marksman", -- markdown 格式化软件
-						"ast_grep", -- 像gren一样检索，不过是用语法而非文本
+						"html", "cssls", "ts_ls", "lua_ls", "clangd", "bashls", "jsonls", "yamlls",
+                        "asm_lsp", "pyright", "emmet_ls", "texlab", "marksman", -- "rust_analyzer",
 					},
 				})
 			end,
@@ -555,14 +543,12 @@ require("lazy").setup({
 	},
 	-- 主题颜色
 	{
-		{ "rose-pine/neovim",        name = "rosepine",   opts = { styles = { transparency = false } } },
-		{ "catppuccin/nvim",         name = "catppuccin", opts = { transparent_background = false } },
+		{ "rose-pine/neovim", name = "rosepine",   opts = { styles = { transparency = false } } },
+		{ "catppuccin/nvim",  name = "catppuccin", opts = { transparent_background = false } },
 		{ "folke/tokyonight.nvim",  opts = { transparent = false } },
 		{ "EdenEast/nightfox.nvim", opts = { options = { transparent = false } } },
         { "sainnhe/everforest", config = function () vim.g.everforest_transparent_background = 0 end },
-        { "sainnhe/gruvbox-material" },
-        { "sainnhe/edge" },
-        { "sainnhe/sonokai" },
+        { "sainnhe/gruvbox-material" }, { "sainnhe/edge" }, { "sainnhe/sonokai" },
 	},
 	-- venn.nvim -- 在nvim中用ascii画图
 	-- nvim-toggler 在nvim中将yes/no或者true/false这种快速翻转的插件，类似vim的switch
