@@ -160,6 +160,8 @@ require("snacks").toggle.inlay_hints():map("<leader>uh")
 require("snacks").toggle.dim():map("<leader>uD")
 -- zen 模式，沉浸式写作
 require("snacks").toggle.zen():map("<leader>uz")
+-- 打开indentline
+require("snacks").toggle.indent():map("<leader>ug")
 
 -- 显示neovim的新闻
 vim.keymap.set("n", "<leader>pn", function() require("snacks").win({
@@ -170,8 +172,6 @@ vim.keymap.set("n", "<leader>pn", function() require("snacks").win({
 -- colorscheme 主题
 vim.keymap.set("n", "<leader>uC", "<cmd>lua require('snacks').picker.colorschemes()<cr>",   { desc = "Colorschemes" })
 
--- 打开indentline
-vim.keymap.set("n", "<leader>ug", "<cmd>lua require('snacks').indent()<cr>",                { desc = "Indent Line" })
 
 -- 在屏幕下面打开终端
 vim.keymap.set("n", "<C-t>",      "<cmd>lua require('snacks').terminal.toggle()<cr>",       { desc = "Toggle Terminal" })
